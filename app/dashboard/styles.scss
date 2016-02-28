@@ -1,0 +1,19 @@
+.dashboard-menu {
+    margin-top: 40px;
+
+    li {
+        text-align: center;
+        height: 140px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+
+        p {
+            padding-top: 20px;
+        }
+
+        &:hover {
+            background-color: #bd362f;
+            color: #fff;
+        }
+    }
+}

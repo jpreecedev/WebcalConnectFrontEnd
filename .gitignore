@@ -234,3 +234,17 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# Keep repo super clean
+
+.sass-cache/
+typings/
+
+app/**/*.js
+app/**/*.js.map
+app/**/*.css
+app/**/*.css.map
+
+css/**/*.css
+css/**/*.css.map
+
