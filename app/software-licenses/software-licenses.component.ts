@@ -4,6 +4,7 @@ import { Client } from "./client";
 import { License } from "./license";
 import { TickPipe } from "./tick.pipe";
 import { ClientNamePipe } from "./client-name.pipe";
+import { Observable } from "rxjs/Rx";
 
 @Component({
     templateUrl: "app/software-licenses/software-licenses.component.html",
@@ -25,7 +26,7 @@ export class SoftwareLicensesComponent implements OnInit {
 
         this.service.getClients().then((response: Client[]) => {
             this.clients = response;
-        });
+        })
 
     }
 
