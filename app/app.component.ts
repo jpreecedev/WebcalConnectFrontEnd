@@ -20,7 +20,6 @@ import {SoftwareLicensesComponent} from './software-licenses/software-licenses.c
   directives: [ROUTER_DIRECTIVES],
   providers: [ROUTER_PROVIDERS]
 })
-
 @RouteConfig([
   { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
   { path: '/login', name: 'Login', component: LoginComponent },
@@ -32,9 +31,8 @@ import {SoftwareLicensesComponent} from './software-licenses/software-licenses.c
   { path: '/register-user', name: 'RegisterUser', component: RegisterUserComponent },
   { path: '/revoke-access', name: 'RevokeAccess', component: RevokeAccessComponent },
   { path: '/search-my-depot', name: 'SearchMyDepot', component: SearchMyDepotComponent },
-  { path: '/software-licenses', name: 'SoftwareLicenses', component: SoftwareLicensesComponent },
+  { path: '/software-licenses', name: 'SoftwareLicenses', component: SoftwareLicensesComponent }
 ])
-
 export class AppComponent {
     
 }
