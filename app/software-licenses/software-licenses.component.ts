@@ -31,7 +31,7 @@ export class SoftwareLicensesComponent implements OnInit {
     }
 
     addLicense(expiration: string) {
-        this.service.addLicense(this.selectedClient.clientId, expiration)
+        this.service.addLicense(this.selectedClient.accessId, expiration)
             .then((response: License) => {
                 this.selectedClient.licenses.push(response);
             });

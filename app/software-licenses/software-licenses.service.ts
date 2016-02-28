@@ -12,21 +12,34 @@ export class SoftwareLicensesService {
     }
 
     addClient(clientName: string) {
-        return this._http.post(`http://localhost:50579/api/Licenses/AddClient?name=${clientName}`, null)
+        var body = { "name": clientName };
+
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this._http.post("http://localhost:50139/api/licenses/client", JSON.stringify(body), { headers: headers })
             .map((response: Response) => response.json())
             .catch(this.handleError)
             .toPromise();
     }
 
-    addLicense(clientAccessId: string, expiration: string) {
-        return this._http.post(`http://localhost:50579/api/Licenses/AddLicense?clientId=${clientAccessId}&expiration=${expiration}`, null)
+    addLicense(accessId: string, expiration: string) {
+        var body = {
+            accessId: accessId,
+            expiration: expiration
+        };
+
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this._http.post(`http://localhost:50139/api/licenses/license`, JSON.stringify(body), { headers: headers })
             .map((response: Response) => <License>response.json())
             .catch(this.handleError)
             .toPromise();
     }
 
     getClients() {
-        return this._http.get("http://localhost:50579/api/Licenses")
+        return this._http.get("http://localhost:50139/api/licenses/clients")
             .map((response: Response) => <Client[]>response.json())
             .toPromise()
             .catch(this.handleError);

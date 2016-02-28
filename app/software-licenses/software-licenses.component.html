@@ -34,7 +34,7 @@
         </thead>
         <tbody>
         <tr *ngFor="#client of clients | clientName:filterValue">
-            <td>{{client.clientName}}</td>
+            <td>{{client.name}}</td>
             <td>{{client.licenses.length}}</td>
             <td class="actions">
                 <button class="btn btn-secondary" (click)="selectClient(client)" data-toggle="modal" data-target="#modal">Add/View Licenses</button>
