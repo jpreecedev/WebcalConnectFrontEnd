@@ -14,10 +14,7 @@ export class SoftwareLicensesService {
     addClient(clientName: string) {
         var body = { "name": clientName };
 
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-
-        return this._http.post("http://localhost:50139/api/licenses/client", JSON.stringify(body), { headers: headers })
+        return this._http.post("http://localhost:50139/api/licenses/client", JSON.stringify(body), { headers: this.getHeaders() })
             .map((response: Response) => response.json())
             .catch(this.handleError)
             .toPromise();
@@ -29,20 +26,25 @@ export class SoftwareLicensesService {
             expiration: expiration
         };
 
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-
-        return this._http.post(`http://localhost:50139/api/licenses/license`, JSON.stringify(body), { headers: headers })
+        return this._http.post(`http://localhost:50139/api/licenses/license`, JSON.stringify(body), { headers: this.getHeaders() })
             .map((response: Response) => <License>response.json())
             .catch(this.handleError)
             .toPromise();
     }
 
     getClients() {
-        return this._http.get("http://localhost:50139/api/licenses/clients")
+        return this._http.get("http://localhost:50139/api/licenses/clients", { headers: this.getHeaders() })
             .map((response: Response) => <Client[]>response.json())
             .toPromise()
             .catch(this.handleError);
+    }
+
+    getHeaders() {
+        var headers = new Headers();
+        headers.append('Authorization', 'Basic dXNlcjpwYXNzd29yZA==');
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        return headers;
     }
 
     handleError(error: Response) {

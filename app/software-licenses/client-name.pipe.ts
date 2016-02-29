@@ -10,7 +10,7 @@ export class ClientNamePipe {
             return data;
         }
         return data.filter((item: Client) => {
-            return item.clientName && item.clientName.toLowerCase().indexOf(filterValue[0].toLowerCase()) > -1;
+            return item.name && item.name.toLowerCase().indexOf(filterValue[0].toLowerCase()) > -1;
         });
     }
 }
