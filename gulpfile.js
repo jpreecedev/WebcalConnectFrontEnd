@@ -16,12 +16,12 @@ gulp.task("clean-css", function (done) {
 });
 
 gulp.task("css", ["clean-css"], function () {
-    return gulp.src(config.scss)
+    return gulp.src(config.scss, {base: "./"})
         .pipe($.plumber())
         .pipe($.sass())
         .pipe($.autoprefixer({ browsers: ["last 2 versions", "> 5%"] }))
         .pipe($.plumber.stop())
-        .pipe(gulp.dest(config.temp));
+        .pipe(gulp.dest("."));
 });
 
 gulp.task("scss-watcher", function () {

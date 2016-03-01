@@ -31,7 +31,7 @@
         <div class="container">
             <div class="row">
                 <div class="span6">
-                    Copyright &copy; @DateTime.Now.Year Skillray Transport Services | All Rights Reserved
+                    Copyright &copy; <span id="year"></span> Skillray Transport Services | All Rights Reserved
                     <br>
                     <small>Developed by <a href="http://www.jpreecedev.com">Jon Preece Development Ltd</a>.</small>
                 </div>
@@ -62,5 +62,10 @@
         System.import('app/main')
             .then(null, console.error.bind(console));
     </script>
+    <script>
+        (function(){
+            document.getElementById("year").innerText = new Date().getFullYear();
+        })();
+        </script>
 </body>
 </html>
