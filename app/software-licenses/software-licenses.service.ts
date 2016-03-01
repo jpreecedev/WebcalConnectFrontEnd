@@ -3,12 +3,13 @@ import {Http, Headers, Response} from 'angular2/http';
 import {Client} from './client';
 import {License} from './license';
 import {Observable} from 'rxjs/Rx';
+import {BaseService} from '../base.service';
 
 @Injectable()
-export class SoftwareLicensesService {
+export class SoftwareLicensesService extends BaseService {
 
-    constructor(private _http: Http) {
-
+    constructor(_http: Http) {
+        super(_http);
     }
 
     addClient(clientName: string): Promise<Client> {
@@ -30,19 +31,6 @@ export class SoftwareLicensesService {
             .map((response: Response) => <Client[]>response.json())
             .toPromise()
             .catch(this.handleError);
-    }
-
-    getHeaders(): Headers {
-        var headers: Headers = new Headers();
-        headers.append('Authorization', 'Basic dXNlcjpwYXNzd29yZA==');
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        return headers;
-    }
-
-    handleError<T>(error: Response): Observable<T> {
-        console.error(error);
-        return Observable.throw(error || 'Server Error');
     }
 
 }
