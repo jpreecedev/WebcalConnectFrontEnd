@@ -1,4 +1,4 @@
-﻿import {License} from "./license";
+﻿import {License} from './license';
 
 export interface Client {
     name: string;

@@ -1,11 +1,11 @@
-﻿import {Pipe} from "angular2/core";
-import {Client} from "./client";
+﻿import {Pipe} from 'angular2/core';
+import {Client} from './client';
 
 @Pipe({
-    name: "clientName"
+    name: 'clientName'
 })
 export class ClientNamePipe {
-    transform(data: Client[], filterValue: any) {
+    public transform(data: Client[], filterValue: any): Client[] {
         if (!data || !filterValue[0]) {
             return data;
         }

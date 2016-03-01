@@ -14,25 +14,25 @@ import {SearchMyDepotComponent} from './search-my-depot/search-my-depot.componen
 import {SoftwareLicensesComponent} from './software-licenses/software-licenses.component';
 
 @Component({
-  selector: 'main-app',
-  templateUrl: 'app/app.component.html',
-  styleUrls: ['app/styles.css'],
-  directives: [ROUTER_DIRECTIVES],
-  providers: [ROUTER_PROVIDERS]
+    selector: 'main-app',
+    templateUrl: 'app/app.component.html',
+    styleUrls: ['app/styles.css'],
+    directives: [ROUTER_DIRECTIVES],
+    providers: [ROUTER_PROVIDERS],
 })
 @RouteConfig([
-  { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
-  { path: '/login', name: 'Login', component: LoginComponent },
-  { path: '/dashboard', name: 'Dashboard', component: DashboardComponent },
-  { path: '/calibrations-due', name: 'CalibrationsDue', component: CalibrationsDueComponent },
-  { path: '/generate-email', name: 'GenerateEmail', component: GenerateEmailComponent },
-  { path: '/inspection-data', name: 'InspectionData', component: InspectionDataComponent },
-  { path: '/recent-calibrations', name: 'RecentCalibrations', component: RecentCalibrationsComponent },
-  { path: '/register-user', name: 'RegisterUser', component: RegisterUserComponent },
-  { path: '/revoke-access', name: 'RevokeAccess', component: RevokeAccessComponent },
-  { path: '/search-my-depot', name: 'SearchMyDepot', component: SearchMyDepotComponent },
-  { path: '/software-licenses', name: 'SoftwareLicenses', component: SoftwareLicensesComponent }
+    { path: '/', name: 'Home', component: HomeComponent, useAsDefault: true },
+    { path: '/login', name: 'Login', component: LoginComponent },
+    { path: '/dashboard', name: 'Dashboard', component: DashboardComponent },
+    { path: '/calibrations-due', name: 'CalibrationsDue', component: CalibrationsDueComponent },
+    { path: '/generate-email', name: 'GenerateEmail', component: GenerateEmailComponent },
+    { path: '/inspection-data', name: 'InspectionData', component: InspectionDataComponent },
+    { path: '/recent-calibrations', name: 'RecentCalibrations', component: RecentCalibrationsComponent },
+    { path: '/register-user', name: 'RegisterUser', component: RegisterUserComponent },
+    { path: '/revoke-access', name: 'RevokeAccess', component: RevokeAccessComponent },
+    { path: '/search-my-depot', name: 'SearchMyDepot', component: SearchMyDepotComponent },
+    { path: '/software-licenses', name: 'SoftwareLicenses', component: SoftwareLicensesComponent },
 ])
 export class AppComponent {
-    
+
 }
