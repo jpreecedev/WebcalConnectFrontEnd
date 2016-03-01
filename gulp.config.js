@@ -1,6 +1,11 @@
 module.exports = function(){
     var config = {
-        tsSource: "./app/**/*.ts"
+        temp: '.tmp/',
+        tsSource: "./app/**/*.ts",
+        scss: [
+            './css/site.scss',
+            './app/**/*.scss'
+        ]
     };
     return config;
 };

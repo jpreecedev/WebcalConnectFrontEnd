@@ -249,3 +249,4 @@ css/**/*.css
 css/**/*.css.map
 
 .vscode/
+npm-debug.log*
