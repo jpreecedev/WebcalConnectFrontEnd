@@ -1,7 +1,6 @@
-import {Injectable} from "angular2/core";
 import {Http, Headers, Response} from "angular2/http";
 import {Observable} from "rxjs/Rx";
-import {Cookie} from "ng2-cookies/ng2-cookies";
+import {Cookie} from "./cookies";
 
 export interface IJwt {
     access_token: string;
@@ -9,7 +8,6 @@ export interface IJwt {
     expires_in: number;
 }
 
-@Injectable()
 export class BaseService {
 
     constructor(protected _http: Http) {
