@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Http, Headers, Response} from 'angular2/http';
-import {BaseService} from '../base.service';
+import {BaseService, IJwt} from '../base.service';
 
 @Injectable()
 export class LoginService extends BaseService {
@@ -17,8 +17,7 @@ export class LoginService extends BaseService {
 
         return this._http.post("http://localhost:50139/oauth2/token", creds, { headers: headers })
             .map((response: Response) => {
-                var r = response.json();
-                this.setToken(r);
+                this.setToken(<IJwt>response.json(), rememberMe);
                 return true;
             })
             .toPromise();

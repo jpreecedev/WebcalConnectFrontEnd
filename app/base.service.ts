@@ -1,5 +1,6 @@
 import {Http, Headers, Response} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 export interface IJwt {
     access_token: string;
@@ -17,21 +18,25 @@ export class BaseService {
         var headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
-        
+
         var token = this.getToken();
-        if (token && token.access_token){
+        if (token && token.access_token) {
             headers.append("Authorization", "Bearer " + token.access_token);
         }
-        
+
         return headers;
     }
-    
-    setToken(token: IJwt){
-        sessionStorage.setItem("token", JSON.stringify(token));
+
+    setToken(token: IJwt, rememberMe: boolean): void {
+        Cookie.setCookie("token", JSON.stringify(token), rememberMe ? token.expires_in : undefined);
     }
-    
-    getToken(){
-        return JSON.parse(sessionStorage.getItem("token"));
+
+    getToken(): IJwt {
+        var cookie = Cookie.getCookie("token");
+        if (cookie) {
+            return JSON.parse(cookie);
+        }
+        return null;
     }
 
     handleError<T>(error: Response): Observable<T> {

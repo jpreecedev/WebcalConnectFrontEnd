@@ -1,5 +1,4 @@
 import { Component, OnInit } from 'angular2/core';
-// import { CanActivate } from "angular2/router";
 import { SoftwareLicensesService } from './software-licenses.service';
 import { Client } from './client';
 import { License } from './license';
@@ -12,7 +11,6 @@ import { ClientNamePipe } from './client-name.pipe';
     providers: [SoftwareLicensesService],
     pipes: [TickPipe, ClientNamePipe]
 })
-// @CanActivate(() => { return false; })
 export class SoftwareLicensesComponent implements OnInit {
 
     private clients: Client[];
