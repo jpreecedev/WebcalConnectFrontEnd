@@ -1,6 +1,7 @@
-import {Http, Headers, Response} from 'angular2/http';
-import {Observable} from 'rxjs/Rx';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
+import {Injectable} from "angular2/core";
+import {Http, Headers, Response} from "angular2/http";
+import {Observable} from "rxjs/Rx";
+import {Cookie} from "ng2-cookies/ng2-cookies";
 
 export interface IJwt {
     access_token: string;
@@ -8,6 +9,7 @@ export interface IJwt {
     expires_in: number;
 }
 
+@Injectable()
 export class BaseService {
 
     constructor(protected _http: Http) {
@@ -16,10 +18,10 @@ export class BaseService {
 
     getHeaders(): Headers {
         var headers: Headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
+        headers.append("Content-Type", "application/json");
+        headers.append("Accept", "application/json");
 
-        var token = this.getToken();
+        var token: IJwt = this.getToken();
         if (token && token.access_token) {
             headers.append("Authorization", "Bearer " + token.access_token);
         }
@@ -32,15 +34,15 @@ export class BaseService {
     }
 
     getToken(): IJwt {
-        var cookie = Cookie.getCookie("token");
+        var cookie: string = Cookie.getCookie("token");
         if (cookie) {
             return JSON.parse(cookie);
         }
-        return null;
+        return undefined;
     }
 
     handleError<T>(error: Response): Observable<T> {
         console.error(error);
-        return Observable.throw(error || 'Server Error');
+        return Observable.throw(error || "Server Error");
     }
 }

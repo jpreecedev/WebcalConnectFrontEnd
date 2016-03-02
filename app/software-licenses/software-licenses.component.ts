@@ -1,13 +1,13 @@
-import { Component, OnInit } from 'angular2/core';
-import { SoftwareLicensesService } from './software-licenses.service';
-import { Client } from './client';
-import { License } from './license';
-import { TickPipe } from './tick.pipe';
-import { ClientNamePipe } from './client-name.pipe';
+import { Component, OnInit } from "angular2/core";
+import { SoftwareLicensesService } from "./software-licenses.service";
+import { Client } from "./client";
+import { License } from "./license";
+import { TickPipe } from "./tick.pipe";
+import { ClientNamePipe } from "./client-name.pipe";
 
 @Component({
-    templateUrl: 'app/software-licenses/software-licenses.component.html',
-    styleUrls: ['app/software-licenses/styles.css'],
+    templateUrl: "app/software-licenses/software-licenses.component.html",
+    styleUrls: ["app/software-licenses/styles.css"],
     providers: [SoftwareLicensesService],
     pipes: [TickPipe, ClientNamePipe]
 })

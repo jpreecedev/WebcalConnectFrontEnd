@@ -8,11 +8,6 @@
     ],
     "ban": false,
     "class-name": true,
-    "comment-format": [
-      true,
-      "check-space",
-      "check-lowercase"
-    ],
     "curly": true,
     "eofline": true,
     "forin": true,
@@ -79,7 +74,7 @@
     ],
     "quotemark": [
       true,
-      "single",
+      "double",
       "avoid-escape"
     ],
     "radix": true,

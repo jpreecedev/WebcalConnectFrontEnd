@@ -1,9 +1,8 @@
-﻿import {Injectable} from 'angular2/core';
-import {Http, Headers, Response} from 'angular2/http';
-import {Client} from './client';
-import {License} from './license';
-import {Observable} from 'rxjs/Rx';
-import {BaseService} from '../base.service';
+﻿import {Injectable} from "angular2/core";
+import {Http, Response} from "angular2/http";
+import {Client} from "./client";
+import {License} from "./license";
+import {BaseService} from "../base.service";
 
 @Injectable()
 export class SoftwareLicensesService extends BaseService {
@@ -13,7 +12,7 @@ export class SoftwareLicensesService extends BaseService {
     }
 
     addClient(clientName: string): Promise<Client> {
-        return this._http.post('http://localhost:50139/api/licenses/client', JSON.stringify({ 'name': clientName }), { headers: this.getHeaders() })
+        return this._http.post("http://localhost:50139/api/licenses/client", JSON.stringify({ "name": clientName }), { headers: this.getHeaders() })
             .map((response: Response) => response.json())
             .catch(this.handleError)
             .toPromise();
@@ -27,7 +26,7 @@ export class SoftwareLicensesService extends BaseService {
     }
 
     getClients(): Promise<Client[]> {
-        return this._http.get('http://localhost:50139/api/licenses/clients', { headers: this.getHeaders() })
+        return this._http.get("http://localhost:50139/api/licenses/clients", { headers: this.getHeaders() })
             .map((response: Response) => <Client[]>response.json())
             .toPromise()
             .catch(this.handleError);
