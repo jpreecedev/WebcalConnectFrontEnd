@@ -3,6 +3,16 @@ import {Cookie} from "./cookies";
 
 declare var escape: any;
 
+export interface IJwtBody {
+    aud: string;
+    exp: number;
+    iss: string;
+    nbf: number;
+    role: string | string[];
+    sub: string;
+    unique_name: string;
+}
+
 export class JwtHelper {
 
     public getToken(): IJwt {
@@ -10,23 +20,24 @@ export class JwtHelper {
         if (cookie && !this.isTokenExpired(cookie)) {
             return JSON.parse(cookie);
         }
-        return undefined;
+        return;
     }
 
-    public getRoles(): string[] {
-        var cookie: string = Cookie.getCookie("roles");
-        if (cookie) {
-            return JSON.parse(cookie);
+    public getRoles(rawToken: string): string[] {
+        var decoded: IJwtBody = this.decodeToken(rawToken);
+        if (!decoded) {
+            return;
         }
-        return undefined;
+        if (Array.isArray(decoded.role)) {
+            return <string[]>decoded.role;
+        }
+        else {
+            return [<string>decoded.role];
+        }
     }
 
     public setToken(token: IJwt, rememberMe: boolean): void {
         Cookie.setCookie("token", JSON.stringify(token), rememberMe ? token.expires_in : undefined);
-    }
-
-    public setRoles(roles: string[]): void {
-        Cookie.setCookie("roles", JSON.stringify(roles));
     }
 
     public urlBase64Decode(str: string): string {
@@ -47,7 +58,7 @@ export class JwtHelper {
         return decodeURIComponent(escape(window.atob(output))); //polifyll https://github.com/davidchambers/Base64.js
     }
 
-    public decodeToken(token: string): any {
+    public decodeToken(token: string): IJwtBody {
         var parts: string[] = token.split(".");
 
         if (parts.length !== 3) {

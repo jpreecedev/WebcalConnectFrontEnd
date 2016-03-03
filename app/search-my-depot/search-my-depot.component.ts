@@ -1,6 +1,6 @@
 import { Component } from "angular2/core";
 import { CanActivate } from "angular2/router";
-import { hasValidToken } from "../Jwt";
+import { hasValidToken } from "../utilities/Jwt";
 
 @Component({
     templateUrl: "app/search-my-depot/search-my-depot.component.html",

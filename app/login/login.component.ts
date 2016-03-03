@@ -1,6 +1,6 @@
 ﻿import { Component } from "angular2/core";
 import { Router } from "angular2/router";
-import { HttpService } from "../HttpService";
+import { HttpService } from "../utilities/HttpService";
 
 @Component({
     templateUrl: "app/login/login.component.html",

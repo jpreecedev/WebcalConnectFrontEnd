@@ -2,7 +2,7 @@
 import {Response} from "angular2/http";
 import {Client} from "./client";
 import {License} from "./license";
-import {HttpService} from "../HttpService";
+import {HttpService} from "../utilities/HttpService";
 
 @Injectable()
 export class SoftwareLicensesService {

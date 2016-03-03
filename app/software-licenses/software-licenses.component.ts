@@ -5,12 +5,13 @@ import { Client } from "./client";
 import { License } from "./license";
 import { TickPipe } from "./tick.pipe";
 import { ClientNamePipe } from "./client-name.pipe";
-import { hasValidToken } from "../Jwt";
+import { hasValidToken } from "../utilities/Jwt";
+import { HttpService } from "../utilities/HttpService";
 
 @Component({
     templateUrl: "app/software-licenses/software-licenses.component.html",
     styleUrls: ["app/software-licenses/styles.css"],
-    providers: [SoftwareLicensesService],
+    providers: [SoftwareLicensesService, HttpService],
     pipes: [TickPipe, ClientNamePipe]
 })
 @CanActivate(() => hasValidToken(["Administrator"]))

@@ -37,13 +37,6 @@ export class HttpService {
                 this._jwtHelper.setToken(response.json(), rememberMe);
                 return true;
             })
-            .then(() => {
-                this._request({ url: "http://localhost:50139/api/user/roles", method: RequestMethod.Get, headers: this.getRequestHeaders(false) })
-                    .then((response: Response) => {
-                        this._jwtHelper.setRoles(response.json());
-                    });
-                return true;
-            })
             .catch(this.handleError);
     }
 
@@ -55,11 +48,11 @@ export class HttpService {
             headers.append("Content-Type", "application/x-www-form-urlencoded");
         } else {
             headers.append("Content-Type", "application/json");
-        }
-
-        var token: IJwt = this._jwtHelper.getToken();
-        if (token && token.access_token) {
-            headers.append("Authorization", "Bearer " + token.access_token);
+         
+            var token: IJwt = this._jwtHelper.getToken();
+            if (token && token.access_token) {
+                headers.append("Authorization", "Bearer " + token.access_token);
+            }
         }
 
         return headers;
@@ -71,6 +64,11 @@ export class HttpService {
     }
 
     private _request(options: RequestOptionsArgs): Promise<Response> {
-        return this._http.request(options.url, options).toPromise();
+        return new Promise((resolve) => {
+            this._http.request(options.url, options)
+                .subscribe((response: Response) => {
+                    resolve(response);
+                });
+        });
     }
 }

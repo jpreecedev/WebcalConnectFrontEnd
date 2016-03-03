@@ -13,14 +13,16 @@ export function hasValidToken(roles?: string[]): boolean {
     var jwtHelper: JwtHelper = new JwtHelper();
     var token: IJwt = jwtHelper.getToken();
     var hasTokenExpired: boolean = jwtHelper.isTokenExpired(token ? token.access_token : undefined);
-    var userRoles: string[] = jwtHelper.getRoles();
+    var userRoles: string[] = jwtHelper.getRoles(token.access_token);
     var hasUserRole: boolean = false;
 
-    for (var index: number = 0; index < userRoles.length; index++) {
-        var element: string = userRoles[index];
-        if (roles.indexOf(element) > -1) {
-            hasUserRole = true;
-            break;
+    if (userRoles) {
+        for (var index: number = 0; index < userRoles.length; index++) {
+            var element: string = userRoles[index];
+            if (roles.indexOf(element) > -1) {
+                hasUserRole = true;
+                break;
+            }
         }
     }
 
