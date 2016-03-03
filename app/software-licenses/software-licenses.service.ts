@@ -1,5 +1,5 @@
 ﻿import {Injectable} from "angular2/core";
-import {Http, Response} from "angular2/http";
+import {Response} from "angular2/http";
 import {Client} from "./client";
 import {License} from "./license";
 import {HttpService} from "../HttpService";
@@ -8,7 +8,7 @@ import {HttpService} from "../HttpService";
 export class SoftwareLicensesService {
 
     constructor(private _httpService: HttpService) {
-        
+
     }
 
     addClient(clientName: string): Promise<Client> {

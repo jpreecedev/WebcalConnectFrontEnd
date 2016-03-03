@@ -8,12 +8,21 @@ export interface IJwt {
 
 export function hasValidToken(roles?: string[]): boolean {
 
+    roles = roles || ["TachographCentre"];
+
     var jwtHelper: JwtHelper = new JwtHelper();
     var token: IJwt = jwtHelper.getToken();
+    var hasTokenExpired: boolean = jwtHelper.isTokenExpired(token ? token.access_token : undefined);
+    var userRoles: string[] = jwtHelper.getRoles();
+    var hasUserRole: boolean = false;
 
-    if (!token || jwtHelper.isTokenExpired(token.access_token)) {
-        return false;
-    } else {
-        return true;
+    for (var index: number = 0; index < userRoles.length; index++) {
+        var element: string = userRoles[index];
+        if (roles.indexOf(element) > -1) {
+            hasUserRole = true;
+            break;
+        }
     }
+
+    return !hasTokenExpired && hasUserRole;
 }

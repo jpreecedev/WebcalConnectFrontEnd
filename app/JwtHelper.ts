@@ -13,8 +13,20 @@ export class JwtHelper {
         return undefined;
     }
 
+    public getRoles(): string[] {
+        var cookie: string = Cookie.getCookie("roles");
+        if (cookie) {
+            return JSON.parse(cookie);
+        }
+        return undefined;
+    }
+
     public setToken(token: IJwt, rememberMe: boolean): void {
         Cookie.setCookie("token", JSON.stringify(token), rememberMe ? token.expires_in : undefined);
+    }
+
+    public setRoles(roles: string[]): void {
+        Cookie.setCookie("roles", JSON.stringify(roles));
     }
 
     public urlBase64Decode(str: string): string {
@@ -65,6 +77,10 @@ export class JwtHelper {
     }
 
     public isTokenExpired(token: string, offsetSeconds?: number): boolean {
+        if (!token) {
+            return true;
+        }
+
         var date: Date = this.getTokenExpirationDate(token);
         offsetSeconds = offsetSeconds || 0;
         if (!date) {

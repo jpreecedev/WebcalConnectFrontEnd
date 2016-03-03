@@ -37,6 +37,13 @@ export class HttpService {
                 this._jwtHelper.setToken(response.json(), rememberMe);
                 return true;
             })
+            .then(() => {
+                this._request({ url: "http://localhost:50139/api/user/roles", method: RequestMethod.Get, headers: this.getRequestHeaders(false) })
+                    .then((response: Response) => {
+                        this._jwtHelper.setRoles(response.json());
+                    });
+                return true;
+            })
             .catch(this.handleError);
     }
 
