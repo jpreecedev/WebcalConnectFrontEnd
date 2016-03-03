@@ -2,34 +2,28 @@
 import {Http, Response} from "angular2/http";
 import {Client} from "./client";
 import {License} from "./license";
-import {BaseService} from "../base.service";
+import {HttpService} from "../HttpService";
 
 @Injectable()
-export class SoftwareLicensesService extends BaseService {
+export class SoftwareLicensesService {
 
-    constructor(_http: Http) {
-        super(_http);
+    constructor(private _httpService: HttpService) {
+        
     }
 
     addClient(clientName: string): Promise<Client> {
-        return this._http.post("http://localhost:50139/api/licenses/client", JSON.stringify({ "name": clientName }), { headers: this.getHeaders() })
-            .map((response: Response) => response.json())
-            .catch(this.handleError)
-            .toPromise();
+        return this._httpService.post("http://localhost:50139/api/licenses/client", JSON.stringify({ "name": clientName }))
+            .then((response: Response) => response.json());
     }
 
     addLicense(accessId: string, expiration: string): Promise<License> {
-        return this._http.post(`http://localhost:50139/api/licenses/license`, JSON.stringify({ accessId: accessId, expiration: expiration }), { headers: this.getHeaders() })
-            .map((response: Response) => <License>response.json())
-            .catch(this.handleError)
-            .toPromise();
+        return this._httpService.post(`http://localhost:50139/api/licenses/license`, JSON.stringify({ accessId: accessId, expiration: expiration }))
+            .then((response: Response) => <License>response.json());
     }
 
     getClients(): Promise<Client[]> {
-        return this._http.get("http://localhost:50139/api/licenses/clients", { headers: this.getHeaders() })
-            .map((response: Response) => <Client[]>response.json())
-            .toPromise()
-            .catch(this.handleError);
+        return this._httpService.get("http://localhost:50139/api/licenses/clients")
+            .then((response: Response) => <Client[]>response.json());
     }
 
 }
