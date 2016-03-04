@@ -29,3 +29,4 @@ gulp.task("scss-watcher", function () {
 });
 
 gulp.task("default", ["css", "tslint"]);
+gulp.task("watch", ["scss-watcher"]);
