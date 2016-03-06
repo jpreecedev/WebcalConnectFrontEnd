@@ -20,12 +20,6 @@ var log = require('connect-logger');
  */
 module.exports = {
     injectChanges: false, // workaround for Angular 2 styleUrls loading
-    ghostMode: {
-        clicks: true,
-        location: false,
-        forms: true,
-        scroll: true
-    },
     files: ['./**/*.{html,htm,css,js}'],
     server: {
         baseDir: './',
