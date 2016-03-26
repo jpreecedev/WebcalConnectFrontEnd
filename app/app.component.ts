@@ -33,10 +33,8 @@ import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.c
     { path: "/search-my-depot", name: "SearchMyDepot", component: SearchMyDepotComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", component: SoftwareLicensesComponent },
 ])
-export class AppComponent {
-    @Input() isLoggedIn: boolean;
-    
+export class AppComponent {    
     logout(){
-        console.log("Log out...");
+        
     }
 }
