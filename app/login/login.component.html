@@ -4,7 +4,7 @@
         <p id="profile-name" class="profile-name-card"></p>
         <form class="form-signin" (ngSubmit)="authenticate(username, password, rememberMe)">
             <span id="reauth-email" class="reauth-email"></span>
-            <input [(ngModel)]="username" type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input [(ngModel)]="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
             <input [(ngModel)]="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
             <div id="remember" class="checkbox">
                 <label>

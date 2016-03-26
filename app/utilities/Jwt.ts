@@ -13,8 +13,9 @@ export function hasValidToken(roles?: string[]): boolean {
     var jwtHelper: JwtHelper = new JwtHelper();
     var token: IJwt = jwtHelper.getToken();
     var hasTokenExpired: boolean = jwtHelper.isTokenExpired(token ? token.access_token : undefined);
-    var userRoles: string[] = jwtHelper.getRoles(token.access_token);
     var hasUserRole: boolean = false;
+
+    var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : undefined;
 
     if (userRoles) {
         for (var index: number = 0; index < userRoles.length; index++) {

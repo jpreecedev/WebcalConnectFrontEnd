@@ -1,5 +1,6 @@
 import {Component, OnChanges, SimpleChange, Input} from "angular2/core";
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "angular2/router";
+import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "angular2/router";
+import {JwtHelper} from "./utilities/JwtHelper";
 
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
@@ -33,8 +34,16 @@ import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.c
     { path: "/search-my-depot", name: "SearchMyDepot", component: SearchMyDepotComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", component: SoftwareLicensesComponent },
 ])
-export class AppComponent {    
-    logout(){
+export class AppComponent {
+    
+    private _jwtHelper: JwtHelper
+    
+    constructor(private _router: Router) {
+        this._jwtHelper = new JwtHelper();            
+    }
         
+    logout(){
+        this._jwtHelper.logout();
+        this._router.parent.navigate(["Home"]);
     }
 }

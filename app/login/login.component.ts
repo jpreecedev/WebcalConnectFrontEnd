@@ -1,13 +1,14 @@
-﻿import { Component } from "angular2/core";
+﻿import { Component, OnInit } from "angular2/core";
 import { Router } from "angular2/router";
 import { HttpService } from "../utilities/HttpService";
+import { hasValidToken } from "../utilities/Jwt";
 
 @Component({
     templateUrl: "app/login/login.component.html",
     styleUrls: ["app/login/styles.css"],
     providers: [HttpService]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
     constructor(private _httpService: HttpService, private _router: Router) {
 
@@ -22,6 +23,12 @@ export class LoginComponent {
                 }
             });
 
+    }
+    
+    ngOnInit(){
+     if (hasValidToken()){
+         this._router.parent.navigate(["Dashboard"]);
+     }   
     }
 
 }

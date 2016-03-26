@@ -20,20 +20,20 @@ export class SoftwareLicensesComponent implements OnInit {
     private clients: Client[];
     private selectedClient: Client;
 
-    constructor(private service: SoftwareLicensesService) {
+    constructor(private _service: SoftwareLicensesService) {
         this.selectedClient = ({} as Client);
     }
 
     ngOnInit(): void {
 
-        this.service.getClients().then((response: Client[]) => {
+        this._service.getClients().then((response: Client[]) => {
             this.clients = response;
         });
 
     }
 
     addLicense(expiration: string): void {
-        this.service.addLicense(this.selectedClient.accessId, expiration)
+        this._service.addLicense(this.selectedClient.accessId, expiration)
             .then((response: License) => {
                 this.selectedClient.licenses.push(response);
             });
@@ -44,7 +44,7 @@ export class SoftwareLicensesComponent implements OnInit {
             return;
         }
 
-        this.service.addClient(clientName)
+        this._service.addClient(clientName)
             .then((response: Client) => {
                 this.clients.push(response);
             });
@@ -53,8 +53,8 @@ export class SoftwareLicensesComponent implements OnInit {
     selectClient(client: Client): void {
         this.selectedClient = client;
     }
-
-    asDate(date: string): Date {
-        return new Date(date);
+    
+    asDate(input:string){
+        return new Date(input);
     }
 }

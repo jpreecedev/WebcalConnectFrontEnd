@@ -7,6 +7,14 @@
         border-radius: 10px;
         margin-bottom: 20px;
 
+        a{
+            color:#666;   
+            
+            &:hover{
+                color:#fff;
+            }
+        }
+
         p {
             padding-top: 20px;
         }
