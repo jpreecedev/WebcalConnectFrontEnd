@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="#recentCalibration of _recentCalibrations | depotname : _selectedDepotName">
+        <tr *ngFor="#recentCalibration of _recentCalibrations | depotname : _selectedDepotName" class="pointer" (click)="downloadCertificate(recentCalibration)">
             <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType"/> </td>
             <td>{{recentCalibration.companyName}}</td>
             <td>{{recentCalibration.documentType}}</td>

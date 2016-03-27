@@ -14,4 +14,12 @@ export class RecentCalibrationsService{
         .then((response:Response) => response.json());
     }
     
+    downloadCertificate(id:Number, documentType:string){
+        
+        this._httpService.get(`http://localhost:50139/api/resource/certificate/${id}/${documentType}`)
+            .then((response: Response)=>{
+                window.open("data:application/pdf;base64," + response.text());
+            });
+    }
+    
 }

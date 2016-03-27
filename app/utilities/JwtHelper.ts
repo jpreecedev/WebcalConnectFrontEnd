@@ -100,8 +100,8 @@ export class JwtHelper {
 
         return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
     }
-    
-    public logout(){
+
+    public logout() {
         Cookie.deleteCookie("token");
     }
 }

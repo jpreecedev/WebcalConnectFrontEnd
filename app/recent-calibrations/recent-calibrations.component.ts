@@ -14,6 +14,8 @@ export interface RecentCalibration {
     technician: string;
     customer: string;
     depotName: string;
+    documentId: number;
+    documentTypeEnum: string;
 }
 
 @Component({
@@ -54,6 +56,14 @@ export class RecentCalibrationsComponent implements OnInit {
             }
         }
         return depotNames;
+    }
+
+    downloadCertificate(selectedCalibration: RecentCalibration) {
+        if (!selectedCalibration) {
+            return;
+        }
+
+        this._service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
     }
 
     asDate(input: string) {

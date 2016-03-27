@@ -37,6 +37,7 @@ p {
 
 a {
     color: #bd362f;
+    cursor: pointer;
 
     &:hover {
         text-decoration: none;
@@ -290,4 +291,8 @@ html {
 
 th.max {
     width: 75%;
+}
+
+.pointer{
+    cursor: pointer;
 }

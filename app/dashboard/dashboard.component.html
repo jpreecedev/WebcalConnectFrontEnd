@@ -2,68 +2,10 @@
     <h1>Dashboard</h1>
     <hr />
     <ul class="dashboard-menu">
-        <li class="col-xs-6 col-md-4">
+        <li class="col-xs-6 col-md-4 pointer" *ngFor="#dashboardItem of _dashboardItems" (click)="navigate(dashboardItem)">
             <p>
-                <a [routerLink]="['RecentCalibrations']">
-                    <i class="fa fa-history fa-4x"></i>
-                    <br /><span>Recent Calibrations</span>
-                </a>
-            </p>
-        </li>
-        <li class="col-xs-6 col-md-4">
-            <p>
-                <a [routerLink]="['SearchMyDepot']">
-                    <i class="fa fa-truck fa-4x"></i>
-                    <br /><span>Search My Depot</span>
-                </a>
-            </p>
-        </li>
-        <li class="col-xs-6 col-md-4">
-            <p>
-                <a [routerLink]="['CalibrationsDue']">
-                    <i class="fa fa-list-alt fa-4x"></i>
-                    <br /><span>Calibrations Due This Month</span>
-                </a>
-            </p>
-        </li>
-        <li class="col-xs-6 col-md-4">
-            <p>
-                <a [routerLink]="['GenerateEmail']">
-                    <i class="fa fa-envelope fa-4x"></i>
-                    <br /><span>Generate Email Report</span>
-                </a>
-            </p>
-        </li>
-        <li class="col-xs-6 col-md-4">
-            <p>
-                <a [routerLink]="['InspectionData']">
-                    <i class="fa fa-search fa-4x"></i>
-                    <br /><span>Inspection Data</span>
-                </a>
-            </p>
-        </li>
-        <li class="col-xs-6 col-md-4">
-            <p>
-                <a [routerLink]="['RevokeAccess']">
-                    <i class="fa fa-users fa-4x"></i>
-                    <br /><span>Revoke Access</span>
-                </a>
-            </p>
-        </li>
-        <li class="col-xs-6 col-md-4">
-            <p>
-                <a [routerLink]="['SoftwareLicenses']">
-                    <i class="fa fa-certificate fa-4x"></i>
-                    <br /><span>Software Licenses</span>
-                </a>
-            </p>
-        </li>
-        <li class="col-xs-6 col-md-4">
-            <p>
-                <a [routerLink]="['RegisterUser']">
-                    <i class="fa fa-at fa-4x"></i>
-                    <br /><span>Register User</span>
-                </a>
+                <i class="fa {{dashboardItem.icon}} fa-4x"></i>
+                <br /><span>{{dashboardItem.text}}</span>
             </p>
         </li>
     </ul>

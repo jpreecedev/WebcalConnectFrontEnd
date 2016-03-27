@@ -14,6 +14,12 @@ import {RevokeAccessComponent} from "./revoke-access/revoke-access.component";
 import {SearchMyDepotComponent} from "./search-my-depot/search-my-depot.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
 
+export interface MenuItem {
+    icon: string;
+    routerLink: string;
+    text: string;
+}
+
 @Component({
     selector: "main-app",
     templateUrl: "app/app.component.html",
