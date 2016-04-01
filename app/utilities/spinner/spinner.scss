@@ -1,0 +1,26 @@
+$color_mine_shaft_approx: #333;
+
+.spinner {
+	width: 40px;
+	height: 40px;
+	margin: 100px auto;
+	background-color: $color_mine_shaft_approx;
+	border-radius: 100%;
+	animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+@-webkit-keyframes sk-scaleout {
+	0% {
+	}
+	100% {
+		opacity: 0;
+	}
+}
+@keyframes sk-scaleout {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1.0);
+		opacity: 0;
+	}
+}

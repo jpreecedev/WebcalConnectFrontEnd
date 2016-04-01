@@ -4,6 +4,7 @@ import { hasValidToken } from "../utilities/Jwt";
 import { HttpService } from "../utilities/HttpService";
 import { RecentCalibrationsService } from "./recent-calibrations.service";
 import { DepotNamePipe } from "./depot-name.pipe";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 
 export interface RecentCalibration {
     companyName: string;
@@ -22,7 +23,8 @@ export interface RecentCalibration {
     templateUrl: "app/recent-calibrations/recent-calibrations.component.html",
     styleUrls: ["app/recent-calibrations/styles.css"],
     providers: [RecentCalibrationsService, HttpService],
-    pipes: [DepotNamePipe]
+    pipes: [DepotNamePipe],    
+    directives: [SpinnerComponent]
 })
 @CanActivate(() => hasValidToken())
 export class RecentCalibrationsComponent implements OnInit {
@@ -30,6 +32,8 @@ export class RecentCalibrationsComponent implements OnInit {
     private _recentCalibrations: RecentCalibration[];
     private _depotNames: string[];
     private _selectedDepotName: string;
+    
+    public  isRequesting: boolean;
 
     constructor(private _service: RecentCalibrationsService) {
 
@@ -37,7 +41,9 @@ export class RecentCalibrationsComponent implements OnInit {
 
     ngOnInit() {
 
+        this.isRequesting = true;
         this._service.getRecent().then((response: RecentCalibration[]) => {
+            this.isRequesting = false;
             this._recentCalibrations = response;
             this._depotNames = this.getDepotNames();
         });
