@@ -2,16 +2,23 @@
     <div class="card card-container">
         <img id="profile-img" src="/img/webcal.png" alt="Webcal Calibration Software" />
         <p id="profile-name" class="profile-name-card"></p>
-        <form class="form-signin" (ngSubmit)="authenticate(username, password, rememberMe)">
-            <span id="reauth-email" class="reauth-email"></span>
-            <input [(ngModel)]="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-            <input [(ngModel)]="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <form role="form" class="form-signup" (ngSubmit)="authenticate(username, password, rememberMe)">
+            <div class="form-group has-feedback">
+                <label for="inputEmail">Email address</label>
+                <input [(ngModel)]="username" type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+                <span class="form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="inputPassword">Password</label>
+                <input [(ngModel)]="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <span class="form-control-feedback"></span>
+            </div>
             <div id="remember" class="checkbox">
                 <label>
                     <input [(ngModel)]="rememberMe" type="checkbox" value="remember-me"> Remember me
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-        </form><!-- /form -->
-    </div><!-- /card-container -->
-</div><!-- /container -->
+        </form>
+    </div>
+</div>

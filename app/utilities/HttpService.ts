@@ -7,10 +7,8 @@ import {IJwt} from "./Jwt";
 @Injectable()
 export class HttpService {
 
-    private _jwtHelper: JwtHelper;
+    constructor(private _http: Http, private _jwtHelper: JwtHelper) {
 
-    constructor(private _http: Http) {
-        this._jwtHelper = new JwtHelper();
     }
 
     get(url: string): Promise<Response> {

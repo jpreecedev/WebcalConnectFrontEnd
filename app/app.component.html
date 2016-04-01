@@ -15,10 +15,10 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav pull-right">
                 <li class="active"><a [routerLink]="['Home']">Home</a></li>
-                <li><a [routerLink]="['Login']">Login</a></li>
-                <li><a (click)="logout()">Logout</a></li>
-                <li><a [routerLink]="['Dashboard']">Dashboard</a></li>
-                <li class="dropdown">
+                <li><a [hidden]="isLoggedIn" [routerLink]="['Login']">Login</a></li>
+                <li><a [hidden]="!isLoggedIn" (click)="logout()">Logout</a></li>
+                <li><a [hidden]="!isLoggedIn" [routerLink]="['Dashboard']">Dashboard</a></li>
+                <li class="dropdown" [hidden]="!isLoggedIn">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a [routerLink]="['GenerateEmail']">Generate Email</a></li>
@@ -30,9 +30,9 @@
                         <li><a [routerLink]="['SoftwareLicenses']">Software Licenses</a></li>
                     </ul>
                 </li>
-                <li><a [routerLink]="['RecentCalibrations']">Recent Calibrations</a></li>
+                <li><a [hidden]="!isLoggedIn" [routerLink]="['RecentCalibrations']">Recent Calibrations</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<router-outlet></router-outlet>
+<auth-router-outlet></auth-router-outlet>

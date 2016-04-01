@@ -1,3 +1,4 @@
+import {Injectable} from 'angular2/core';
 import {IJwt} from "./Jwt";
 import {Cookie} from "./cookies";
 
@@ -13,6 +14,7 @@ export interface IJwtBody {
     unique_name: string;
 }
 
+@Injectable()
 export class JwtHelper {
 
     public getToken(): IJwt {

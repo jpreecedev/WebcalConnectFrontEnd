@@ -8,7 +8,7 @@ import { MenuItem } from "../app.component";
     styleUrls: ["app/dashboard/styles.css"],
     directives: [ROUTER_DIRECTIVES],
 })
-@CanActivate(() => hasValidToken())
+@CanActivate((next) => hasValidToken())
 export class DashboardComponent implements OnInit {
 
     private _dashboardItems: Array<MenuItem>;
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
     }
 
     private navigate(dashboardItem: MenuItem) {
-        this._router.parent.navigate([dashboardItem.routerLink]);
+        this._router.navigate([dashboardItem.routerLink]);
     }
 
 }

@@ -7,18 +7,22 @@ import { TickPipe } from "./tick.pipe";
 import { ClientNamePipe } from "./client-name.pipe";
 import { hasValidToken } from "../utilities/Jwt";
 import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 
 @Component({
     templateUrl: "app/software-licenses/software-licenses.component.html",
     styleUrls: ["app/software-licenses/styles.css"],
     providers: [SoftwareLicensesService, HttpService],
-    pipes: [TickPipe, ClientNamePipe]
+    pipes: [TickPipe, ClientNamePipe],
+    directives: [SpinnerComponent]
 })
 @CanActivate(() => hasValidToken(["Administrator"]))
 export class SoftwareLicensesComponent implements OnInit {
 
     private clients: Client[];
     private selectedClient: Client;
+    
+    public  isRequesting: boolean;
 
     constructor(private _service: SoftwareLicensesService) {
         this.selectedClient = ({} as Client);
@@ -26,7 +30,9 @@ export class SoftwareLicensesComponent implements OnInit {
 
     ngOnInit(): void {
 
+        this.isRequesting = true;
         this._service.getClients().then((response: Client[]) => {
+            this.isRequesting = false;
             this.clients = response;
         });
 
