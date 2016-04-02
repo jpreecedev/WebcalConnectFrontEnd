@@ -6,6 +6,11 @@ import {IJwt} from "./Jwt";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
+export interface PagedResponse<T> {
+    total: number;
+    data: T[];
+}
+
 @Injectable()
 export class HttpService {
 

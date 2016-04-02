@@ -1,10 +1,15 @@
-import { Component, OnInit } from "angular2/core";
-import { CanActivate } from "angular2/router";
-import { hasValidToken } from "../utilities/Jwt";
-import { HttpService } from "../utilities/HttpService";
-import { RecentCalibrationsService } from "./recent-calibrations.service";
-import { DepotNamePipe } from "./depot-name.pipe";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import {Component, OnInit} from "angular2/core";
+import {CanActivate} from "angular2/router";
+import {Response, Http} from "angular2/http";
+import {hasValidToken} from "../utilities/Jwt";
+import {HttpService} from "../utilities/HttpService";
+import {RecentCalibrationsService} from "./recent-calibrations.service";
+import {SpinnerComponent} from "../utilities/spinner/spinner.component";
+import {PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance} from "ng2-pagination";
+import {Observable} from "rxjs/Rx";
+import {DepotNamePipe} from "./depot-name.pipe";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 export interface RecentCalibration {
     companyName: string;
@@ -22,40 +27,41 @@ export interface RecentCalibration {
 @Component({
     templateUrl: "app/recent-calibrations/recent-calibrations.component.html",
     styleUrls: ["app/recent-calibrations/styles.css"],
-    providers: [RecentCalibrationsService, HttpService],
-    pipes: [DepotNamePipe],
-    directives: [SpinnerComponent]
+    providers: [RecentCalibrationsService, HttpService, PaginationService],
+    pipes: [PaginatePipe, DepotNamePipe],
+    directives: [SpinnerComponent, PaginationControlsCmp]
 })
 @CanActivate(() => hasValidToken())
 export class RecentCalibrationsComponent implements OnInit {
 
-    public selectedDepotName: string = "-- All --";
-    
+    public selectedDepotName: string;
+
     private _recentCalibrations: RecentCalibration[];
     private _depotNames: string[];
     private _isRequesting: boolean;
-
-    constructor(private _service: RecentCalibrationsService) {
+    
+    constructor(private _service: RecentCalibrationsService, private _http: Http) {
 
     }
 
     ngOnInit(): void {
+        this.getPage(1);
+    }
 
+    getPage(page: number) {
         this._isRequesting = true;
-        this._service.getRecent().subscribe((response: RecentCalibration[]) => {
-            this._recentCalibrations = response;
+        this._service.getRecent().subscribe((response: Response)=>{
+            this._recentCalibrations = response.json();
             this._depotNames = this.getDepotNames();
             this._isRequesting = false;
         });
-
     }
 
     getDepotNames(): string[] {
-        if (!this._recentCalibrations || this._recentCalibrations.length === 0) {
+        if (!this._recentCalibrations) {
             return;
         }
         var depotNames: Array<string> = new Array<string>();
-        depotNames.push("-- All --");
         for (var index: number = 0; index < this._recentCalibrations.length; index++) {
             var element: RecentCalibration = this._recentCalibrations[index];
             if (depotNames.indexOf(element.depotName) === -1) {

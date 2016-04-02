@@ -11,11 +11,8 @@ export class RecentCalibrationsService {
 
     }
 
-    getRecent(): Observable<RecentCalibration[]> {
-        return this._httpService.get("http://localhost:50139/api/recentcalibrations")
-            .map((response: Response) => {
-                return response.json();
-            });
+    getRecent(): Observable<Response> {
+        return this._httpService.get("http://localhost:50139/api/recentcalibrations/")
     }
 
     downloadCertificate(id: Number, documentType: string): void {
