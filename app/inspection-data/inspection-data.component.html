@@ -1,4 +1,71 @@
-<h3>Inspection Data</h3>
-<div>
-	
+<div class="container">
+    <h1>Inspection Data</h1>
+    <hr/>
+
+    <form action="" id="filterForm" method="post" role="form" (ngSubmit)="submit()">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="vehicleRegistration">Enter a vehicle registration number</label>
+                    <input type="text" id="vehicleRegistration" name="vehicleRegistration" class="form-control" [(ngModel)]="_vehicleRegistration">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <button class="btn btn-primary" type="submit">Find</button>
+            </div>
+        </div>
+    </form>
+    <hr/>
+
+    <spinner [isRunning]="_isRequesting"></spinner>
+
+    <div class="row" *ngIf="_inspectionData">
+        <div class="col-xs-3">
+            <p><strong>Calibration Date</strong>
+                <br>{{asDate(_inspectionData.calibrationDate) | date}}</p>
+        </div>
+        <div class="col-xs-3">
+            <p><strong>Inspection Date</strong>
+                <br>{{asDate(_inspectionData.inspectionDate) | date}}</p>
+        </div>
+        <div class="col-xs-3">
+            <p><strong>Vehicle Make</strong>
+                <br>{{_inspectionData.vehicleMake}}</p>
+        </div>
+        <div class="col-xs-3">
+            <p><strong>Vehicle Model</strong>
+                <br>{{_inspectionData.vehicleModel}}</p>
+        </div>
+        <div class="col-xs-3">
+            <p><strong>Tacho Model</strong>
+                <br>{{_inspectionData.tachoModel}}</p>
+        </div>
+        <div class="col-xs-9">
+            <p><strong>Inspection Data</strong>
+                <br>{{_inspectionData.inspectionData}}</p>
+        </div>
+    </div>
+    <hr *ngIf="_inspectionData" />
+
+    <div *ngIf="_inspectionData && _inspectionData.history">
+        <h2>Inspection data history</h2>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default" *ngFor="#item of _inspectionData.history; #i=index">
+                <div class="panel-heading" role="tab" [attr.id]="'heading'+i">
+                    <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" [attr.href]="'#collapse'+i" aria-expanded="true" [attr.aria-controls]="'collapse'+i">
+                    {{asDate(item.calibrationDate) | date}}
+                    </a>
+                </h4>
+                </div>
+                <div [attr.id]="'collapse'+i" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'heading'+i">
+                    <div class="panel-body">
+                        {{item.inspectionInfo}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

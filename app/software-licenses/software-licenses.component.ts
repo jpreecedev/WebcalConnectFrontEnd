@@ -21,8 +21,7 @@ export class SoftwareLicensesComponent implements OnInit {
 
     private clients: Client[];
     private selectedClient: Client;
-    
-    public  isRequesting: boolean;
+    private _isRequesting: boolean;
 
     constructor(private _service: SoftwareLicensesService) {
         this.selectedClient = ({} as Client);
@@ -30,9 +29,9 @@ export class SoftwareLicensesComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.isRequesting = true;
+        this._isRequesting = true;
         this._service.getClients().then((response: Client[]) => {
-            this.isRequesting = false;
+            this._isRequesting = false;
             this.clients = response;
         });
 

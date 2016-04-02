@@ -20,11 +20,9 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
         this._dashboardItems = [
             <MenuItem>{ icon: "fa-history", routerLink: "RecentCalibrations", text: "Recent Calibrations" },
-            <MenuItem>{ icon: "fa-truck", routerLink: "SearchMyDepot", text: "Search My Depot" },
             <MenuItem>{ icon: "fa-list-alt", routerLink: "CalibrationsDue", text: "Calibrations Due" },
             <MenuItem>{ icon: "fa-envelope", routerLink: "GenerateEmail", text: "Generate Email" },
-            <MenuItem>{ icon: "fa-search", routerLink: "InspectionData", text: "Inspection Data" },
-
+            <MenuItem>{ icon: "fa-search", routerLink: "InspectionData", text: "Inspection Data" }
         ];
 
         if (isAdministrator()) {

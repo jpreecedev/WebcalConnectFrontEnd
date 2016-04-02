@@ -39,12 +39,11 @@ export interface MenuItem {
     { path: "/recent-calibrations", name: "RecentCalibrations", component: RecentCalibrationsComponent },
     { path: "/register-user", name: "RegisterUser", component: RegisterUserComponent },
     { path: "/revoke-access", name: "RevokeAccess", component: RevokeAccessComponent },
-    { path: "/search-my-depot", name: "SearchMyDepot", component: SearchMyDepotComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", component: SoftwareLicensesComponent },
 ])
 export class AppComponent {
     
-    public isLoggedIn: boolean;
+    public isLoggedIn: boolean= true;
     
     constructor(private _router: Router, private _jwtHelper: JwtHelper) {
         

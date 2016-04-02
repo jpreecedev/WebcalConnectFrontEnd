@@ -31,9 +31,8 @@ export class RecentCalibrationsComponent implements OnInit {
 
     private _recentCalibrations: RecentCalibration[];
     private _depotNames: string[];
-    private _selectedDepotName: string;
-    
-    public  isRequesting: boolean;
+    private _selectedDepotName: string = "-- All --";
+    private _isRequesting: boolean;
 
     constructor(private _service: RecentCalibrationsService) {
 
@@ -41,9 +40,9 @@ export class RecentCalibrationsComponent implements OnInit {
 
     ngOnInit() {
 
-        this.isRequesting = true;
+        this._isRequesting = true;
         this._service.getRecent().then((response: RecentCalibration[]) => {
-            this.isRequesting = false;
+            this._isRequesting = false;
             this._recentCalibrations = response;
             this._depotNames = this.getDepotNames();
         });
@@ -55,6 +54,7 @@ export class RecentCalibrationsComponent implements OnInit {
             return;
         }
         var depotNames = new Array<string>();
+        depotNames.push("-- All --");
         for (var index = 0; index < this._recentCalibrations.length; index++) {
             var element = this._recentCalibrations[index];
             if (depotNames.indexOf(element.depotName) === -1) {
