@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Output } from "angular2/core";
+﻿import { Component, OnInit } from "angular2/core";
 import { Router } from "angular2/router";
 import { HttpService } from "../utilities/HttpService";
 import { hasValidToken } from "../utilities/Jwt";
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     authenticate(username: string, password: string, rememberMe: boolean): void {
 
         this._httpService.authenticate(username, password, rememberMe)
-            .then((response: boolean) => {
+            .subscribe((response: boolean) => {
                 if (response) {
                     this._router.navigate(["Dashboard"]);
                 }
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         if (hasValidToken()) {
             this._router.navigate(["Dashboard"]);
         }

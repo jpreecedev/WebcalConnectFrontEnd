@@ -1,7 +1,6 @@
-import {Component, OnChanges, SimpleChange, Input} from "angular2/core";
+import {Component} from "angular2/core";
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "angular2/router";
 import {JwtHelper} from "./utilities/JwtHelper";
-import {Observable} from "rxjs/Observable";
 
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
@@ -42,13 +41,12 @@ export interface MenuItem {
 ])
 export class AppComponent {
     
-    public isLoggedIn: boolean= true;
+    public isLoggedIn: boolean = true;
     
     constructor(private _router: Router, private _jwtHelper: JwtHelper) {
-        
     }
-        
-    logout(){
+
+    logout(): void {
         this._jwtHelper.logout();
         this._router.navigate(["Home"]);
     }

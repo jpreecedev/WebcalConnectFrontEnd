@@ -3,8 +3,8 @@ import {Http, Headers, Response, RequestMethod, RequestOptionsArgs} from "angula
 import {Observable} from "rxjs/Observable";
 import {JwtHelper} from "./JwtHelper";
 import {IJwt} from "./Jwt";
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/do";
 
 @Injectable()
 export class HttpService {
@@ -37,7 +37,7 @@ export class HttpService {
                 this._jwtHelper.setToken(response.json(), rememberMe);
             })
             .map((res: Response) => {
-                if (res.status === 200){
+                if (res.status === 200) {
                     return true;
                 }
                 return false;
@@ -52,7 +52,7 @@ export class HttpService {
             headers.append("Content-Type", "application/x-www-form-urlencoded");
         } else {
             headers.append("Content-Type", "application/json");
-         
+
             var token: IJwt = this._jwtHelper.getToken();
             if (token && token.access_token) {
                 headers.append("Authorization", "Bearer " + token.access_token);

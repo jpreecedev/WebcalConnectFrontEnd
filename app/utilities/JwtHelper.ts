@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from "angular2/core";
 import {IJwt} from "./Jwt";
 import {Cookie} from "./cookies";
 
@@ -32,8 +32,7 @@ export class JwtHelper {
         }
         if (Array.isArray(decoded.role)) {
             return <string[]>decoded.role;
-        }
-        else {
+        } else {
             return [<string>decoded.role];
         }
     }
@@ -103,7 +102,7 @@ export class JwtHelper {
         return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
     }
 
-    public logout() {
+    public logout(): void {
         Cookie.deleteCookie("token");
     }
 }

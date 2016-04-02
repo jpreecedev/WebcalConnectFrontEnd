@@ -2,7 +2,7 @@ import {Injectable} from "angular2/core";
 import {Response} from "angular2/http";
 import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
-import 'rxjs/add/operator/map';
+import "rxjs/add/operator/map";
 
 @Injectable()
 export class InspectionDataService {

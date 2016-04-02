@@ -23,40 +23,41 @@ export interface RecentCalibration {
     templateUrl: "app/recent-calibrations/recent-calibrations.component.html",
     styleUrls: ["app/recent-calibrations/styles.css"],
     providers: [RecentCalibrationsService, HttpService],
-    pipes: [DepotNamePipe],    
+    pipes: [DepotNamePipe],
     directives: [SpinnerComponent]
 })
 @CanActivate(() => hasValidToken())
 export class RecentCalibrationsComponent implements OnInit {
 
+    public selectedDepotName: string = "-- All --";
+    
     private _recentCalibrations: RecentCalibration[];
     private _depotNames: string[];
-    private _selectedDepotName: string = "-- All --";
     private _isRequesting: boolean;
 
     constructor(private _service: RecentCalibrationsService) {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         this._isRequesting = true;
-        this._service.getRecent().then((response: RecentCalibration[]) => {
-            this._isRequesting = false;
+        this._service.getRecent().subscribe((response: RecentCalibration[]) => {
             this._recentCalibrations = response;
             this._depotNames = this.getDepotNames();
+            this._isRequesting = false;
         });
 
     }
 
-    getDepotNames() {
+    getDepotNames(): string[] {
         if (!this._recentCalibrations || this._recentCalibrations.length === 0) {
             return;
         }
-        var depotNames = new Array<string>();
+        var depotNames: Array<string> = new Array<string>();
         depotNames.push("-- All --");
-        for (var index = 0; index < this._recentCalibrations.length; index++) {
-            var element = this._recentCalibrations[index];
+        for (var index: number = 0; index < this._recentCalibrations.length; index++) {
+            var element: RecentCalibration = this._recentCalibrations[index];
             if (depotNames.indexOf(element.depotName) === -1) {
                 depotNames.push(element.depotName);
             }
@@ -64,7 +65,7 @@ export class RecentCalibrationsComponent implements OnInit {
         return depotNames;
     }
 
-    downloadCertificate(selectedCalibration: RecentCalibration) {
+    downloadCertificate(selectedCalibration: RecentCalibration): void {
         if (!selectedCalibration) {
             return;
         }
@@ -72,7 +73,7 @@ export class RecentCalibrationsComponent implements OnInit {
         this._service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
     }
 
-    asDate(input: string) {
+    asDate(input: string): Date {
         return new Date(input);
     }
 }

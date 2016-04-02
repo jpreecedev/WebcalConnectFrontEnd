@@ -1,13 +1,25 @@
 import { Component, OnInit } from "angular2/core";
 import { CanActivate } from "angular2/router";
 import { SoftwareLicensesService } from "./software-licenses.service";
-import { Client } from "./client";
-import { License } from "./license";
 import { TickPipe } from "./tick.pipe";
 import { ClientNamePipe } from "./client-name.pipe";
 import { hasValidToken } from "../utilities/Jwt";
 import { HttpService } from "../utilities/HttpService";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+
+export interface License {
+    expiration: Date;
+    hasExpired: boolean;
+    license: string;
+    accessId: string;
+}
+
+export interface Client {
+    name: string;
+    expiration: string;
+    accessId: string;
+    licenses: License[];
+}
 
 @Component({
     templateUrl: "app/software-licenses/software-licenses.component.html",
@@ -30,7 +42,7 @@ export class SoftwareLicensesComponent implements OnInit {
     ngOnInit(): void {
 
         this._isRequesting = true;
-        this._service.getClients().then((response: Client[]) => {
+        this._service.getClients().subscribe((response: Client[]) => {
             this._isRequesting = false;
             this.clients = response;
         });
@@ -39,7 +51,7 @@ export class SoftwareLicensesComponent implements OnInit {
 
     addLicense(expiration: string): void {
         this._service.addLicense(this.selectedClient.accessId, expiration)
-            .then((response: License) => {
+            .subscribe((response: License) => {
                 this.selectedClient.licenses.push(response);
             });
     }
@@ -50,7 +62,7 @@ export class SoftwareLicensesComponent implements OnInit {
         }
 
         this._service.addClient(clientName)
-            .then((response: Client) => {
+            .subscribe((response: Client) => {
                 this.clients.push(response);
             });
     }
@@ -58,8 +70,8 @@ export class SoftwareLicensesComponent implements OnInit {
     selectClient(client: Client): void {
         this.selectedClient = client;
     }
-    
-    asDate(input:string){
+
+    asDate(input: string): Date {
         return new Date(input);
     }
 }

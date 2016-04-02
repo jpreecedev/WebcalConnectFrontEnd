@@ -31,12 +31,12 @@ export function hasValidToken(roles?: string[]): boolean {
 }
 
 export function isAdministrator(): boolean {
-    var jwtHelper = new JwtHelper();
+    var jwtHelper: JwtHelper = new JwtHelper();
     var token: IJwt = jwtHelper.getToken();
     var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : undefined;
 
-    for (var index = 0; index < userRoles.length; index++) {
-        var element = userRoles[index];
+    for (var index: number = 0; index < userRoles.length; index++) {
+        var element: string = userRoles[index];
         if (element === "Administrator") {
             return true;
         }

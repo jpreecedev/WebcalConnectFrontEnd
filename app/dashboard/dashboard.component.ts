@@ -8,16 +8,15 @@ import { MenuItem } from "../app.component";
     styleUrls: ["app/dashboard/styles.css"],
     directives: [ROUTER_DIRECTIVES],
 })
-@CanActivate((next) => hasValidToken())
+@CanActivate(() => hasValidToken())
 export class DashboardComponent implements OnInit {
 
     private _dashboardItems: Array<MenuItem>;
 
     constructor(private _router: Router) {
-
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this._dashboardItems = [
             <MenuItem>{ icon: "fa-history", routerLink: "RecentCalibrations", text: "Recent Calibrations" },
             <MenuItem>{ icon: "fa-list-alt", routerLink: "CalibrationsDue", text: "Calibrations Due" },
@@ -34,7 +33,7 @@ export class DashboardComponent implements OnInit {
         }
     }
 
-    private navigate(dashboardItem: MenuItem) {
+    navigate(dashboardItem: MenuItem): void {
         this._router.navigate([dashboardItem.routerLink]);
     }
 

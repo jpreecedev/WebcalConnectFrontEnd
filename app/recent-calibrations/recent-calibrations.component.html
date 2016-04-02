@@ -7,7 +7,7 @@
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="favourite">Filter by depot name</label>
-                    <select id="favourite" name="favourite" class="form-control" [(ngModel)]="_selectedDepotName">
+                    <select id="favourite" name="favourite" class="form-control" [(ngModel)]="selectedDepotName">
                         <option *ngFor="#item of _depotNames">{{item}}</option>
                     </select>
                 </div>
@@ -15,8 +15,8 @@
         </div>
     </form>
     <hr/>
-    <spinner [isRunning]="isRequesting"></spinner>
-    <table class="table table-striped table-hover table-responsive" *ngIf="!isRequesting">
+    <spinner [isRunning]="_isRequesting"></spinner>
+    <table class="table table-striped table-hover table-responsive" *ngIf="!_isRequesting">
         <thead>
         <tr>
             <th>&nbsp;</th>
@@ -30,7 +30,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="#recentCalibration of _recentCalibrations | depotname : _selectedDepotName" class="pointer" (click)="downloadCertificate(recentCalibration)">
+        <tr *ngFor="#recentCalibration of _recentCalibrations | depotname : selectedDepotName" class="pointer" (click)="downloadCertificate(recentCalibration)">
             <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType"/> </td>
             <td>{{recentCalibration.companyName}}</td>
             <td>{{recentCalibration.documentType}}</td>

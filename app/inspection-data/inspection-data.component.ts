@@ -1,11 +1,9 @@
-import { Component, OnInit } from "angular2/core";
+import { Component } from "angular2/core";
 import { HttpService } from "../utilities/HttpService";
 import { CanActivate } from "angular2/router";
 import { hasValidToken } from "../utilities/Jwt";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 import { InspectionDataService } from "./inspection-data.service";
-import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/do';
 
 export interface InspectionData {
     calibrationDate: string;
@@ -39,8 +37,8 @@ export class InspectionDataComponent {
     constructor(private _service: InspectionDataService) {
     }
 
-    submit() {
-        this._inspectionData = null;
+    submit(): void {
+        this._inspectionData = undefined;
         this._isRequesting = true;
         this._service.getVehicleInspectionData<InspectionData>(this._vehicleRegistration).subscribe((data: InspectionData) => {
             this._inspectionData = data;
@@ -48,7 +46,7 @@ export class InspectionDataComponent {
         });
     }
 
-    asDate(input: string) {
+    asDate(input: string): Date {
         return new Date(input);
     }
 }

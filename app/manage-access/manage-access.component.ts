@@ -26,13 +26,13 @@ export class ManageAccessComponent implements OnInit {
 
     private _isRequesting: boolean;
     private _users: ManageAccessUser[];
-    private _connectedSites: ManageAccessSite[]; 
+    private _connectedSites: ManageAccessSite[];
 
     constructor(private _service: ManageAccessService) {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this._isRequesting = true;
         this._service.getUsers().subscribe((data: ManageAccessUser[]) => {
             data.unshift(<ManageAccessUser>{ id: -1, name: "" });
@@ -40,18 +40,18 @@ export class ManageAccessComponent implements OnInit {
             this._isRequesting = false;
         });
     }
-    
-    getConnectedSites(siteId: number){        
+
+    getConnectedSites(siteId: number): void {
         this._isRequesting = true;
-        this._service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) =>{
+        this._service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) => {
             this._connectedSites = data;
             this._isRequesting = false;
         });
     }
-    
-    toggleAccess(site: ManageAccessSite){
-        this._service.toggleSite(site).subscribe(()=>{
-           site.isRevoked = !site.isRevoked; 
+
+    toggleAccess(site: ManageAccessSite): void {
+        this._service.toggleSite(site).subscribe(() => {
+            site.isRevoked = !site.isRevoked;
         });
     }
 
