@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit, ElementRef} from "angular2/core";
 import {CanActivate} from "angular2/router";
 import {Response, Http} from "angular2/http";
 import {hasValidToken} from "../utilities/Jwt";
@@ -9,6 +9,7 @@ import {PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInsta
 import {Observable} from "rxjs/Rx";
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
+import {bootbox, bootboxConfig} from "../utilities/bootbox";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -42,7 +43,7 @@ export class RecentCalibrationsComponent implements OnInit {
     private _isRequesting: boolean;
     private _page: number = 1;
 
-    constructor(private _service: RecentCalibrationsService, private _http: Http) {
+    constructor(private _service: RecentCalibrationsService, private _http: Http, private _element: ElementRef) {
 
     }
 
@@ -69,35 +70,95 @@ export class RecentCalibrationsComponent implements OnInit {
         return depotNames;
     }
 
-    downloadCertificate(selectedCalibration: RecentCalibration): void {
-        if (!selectedCalibration) {
+    downloadCertificate($event: Event, selectedCalibration: RecentCalibration): void {
+        if (!selectedCalibration || $event.defaultPrevented) {
             return;
         }
 
         this._service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
     }
 
-    downloadGridData() {
-        var dataString: string;
-        var filteredData = this._recentCalibrations.filter((item: RecentCalibration) => {
-            if (!this.selectedDepotName){
-                return true;
-            }
-            return item.depotName === this.selectedDepotName;
-        });
+    emailCertificate($event: Event, selectedCalibration: RecentCalibration): void {
+        if (!selectedCalibration) {
+            return;
+        }
+        $event.preventDefault();
 
+        var $this: RecentCalibrationsComponent = this;
+        this.showDialog(function() {
+            var email = this.find("#email").val();
+            if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+                $this._service.emailCertificate(email, selectedCalibration).subscribe();
+                $this.alert("Your email has been sent.");
+            }
+        });
+    }
+
+    downloadGridData() {
         var csvHelper: CsvHelper = new CsvHelper();
-        csvHelper.download(filteredData, this._page, (item: RecentCalibration) => {
-            return [item.companyName,
-                item.documentType,
-                this.asDate(item.expiration).toDateString(),
-                item.registration,
-                item.technician,
-                item.customer];
+        csvHelper.download(this.getGridData(), this._page, this.selectGridData);
+    }
+
+    emailGridData() {
+        var $this: RecentCalibrationsComponent = this;
+        this.showDialog(function() {
+            var email = this.find("#email").val();
+            if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+                $this._service.emailGridData(email, $this.getGridData()).subscribe();
+                $this.alert("Your email has been sent.");
+            }
         });
     }
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    private getGridData(): RecentCalibration[] {
+        return this._recentCalibrations.filter((item: RecentCalibration) => {
+            if (!this.selectedDepotName) {
+                return true;
+            }
+            return item.depotName === this.selectedDepotName;
+        })
+            .slice((this._page - 1) * 10, ((this._page - 1) * 10) + 10);
+    }
+
+    private selectGridData(item: RecentCalibration) {
+        return [item.companyName,
+            item.documentType,
+            this.asDate(item.expiration).toDateString(),
+            item.registration,
+            item.technician,
+            item.customer];
+    }
+
+    private showDialog(callback: Function): void {
+        var bootbox: bootbox = (<any>window).bootbox;
+
+        bootbox.dialog({
+            title: "Enter the email address of the recipient",
+            message: '<div class="row">  ' +
+            '<div class="col-md-12"> ' +
+            '<form class="form-horizontal"> ' +
+            '<input id="email" name="email" type="email" placeholder="you@yourcompany.com" class="form-control" required> ' +
+            '</form> </div> </div>',
+            buttons: {
+                cancel: {
+                    label: "Cancel",
+                    className: "btn-default"
+                },
+                success: {
+                    label: "Send Email",
+                    className: "btn-primary",
+                    callback: callback
+                }
+            }
+        });
+    }
+
+    private alert(message: string) {
+        var bootbox: bootbox = (<any>window).bootbox;
+        bootbox.alert(message);
     }
 }

@@ -39,7 +39,7 @@
                 </td>
             </tr>
             <tr *ngFor="#recentCalibration of _recentCalibrations | depotname : selectedDepotName | paginate: { itemsPerPage: 10, currentPage: p }"
-            class="pointer" (click)="downloadCertificate(recentCalibration)">
+            class="pointer" (click)="downloadCertificate($event, recentCalibration)">
                 <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" /> </td>
                 <td>{{recentCalibration.companyName}}</td>
                 <td>{{recentCalibration.documentType}}</td>
@@ -48,7 +48,7 @@
                 <td>{{recentCalibration.technician}}</td>
                 <td>{{recentCalibration.customer}}</td>
                 <td>
-                    <button class="btn btn-secondary">Email</button>
+                    <button class="btn btn-secondary" (click)="emailCertificate($event, recentCalibration)">Email</button>
                 </td>
             </tr>
         </tbody>
@@ -56,8 +56,7 @@
             <tr>
                 <td colspan="8">
                     <button class="btn btn-primary" (click)="downloadGridData()">Download</button>
-                    <button class="btn btn-primary">Email</button>
-                    <button class="btn btn-primary">Email Preview</button>
+                    <button class="btn btn-primary" (click)="emailGridData()">Email</button>
                 </td>
             </tr>
         </tfoot>

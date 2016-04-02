@@ -1,5 +1,5 @@
 ﻿import {Pipe} from "angular2/core";
-import {Client} from "./client";
+import {Client} from "./software-licenses.component";
 
 @Pipe({
     name: "clientName"

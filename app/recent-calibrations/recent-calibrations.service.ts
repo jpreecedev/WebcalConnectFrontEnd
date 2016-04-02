@@ -23,4 +23,23 @@ export class RecentCalibrationsService {
             });
     }
 
+    emailCertificate(recipient: string, calibration: RecentCalibration): Observable<Response> {
+
+        return this._httpService.post("http://localhost:50139/api/recentcalibrations/emailcertificate/", JSON.stringify({
+            recipient: recipient,
+            documentId: calibration.documentId,
+            documentType: calibration.documentTypeEnum
+        }));
+
+    }
+
+    emailGridData(recipient: string, calibrations: RecentCalibration[]): Observable<Response> {
+
+        return this._httpService.post("http://localhost:50139/api/recentcalibrations/email/", JSON.stringify({
+            recipient: recipient,
+            calibrations: calibrations
+        }));
+
+    }
+
 }
