@@ -12,6 +12,9 @@
                     </select>
                 </div>
             </div>
+            <div class="col-xs-6" *ngIf="!_isRequesting">
+                <pagination-controls class="pull-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+            </div>
         </div>
     </form>
     <hr/>
@@ -52,12 +55,11 @@
         <tfoot>
             <tr>
                 <td colspan="8">
-                    <button class="btn btn-primary">Download</button>
+                    <button class="btn btn-primary" (click)="downloadGridData()">Download</button>
                     <button class="btn btn-primary">Email</button>
                     <button class="btn btn-primary">Email Preview</button>
                 </td>
             </tr>
         </tfoot>
     </table>
-    <pagination-controls (pageChange)="p = $event" #api></pagination-controls>
 </div>

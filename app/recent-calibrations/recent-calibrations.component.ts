@@ -8,6 +8,7 @@ import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance} from "ng2-pagination";
 import {Observable} from "rxjs/Rx";
 import {DepotNamePipe} from "./depot-name.pipe";
+import {CsvHelper} from "../utilities/csv.helper";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -15,7 +16,7 @@ export interface RecentCalibration {
     companyName: string;
     documentType: string;
     documentIcon: string;
-    expiration: Date;
+    expiration: string;
     registration: string;
     technician: string;
     customer: string;
@@ -39,18 +40,15 @@ export class RecentCalibrationsComponent implements OnInit {
     private _recentCalibrations: RecentCalibration[];
     private _depotNames: string[];
     private _isRequesting: boolean;
-    
+    private _page: number = 1;
+
     constructor(private _service: RecentCalibrationsService, private _http: Http) {
 
     }
 
     ngOnInit(): void {
-        this.getPage(1);
-    }
-
-    getPage(page: number) {
         this._isRequesting = true;
-        this._service.getRecent().subscribe((response: Response)=>{
+        this._service.getRecent().subscribe((response: Response) => {
             this._recentCalibrations = response.json();
             this._depotNames = this.getDepotNames();
             this._isRequesting = false;
@@ -77,6 +75,26 @@ export class RecentCalibrationsComponent implements OnInit {
         }
 
         this._service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
+    }
+
+    downloadGridData() {
+        var dataString: string;
+        var filteredData = this._recentCalibrations.filter((item: RecentCalibration) => {
+            if (!this.selectedDepotName){
+                return true;
+            }
+            return item.depotName === this.selectedDepotName;
+        });
+
+        var csvHelper: CsvHelper = new CsvHelper();
+        csvHelper.download(filteredData, this._page, (item: RecentCalibration) => {
+            return [item.companyName,
+                item.documentType,
+                this.asDate(item.expiration).toDateString(),
+                item.registration,
+                item.technician,
+                item.customer];
+        });
     }
 
     asDate(input: string): Date {

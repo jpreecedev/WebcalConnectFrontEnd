@@ -18,7 +18,7 @@ export class RecentCalibrationsService {
     downloadCertificate(id: Number, documentType: string): void {
 
         this._httpService.get(`http://localhost:50139/api/resource/certificate/${id}/${documentType}`)
-            .map((response: Response) => {
+            .subscribe((response: Response) => {
                 window.open("data:application/pdf;base64," + response.text());
             });
     }
