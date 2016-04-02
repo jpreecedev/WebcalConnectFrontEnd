@@ -11,8 +11,7 @@ import {GenerateEmailComponent} from "./generate-email/generate-email.component"
 import {InspectionDataComponent} from "./inspection-data/inspection-data.component";
 import {RecentCalibrationsComponent} from "./recent-calibrations/recent-calibrations.component";
 import {RegisterUserComponent} from "./register-user/register-user.component";
-import {RevokeAccessComponent} from "./revoke-access/revoke-access.component";
-import {SearchMyDepotComponent} from "./search-my-depot/search-my-depot.component";
+import {ManageAccessComponent} from "./manage-access/manage-access.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
 import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
 
@@ -38,7 +37,7 @@ export interface MenuItem {
     { path: "/inspection-data", name: "InspectionData", component: InspectionDataComponent },
     { path: "/recent-calibrations", name: "RecentCalibrations", component: RecentCalibrationsComponent },
     { path: "/register-user", name: "RegisterUser", component: RegisterUserComponent },
-    { path: "/revoke-access", name: "RevokeAccess", component: RevokeAccessComponent },
+    { path: "/manage-access", name: "ManageAccess", component: ManageAccessComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", component: SoftwareLicensesComponent },
 ])
 export class AppComponent {

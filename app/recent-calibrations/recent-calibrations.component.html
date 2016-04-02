@@ -15,8 +15,8 @@
         </div>
     </form>
     <hr/>
-    <spinner [isRunning]="_isRequesting"></spinner>
-    <table class="table table-striped table-hover table-responsive" *ngIf="!_isRequesting">
+    <spinner [isRunning]="isRequesting"></spinner>
+    <table class="table table-striped table-hover table-responsive" *ngIf="!isRequesting">
         <thead>
         <tr>
             <th>&nbsp;</th>

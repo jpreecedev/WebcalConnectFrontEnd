@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
 
         if (isAdministrator()) {
             this._dashboardItems.push(...[
-                <MenuItem>{ icon: "fa-users", routerLink: "RevokeAccess", text: "Revoke Access" },
+                <MenuItem>{ icon: "fa-users", routerLink: "ManageAccess", text: "Manage Access" },
                 <MenuItem>{ icon: "fa-certificate", routerLink: "SoftwareLicenses", text: "Software Licenses" },
                 <MenuItem>{ icon: "fa-at", routerLink: "RegisterUser", text: "Register User" }
             ]);
