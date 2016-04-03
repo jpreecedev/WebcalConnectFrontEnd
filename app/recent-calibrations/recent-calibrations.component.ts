@@ -133,7 +133,7 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     private showDialog(callback: Function): void {
-        var bootbox: bootbox = (<any>window).bootbox;
+        var bootbox: Bootbox = (<any>window).bootbox;
 
         bootbox.dialog({
             title: "Enter the email address of the recipient",
@@ -157,7 +157,7 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     private alert(message: string): void {
-        var bootbox: bootbox = (<any>window).bootbox;
+        var bootbox: Bootbox = (<any>window).bootbox;
         bootbox.alert(message);
     }
 }
