@@ -38,12 +38,22 @@ export class InspectionDataComponent {
     }
 
     submit(): void {
+        if (!this._vehicleRegistration){
+            return;
+        }
+        
         this._inspectionData = undefined;
         this._isRequesting = true;
         this._service.getVehicleInspectionData<InspectionData>(this._vehicleRegistration).subscribe((data: InspectionData) => {
             this._inspectionData = data;
             this._isRequesting = false;
         });
+    }
+
+    reset(){
+        this._inspectionData = undefined;
+        this._isRequesting = false;
+        this._vehicleRegistration = "";
     }
 
     asDate(input: string): Date {

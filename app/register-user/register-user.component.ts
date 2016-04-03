@@ -1,5 +1,5 @@
 import { Component } from "angular2/core";
-import { CanActivate } from "angular2/router";
+import { CanActivate, Router } from "angular2/router";
 import { hasValidToken } from "../utilities/Jwt";
 
 @Component({
@@ -8,5 +8,13 @@ import { hasValidToken } from "../utilities/Jwt";
 })
 @CanActivate(() => hasValidToken())
 export class RegisterUserComponent {
+
+    constructor(private _router: Router) {
+
+    }
+
+    cancel() {
+        this._router.parent.navigate(["Dashboard"]);
+    }
 
 }
