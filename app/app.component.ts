@@ -9,6 +9,7 @@ import {CalibrationsDueComponent} from "./calibrations-due/calibrations-due.comp
 import {GenerateEmailComponent} from "./generate-email/generate-email.component";
 import {InspectionDataComponent} from "./inspection-data/inspection-data.component";
 import {RecentCalibrationsComponent} from "./recent-calibrations/recent-calibrations.component";
+import {QCCheckComponent} from "./qc-check/qc-check.component";
 import {RegisterUserComponent} from "./register-user/register-user.component";
 import {ManageAccessComponent} from "./manage-access/manage-access.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
@@ -35,6 +36,7 @@ export interface MenuItem {
     { path: "/generate-email", name: "GenerateEmail", component: GenerateEmailComponent },
     { path: "/inspection-data", name: "InspectionData", component: InspectionDataComponent },
     { path: "/recent-calibrations", name: "RecentCalibrations", component: RecentCalibrationsComponent },
+    { path: "/qc-check", name: "QCCheck", component: QCCheckComponent },
     { path: "/register-user", name: "RegisterUser", component: RegisterUserComponent },
     { path: "/manage-access", name: "ManageAccess", component: ManageAccessComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", component: SoftwareLicensesComponent },

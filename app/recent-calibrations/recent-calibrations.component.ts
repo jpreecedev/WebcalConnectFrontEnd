@@ -8,7 +8,7 @@ import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
-import {bootbox} from "../utilities/bootbox";
+import {Bootbox} from "../utilities/bootbox";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
