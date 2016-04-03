@@ -1,11 +1,12 @@
-import { Component, OnInit } from "angular2/core";
-import { CanActivate } from "angular2/router";
-import { SoftwareLicensesService } from "./software-licenses.service";
-import { TickPipe } from "./tick.pipe";
-import { ClientNamePipe } from "./client-name.pipe";
-import { hasValidToken } from "../utilities/Jwt";
-import { HttpService } from "../utilities/HttpService";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import {Component, OnInit} from "angular2/core";
+import {CanActivate} from "angular2/router";
+import {SoftwareLicensesService} from "./software-licenses.service";
+import {TickPipe} from "./tick.pipe";
+import {ClientNamePipe} from "./client-name.pipe";
+import {hasValidToken} from "../utilities/Jwt";
+import {HttpService} from "../utilities/HttpService";
+import {SpinnerComponent} from "../utilities/spinner/spinner.component";
+import {PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance} from "ng2-pagination";
 
 export interface License {
     expiration: Date;
@@ -24,19 +25,23 @@ export interface Client {
 @Component({
     templateUrl: "app/software-licenses/software-licenses.component.html",
     styleUrls: ["app/software-licenses/styles.css"],
-    providers: [SoftwareLicensesService, HttpService],
-    pipes: [TickPipe, ClientNamePipe],
-    directives: [SpinnerComponent]
+    providers: [SoftwareLicensesService, HttpService, PaginationService],
+    pipes: [TickPipe, ClientNamePipe, PaginatePipe],
+    directives: [SpinnerComponent, PaginationControlsCmp]
 })
 @CanActivate(() => hasValidToken(["Administrator"]))
 export class SoftwareLicensesComponent implements OnInit {
 
-    private clients: Client[];
-    private selectedClient: Client;
+    private _clients: Client[];
+    private _selectedClient: Client;
     private _isRequesting: boolean;
+    private _page: number = 1;
+    
+    private _newClientName: string;
+    private _newLicenseExpiration: string;
 
     constructor(private _service: SoftwareLicensesService) {
-        this.selectedClient = ({} as Client);
+        this._selectedClient = ({} as Client);
     }
 
     ngOnInit(): void {
@@ -44,15 +49,16 @@ export class SoftwareLicensesComponent implements OnInit {
         this._isRequesting = true;
         this._service.getClients().subscribe((response: Client[]) => {
             this._isRequesting = false;
-            this.clients = response;
+            this._clients = response;
         });
 
     }
 
     addLicense(expiration: string): void {
-        this._service.addLicense(this.selectedClient.accessId, expiration)
+        this._service.addLicense(this._selectedClient.accessId, expiration)
             .subscribe((response: License) => {
-                this.selectedClient.licenses.push(response);
+                this._selectedClient.licenses.unshift(response);
+                this._newLicenseExpiration = "";
             });
     }
 
@@ -63,12 +69,13 @@ export class SoftwareLicensesComponent implements OnInit {
 
         this._service.addClient(clientName)
             .subscribe((response: Client) => {
-                this.clients.push(response);
+                this._clients.unshift(response);
+                this._newClientName = "";
             });
     }
 
     selectClient(client: Client): void {
-        this.selectedClient = client;
+        this._selectedClient = client;
     }
 
     asDate(input: string): Date {

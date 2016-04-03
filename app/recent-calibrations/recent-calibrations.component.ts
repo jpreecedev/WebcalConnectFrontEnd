@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef} from "angular2/core";
+import {Component, OnInit} from "angular2/core";
 import {CanActivate} from "angular2/router";
 import {Response, Http} from "angular2/http";
 import {hasValidToken} from "../utilities/Jwt";
@@ -43,7 +43,7 @@ export class RecentCalibrationsComponent implements OnInit {
     private _isRequesting: boolean;
     private _page: number = 1;
 
-    constructor(private _service: RecentCalibrationsService, private _http: Http, private _element: ElementRef) {
+    constructor(private _service: RecentCalibrationsService, private _http: Http) {
 
     }
 

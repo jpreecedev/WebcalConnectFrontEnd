@@ -15,21 +15,22 @@
             <label for="newClientName">Add new client</label>
             <div class="row">
                 <div class="col-xs-10">
-                    <input type="text" class="form-control" id="newClientName" [(ngModel)]="newClientName" placeholder="New Client Name">
+                    <input type="text" class="form-control" id="newClientName" [(ngModel)]="_newClientName" placeholder="New Client Name">
                 </div>
                 <div class="col-xs-2">
-                    <button class="btn btn-primary" (click)="addClient(newClientName)">Add Client</button>
+                    <button class="btn btn-primary" (click)="addClient(_newClientName)">Add Client</button>
                 </div>
             </div>
         </div>
     </div>
     <hr />
+    <pagination-controls class="pull-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
     <table class="table table-striped table-hover table-responsive">
         <thead>
             <tr>
                 <th>Client Name</th>
                 <th>Licenses</th>
-                <th class="actions">Actions</th>
+                <th class="actions">&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -38,11 +39,11 @@
                     <spinner [isRunning]="_isRequesting"></spinner>
                 </td>
             </tr>
-            <tr *ngFor="#client of clients | clientName:filterValue">
+            <tr *ngFor="#client of _clients | clientName:filterValue | paginate: { itemsPerPage: 10, currentPage: p }">
                 <td>{{client.name}}</td>
                 <td>{{client.licenses.length}}</td>
                 <td class="actions">
-                    <button class="btn btn-secondary" (click)="selectClient(client)" data-toggle="modal" data-target="#modal">Add/View Licenses</button>
+                    <button class="btn btn-secondary pull-right" (click)="selectClient(client)" data-toggle="modal" data-target="#modal">Add/View Licenses</button>
                 </td>
             </tr>
         </tbody>
@@ -61,14 +62,14 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label for="newLicense">Add New License</label>
-                            <input type="date" id="newLicense" name="newLicense" [(ngModel)]="newLicenseExpiration" class="form-control" />
+                            <input type="date" id="newLicense" name="newLicense" [(ngModel)]="_newLicenseExpiration" class="form-control" />
                         </div>
-                        <button class="btn btn-primary" (click)="addLicense(newLicenseExpiration)">Add License</button>
+                        <button class="btn btn-primary" (click)="addLicense(_newLicenseExpiration)">Add License</button>
                     </div>
                 </div>
-                <hr />
-                <div class="row">
+                <div class="row" *ngIf="_selectedClient.licenses && _selectedClient.licenses.length > 0">
                     <div class="col-xs-12">
+                        <hr />
                         <table class="table table-striped table-hover table-responsive">
                             <thead>
                                 <tr>
@@ -78,7 +79,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="#license of selectedClient.licenses">
+                                <tr *ngFor="#license of _selectedClient.licenses">
                                     <td>{{license.license}}</td>
                                     <td>{{asDate(license.expiration) | date}}</td>
                                     <td [innerHtml]="license.hasExpired | tick"></td>
