@@ -6,7 +6,7 @@ import {ClientNamePipe} from "./client-name.pipe";
 import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance} from "ng2-pagination";
+import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 
 export interface License {
     expiration: Date;
@@ -35,7 +35,6 @@ export class SoftwareLicensesComponent implements OnInit {
     private _clients: Client[];
     private _selectedClient: Client;
     private _isRequesting: boolean;
-    private _page: number = 1;
     
     private _newClientName: string;
     private _newLicenseExpiration: string;

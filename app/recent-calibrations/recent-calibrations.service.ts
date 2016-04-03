@@ -12,7 +12,7 @@ export class RecentCalibrationsService {
     }
 
     getRecent(): Observable<Response> {
-        return this._httpService.get("http://localhost:50139/api/recentcalibrations/")
+        return this._httpService.get("http://localhost:50139/api/recentcalibrations/");
     }
 
     downloadCertificate(id: Number, documentType: string): void {
