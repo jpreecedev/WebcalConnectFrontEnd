@@ -5,6 +5,7 @@ import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {RecentCalibrationsService} from "./recent-calibrations.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
+import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
@@ -30,7 +31,7 @@ export interface RecentCalibration {
     styleUrls: ["app/recent-calibrations/styles.css"],
     providers: [RecentCalibrationsService, HttpService, PaginationService],
     pipes: [PaginatePipe, DepotNamePipe],
-    directives: [SpinnerComponent, PaginationControlsCmp]
+    directives: [SpinnerComponent, PaginationControlsCmp, AnimatedButtonComponent]
 })
 @CanActivate(() => hasValidToken())
 export class RecentCalibrationsComponent implements OnInit {
@@ -41,6 +42,8 @@ export class RecentCalibrationsComponent implements OnInit {
     private _depotNames: string[];
     private _isRequesting: boolean;
     private _page: number = 1;
+    private _isDownloading: boolean = false;
+    private _isEmailing: boolean = false;
 
     constructor(private _service: RecentCalibrationsService, private _http: Http) {
 
@@ -94,18 +97,22 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     downloadGridData(): void {
+        this._isDownloading = true;
         var csvHelper: CsvHelper = new CsvHelper();
         csvHelper.download(this.getGridData(), this._page, this.selectGridData);
+        this._isDownloading = false;
     }
 
     emailGridData(): void {
         var $this: RecentCalibrationsComponent = this;
+        $this._isEmailing = true;
         this.showDialog(function() {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this._service.emailGridData(email, $this.getGridData()).subscribe();
                 $this.alert("Your email has been sent.");
             }
+            $this._isEmailing = false;
         });
     }
 
@@ -126,7 +133,7 @@ export class RecentCalibrationsComponent implements OnInit {
     private selectGridData(item: RecentCalibration): Array<any> {
         return [item.companyName,
             item.documentType,
-            this.asDate(item.expiration).toDateString(),
+            new Date(item.expiration).toDateString(),
             item.registration,
             item.technician,
             item.customer];
@@ -145,7 +152,8 @@ export class RecentCalibrationsComponent implements OnInit {
             buttons: {
                 cancel: {
                     label: "Cancel",
-                    className: "btn-default"
+                    className: "btn-default",
+                    callback: callback
                 },
                 success: {
                     label: "Send Email",

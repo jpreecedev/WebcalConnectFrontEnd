@@ -7,8 +7,8 @@
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="selectUser">Select user</label>
-                    <select id="selectUser" name="selectUser" class="form-control" #site (change)="getConnectedSites(site.value)">
-                        <option [value]="item.id" *ngFor="#item of _users">{{item.name}}</option>
+                    <select id="selectUser" name="selectUser" class="form-control" #site [(ngModel)]="_selectedSite" (change)="getConnectedSites(site.value, site)">
+                        <option [value]="item.id" *ngFor="#item of _users" #index>{{item.name}}</option>
                     </select>
                 </div>
             </div>
@@ -17,8 +17,10 @@
     <hr/>
 
     <spinner [isRunning]="_isRequesting"></spinner>
+    
+    <p class="text-center" *ngIf="!_isRequesting && _selectedSite && (!_connectedSites || _connectedSites.length === 0)">No data to display</p>
 
-    <table class="table table-striped table-hover table-responsive" *ngIf="_connectedSites && !_isRequesting">
+    <table class="table table-striped table-hover table-responsive" *ngIf="_connectedSites && _connectedSites.length > 0 && !_isRequesting">
         <thead>
             <tr>
                 <th>Site Description</th>
@@ -29,7 +31,7 @@
             <tr *ngFor="#site of _connectedSites">
                 <td>{{site.description}}</td>
                 <td class="actions">
-                    <button class="btn btn-secondary pull-right" (click)="toggleAccess(site)">{{site.isRevoked ? 'Authorize' : 'Revoke'}}</button>
+                    <animated-button [IsDisabled]="_isUpdating" [Type]="'secondary pull-right'" [Label]="site.isRevoked ? 'Authorize' : 'Revoke'" [WorkingLabel]="site.isRevoked ? 'Authorize' : 'Revoke'" (click)="toggleAccess(site)"></animated-button>
                 </td>
             </tr>
         </tbody>

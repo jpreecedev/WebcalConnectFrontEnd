@@ -55,8 +55,8 @@
         <tfoot>
             <tr>
                 <td colspan="8">
-                    <button class="btn btn-primary" (click)="downloadGridData()">Download</button>
-                    <button class="btn btn-primary" (click)="emailGridData()">Email</button>
+                    <animated-button [IsDisabled]="_isDownloading" [Label]="'Download'" [WorkingLabel]="'Downloading...'" (click)="downloadGridData()"></animated-button>
+                    <animated-button [IsDisabled]="_isEmailing" [Label]="'Email'" [WorkingLabel]="'Emailing...'" (click)="emailGridData()"></animated-button>
                 </td>
             </tr>
         </tfoot>

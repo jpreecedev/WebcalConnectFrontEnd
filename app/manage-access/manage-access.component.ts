@@ -1,9 +1,10 @@
-import { Component, OnInit } from "angular2/core";
-import { CanActivate } from "angular2/router";
-import { HttpService } from "../utilities/HttpService";
-import { ManageAccessService } from "./manage-access.service";
-import { hasValidToken } from "../utilities/Jwt";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import {Component, OnInit} from "angular2/core";
+import {CanActivate} from "angular2/router";
+import {HttpService} from "../utilities/HttpService";
+import {ManageAccessService} from "./manage-access.service";
+import {hasValidToken} from "../utilities/Jwt";
+import {SpinnerComponent} from "../utilities/spinner/spinner.component";
+import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
 
 export interface ManageAccessUser {
     id: number;
@@ -19,12 +20,13 @@ export interface ManageAccessSite {
     templateUrl: "app/manage-access/manage-access.component.html",
     styleUrls: ["app/manage-access/styles.css"],
     providers: [HttpService, ManageAccessService],
-    directives: [SpinnerComponent]
+    directives: [SpinnerComponent, AnimatedButtonComponent]
 })
 @CanActivate(() => hasValidToken(["Administrator"]))
 export class ManageAccessComponent implements OnInit {
 
     private _isRequesting: boolean;
+    private _isUpdating: boolean;
     private _users: ManageAccessUser[];
     private _connectedSites: ManageAccessSite[];
 
@@ -42,6 +44,11 @@ export class ManageAccessComponent implements OnInit {
     }
 
     getConnectedSites(siteId: number): void {
+        if (siteId < 1){
+            this._connectedSites = undefined;            
+            return;
+        }
+        
         this._isRequesting = true;
         this._service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) => {
             this._connectedSites = data;
@@ -50,8 +57,10 @@ export class ManageAccessComponent implements OnInit {
     }
 
     toggleAccess(site: ManageAccessSite): void {
+        this._isUpdating = true;
         this._service.toggleSite(site).subscribe(() => {
             site.isRevoked = !site.isRevoked;
+            this._isUpdating = false;
         });
     }
 

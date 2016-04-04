@@ -4,6 +4,7 @@ import { CanActivate } from "angular2/router";
 import { hasValidToken } from "../utilities/Jwt";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 import { InspectionDataService } from "./inspection-data.service";
+import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
 
 export interface InspectionData {
     calibrationDate: string;
@@ -23,7 +24,7 @@ export interface History {
 @Component({
     templateUrl: "app/inspection-data/inspection-data.component.html",
     styleUrls: ["app/inspection-data/styles.css"],
-    directives: [SpinnerComponent],
+    directives: [SpinnerComponent, AnimatedButtonComponent],
     providers: [InspectionDataService, HttpService]
 })
 @CanActivate(() => hasValidToken())

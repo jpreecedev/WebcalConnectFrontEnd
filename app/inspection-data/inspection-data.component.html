@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <button class="btn btn-primary" type="submit">Find</button>
+                <animated-button [IsDisabled]="_isRequesting" [Label]="'Find'" [WorkingLabel]="'Finding...'"></animated-button>
                 <button class="btn btn-default" type="button" (click)="reset()">Reset</button>
             </div>
         </div>
