@@ -23,7 +23,7 @@ export interface MenuItem {
 }
 
 @Component({
-    selector: "main-app",
+    selector: "wc-app",
     templateUrl: "app/app.component.html",
     styleUrls: ["app/styles.css"],
     directives: [ROUTER_DIRECTIVES, AuthRouterOutlet],
