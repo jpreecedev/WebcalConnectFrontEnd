@@ -6,7 +6,7 @@ module.exports = function() {
             "./app/**/*.js",
             "./app/**/*.html",
             "./app/**/*.css",
-            ],
+        ],
         rootFiles: [
             "favicon.ico",
             "index.html",

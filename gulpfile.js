@@ -21,10 +21,8 @@ gulp.task("lib-js", ["lib-css"], function() {
 
 gulp.task("app-css", ["lib-js"], function() {
     return gulp.src(config.scss, { base: "./" })
-        .pipe($.plumber())
         .pipe($.sass())
         .pipe($.autoprefixer({ browsers: ["last 2 versions", "> 5%"] }))
-        .pipe($.plumber.stop())
         .pipe(gulp.dest(config.dist));
 });
 
@@ -38,7 +36,17 @@ gulp.task("app", ["app-root"], function() {
         .pipe(gulp.dest(config.dist))
 });
 
-gulp.task("dist", ["app"], function() {
+gulp.task("inject", ["app"], function() {
+    var vendorStream = gulp.src(config.libJs)
+        .pipe($.concat('lib.min.js'))
+        .pipe($.uglify())
+        .pipe(gulp.dest(config.dist));
+
+    return gulp.src('./index.html')
+        .pipe(gulp.dest("."));
+});
+
+gulp.task("dist", ["inject"], function() {
 
 });
 
