@@ -37,7 +37,6 @@ export class CalibrationsDueComponent implements OnInit {
     private _calibrationsDue: CalibrationDue[];
     private _depotNames: string[];
     private _isRequesting: boolean;
-    private _page: number = 1;
 
     constructor(private _service: CalibrationsDueService, private _http: Http) {
 

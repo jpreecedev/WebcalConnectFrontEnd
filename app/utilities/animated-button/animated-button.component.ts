@@ -1,9 +1,7 @@
-import {Component, Input, ElementRef, OnInit} from 'angular2/core';
+import {Component, Input, ElementRef} from "angular2/core";
 
 export type StyleType = "primary" | "secondary" | "default";
 export type ButtonType = "submit" | "button";
-
-//<animated-button [IsDisabled]="_isDisabled" (click)="clicked()"></animated-button>
 
 @Component({
     selector: "animated-button",
@@ -38,9 +36,9 @@ export class AnimatedButtonComponent {
     public set Label(value: string) {
         this._originalLabel = this._label = value;
     }
-    
+
     @Input()
-    public set WorkingLabel(value: string){
+    public set WorkingLabel(value: string) {
         this._workingLabel = value;
     }
 
@@ -48,12 +46,11 @@ export class AnimatedButtonComponent {
     public set IsDisabled(value: boolean) {
         this._isDisabled = value;
 
-        var button = this._domElement.querySelector("button");
+        var button: Element = this._domElement.querySelector("button");
         if (value) {
             button.setAttribute("disabled", "disabled");
             this._label = this._workingLabel;
-        }
-        else {
+        } else {
             button.removeAttribute("disabled");
             this._label = this._originalLabel;
         }

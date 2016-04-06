@@ -39,10 +39,10 @@ export class InspectionDataComponent {
     }
 
     submit(): void {
-        if (!this._vehicleRegistration){
+        if (!this._vehicleRegistration) {
             return;
         }
-        
+
         this._inspectionData = undefined;
         this._isRequesting = true;
         this._service.getVehicleInspectionData<InspectionData>(this._vehicleRegistration).subscribe((data: InspectionData) => {
@@ -51,7 +51,7 @@ export class InspectionDataComponent {
         });
     }
 
-    reset(){
+    reset(): void {
         this._inspectionData = undefined;
         this._isRequesting = false;
         this._vehicleRegistration = "";

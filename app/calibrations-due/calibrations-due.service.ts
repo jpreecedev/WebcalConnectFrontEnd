@@ -2,7 +2,6 @@ import {Injectable} from "angular2/core";
 import {Response} from "angular2/http";
 import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
-import {CalibrationDue} from "./calibrations-due.component";
 
 @Injectable()
 export class CalibrationsDueService {

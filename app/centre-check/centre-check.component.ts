@@ -10,7 +10,7 @@ import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagina
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
-export interface CentreCheck{
+export interface CentreCheck {
     centreName: string;
     sealNumber: string;
     date: string;

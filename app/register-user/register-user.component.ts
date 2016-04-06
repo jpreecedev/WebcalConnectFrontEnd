@@ -20,9 +20,9 @@ export class RegisterUserComponent {
     }
 
     getLicenseKey(expiration: string): void {
-        this._service.getLicenseKey(expiration).subscribe((response: Response)=>{
+        this._service.getLicenseKey(expiration).subscribe((response: Response) => {
             this._licenseKey = response.json().key;
-        })
+        });
     }
 
     cancel(): void {

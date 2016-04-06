@@ -44,11 +44,11 @@ export class ManageAccessComponent implements OnInit {
     }
 
     getConnectedSites(siteId: number): void {
-        if (siteId < 1){
-            this._connectedSites = undefined;            
+        if (siteId < 1) {
+            this._connectedSites = undefined;
             return;
         }
-        
+
         this._isRequesting = true;
         this._service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) => {
             this._connectedSites = data;
