@@ -1,11 +1,16 @@
 module.exports = function() {
     var config = {
         temp: '.tmp/',
-        tsSource: ["./app/**/*.ts", "!./app/utilities/cookies.ts"],
-        jsSource: ["./app/**/*.js", "!./app/utilities/cookies.js"],
+        tsSource: ["./app/**/*.ts"],
+        appSource: [
+            "./app/**/*.js",
+            "./app/**/*.html",
+            "./app/**/*.css",
+            ],
         rootFiles: [
             "favicon.ico",
-            "index.html"
+            "index.html",
+            "./img/*.png"
         ],
         scss: [
             './css/site.scss',
