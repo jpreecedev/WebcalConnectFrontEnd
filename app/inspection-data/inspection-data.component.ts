@@ -1,10 +1,10 @@
-import { Component } from "angular2/core";
-import { HttpService } from "../utilities/HttpService";
-import { CanActivate } from "angular2/router";
-import { hasValidToken } from "../utilities/Jwt";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { InspectionDataService } from "./inspection-data.service";
-import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
+import {Component} from "angular2/core";
+import {HttpService} from "../utilities/HttpService";
+import {CanActivate} from "angular2/router";
+import {hasValidToken} from "../utilities/Jwt";
+import {SpinnerComponent} from "../utilities/spinner/spinner.component";
+import {InspectionDataService} from "./inspection-data.service";
+import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 
 export interface InspectionData {
     calibrationDate: string;
@@ -24,7 +24,7 @@ export interface History {
 @Component({
     templateUrl: "app/inspection-data/inspection-data.component.html",
     styleUrls: ["app/inspection-data/styles.css"],
-    directives: [SpinnerComponent, AnimatedButtonComponent],
+    directives: [SpinnerComponent, WCButtonComponent],
     providers: [InspectionDataService, HttpService]
 })
 @CanActivate(() => hasValidToken())
@@ -32,7 +32,6 @@ export class InspectionDataComponent {
 
     private _isRequesting: boolean = false;
     private _vehicleRegistration: string;
-
     private _inspectionData: InspectionData;
 
     constructor(private _service: InspectionDataService) {

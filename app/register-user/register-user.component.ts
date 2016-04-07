@@ -4,7 +4,7 @@ import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {Response} from "angular2/http";
 import {RegisterUserService} from "./register-user.service";
-import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
+import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {Bootbox} from "../utilities/bootbox";
 
 export interface UserRegistration {
@@ -18,7 +18,7 @@ export interface UserRegistration {
     templateUrl: "app/register-user/register-user.component.html",
     styleUrls: ["app/register-user/styles.css"],
     providers: [RegisterUserService, HttpService],
-    directives: [AnimatedButtonComponent]
+    directives: [WCButtonComponent]
 })
 @CanActivate(() => hasValidToken(["Administrator"]))
 export class RegisterUserComponent {

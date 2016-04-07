@@ -20,7 +20,7 @@
                 <p><strong>License Key:</strong> {{_userRegistration.licenseKey}}</p>
             </div>
             <div class="two-buttons">
-                <animated-button [IsDisabled]="_isRequesting" [Type]="'btn btn-lg btn-primary btn-block btn-reigster'" [Label]="'Register'" [WorkingLabel]="'Registering...'"></animated-button>
+                <wc-button [isDisabled]="_isRequesting" [style]="'btn btn-lg btn-primary btn-block btn-reigster'" [label]="'Register'" [workingLabel]="'Registering...'"></wc-button>
                 <button class="btn btn-lg btn-primary btn-block" (click)="cancel()" type="button">Cancel</button>
             </div>
         </form>

@@ -5,7 +5,7 @@ import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {RecentCalibrationsService} from "./recent-calibrations.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
+import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
@@ -31,7 +31,7 @@ export interface RecentCalibration {
     styleUrls: ["app/recent-calibrations/styles.css"],
     providers: [RecentCalibrationsService, HttpService, PaginationService],
     pipes: [PaginatePipe, DepotNamePipe],
-    directives: [SpinnerComponent, PaginationControlsCmp, AnimatedButtonComponent]
+    directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent]
 })
 @CanActivate(() => hasValidToken())
 export class RecentCalibrationsComponent implements OnInit {

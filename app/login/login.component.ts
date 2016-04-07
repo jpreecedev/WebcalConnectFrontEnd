@@ -3,14 +3,14 @@ import {Router} from "angular2/router";
 import {HttpService} from "../utilities/HttpService";
 import {hasValidToken} from "../utilities/Jwt";
 import {JwtHelper} from "../utilities/JwtHelper";
-import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
+import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 
 @Component({
     selector: "login",
     templateUrl: "app/login/login.component.html",
     styleUrls: ["app/login/styles.css"],
     providers: [HttpService, JwtHelper],
-    directives: [AnimatedButtonComponent]
+    directives: [WCButtonComponent]
 })
 export class LoginComponent implements OnInit {
 

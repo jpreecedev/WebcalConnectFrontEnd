@@ -55,8 +55,8 @@
         <tfoot>
             <tr>
                 <td colspan="8">
-                    <animated-button [IsDisabled]="_isDownloading" [Label]="'Download'" [WorkingLabel]="'Downloading...'" (click)="downloadGridData()"></animated-button>
-                    <animated-button [IsDisabled]="_isEmailing" [Label]="'Email'" [WorkingLabel]="'Emailing...'" (click)="emailGridData()"></animated-button>
+                    <wc-button [isDisabled]="_isDownloading" [label]="'Download'" [workingLabel]="'Downloading...'" (click)="downloadGridData()"></wc-button>
+                    <wc-button [isDisabled]="_isEmailing" [label]="'Email'" [workingLabel]="'Emailing...'" (click)="emailGridData()"></wc-button>
                 </td>
             </tr>
         </tfoot>

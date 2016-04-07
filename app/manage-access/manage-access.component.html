@@ -31,7 +31,7 @@
             <tr *ngFor="#site of _connectedSites">
                 <td>{{site.description}}</td>
                 <td class="actions">
-                    <animated-button [IsDisabled]="_isUpdating" [Type]="'secondary pull-right'" [Label]="site.isRevoked ? 'Authorize' : 'Revoke'" [WorkingLabel]="site.isRevoked ? 'Authorize' : 'Revoke'" (click)="toggleAccess(site)"></animated-button>
+                    <wc-button [isDisabled]="_isUpdating" [style]="'btn btn-secondary pull-right'" [label]="site.isRevoked ? 'Authorize' : 'Revoke'" [workingLabel]="site.isRevoked ? 'Authorize' : 'Revoke'" (click)="toggleAccess(site)"></wc-button>
                 </td>
             </tr>
         </tbody>

@@ -4,7 +4,7 @@ import {HttpService} from "../utilities/HttpService";
 import {ManageAccessService} from "./manage-access.service";
 import {hasValidToken} from "../utilities/Jwt";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
+import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 
 export interface ManageAccessUser {
     id: number;
@@ -20,7 +20,7 @@ export interface ManageAccessSite {
     templateUrl: "app/manage-access/manage-access.component.html",
     styleUrls: ["app/manage-access/styles.css"],
     providers: [HttpService, ManageAccessService],
-    directives: [SpinnerComponent, AnimatedButtonComponent]
+    directives: [SpinnerComponent, WCButtonComponent]
 })
 @CanActivate(() => hasValidToken(["Administrator"]))
 export class ManageAccessComponent implements OnInit {
