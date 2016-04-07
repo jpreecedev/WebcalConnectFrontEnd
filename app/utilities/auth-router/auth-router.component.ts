@@ -1,6 +1,6 @@
 import {Directive, Attribute, ElementRef, DynamicComponentLoader} from "angular2/core";
 import {Router, RouterOutlet, ComponentInstruction} from "angular2/router";
-import {hasValidToken} from "../Jwt";
+import {hasValidToken, isAdministrator} from "../Jwt";
 import {Route, Routes} from "../../app.component";
 
 @Directive({
@@ -17,30 +17,39 @@ export class AuthRouterOutlet extends RouterOutlet {
 
     activate(instruction: ComponentInstruction): Promise<any> {
         var route = this.findRoute("/" + instruction.urlPath);
-        if (!route){
+        if (!route) {
             this.parentRouter.navigate(["Home"]);
             return;
         }
-        
-        if (route.role && !hasValidToken()) {
-            this.parentRouter.navigate(["Login"]);
-            return;
+
+        if (!route.role) {
+            return super.activate(instruction);
         }
-        return super.activate(instruction);
+
+        if (route.role === "TachographCentre" && hasValidToken()) {
+            return super.activate(instruction);
+        }
+
+        if (route.role === "Administrator" && hasValidToken(["Administrator"])) {
+            return super.activate(instruction);
+        }
+
+        this.parentRouter.navigate(["Login"]);
+        return;
     }
 
     findRoute(url: string): Route {
-        if (!url || url === "/"){
-            return null;
+        if (url === "/") {
+            return Routes[0];
         }
-        
-        for (var index = 0; index < Routes.length; index++) {
+
+        for (var index = 1; index < Routes.length; index++) {
             var element = Routes[index];
-            if (url.indexOf(element.path)){
-                return Routes[index];
+            if (url.indexOf(element.path) > -1) {
+                return element;
             }
         }
-        
+
         return null;
     }
 }
