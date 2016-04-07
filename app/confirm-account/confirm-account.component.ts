@@ -1,9 +1,11 @@
 import {Component, OnInit} from "angular2/core";
+import {NgForm} from "angular2/common";
 import {Response, Http} from "angular2/http";
 import {Router, RouteParams} from "angular2/router";
 import {HttpService} from "../utilities/HttpService";
 import {ConfirmAccountService} from "./confirm-account.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
+import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 import {ShowMessage, ShowError} from "../utilities/messageBox";
@@ -19,10 +21,11 @@ export interface ConfirmAccountTokens {
     templateUrl: "app/confirm-account/confirm-account.component.html",
     styleUrls: ["app/confirm-account/styles.css"],
     providers: [HttpService, ConfirmAccountService],
-    directives: [SpinnerComponent]
+    directives: [SpinnerComponent, WCButtonComponent]
 })
 export class ConfirmAccountComponent {
 
+    private _validationErrors: string;
     private _isRequesting: boolean = false;
     private _tokens: ConfirmAccountTokens;
     private _confirmPassword: string;
@@ -39,8 +42,7 @@ export class ConfirmAccountComponent {
     }
 
     submit(): void {
-        if (!this.checkPassword()) {
-            ShowMessage("The passwords you have entered do not match.");
+        if (!this.validateForm()) {
             return;
         }
 
@@ -60,10 +62,19 @@ export class ConfirmAccountComponent {
         });
     }
 
-    checkPassword(): boolean {
+    validateForm(): boolean {
+        this._validationErrors = "";
+        
+        if (!this._tokens.password || this._tokens.password.length < 6){
+            this._validationErrors = "Password is too short<br/>";
+        }        
         if (!this._confirmPassword || this._confirmPassword.length < 6) {
-            return false;
+            this._validationErrors += "Confirm password is too short<br/>";
         }
-        return this._confirmPassword === this._tokens.password;
+        if (this._tokens.password !== this._confirmPassword){
+            this._validationErrors += "Passwords do not match<br/>"
+        }
+        
+        return !this._validationErrors;
     }
 }

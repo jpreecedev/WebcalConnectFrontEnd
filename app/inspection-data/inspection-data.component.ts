@@ -13,6 +13,7 @@ export interface InspectionData {
     tachoModel: string;
     inspectionData: string;
     history: History[];
+    isDefault: boolean;
 }
 
 export interface History {

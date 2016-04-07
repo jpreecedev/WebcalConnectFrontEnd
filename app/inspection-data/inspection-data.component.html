@@ -22,7 +22,9 @@
 
     <spinner [isRunning]="_isRequesting"></spinner>
 
-    <div class="row" *ngIf="_inspectionData">
+    <p class="text-center" *ngIf="!_isRequesting && (!_inspectionData || _inspectionData.isDefault)">No data to display</p>
+
+    <div class="row" *ngIf="_inspectionData && !_inspectionData.isDefault">
         <div class="col-xs-3">
             <p><strong>Calibration Date</strong>
                 <br>{{asDate(_inspectionData.calibrationDate) | date}}</p>
@@ -48,9 +50,9 @@
                 <br>{{_inspectionData.inspectionData}}</p>
         </div>
     </div>
-    <hr *ngIf="_inspectionData" />
+    <hr *ngIf="_inspectionData && !_inspectionData.isDefault" />
 
-    <div *ngIf="_inspectionData && _inspectionData.history">
+    <div *ngIf="_inspectionData && _inspectionData.history && !_inspectionData.isDefault">
         <h2>Inspection data history</h2>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default" *ngFor="#item of _inspectionData.history; #i=index">

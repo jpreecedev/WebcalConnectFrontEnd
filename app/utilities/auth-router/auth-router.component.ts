@@ -48,6 +48,9 @@ export class AuthRouterOutlet extends RouterOutlet {
             if (url.indexOf(element.path) > -1) {
                 return element;
             }
+            if (url.startsWith("/confirm-account/") && element.path.startsWith("/confirm-account")){
+                return element;
+            }
         }
 
         return null;
