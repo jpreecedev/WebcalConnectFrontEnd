@@ -7,7 +7,7 @@ import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
-import {ShowMessage, ShowDialog} from "../utilities/messageBox";
+import {ShowMessage, ShowError, ShowDialog} from "../utilities/messageBox";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
@@ -51,7 +51,13 @@ export class RecentCalibrationsComponent implements OnInit {
         this._service.getRecent().subscribe((response: Response) => {
             this._recentCalibrations = response.json();
             this._depotNames = this.getDepotNames();
-            this._isRequesting = false;
+        },
+        (error: any) => {
+            ShowError("Unable to get list of recent calibrations, please try again later.", error);
+            this._isRequesting = false;            
+        },
+        () => {
+            this._isRequesting = false;            
         });
     }
 
@@ -124,7 +130,7 @@ export class RecentCalibrationsComponent implements OnInit {
             }
             return item.depotName === this.selectedDepotName;
         })
-            .slice((this._page - 1) * 10, ((this._page - 1) * 10) + 10);
+        .slice((this._page - 1) * 10, ((this._page - 1) * 10) + 10);
     }
 
     private selectGridData(item: RecentCalibration): Array<any> {
