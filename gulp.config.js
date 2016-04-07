@@ -33,7 +33,9 @@ module.exports = function() {
         ],
         libCss: [
             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-            "node_modules/font-awesome/css/font-awesome.css"
+            "node_modules/font-awesome/css/font-awesome.css",
+            "node_modules/font-awesome/fonts/**/*.*",
+            "css/site.css"
         ],
         dist: "./wwwroot",
         app: "./app"

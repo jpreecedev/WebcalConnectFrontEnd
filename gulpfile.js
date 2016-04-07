@@ -37,13 +37,11 @@ gulp.task("app", ["app-root"], function() {
 });
 
 gulp.task("inject", ["app"], function() {
-    var vendorStream = gulp.src(config.libJs)
-        .pipe($.concat('lib.min.js'))
-        .pipe($.uglify())
-        .pipe(gulp.dest(config.dist));
+    var target = gulp.src('./index.html');
+    var sources = gulp.src([].concat(config.libJs, config.libCss), { read: false });
 
-    return gulp.src('./index.html')
-        .pipe(gulp.dest("."));
+    return target.pipe($.inject(sources, { ignorePath: "/wwwroot"}))
+        .pipe(gulp.dest(config.dist));
 });
 
 gulp.task("dist", ["inject"], function() {
