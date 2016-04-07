@@ -5,6 +5,7 @@ import {HttpService} from "../utilities/HttpService";
 import {Response} from "angular2/http";
 import {RegisterUserService} from "./register-user.service";
 import {AnimatedButtonComponent} from "../utilities/animated-button/animated-button.component";
+import {Bootbox} from "../utilities/bootbox";
 
 export interface UserRegistration {
     emailAddress: string;
@@ -26,12 +27,7 @@ export class RegisterUserComponent {
     private _isRequesting: boolean = false;
 
     constructor(private _router: Router, private _service: RegisterUserService) {
-        this._userRegistration = {
-            emailAddress: "",
-            companyName: "",
-            expiration: "",
-            licenseKey: ""
-        };
+        this.resetForm();
     }
 
     getLicenseKey(expiration: string): void {
@@ -41,14 +37,31 @@ export class RegisterUserComponent {
     }
 
     submit(): void {
+        var bootbox: Bootbox = (<any>window).bootbox;
+
         this._isRequesting = true;
-        setTimeout(()=>{
+        this._service.registerUser(this._userRegistration).subscribe(() => {
+            bootbox.alert("The user was registered successfully");
+            this.resetForm();
+        }, (error: any) => {
+            bootbox.alert(`An error has occurred. ${error.json().message}`);
             this._isRequesting = false;
-        }, 3000);
+        }, () => {
+            this._isRequesting = false;
+        });
     }
 
     cancel(): void {
         this._router.parent.navigate(["Dashboard"]);
+    }
+
+    resetForm(): void {
+        this._userRegistration = {
+            emailAddress: "",
+            companyName: "",
+            expiration: "",
+            licenseKey: ""
+        };
     }
 
 }
