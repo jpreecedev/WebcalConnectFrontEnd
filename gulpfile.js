@@ -23,6 +23,7 @@ gulp.task("app-css", ["lib-js"], function() {
     return gulp.src(config.scss, { base: "./" })
         .pipe($.sass())
         .pipe($.autoprefixer({ browsers: ["last 2 versions", "> 5%"] }))
+        .pipe(gulp.dest("."))
         .pipe(gulp.dest(config.dist));
 });
 
