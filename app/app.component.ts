@@ -14,6 +14,7 @@ import {CentreCheckComponent} from "./centre-check/centre-check.component";
 import {RegisterUserComponent} from "./register-user/register-user.component";
 import {ManageAccessComponent} from "./manage-access/manage-access.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
+import {ConfirmAccountComponent} from "./confirm-account/confirm-account.component";
 import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
 
 export interface MenuItem {
@@ -42,6 +43,7 @@ export interface MenuItem {
     { path: "/register-user", name: "RegisterUser", component: RegisterUserComponent },
     { path: "/manage-access", name: "ManageAccess", component: ManageAccessComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", component: SoftwareLicensesComponent },
+    { path: "/confirm-account/:userId/:code", name: "ConfirmAccount", component: ConfirmAccountComponent },
 ])
 export class AppComponent {
     

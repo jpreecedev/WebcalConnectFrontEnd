@@ -1,6 +1,6 @@
 import {Component, OnInit} from "angular2/core";
 import {CanActivate} from "angular2/router";
-import {Response, Http} from "angular2/http";
+import {Response} from "angular2/http";
 import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {RecentCalibrationsService} from "./recent-calibrations.service";
@@ -45,7 +45,7 @@ export class RecentCalibrationsComponent implements OnInit {
     private _isDownloading: boolean = false;
     private _isEmailing: boolean = false;
 
-    constructor(private _service: RecentCalibrationsService, private _http: Http) {
+    constructor(private _service: RecentCalibrationsService) {
 
     }
 
