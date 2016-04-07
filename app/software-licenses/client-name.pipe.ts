@@ -1,10 +1,10 @@
-﻿import {Pipe} from "angular2/core";
+﻿import {Pipe, PipeTransform} from "angular2/core";
 import {Client} from "./software-licenses.component";
 
 @Pipe({
     name: "clientName"
 })
-export class ClientNamePipe {
+export class ClientNamePipe implements PipeTransform {
     public transform(data: Client[], filterValue: any): Client[] {
         if (!data || !filterValue[0]) {
             return data;
