@@ -35,7 +35,10 @@ export class AuthRouterOutlet extends RouterOutlet {
         }
         
         for (var index = 0; index < Routes.length; index++) {
-
+            var element = Routes[index];
+            if (url.indexOf(element.path)){
+                return Routes[index];
+            }
         }
         
         return null;
