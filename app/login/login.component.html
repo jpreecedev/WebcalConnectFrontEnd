@@ -18,7 +18,7 @@
                     <input [(ngModel)]="rememberMe" type="checkbox" value="remember-me"> Remember me
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+            <animated-button [IsDisabled]="_isRequesting" [Type]="'btn btn-lg btn-primary btn-block btn-signin'" [Label]="'Sign In'" [WorkingLabel]="'Signing in...'"></animated-button>
         </form>
     </div>
 </div>
