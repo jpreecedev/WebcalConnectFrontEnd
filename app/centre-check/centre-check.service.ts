@@ -3,6 +3,7 @@ import {Response} from "angular2/http";
 import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
 import {AppSettings} from "../app.settings";
+import {ShowError} from "../utilities/messageBox";
 
 @Injectable()
 export class CentreCheckService {
@@ -20,6 +21,9 @@ export class CentreCheckService {
         this._httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
             .subscribe((response: Response) => {
                 window.open("data:application/pdf;base64," + response.text());
+            },
+            (error: any) => {
+                ShowError("Unable to download PDF, please try again later.", error);
             });
     }
 

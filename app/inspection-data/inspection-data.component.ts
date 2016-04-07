@@ -5,6 +5,7 @@ import {hasValidToken} from "../utilities/Jwt";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {InspectionDataService} from "./inspection-data.service";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import {ShowError} from "../utilities/messageBox";
 
 export interface InspectionData {
     calibrationDate: string;
@@ -46,7 +47,13 @@ export class InspectionDataComponent {
         this._isRequesting = true;
         this._service.getVehicleInspectionData<InspectionData>(this._vehicleRegistration).subscribe((data: InspectionData) => {
             this._inspectionData = data;
-            this._isRequesting = false;
+        },
+        (error: any) => {
+            this._isRequesting = false;            
+            ShowError("Unable to get vehicle inspection data, please try again later.", error);
+        },
+        () => {
+            this._isRequesting = false;            
         });
     }
 

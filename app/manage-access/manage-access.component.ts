@@ -5,6 +5,7 @@ import {ManageAccessService} from "./manage-access.service";
 import {hasValidToken} from "../utilities/Jwt";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import {ShowError} from "../utilities/messageBox";
 
 export interface ManageAccessUser {
     id: number;
@@ -31,7 +32,6 @@ export class ManageAccessComponent implements OnInit {
     private _connectedSites: ManageAccessSite[];
 
     constructor(private _service: ManageAccessService) {
-
     }
 
     ngOnInit(): void {
@@ -39,6 +39,12 @@ export class ManageAccessComponent implements OnInit {
         this._service.getUsers().subscribe((data: ManageAccessUser[]) => {
             data.unshift(<ManageAccessUser>{ id: -1, name: "" });
             this._users = data;
+        },
+        (error: any) => {
+            ShowError("Unable to get a list of users, please try again later.", error);
+            this._isRequesting = false;
+        },
+        () => {
             this._isRequesting = false;
         });
     }
@@ -52,7 +58,13 @@ export class ManageAccessComponent implements OnInit {
         this._isRequesting = true;
         this._service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) => {
             this._connectedSites = data;
-            this._isRequesting = false;
+        },
+        (error: any) => {
+            ShowError("Unable to get a list of connected sites, please try again later.", error);
+            this._isRequesting = false;            
+        }, 
+        () => {
+            this._isRequesting = false;            
         });
     }
 
@@ -60,7 +72,13 @@ export class ManageAccessComponent implements OnInit {
         this._isUpdating = true;
         this._service.toggleSite(site).subscribe(() => {
             site.isRevoked = !site.isRevoked;
-            this._isUpdating = false;
+        },
+        (error: any) =>{
+            ShowError("Unable to change the access permission for this site, please try again later.", error);
+            this._isUpdating = false;            
+        },
+        () => {
+            this._isUpdating = false;            
         });
     }
 

@@ -9,7 +9,7 @@ import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
-import {Bootbox} from "../utilities/bootbox";
+import {ShowMessage, ShowDialog} from "../utilities/messageBox";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
@@ -91,7 +91,7 @@ export class RecentCalibrationsComponent implements OnInit {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this._service.emailCertificate(email, selectedCalibration).subscribe();
-                $this.alert("Your email has been sent.");
+                ShowMessage("Your email has been sent.");
             }
         });
     }
@@ -110,7 +110,7 @@ export class RecentCalibrationsComponent implements OnInit {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this._service.emailGridData(email, $this.getGridData()).subscribe();
-                $this.alert("Your email has been sent.");
+                ShowMessage("Your email has been sent.");
             }
             $this._isEmailing = false;
         });
@@ -140,9 +140,7 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     private showDialog(callback: Function): void {
-        var bootbox: Bootbox = (<any>window).bootbox;
-
-        bootbox.dialog({
+        ShowDialog({
             title: "Enter the email address of the recipient",
             message: "<div class=\"row\">  " +
             "<div class=\"col-md-12\"> " +
@@ -162,10 +160,5 @@ export class RecentCalibrationsComponent implements OnInit {
                 }
             }
         });
-    }
-
-    private alert(message: string): void {
-        var bootbox: Bootbox = (<any>window).bootbox;
-        bootbox.alert(message);
     }
 }

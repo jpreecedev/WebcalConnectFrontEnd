@@ -4,6 +4,7 @@ import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
 import {RecentCalibration} from "./recent-calibrations.component";
 import {AppSettings} from "../app.settings";
+import {ShowError} from "../utilities/messageBox";
 
 @Injectable()
 export class RecentCalibrationsService {
@@ -21,6 +22,9 @@ export class RecentCalibrationsService {
         this._httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
             .subscribe((response: Response) => {
                 window.open("data:application/pdf;base64," + response.text());
+            },
+            (error: any) => {
+                ShowError("Unable to download certificate, please try again later.", error);
             });
     }
 

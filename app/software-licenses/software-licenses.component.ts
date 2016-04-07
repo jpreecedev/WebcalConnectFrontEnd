@@ -7,6 +7,7 @@ import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
+import {ShowError} from "../utilities/messageBox";
 
 export interface License {
     expiration: Date;
@@ -47,17 +48,25 @@ export class SoftwareLicensesComponent implements OnInit {
 
         this._isRequesting = true;
         this._service.getClients().subscribe((response: Client[]) => {
-            this._isRequesting = false;
             this._clients = response;
+        },
+        (error: any) => {
+            ShowError("Unable to get list of clients, please try again later.", error);
+            this._isRequesting = false;
+        },
+        () => {
+            this._isRequesting = false;            
         });
 
     }
 
     addLicense(expiration: string): void {
-        this._service.addLicense(this._selectedClient.accessId, expiration)
-            .subscribe((response: License) => {
+        this._service.addLicense(this._selectedClient.accessId, expiration).subscribe((response: License) => {
                 this._selectedClient.licenses.unshift(response);
                 this._newLicenseExpiration = "";
+            },
+            (error: any) => {
+                ShowError("Unable to add license, please try again later.", error);   
             });
     }
 
@@ -66,10 +75,12 @@ export class SoftwareLicensesComponent implements OnInit {
             return;
         }
 
-        this._service.addClient(clientName)
-            .subscribe((response: Client) => {
+        this._service.addClient(clientName).subscribe((response: Client) => {
                 this._clients.unshift(response);
                 this._newClientName = "";
+            },
+            (error: any) => {
+                ShowError("Unable to add client, please try again later.", error);
             });
     }
 

@@ -6,7 +6,7 @@ import {ConfirmAccountService} from "./confirm-account.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
-import {Bootbox} from "../utilities/bootbox";
+import {ShowMessage, ShowError} from "../utilities/messageBox";
 import {JwtHelper} from "../utilities/JwtHelper";
 
 export interface ConfirmAccountTokens {
@@ -37,15 +37,14 @@ export class ConfirmAccountComponent implements OnInit {
 
     ngOnInit(): void {
         this._isRequesting = true;
-        var bootbox: Bootbox = (<any>window).bootbox;
 
         this._service.confirmEmail(this._tokens).subscribe(() => {
-            bootbox.alert("Your account has been activated, please now log in.");
+            ShowMessage("Your account has been activated, please now log in.");
             this._router.parent.navigate(["Login"]);
         },
-        () => {
+        (error: any) => {
             this._isRequesting = false;
-            bootbox.alert("Unable to confirm the account activation process.  Please contact customer support.");
+            ShowError("Unable to confirm the account activation process.  Please contact customer support.", error);
             this._router.parent.navigate(["Home"]);
         },
         () => {

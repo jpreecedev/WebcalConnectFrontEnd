@@ -1,6 +1,5 @@
 import {Component} from "angular2/core";
 import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "angular2/router";
-import {JwtHelper} from "./utilities/JwtHelper";
 
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
@@ -15,7 +14,9 @@ import {RegisterUserComponent} from "./register-user/register-user.component";
 import {ManageAccessComponent} from "./manage-access/manage-access.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
 import {ConfirmAccountComponent} from "./confirm-account/confirm-account.component";
+
 import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
+import {JwtHelper} from "./utilities/JwtHelper";
 
 export interface MenuItem {
     icon: string;
@@ -46,9 +47,9 @@ export interface MenuItem {
     { path: "/confirm-account/:userId/:code", name: "ConfirmAccount", component: ConfirmAccountComponent },
 ])
 export class AppComponent {
-    
+
     public isLoggedIn: boolean = true;
-    
+
     constructor(private _router: Router, private _jwtHelper: JwtHelper) {
     }
 

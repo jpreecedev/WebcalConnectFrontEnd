@@ -4,6 +4,7 @@ import {HttpService} from "../utilities/HttpService";
 import {hasValidToken} from "../utilities/Jwt";
 import {JwtHelper} from "../utilities/JwtHelper";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import {ShowError} from "../utilities/messageBox";
 
 @Component({
     selector: "login",
@@ -23,13 +24,18 @@ export class LoginComponent implements OnInit {
     authenticate(username: string, password: string, rememberMe: boolean): void {
 
         this._isRequesting = true;
-        this._httpService.authenticate(username, password, rememberMe)
-            .subscribe((response: boolean) => {
-                if (response) {
-                    this._router.navigate(["Dashboard"]);
-                }
-                this._isRequesting = false;
-            });
+        this._httpService.authenticate(username, password, rememberMe).subscribe((response: boolean) => {
+            if (response) {
+                this._router.navigate(["Dashboard"]);
+            }
+        },
+        (error: any) => {
+            ShowError("Unable to log in at this time, please try again later.", error);
+            this._isRequesting = false;
+        },
+        () => {
+            this._isRequesting = false;
+        });
 
     }
 

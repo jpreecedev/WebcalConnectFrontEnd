@@ -5,7 +5,7 @@ import {HttpService} from "../utilities/HttpService";
 import {Response} from "angular2/http";
 import {RegisterUserService} from "./register-user.service";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {Bootbox} from "../utilities/bootbox";
+import {ShowMessage, ShowError} from "../utilities/messageBox";
 
 export interface UserRegistration {
     emailAddress: string;
@@ -37,16 +37,16 @@ export class RegisterUserComponent {
     }
 
     submit(): void {
-        var bootbox: Bootbox = (<any>window).bootbox;
-
         this._isRequesting = true;
         this._service.registerUser(this._userRegistration).subscribe(() => {
-            bootbox.alert("The user was registered successfully");
             this.resetForm();
-        }, (error: any) => {
-            bootbox.alert(`An error has occurred. ${error.json().message}`);
+            ShowMessage("The user was registered successfully");
+        }, 
+        (error: any) => {
             this._isRequesting = false;
-        }, () => {
+            ShowError("Unable to register user, please try again later.", error);;
+        }, 
+        () => {
             this._isRequesting = false;
         });
     }

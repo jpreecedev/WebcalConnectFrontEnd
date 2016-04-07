@@ -7,6 +7,7 @@ import {HttpService} from "../utilities/HttpService";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {DepotNamePipe} from "../recent-calibrations/depot-name.pipe";
+import {ShowError} from "../utilities/messageBox";
 
 export interface CalibrationDue {
     date: string;
@@ -33,13 +34,11 @@ export interface CalibrationDue {
 export class CalibrationsDueComponent implements OnInit {
 
     private _selectedDepotName: string;
-
     private _calibrationsDue: CalibrationDue[];
     private _depotNames: string[];
     private _isRequesting: boolean;
 
     constructor(private _service: CalibrationsDueService, private _http: Http) {
-
     }
 
     ngOnInit(): void {
@@ -47,7 +46,13 @@ export class CalibrationsDueComponent implements OnInit {
         this._service.getCalibrationsDue().subscribe((response: Response) => {
             this._calibrationsDue = response.json();
             this._depotNames = this.getDepotNames();
+        },
+        (error: any) => {
             this._isRequesting = false;
+            ShowError("Unable to get list of calibrations due, please try again later.", error);
+        },
+        () => {
+            this._isRequesting = false;            
         });
     }
 

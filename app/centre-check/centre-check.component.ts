@@ -6,6 +6,7 @@ import {HttpService} from "../utilities/HttpService";
 import {CentreCheckService} from "./centre-check.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {TickPipe} from "../utilities/tick.pipe";
+import {ShowError} from "../utilities/messageBox";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
@@ -33,14 +34,19 @@ export class CentreCheckComponent implements OnInit {
     private _isRequesting: boolean;
 
     constructor(private _service: CentreCheckService, private _http: Http) {
-
     }
 
     ngOnInit(): void {
         this._isRequesting = true;
         this._service.getCentreChecks().subscribe((response: Response) => {
             this._centreChecks = response.json();
+        },
+        (error: any) => {
+            ShowError("Unable to get list of centre checks, please try again later.", error);
             this._isRequesting = false;
+        },
+        () => {
+            this._isRequesting = false;            
         });
     }
 
