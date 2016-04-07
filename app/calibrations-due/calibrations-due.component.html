@@ -7,7 +7,7 @@
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="favourite">Filter by depot name</label>
-                    <select id="favourite" name="favourite" class="form-control" [(ngModel)]="selectedDepotName">
+                    <select id="favourite" name="favourite" class="form-control" [(ngModel)]="_selectedDepotName">
                         <option *ngFor="#item of _depotNames">{{item}}</option>
                     </select>
                 </div>
@@ -39,7 +39,7 @@
                     <spinner [isRunning]="_isRequesting"></spinner>
                 </td>
             </tr>
-            <tr *ngFor="#calibrationDue of _calibrationsDue | depotname : selectedDepotName | paginate: { itemsPerPage: 10, currentPage: p }"
+            <tr *ngFor="#calibrationDue of _calibrationsDue | depotname : _selectedDepotName | paginate: { itemsPerPage: 10, currentPage: p }"
             class="pointer" (click)="downloadCertificate($event, calibrationDue)">
                 <td><img src="/img/{{calibrationDue.documentIcon}}.png" [attr.alt]="calibrationDue.documentType" /> </td>
                 <td>{{asDate(calibrationDue.date) | date}}</td>

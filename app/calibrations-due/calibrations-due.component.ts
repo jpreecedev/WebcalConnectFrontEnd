@@ -32,7 +32,7 @@ export interface CalibrationDue {
 @CanActivate(() => hasValidToken())
 export class CalibrationsDueComponent implements OnInit {
 
-    public selectedDepotName: string;
+    private _selectedDepotName: string;
 
     private _calibrationsDue: CalibrationDue[];
     private _depotNames: string[];

@@ -69,6 +69,7 @@ export class HttpService {
     }
 
     handleError<T>(error: Response): Observable<T> {
+        debugger;
         console.error(error);
         return Observable.throw(error || "Server Error");
     }
