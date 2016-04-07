@@ -24,6 +24,30 @@ export interface MenuItem {
     text: string;
 }
 
+export interface Route {
+    path: string;
+    name: string;
+    component: any;
+    role: string,
+    useAsDefault?: boolean;
+}
+
+export var Routes: Route[] = [
+    { path: "/", name: "Home", component: HomeComponent, role: "", useAsDefault: true },
+    { path: "/login", name: "Login", role: "", component: LoginComponent },
+    { path: "/dashboard", name: "Dashboard", role: "TachographCentre", component: DashboardComponent },
+    { path: "/calibrations-due", name: "CalibrationsDue", role: "TachographCentre", component: CalibrationsDueComponent },
+    { path: "/generate-email", name: "GenerateEmail", role: "TachographCentre", component: GenerateEmailComponent },
+    { path: "/inspection-data", name: "InspectionData", role: "TachographCentre", component: InspectionDataComponent },
+    { path: "/recent-calibrations", name: "RecentCalibrations", role: "TachographCentre", component: RecentCalibrationsComponent },
+    { path: "/qc-check", name: "QCCheck", role: "TachographCentre", component: QCCheckComponent },
+    { path: "/centre-check", name: "CentreCheck", role: "TachographCentre", component: CentreCheckComponent },
+    { path: "/register-user", name: "RegisterUser", role: "Administrator", component: RegisterUserComponent },
+    { path: "/manage-access", name: "ManageAccess", role: "Administrator", component: ManageAccessComponent },
+    { path: "/software-licenses", name: "SoftwareLicenses", role: "Administrator", component: SoftwareLicensesComponent },
+    { path: "/confirm-account/:userId/:code", name: "ConfirmAccount", role: "", component: ConfirmAccountComponent },
+];
+
 @Component({
     selector: "wc-app",
     templateUrl: "app/app.component.html",
@@ -31,21 +55,7 @@ export interface MenuItem {
     directives: [ROUTER_DIRECTIVES, AuthRouterOutlet],
     providers: [ROUTER_PROVIDERS, JwtHelper],
 })
-@RouteConfig([
-    { path: "/", name: "Home", component: HomeComponent, useAsDefault: true },
-    { path: "/login", name: "Login", component: LoginComponent },
-    { path: "/dashboard", name: "Dashboard", component: DashboardComponent },
-    { path: "/calibrations-due", name: "CalibrationsDue", component: CalibrationsDueComponent },
-    { path: "/generate-email", name: "GenerateEmail", component: GenerateEmailComponent },
-    { path: "/inspection-data", name: "InspectionData", component: InspectionDataComponent },
-    { path: "/recent-calibrations", name: "RecentCalibrations", component: RecentCalibrationsComponent },
-    { path: "/qc-check", name: "QCCheck", component: QCCheckComponent },
-    { path: "/centre-check", name: "CentreCheck", component: CentreCheckComponent },
-    { path: "/register-user", name: "RegisterUser", component: RegisterUserComponent },
-    { path: "/manage-access", name: "ManageAccess", component: ManageAccessComponent },
-    { path: "/software-licenses", name: "SoftwareLicenses", component: SoftwareLicensesComponent },
-    { path: "/confirm-account/:userId/:code", name: "ConfirmAccount", component: ConfirmAccountComponent },
-])
+@RouteConfig(Routes)
 export class AppComponent {
 
     public isLoggedIn: boolean = true;

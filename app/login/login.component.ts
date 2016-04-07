@@ -1,7 +1,6 @@
 ﻿import {Component, OnInit} from "angular2/core";
 import {Router} from "angular2/router";
 import {HttpService} from "../utilities/HttpService";
-import {hasValidToken} from "../utilities/Jwt";
 import {JwtHelper} from "../utilities/JwtHelper";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {ShowError} from "../utilities/messageBox";

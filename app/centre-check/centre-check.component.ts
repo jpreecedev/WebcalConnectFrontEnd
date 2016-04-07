@@ -1,7 +1,5 @@
 import {Component, OnInit} from "angular2/core";
-import {CanActivate} from "angular2/router";
 import {Response, Http} from "angular2/http";
-import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {CentreCheckService} from "./centre-check.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
@@ -27,7 +25,6 @@ export interface CentreCheck {
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
 })
-@CanActivate(() => hasValidToken())
 export class CentreCheckComponent implements OnInit {
 
     private _centreChecks: CentreCheck[];

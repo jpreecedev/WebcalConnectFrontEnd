@@ -1,6 +1,6 @@
 import { Component, OnInit } from "angular2/core";
-import { CanActivate, Router, ROUTER_DIRECTIVES } from "angular2/router";
-import { hasValidToken, isAdministrator } from "../utilities/Jwt";
+import { Router, ROUTER_DIRECTIVES } from "angular2/router";
+import { isAdministrator } from "../utilities/Jwt";
 import { MenuItem } from "../app.component";
 
 @Component({
@@ -8,7 +8,6 @@ import { MenuItem } from "../app.component";
     styleUrls: ["app/dashboard/styles.css"],
     directives: [ROUTER_DIRECTIVES],
 })
-@CanActivate(() => hasValidToken())
 export class DashboardComponent implements OnInit {
 
     private _dashboardItems: Array<MenuItem>;

@@ -1,7 +1,5 @@
 import {Component, OnInit} from "angular2/core";
-import {CanActivate} from "angular2/router";
 import {Response, Http} from "angular2/http";
-import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {QCCheckService} from "./qc-check.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
@@ -28,7 +26,6 @@ export interface QCCheck {
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
 })
-@CanActivate(() => hasValidToken())
 export class QCCheckComponent implements OnInit {
 
     public selectedDepotName: string;

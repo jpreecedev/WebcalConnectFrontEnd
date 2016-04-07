@@ -1,7 +1,5 @@
 import {Component} from "angular2/core";
 import {HttpService} from "../utilities/HttpService";
-import {CanActivate} from "angular2/router";
-import {hasValidToken} from "../utilities/Jwt";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {InspectionDataService} from "./inspection-data.service";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
@@ -28,7 +26,6 @@ export interface History {
     directives: [SpinnerComponent, WCButtonComponent],
     providers: [InspectionDataService, HttpService]
 })
-@CanActivate(() => hasValidToken())
 export class InspectionDataComponent {
 
     private _isRequesting: boolean = false;

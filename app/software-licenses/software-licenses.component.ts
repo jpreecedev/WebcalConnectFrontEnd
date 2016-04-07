@@ -1,9 +1,7 @@
 import {Component, OnInit} from "angular2/core";
-import {CanActivate} from "angular2/router";
 import {SoftwareLicensesService} from "./software-licenses.service";
 import {TickPipe} from "../utilities/tick.pipe";
 import {ClientNamePipe} from "./client-name.pipe";
-import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
@@ -30,7 +28,6 @@ export interface Client {
     pipes: [TickPipe, ClientNamePipe, PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
 })
-@CanActivate(() => hasValidToken(["Administrator"]))
 export class SoftwareLicensesComponent implements OnInit {
 
     private _clients: Client[];

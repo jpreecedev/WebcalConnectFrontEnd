@@ -1,7 +1,5 @@
 import {Component, OnInit} from "angular2/core";
-import {CanActivate} from "angular2/router";
 import {Response} from "angular2/http";
-import {hasValidToken} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
 import {RecentCalibrationsService} from "./recent-calibrations.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
@@ -33,7 +31,6 @@ export interface RecentCalibration {
     pipes: [PaginatePipe, DepotNamePipe],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent]
 })
-@CanActivate(() => hasValidToken())
 export class RecentCalibrationsComponent implements OnInit {
 
     public selectedDepotName: string;

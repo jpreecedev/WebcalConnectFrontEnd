@@ -1,6 +1,5 @@
 import {Component} from "angular2/core";
-import {CanActivate, Router} from "angular2/router";
-import {hasValidToken} from "../utilities/Jwt";
+import {Router} from "angular2/router";
 import {HttpService} from "../utilities/HttpService";
 import {Response} from "angular2/http";
 import {RegisterUserService} from "./register-user.service";
@@ -20,7 +19,6 @@ export interface UserRegistration {
     providers: [RegisterUserService, HttpService],
     directives: [WCButtonComponent]
 })
-@CanActivate(() => hasValidToken(["Administrator"]))
 export class RegisterUserComponent {
 
     private _userRegistration: UserRegistration;

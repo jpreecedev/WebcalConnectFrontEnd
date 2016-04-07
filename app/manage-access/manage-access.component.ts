@@ -1,8 +1,6 @@
 import {Component, OnInit} from "angular2/core";
-import {CanActivate} from "angular2/router";
 import {HttpService} from "../utilities/HttpService";
 import {ManageAccessService} from "./manage-access.service";
-import {hasValidToken} from "../utilities/Jwt";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {ShowError} from "../utilities/messageBox";
@@ -23,7 +21,6 @@ export interface ManageAccessSite {
     providers: [HttpService, ManageAccessService],
     directives: [SpinnerComponent, WCButtonComponent]
 })
-@CanActivate(() => hasValidToken(["Administrator"]))
 export class ManageAccessComponent implements OnInit {
 
     private _isRequesting: boolean;
