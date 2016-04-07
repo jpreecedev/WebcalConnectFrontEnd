@@ -3,6 +3,7 @@ import {Response} from "angular2/http";
 import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
+import {AppSettings} from "../app.settings";
 
 @Injectable()
 export class InspectionDataService {
@@ -12,7 +13,7 @@ export class InspectionDataService {
     }
 
     getVehicleInspectionData<T>(vehicleRegistration: string): Observable<T> {
-        return this._httpService.get("http://localhost:50139/api/inspectiondata/" + vehicleRegistration)
+        return this._httpService.get(`${AppSettings.API_ENDPOINT}/inspectiondata/${vehicleRegistration}`)
             .map((res: Response) => {
                 return res.json();
             });

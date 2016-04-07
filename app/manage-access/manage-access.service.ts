@@ -4,6 +4,7 @@ import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import {ManageAccessUser, ManageAccessSite} from "./manage-access.component";
+import {AppSettings} from "../app.settings";
 
 @Injectable()
 export class ManageAccessService {
@@ -13,20 +14,20 @@ export class ManageAccessService {
     }
 
     getUsers(): Observable<ManageAccessUser[]> {
-        return this._httpService.get("http://localhost:50139/api/manageaccess/users")
+        return this._httpService.get(`${AppSettings.API_ENDPOINT}/manageaccess/users`)
             .map((res: Response) => {
                 return res.json();
             });
     }
 
     getConnectedSites(selectedUserId: number): Observable<ManageAccessSite[]> {
-        return this._httpService.get("http://localhost:50139/api/manageaccess/sites/" + selectedUserId)
+        return this._httpService.get(`${AppSettings.API_ENDPOINT}/manageaccess/sites/${selectedUserId}`)
             .map((res: Response) => {
                 return res.json();
             });
     }
 
     toggleSite(selectedSite: ManageAccessSite): Observable<Response> {
-        return this._httpService.post("http://localhost:50139/api/manageaccess/sites/", JSON.stringify(selectedSite));
+        return this._httpService.post(`${AppSettings.API_ENDPOINT}/manageaccess/sites/`, JSON.stringify(selectedSite));
     }
 }

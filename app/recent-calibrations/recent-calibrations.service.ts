@@ -3,6 +3,7 @@ import {Response} from "angular2/http";
 import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
 import {RecentCalibration} from "./recent-calibrations.component";
+import {AppSettings} from "../app.settings";
 
 @Injectable()
 export class RecentCalibrationsService {
@@ -12,12 +13,12 @@ export class RecentCalibrationsService {
     }
 
     getRecent(): Observable<Response> {
-        return this._httpService.get("http://localhost:50139/api/recentcalibrations/");
+        return this._httpService.get(`${AppSettings.API_ENDPOINT}/recentcalibrations/`);
     }
 
     downloadCertificate(id: Number, documentType: string): void {
 
-        this._httpService.get(`http://localhost:50139/api/resource/certificate/${id}/${documentType}`)
+        this._httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
             .subscribe((response: Response) => {
                 window.open("data:application/pdf;base64," + response.text());
             });
@@ -25,7 +26,7 @@ export class RecentCalibrationsService {
 
     emailCertificate(recipient: string, calibration: RecentCalibration): Observable<Response> {
 
-        return this._httpService.post("http://localhost:50139/api/recentcalibrations/emailcertificate/", JSON.stringify({
+        return this._httpService.post(`${AppSettings.API_ENDPOINT}/recentcalibrations/emailcertificate/`, JSON.stringify({
             recipient: recipient,
             documentId: calibration.documentId,
             documentType: calibration.documentTypeEnum
@@ -35,7 +36,7 @@ export class RecentCalibrationsService {
 
     emailGridData(recipient: string, calibrations: RecentCalibration[]): Observable<Response> {
 
-        return this._httpService.post("http://localhost:50139/api/recentcalibrations/email/", JSON.stringify({
+        return this._httpService.post(`${AppSettings.API_ENDPOINT}/recentcalibrations/email/`, JSON.stringify({
             recipient: recipient,
             calibrations: calibrations
         }));

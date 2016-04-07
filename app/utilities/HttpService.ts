@@ -5,6 +5,7 @@ import {JwtHelper} from "./JwtHelper";
 import {IJwt} from "./Jwt";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
+import {AppSettings} from "../app.settings";
 
 export interface PagedResponse<T> {
     total: number;
@@ -37,7 +38,7 @@ export class HttpService {
     authenticate(username: string, password: string, rememberMe: boolean): Observable<boolean> {
         var creds: string = "username=" + username + "&password=" + password + "&grant_type=password&client_id=099153c2625149bc8ecb3e85e03f0022";
 
-        return this._request({ url: "http://localhost:50139/oauth2/token", body: creds, method: RequestMethod.Post, headers: this.getRequestHeaders(true) })
+        return this._request({ url: `${AppSettings.SERVER_ADDRESS}/oauth2/token`, body: creds, method: RequestMethod.Post, headers: this.getRequestHeaders(true) })
             .do((response: Response) => {
                 this._jwtHelper.setToken(response.json(), rememberMe);
             })
