@@ -12,6 +12,7 @@ import {JwtHelper} from "../utilities/JwtHelper";
 export interface ConfirmAccountTokens {
     userId: string;
     code: string;
+    password: string;
 }
 
 @Component({
@@ -20,22 +21,29 @@ export interface ConfirmAccountTokens {
     providers: [HttpService, ConfirmAccountService],
     directives: [SpinnerComponent]
 })
-export class ConfirmAccountComponent implements OnInit {
+export class ConfirmAccountComponent {
 
     private _isRequesting: boolean = false;
     private _tokens: ConfirmAccountTokens;
+    private _confirmPassword: string;
 
     constructor(private _service: ConfirmAccountService, private _router: Router, _routeParams: RouteParams) {
-        var jwtHelper = new JwtHelper();
-        jwtHelper.logout();
-        
+         var jwtHelper = new JwtHelper();
+         jwtHelper.logout();
+
         this._tokens = {
             code: decodeURIComponent(_routeParams.get("code")),
-            userId: _routeParams.get("userId")
+            userId: _routeParams.get("userId"),
+            password: "",
         };
     }
 
-    ngOnInit(): void {
+    submit(): void {
+        if (!this.checkPassword()) {
+            ShowMessage("The passwords you have entered do not match.");
+            return;
+        }
+
         this._isRequesting = true;
 
         this._service.confirmEmail(this._tokens).subscribe(() => {
@@ -50,5 +58,12 @@ export class ConfirmAccountComponent implements OnInit {
         () => {
             this._isRequesting = false;
         });
+    }
+
+    checkPassword(): boolean {
+        if (!this._confirmPassword || this._confirmPassword.length < 6) {
+            return false;
+        }
+        return this._confirmPassword === this._tokens.password;
     }
 }
