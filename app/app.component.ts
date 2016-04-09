@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component, enableProdMode} from "angular2/core";
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {HomeComponent} from "./home/home.component";
@@ -17,6 +17,8 @@ import {ConfirmAccountComponent} from "./confirm-account/confirm-account.compone
 
 import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
 import {JwtHelper} from "./utilities/JwtHelper";
+
+enableProdMode();
 
 export interface MenuItem {
     icon: string;

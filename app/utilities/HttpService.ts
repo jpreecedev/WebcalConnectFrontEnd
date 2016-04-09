@@ -31,8 +31,8 @@ export class HttpService {
         return this._request({ url: url, body: body, method: RequestMethod.Put, headers: this.getRequestHeaders(false) });
     }
 
-    delete(url: string): Observable<Response> {
-        return this._request({ url: url, method: RequestMethod.Delete, headers: this.getRequestHeaders(false) });
+    delete(url: string, body: string): Observable<Response> {
+        return this._request({ url: url, body: body, method: RequestMethod.Delete, headers: this.getRequestHeaders(false) });
     }
 
     authenticate(username: string, password: string, rememberMe: boolean): Observable<boolean> {
