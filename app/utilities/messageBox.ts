@@ -19,6 +19,11 @@ export function ShowMessage(title: string, callback?: Function) {
 
 export function ShowError(message: string, error: any, callback?: Function) {
     var messageBox: MessageBox = (<any>window).bootbox;
+    
+    if (error && error.json){
+        message += "<br/><br/>" + error.json().message;
+    }
+    
     messageBox.alert(message, callback);
 }
 
