@@ -59,8 +59,9 @@ export var Routes: Route[] = [
 export class AppComponent {
 
     public isLoggedIn: boolean = true;
-
+    
     constructor(private _router: Router, private _jwtHelper: JwtHelper) {
+                
     }
 
     logout(): void {

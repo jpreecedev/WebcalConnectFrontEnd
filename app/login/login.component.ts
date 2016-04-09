@@ -16,6 +16,7 @@ import {hasValidToken} from "../utilities/Jwt";
 export class LoginComponent implements OnInit {
 
     private _isRequesting: boolean = false;
+    private _isLoggedIn: boolean = false;
 
     constructor(private _httpService: HttpService, private _router: Router, private _jwtHelper: JwtHelper) {
 
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
         this._isRequesting = true;
         this._httpService.authenticate(username, password, rememberMe).subscribe((response: boolean) => {
             if (response) {
+                this.loggedInChanged(true);
                 this._router.navigate(["Dashboard"]);
             }
         },
@@ -36,12 +38,19 @@ export class LoginComponent implements OnInit {
         () => {
             this._isRequesting = false;
         });
+    }
 
+    loggedInChanged(value: boolean) {
+        this._isLoggedIn = value;
     }
 
     ngOnInit(): void {
         if (hasValidToken()) {
+            this.loggedInChanged(true);
             this._router.navigate(["Dashboard"]);
+        }
+        else {
+            this.loggedInChanged(false);
         }
     }
 
