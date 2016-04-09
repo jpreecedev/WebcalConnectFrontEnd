@@ -5,7 +5,7 @@ import {HttpService} from "../utilities/HttpService";
 import {GenerateEmailService} from "./generate-email.service";
 import {RecentCalibration} from "../recent-calibrations/recent-calibrations.component";
 import {CalibrationDue} from "../calibrations-due/calibrations-due.component";
-import {ShowError} from "../utilities/messageBox";
+import {ShowDialog, ShowError, ShowMessage} from "../utilities/messageBox";
 import {SplitByCapitalsPipe} from "../utilities/split-by-capitals.pipe";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
@@ -19,6 +19,14 @@ export interface GenerateReport {
 export interface ClientName {
     id: number;
     name: string;
+}
+
+export interface EmailReportData {
+    userId: number;
+    recipient: string;
+    reportType: string;
+    from: string;
+    to?: string;
 }
 
 @Component({
@@ -41,6 +49,7 @@ export class GenerateEmailComponent implements OnInit {
 
     private _isRequesting: boolean = false;
     private _isUpdating: boolean = false;
+    private _isSending: boolean = false;
 
     constructor(private _service: GenerateEmailService) {
         this._isAdministrator = isAdministrator();
@@ -64,13 +73,13 @@ export class GenerateEmailComponent implements OnInit {
             this._isRequesting = false;
         });
     }
-    
-    clearData(){
+
+    clearData() {
         this._recentCalibrations = null;
         this._calibrationsDue = null;
     }
 
-    updateReport(): void {        
+    updateReport(): void {
         if (this._reportType === "RecentCalibrations") {
             this.updateRecentReport();
         }
@@ -111,7 +120,60 @@ export class GenerateEmailComponent implements OnInit {
         });
     }
 
+    sendEmail(): void {
+        var $this: GenerateEmailComponent = this;
+        var emailData = <EmailReportData>{
+            userId: this._selectedClientId,
+            recipient: "",
+            reportType: this._reportType,
+            from: this._generateReport.from,
+            to: this._generateReport.to
+        };
+
+        this.showDialog(function() {
+            var email: string = this.find("#email").val();
+            if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+                $this._isSending = true;
+                emailData.recipient = email;
+
+                $this._service.sendEmail(emailData).subscribe((response: Response) => {
+                    ShowMessage("Your email has been sent.");
+                },
+                (error: any)=>{
+                    ShowError("Unable to send email, please try again later.", error);
+                    $this._isSending = false;
+                },
+                () => {
+                    $this._isSending = false;                    
+                });
+            }
+        });
+    }
+
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    private showDialog(callback: Function): void {
+        ShowDialog({
+            title: "Enter the email address of the recipient",
+            message: "<div class=\"row\">  " +
+            "<div class=\"col-md-12\"> " +
+            "<form class=\"form-horizontal\"> " +
+            "<input id=\"email\" name=\"email\" type=\"email\" placeholder=\"you@yourcompany.com\" class=\"form-control\" required> " +
+            "</form> </div> </div>",
+            buttons: {
+                cancel: {
+                    label: "Cancel",
+                    className: "btn-default",
+                    callback: callback
+                },
+                success: {
+                    label: "Send Email",
+                    className: "btn-primary",
+                    callback: callback
+                }
+            }
+        });
     }
 }
