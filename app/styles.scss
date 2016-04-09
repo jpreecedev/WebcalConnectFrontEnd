@@ -2,6 +2,11 @@ body{
     color:#000;
 }
 
-[hidden]{
+[hidden] {
     display:none;
+}
+
+#navbar ul li hr {
+    margin-top: 7px;
+    margin-bottom: 7px;
 }
