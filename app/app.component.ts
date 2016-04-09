@@ -1,5 +1,5 @@
 import {Component} from "angular2/core";
-import {Router, RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from "angular2/router";
+import {Router, RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
 
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
@@ -53,7 +53,7 @@ export var Routes: Route[] = [
     templateUrl: "app/app.component.html",
     styleUrls: ["app/styles.css"],
     directives: [ROUTER_DIRECTIVES, AuthRouterOutlet],
-    providers: [ROUTER_PROVIDERS, JwtHelper],
+    providers: [JwtHelper],
 })
 @RouteConfig(Routes)
 export class AppComponent {
