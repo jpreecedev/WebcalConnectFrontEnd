@@ -43,6 +43,8 @@ export class CalibrationsDueComponent implements OnInit {
         this._service.getCalibrationsDue().subscribe((response: Response) => {
             this._calibrationsDue = response.json();
             this._depotNames = this.getDepotNames();
+            this._depotNames.unshift("- All -");
+            this._selectedDepotName = "- All -";
         },
         (error: any) => {
             this._isRequesting = false;
@@ -68,7 +70,7 @@ export class CalibrationsDueComponent implements OnInit {
         var depotNames: Array<string> = new Array<string>();
         for (var index: number = 0; index < this._calibrationsDue.length; index++) {
             var element: CalibrationDue = this._calibrationsDue[index];
-            if (depotNames.indexOf(element.depotName) === -1) {
+            if (element.depotName && depotNames.indexOf(element.depotName) === -1) {
                 depotNames.push(element.depotName);
             }
         }

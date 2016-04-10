@@ -20,7 +20,13 @@ export class CalibrationsDueService {
 
         this._httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
             .subscribe((response: Response) => {
-                window.open("data:application/pdf;base64," + response.text());
+                if (window.navigator.msSaveOrOpenBlob) {
+                    var blobObject = new Blob([response.text()]);
+                    window.navigator.msSaveOrOpenBlob(blobObject, "document.pdf");
+                }
+                else {
+                    window.open("data:application/pdf;base64," + encodeURIComponent(response.text()));
+                }
             },
             (error: any) => {
                 ShowError("Unable to download certificate, please try again later.", error);

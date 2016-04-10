@@ -7,7 +7,7 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     <label for="selectUser">Select user</label>
-                    <select id="selectUser" name="selectUser" class="form-control" #site [(ngModel)]="_selectedSite" (change)="getConnectedSites(site.value, site)">
+                    <select id="selectUser" name="selectUser" class="form-control" #site [(ngModel)]="_selectedSiteId" (change)="getConnectedSites(site.value, site)">
                         <option [value]="item.id" *ngFor="#item of _users" #index>{{item.name}}</option>
                     </select>
                 </div>
@@ -18,7 +18,7 @@
 
     <spinner [isRunning]="_isRequesting"></spinner>
 
-    <p class="text-center" *ngIf="!_isRequesting && _selectedSite && (!_connectedSites || _connectedSites.length === 0)">No data to display</p>
+    <p class="text-center" *ngIf="!_isRequesting && _selectedSiteId && (!_connectedSites || _connectedSites.length === 0)">No data to display</p>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover" *ngIf="_connectedSites && _connectedSites.length > 0 && !_isRequesting">

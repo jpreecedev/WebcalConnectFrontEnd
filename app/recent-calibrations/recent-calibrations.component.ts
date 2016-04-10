@@ -51,7 +51,7 @@ export class RecentCalibrationsComponent implements OnInit {
         this._service.getRecent().subscribe((response: Response) => {
             this._recentCalibrations = response.json();
             this._depotNames = this.getDepotNames();
-            this._depotNames.unshift("- All -");
+            this._depotNames.unshift("- All -");            
             this.selectedDepotName = "- All -";
         },
         (error: any) => {

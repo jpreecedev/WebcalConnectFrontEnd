@@ -27,6 +27,7 @@ export class ManageAccessComponent implements OnInit {
     private _isUpdating: boolean;
     private _users: ManageAccessUser[];
     private _connectedSites: ManageAccessSite[];
+    private _selectedSiteId: number;
 
     constructor(private _service: ManageAccessService) {
     }
@@ -34,8 +35,9 @@ export class ManageAccessComponent implements OnInit {
     ngOnInit(): void {
         this._isRequesting = true;
         this._service.getUsers().subscribe((data: ManageAccessUser[]) => {
-            data.unshift(<ManageAccessUser>{ id: -1, name: "" });
             this._users = data;
+            this._selectedSiteId = this._users[0].id;
+            this.getConnectedSites(this._selectedSiteId);
         },
         (error: any) => {
             ShowError("Unable to get a list of users, please try again later.", error);

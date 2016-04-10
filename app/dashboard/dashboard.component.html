@@ -2,7 +2,7 @@
     <h1>Dashboard</h1>
     <hr />
     <ul class="dashboard-menu">
-        <li class="col-xs-6 col-md-4 pointer" *ngFor="#dashboardItem of _dashboardItems" (click)="navigate(dashboardItem)">
+        <li class="col-xs-6 col-sm-4 pointer" *ngFor="#dashboardItem of _dashboardItems" (click)="navigate(dashboardItem)">
             <p>
                 <i class="fa {{dashboardItem.icon}} fa-4x"></i>
                 <br /><span>{{dashboardItem.text}}</span>
