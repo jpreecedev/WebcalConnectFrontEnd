@@ -1,14 +1,15 @@
 .dashboard-menu {
     margin-top: 40px;
-
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    
     li {
         text-align: center;
         height: 140px;
         border-radius: 10px;
         margin-bottom: 20px;
-        list-style-type: none;
         
-
         a{
             color:#666;   
             

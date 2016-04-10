@@ -4,7 +4,7 @@
 
     <form action="" id="filterForm" method="post" role="form" (ngSubmit)="submit()">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     <label for="vehicleRegistration">Enter a vehicle registration number</label>
                     <input type="text" id="vehicleRegistration" name="vehicleRegistration" class="form-control" [(ngModel)]="_vehicleRegistration">
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12 col-sm-6">
                 <wc-button [isDisabled]="_isRequesting" [label]="'Find'" [workingLabel]="'Finding...'"></wc-button>
                 <button class="btn btn-default" type="button" (click)="reset()">Reset</button>
             </div>
@@ -25,23 +25,23 @@
     <p class="text-center" *ngIf="!_isRequesting && (!_inspectionData || _inspectionData.isDefault)">No data to display</p>
 
     <div class="row" *ngIf="_inspectionData && !_inspectionData.isDefault">
-        <div class="col-xs-3">
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Calibration Date</strong>
                 <br>{{asDate(_inspectionData.calibrationDate) | date}}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Inspection Date</strong>
                 <br>{{asDate(_inspectionData.inspectionDate) | date}}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Vehicle Make</strong>
                 <br>{{_inspectionData.vehicleMake}}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Vehicle Model</strong>
                 <br>{{_inspectionData.vehicleModel}}</p>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Tacho Model</strong>
                 <br>{{_inspectionData.tachoModel}}</p>
         </div>

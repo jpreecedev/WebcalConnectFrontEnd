@@ -10,3 +10,8 @@ body{
     margin-top: 7px;
     margin-bottom: 7px;
 }
+
+.navbar-brand > img {
+    max-width: 200px; 
+    margin-top: -7px; 
+}

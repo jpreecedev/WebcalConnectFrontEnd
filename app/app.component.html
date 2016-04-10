@@ -9,18 +9,14 @@
                 <span class="icon-bar"></span>
             </button>
             <a [routerLink]="['Home']" class="navbar-brand" rel="home" title="Webcal - Tacho Calibration Software">
-                <img style="max-width:200px; margin-top: -7px;" src="/img/logo.png" alt="Skillray Transport Services">
+                <img src="/img/logo.png" alt="Skillray Transport Services">
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-right">
-                <li class="active"><a [routerLink]="['Home']">Home</a></li>
-                <li><a [hidden]="isLoggedIn" [routerLink]="['Login']">Login</a></li>
                 <li><a [hidden]="!isLoggedIn" [routerLink]="['Dashboard']">Dashboard</a></li>
-                <li><a [hidden]="!isLoggedIn" [routerLink]="['RecentCalibrations']">Recent Calibrations</a></li>
-                <li><a [routerLink]="['SoftwareLicenses']">Software Licenses</a></li>
                 <li class="dropdown" [hidden]="!isLoggedIn">
-                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a [routerLink]="['QCCheck']">QC Check</a></li>
                         <li><a [routerLink]="['CentreCheck']">Centre Check</a></li>
@@ -29,10 +25,14 @@
                         <li><a [routerLink]="['CalibrationsDue']">Calibrations Due</a></li>
                         <li><a [routerLink]="['RegisterUser']">Register User</a></li>
                         <li><a [routerLink]="['ManageAccess']">Manage Access</a></li>
-                        <li><hr/></li>
+                        <li><a [routerLink]="['SoftwareLicenses']">Licenses</a></li>
+                        <li>
+                            <hr/>
+                        </li>
                         <li><a [hidden]="!isLoggedIn" (click)="logout()">Logout</a></li>
                     </ul>
                 </li>
+                <li><a [hidden]="!isLoggedIn" [routerLink]="['RecentCalibrations']">Recent Calibrations</a></li>
             </ul>
         </div>
     </div>

@@ -4,7 +4,7 @@
 
     <form action="" id="filterForm" method="post" role="form">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     <label for="selectUser">Select user</label>
                     <select id="selectUser" name="selectUser" class="form-control" #site [(ngModel)]="_selectedSite" (change)="getConnectedSites(site.value, site)">
@@ -17,24 +17,26 @@
     <hr/>
 
     <spinner [isRunning]="_isRequesting"></spinner>
-    
+
     <p class="text-center" *ngIf="!_isRequesting && _selectedSite && (!_connectedSites || _connectedSites.length === 0)">No data to display</p>
 
-    <table class="table table-striped table-hover table-responsive" *ngIf="_connectedSites && _connectedSites.length > 0 && !_isRequesting">
-        <thead>
-            <tr>
-                <th>Site Description</th>
-                <th class="actions">&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="#site of _connectedSites">
-                <td>{{site.description}}</td>
-                <td class="actions">
-                    <wc-button [isDisabled]="_isUpdating" [style]="'btn btn-secondary pull-right'" [label]="site.isRevoked ? 'Authorize' : 'Revoke'" [workingLabel]="site.isRevoked ? 'Authorize' : 'Revoke'" (click)="toggleAccess(site)"></wc-button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" *ngIf="_connectedSites && _connectedSites.length > 0 && !_isRequesting">
+            <thead>
+                <tr>
+                    <th>Site Description</th>
+                    <th class="actions">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="#site of _connectedSites">
+                    <td>{{site.description}}</td>
+                    <td class="actions">
+                        <wc-button [isDisabled]="_isUpdating" [style]="'btn btn-secondary pull-right'" [label]="site.isRevoked ? 'Authorize' : 'Revoke'"
+                        [workingLabel]="site.isRevoked ? 'Authorize' : 'Revoke'" (click)="toggleAccess(site)"></wc-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

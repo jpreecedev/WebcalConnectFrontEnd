@@ -246,12 +246,30 @@ footer {
     margin-top: 40px;
 }
 
-@media(max-width: 767px) {
+@media(max-width: 1024px){
+    hr{
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+    .card-container.card {
+        margin-top: 20px;   
+    }
+}
+
+@media(max-width: 1024px) {
+    .carousel-caption {
+        bottom: 20px;
+        
+        img {
+            max-width: 80px;
+            margin-top: 20px;
+        }
+    }
 }
 
 @media(max-width: 480px) {
     .carousel-caption {
-        bottom: 20px;
+        bottom: 85px;
     }
 }
 
@@ -280,6 +298,10 @@ footer {
 html {
     position: relative;
     min-height: 100%;
+}
+
+wc-app > undefined > .container {
+    padding-bottom: 50px;
 }
 
 .footer {

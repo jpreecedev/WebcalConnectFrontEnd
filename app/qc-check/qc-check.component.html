@@ -2,33 +2,35 @@
     <h1>QC Check</h1>
     <hr/>
     <div class="col-xs-offset-6 col-xs-6" *ngIf="!_isRequesting">
-        <pagination-controls class="pull-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+        <pagination-controls class="text-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
     </div>
-    <table class="table table-striped table-hover table-responsive">
-        <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>Centre Name</th>
-                <th>Date</th>
-                <th>Manager Name</th>
-                <th>Technician Name</th>
-                <th class="text-center">3 Checks Completed?</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngIf="_isRequesting">
-                <td colspan="6">
-                    <spinner [isRunning]="_isRequesting"></spinner>
-                </td>
-            </tr>
-            <tr *ngFor="#qcCheck of _qcChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, qcCheck)">
-                <td><img src="/img/qccheck.png" alt="QC Check" /> </td>
-                <td>{{qcCheck.centreName}}</td>
-                <td>{{asDate(qcCheck.date) | date}}</td>
-                <td>{{qcCheck.managerName}}</td>
-                <td>{{qcCheck.technician}}</td>
-                <td class="text-center" [innerHtml]="qcCheck.threeChecksCompleted | tick"></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Centre Name</th>
+                    <th>Date</th>
+                    <th>Manager Name</th>
+                    <th>Technician Name</th>
+                    <th class="text-center">3 Checks Completed?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="_isRequesting">
+                    <td colspan="6">
+                        <spinner [isRunning]="_isRequesting"></spinner>
+                    </td>
+                </tr>
+                <tr *ngFor="#qcCheck of _qcChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, qcCheck)">
+                    <td><img src="/img/qccheck.png" alt="QC Check" /> </td>
+                    <td>{{qcCheck.centreName}}</td>
+                    <td>{{asDate(qcCheck.date) | date}}</td>
+                    <td>{{qcCheck.managerName}}</td>
+                    <td>{{qcCheck.technician}}</td>
+                    <td class="text-center" [innerHtml]="qcCheck.threeChecksCompleted | tick"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

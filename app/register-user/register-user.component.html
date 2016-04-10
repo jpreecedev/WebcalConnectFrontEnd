@@ -1,19 +1,24 @@
 <div class="container">
+    <h1>Register User</h1>
+    <hr/>
     <div class="card card-container">
         <form role="form" class="form-signup" (ngSubmit)="submit()" #form="ngForm">
             <div class="form-group has-feedback">
                 <label for="emailAddress">Email address</label>
-                <input type="email" class="form-control" id="emailAddress" placeholder="you@example.com" [(ngModel)]="_userRegistration.emailAddress" ngControl="emailAddress" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+                <input type="email" class="form-control" id="emailAddress" placeholder="you@example.com" [(ngModel)]="_userRegistration.emailAddress"
+                ngControl="emailAddress" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
                 <span class="form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <label for="companyName">Company Name</label>
-                <input type="text" class="form-control" id="companyName" [(ngModel)]="_userRegistration.companyName" ngControl="companyName" required>
+                <input type="text" class="form-control" id="companyName" [(ngModel)]="_userRegistration.companyName" ngControl="companyName"
+                required>
                 <span class="form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <label for="licenseKey">License Expiration Date</label>
-                <input type="date" class="form-control" id="licenseKey" #licenseKey (change)="getLicenseKey(licenseKey.value)" [(ngModel)]="_userRegistration.expiration" ngControl="expiration" required>
+                <input type="date" class="form-control" id="licenseKey" #licenseKey (change)="getLicenseKey(licenseKey.value)" [(ngModel)]="_userRegistration.expiration"
+                ngControl="expiration" required>
                 <span class="form-control-feedback"></span>
             </div>
             <div class="form-group" *ngIf="_userRegistration.licenseKey">

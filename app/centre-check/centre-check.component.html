@@ -2,31 +2,33 @@
     <h1>Centre Check</h1>
     <hr/>
     <div class="col-xs-offset-6 col-xs-6" *ngIf="!_isRequesting">
-        <pagination-controls class="pull-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+        <pagination-controls class="text-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
     </div>
-    <table class="table table-striped table-hover table-responsive">
-        <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>Centre Name</th>
-                <th>Seal Number</th>
-                <th>Date</th>
-                <th>Name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngIf="_isRequesting">
-                <td colspan="6">
-                    <spinner [isRunning]="_isRequesting"></spinner>
-                </td>
-            </tr>
-            <tr *ngFor="#centreCheck of _centreChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, centreCheck)">
-                <td><img src="/img/centrecheck.png" alt="Centre Check" /> </td>
-                <td>{{centreCheck.centreName}}</td>
-                <td>{{centreCheck.sealNumber}}</td>
-                <td>{{asDate(centreCheck.date) | date}}</td>
-                <td>{{centreCheck.name}}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Centre Name</th>
+                    <th>Seal Number</th>
+                    <th>Date</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="_isRequesting">
+                    <td colspan="6">
+                        <spinner [isRunning]="_isRequesting"></spinner>
+                    </td>
+                </tr>
+                <tr *ngFor="#centreCheck of _centreChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, centreCheck)">
+                    <td><img src="/img/centrecheck.png" alt="Centre Check" /> </td>
+                    <td>{{centreCheck.centreName}}</td>
+                    <td>{{centreCheck.sealNumber}}</td>
+                    <td>{{asDate(centreCheck.date) | date}}</td>
+                    <td>{{centreCheck.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
