@@ -29,7 +29,7 @@ module.exports = function() {
             "node_modules/jquery/dist/jquery.min.js",
             "node_modules/bootstrap/dist/js/bootstrap.min.js",
             "node_modules/ng2-pagination/dist/ng2-pagination-bundle.js",
-            "node_modules/bootbox/bootbox.min.js",
+            "node_modules/bootbox/bootbox.min.js"
         ],
         libCss: [
             "node_modules/bootstrap/dist/css/bootstrap.min.css",

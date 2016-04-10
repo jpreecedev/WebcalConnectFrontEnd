@@ -394,8 +394,12 @@ html {
     display:block;
 }
 
-.pagination a, .pagination-previous.disabled span, .pagination-previous a::before, .pagination-previous.disabled::before, .pagination li.current span {
+.ng2-pagination a, .pagination-previous.disabled span, .pagination-previous a::before, .pagination-previous.disabled::before, .ng2-pagination li.current span {
     font-size: 18px;
+}
+
+pagination-controls > ul > li.current{
+    background: #da4f49 !important;
 }
 
 pagination-controls li.pagination-previous.disabled, pagination-controls li.pagination-next.disabled{
@@ -403,7 +407,6 @@ pagination-controls li.pagination-previous.disabled, pagination-controls li.pagi
 }
 
 pagination-controls li.current{
-    top:-10px;
     position:relative;
 }
 

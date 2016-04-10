@@ -1,7 +1,5 @@
 import {Component, OnInit} from "angular2/core";
-import {isAdministrator} from "../utilities/Jwt";
 import {Response} from "angular2/http";
-import {HttpService} from "../utilities/HttpService";
 import {GenerateEmailService} from "./generate-email.service";
 import {RecentCalibration} from "../recent-calibrations/recent-calibrations.component";
 import {CalibrationDue} from "../calibrations-due/calibrations-due.component";
@@ -9,6 +7,8 @@ import {ShowDialog, ShowError, ShowMessage} from "../utilities/messageBox";
 import {SplitByCapitalsPipe} from "../utilities/split-by-capitals.pipe";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import {isAdministrator} from "../utilities/Jwt";
+import {HttpService} from "../utilities/HttpService";
 
 export interface GenerateReport {
     from: string;
@@ -50,7 +50,7 @@ export class GenerateEmailComponent implements OnInit {
     private _isRequesting: boolean = false;
     private _isUpdating: boolean = false;
     private _isSending: boolean = false;
-
+    
     constructor(private _service: GenerateEmailService) {
         this._isAdministrator = isAdministrator();
     }

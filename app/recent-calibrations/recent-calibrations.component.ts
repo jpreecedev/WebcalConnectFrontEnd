@@ -51,13 +51,15 @@ export class RecentCalibrationsComponent implements OnInit {
         this._service.getRecent().subscribe((response: Response) => {
             this._recentCalibrations = response.json();
             this._depotNames = this.getDepotNames();
+            this._depotNames.unshift("- All -");
+            this.selectedDepotName = "- All -";
         },
         (error: any) => {
             ShowError("Unable to get list of recent calibrations, please try again later.", error);
-            this._isRequesting = false;            
+            this._isRequesting = false;
         },
         () => {
-            this._isRequesting = false;            
+            this._isRequesting = false;
         });
     }
 
@@ -68,7 +70,7 @@ export class RecentCalibrationsComponent implements OnInit {
         var depotNames: Array<string> = new Array<string>();
         for (var index: number = 0; index < this._recentCalibrations.length; index++) {
             var element: RecentCalibration = this._recentCalibrations[index];
-            if (depotNames.indexOf(element.depotName) === -1) {
+            if (element.depotName && depotNames.indexOf(element.depotName) === -1) {
                 depotNames.push(element.depotName);
             }
         }
@@ -108,10 +110,10 @@ export class RecentCalibrationsComponent implements OnInit {
 
     emailGridData(): void {
         var $this: RecentCalibrationsComponent = this;
-        $this._isEmailing = true;
         this.showDialog(function() {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
+                $this._isEmailing = true;
                 $this._service.emailGridData(email, $this.getGridData()).subscribe();
                 ShowMessage("Your email has been sent.");
             }
@@ -121,6 +123,10 @@ export class RecentCalibrationsComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+    
+    setDepotName(depotName: string){
+        this.selectedDepotName = depotName;
     }
 
     private getGridData(): RecentCalibration[] {
