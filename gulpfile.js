@@ -23,7 +23,13 @@ gulp.task("app-css", ["fonts"], function() {
         .pipe(gulp.dest("."));
 });
 
-gulp.task("app-root", ["app-css"], function() {
+gulp.task("app-js", ["app-css"], function(){
+    return gulp.src(config.tsSource, { base: "./" })
+        .pipe($.typescript())
+        .pipe(gulp.dest(config.dist))
+});
+
+gulp.task("app-root", ["app-js"], function() {
     return gulp.src(config.rootFiles, { base: "./" })
         .pipe(gulp.dest(config.dist))
 });

@@ -1,10 +1,7 @@
 module.exports = function() {
     var config = {
-        temp: '.tmp/',
         tsSource: ["./app/**/*.ts"],
-        jsSource: "./app/**/*.js",
         appSource: [
-            "./app/**/*.js",
             "./app/**/*.html",
             "./app/**/*.css",
         ],
