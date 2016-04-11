@@ -2,21 +2,23 @@
     <h1>Recent Calibrations</h1>
     <hr/>
 
-    <form action="" id="filterForm" method="post" role="form">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                <div class="form-group">
-                    <label for="depotName">Filter by depot name</label>
-                    <select id="depotName" name="depotName" class="form-control" #depotName (change)="setDepotName(depotName.value)" [(ngModel)]="selectedDepotName">
-                        <option *ngFor="#item of _depotNames">{{item}}</option>
-                    </select>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group">
+                <label for="depotName">Filter by depot name</label>
+                <div class="input-group search">
+                    <input type="text" class="form-control" id="depotName" (blur)="search()" [(ngModel)]="_filterValue" placeholder="Search by depot name..." required>
+                    <div class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-6" *ngIf="!_isRequesting">
-                <pagination-controls class="text-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+                <wc-button [isDisabled]="_isSearching" (click)="search()" [style]="'btn btn-primary'" [label]="'Search'" [workingLabel]="'Searching...'"></wc-button>
             </div>
         </div>
-    </form>
+        <div class="col-xs-12 text-right">
+            <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+        </div>
+    </div>
     <hr/>
 
     <div class="table-responsive">
@@ -34,13 +36,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="_isRequesting">
-                    <td colspan="8">
-                        <spinner [isRunning]="_isRequesting"></spinner>
-                    </td>
-                </tr>
-                <tr *ngFor="#recentCalibration of _recentCalibrations | depotname : selectedDepotName | paginate: { itemsPerPage: 10, currentPage: p }"
-                class="pointer" (click)="downloadCertificate($event, recentCalibration)">
+                <tr *ngFor="#recentCalibration of _recentCalibrations | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: _page, totalItems: _total }" class="pointer"
+                (click)="downloadCertificate($event, recentCalibration)">
                     <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" />                        </td>
                     <td>{{recentCalibration.companyName}}</td>
                     <td>{{recentCalibration.documentType}}</td>

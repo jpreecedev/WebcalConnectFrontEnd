@@ -13,8 +13,8 @@ export class RecentCalibrationsService {
 
     }
 
-    getRecent(): Observable<Response> {
-        return this._httpService.get(`${AppSettings.API_ENDPOINT}/recentcalibrations/`);
+    getRecent(pageIndex: number, pageSize: number, filter: string): Observable<Response> {
+        return this._httpService.get(`${AppSettings.API_ENDPOINT}/recentcalibrations/${pageIndex}/${pageSize}/${filter ? filter : ""}`);
     }
 
     downloadCertificate(id: Number, documentType: string): void {

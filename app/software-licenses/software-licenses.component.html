@@ -20,10 +20,6 @@
                     <div class="col-xs-12 col-md-10">
                         <input type="text" class="form-control" id="newClientName" [(ngModel)]="_newClientName" placeholder="New Client Name" required>
                     </div>
-                    <div class="col-xs-12 col-md-2">
-                        <wc-button [isDisabled]="_isAdding" (click)="addClient(_newClientName)" [style]="'btn btn-primary'" [label]="'Add Client'"
-                        [workingLabel]="'Adding Client...'"></wc-button>
-                    </div>
                 </div>
             </div>
         </div>

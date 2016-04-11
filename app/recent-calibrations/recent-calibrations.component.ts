@@ -8,8 +8,10 @@ import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagina
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
 import {ShowMessage, ShowError, ShowDialog} from "../utilities/messageBox";
+import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
+import "rxjs/add/operator/catch";
 
 export interface RecentCalibration {
     companyName: string;
@@ -28,53 +30,52 @@ export interface RecentCalibration {
     templateUrl: "app/recent-calibrations/recent-calibrations.component.html",
     styleUrls: ["app/recent-calibrations/styles.css"],
     providers: [RecentCalibrationsService, HttpService, PaginationService],
-    pipes: [PaginatePipe, DepotNamePipe],
+    pipes: [PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent]
 })
 export class RecentCalibrationsComponent implements OnInit {
 
-    public selectedDepotName: string;
-
-    private _recentCalibrations: RecentCalibration[];
-    private _depotNames: string[];
+    private _recentCalibrations: Observable<RecentCalibration[]>;
+    private _data: RecentCalibration[];
     private _isRequesting: boolean;
-    private _page: number = 1;
     private _isDownloading: boolean = false;
     private _isEmailing: boolean = false;
+
+    private _filterValue: string;
+    private _isSearching: boolean = false;
+    private _page: number = 1;
+    private _total: number = 0;
 
     constructor(private _service: RecentCalibrationsService) {
 
     }
 
     ngOnInit(): void {
-        this._isRequesting = true;
-        this._service.getRecent().subscribe((response: Response) => {
-            this._recentCalibrations = response.json();
-            this._depotNames = this.getDepotNames();
-            this._depotNames.unshift("- All -");            
-            this.selectedDepotName = "- All -";
-        },
-        (error: any) => {
-            ShowError("Unable to get list of recent calibrations, please try again later.", error);
-            this._isRequesting = false;
-        },
-        () => {
-            this._isRequesting = false;
-        });
+        this.getPage(1);
     }
 
-    getDepotNames(): string[] {
-        if (!this._recentCalibrations) {
-            return;
-        }
-        var depotNames: Array<string> = new Array<string>();
-        for (var index: number = 0; index < this._recentCalibrations.length; index++) {
-            var element: RecentCalibration = this._recentCalibrations[index];
-            if (element.depotName && depotNames.indexOf(element.depotName) === -1) {
-                depotNames.push(element.depotName);
-            }
-        }
-        return depotNames;
+    search() {
+        this._isSearching = true;
+        this.getPage(1);
+    }
+
+    getPage(page: number) {
+        this._isRequesting = true;
+        this._recentCalibrations = this._service.getRecent(page, 20, this._filterValue)
+        .do((response: Response) => {
+            this._total = response.json().total;
+            this._data = response.json().data;
+            this._page = page;
+            this._isRequesting = false;
+            this._isSearching = false;
+        })
+        .map((response: Response) => response.json().data)
+        .catch((error: any) => {
+            ShowError("Unable to get list of recent calibrations, please try again later.", error);
+            this._isRequesting = false;
+            this._isSearching = false;
+            return null;
+        });
     }
 
     downloadCertificate($event: Event, selectedCalibration: RecentCalibration): void {
@@ -104,7 +105,7 @@ export class RecentCalibrationsComponent implements OnInit {
     downloadGridData(): void {
         this._isDownloading = true;
         var csvHelper: CsvHelper = new CsvHelper();
-        csvHelper.download(this.getGridData(), this._page, this.selectGridData);
+        csvHelper.download(this._data, this._page, this.selectGridData);
         this._isDownloading = false;
     }
 
@@ -114,7 +115,7 @@ export class RecentCalibrationsComponent implements OnInit {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this._isEmailing = true;
-                $this._service.emailGridData(email, $this.getGridData()).subscribe();
+                $this._service.emailGridData(email, $this._data).subscribe();
                 ShowMessage("Your email has been sent.");
             }
             $this._isEmailing = false;
@@ -123,20 +124,6 @@ export class RecentCalibrationsComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
-    }
-    
-    setDepotName(depotName: string){
-        this.selectedDepotName = depotName;
-    }
-
-    private getGridData(): RecentCalibration[] {
-        return this._recentCalibrations.filter((item: RecentCalibration) => {
-            if (!this.selectedDepotName) {
-                return true;
-            }
-            return item.depotName === this.selectedDepotName;
-        })
-        .slice((this._page - 1) * 10, ((this._page - 1) * 10) + 10);
     }
 
     private selectGridData(item: RecentCalibration): Array<any> {
