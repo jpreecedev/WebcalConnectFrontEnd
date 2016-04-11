@@ -19,24 +19,19 @@ gulp.task("app-css", ["fonts"], function() {
     return gulp.src(config.scss, { base: "./" })
         .pipe($.sass())
         .pipe($.autoprefixer({ browsers: ["last 2 versions", "> 5%"] }))
-        .pipe(gulp.dest(config.dist))
         .pipe(gulp.dest("."));
 });
 
 gulp.task("app-js", ["app-css"], function(){
     return gulp.src(config.tsSource, { base: "./" })
+        .pipe($.inlineNg2Template({ target: 'es5' }))
         .pipe($.typescript($.typescript.createProject('tsconfig.json')))
         .pipe(gulp.dest(config.dist))
         .pipe(gulp.dest("."));
 });
 
-gulp.task("app-root", ["app-js"], function() {
+gulp.task("app", ["app-js"], function() {
     return gulp.src(config.rootFiles, { base: "./" })
-        .pipe(gulp.dest(config.dist))
-});
-
-gulp.task("app", ["app-root"], function() {
-    return gulp.src(config.appSource, { base: "./" })
         .pipe(gulp.dest(config.dist))
 });
 
