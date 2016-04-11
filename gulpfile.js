@@ -38,10 +38,19 @@ gulp.task("app", ["app-root"], function() {
 });
 
 gulp.task("inject", ["app"], function() {
-    var target = gulp.src('./index.html');
-    var sources = gulp.src([].concat(config.libJs, config.libCss), { read: false });
+    var es = require("event-stream");
+    
+    var js = gulp.src(config.libJs)
+        .pipe($.concat("lib.min.js"))
+        .pipe(gulp.dest(config.dist));
+        
+    var css = gulp.src(config.libCss)
+        .pipe($.minifyCss())
+        .pipe($.concat("lib.min.css"))
+        .pipe(gulp.dest(config.dist));
 
-    return target.pipe($.inject(sources, { ignorePath: "/wwwroot"}))
+    return gulp.src("./index.html")
+        .pipe($.inject(es.merge(js, css), { ignorePath: "/wwwroot" }))
         .pipe(gulp.dest(config.dist));
 });
 

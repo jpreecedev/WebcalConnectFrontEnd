@@ -2,6 +2,7 @@ module.exports = function() {
     var config = {
         temp: '.tmp/',
         tsSource: ["./app/**/*.ts"],
+        jsSource: "./app/**/*.js",
         appSource: [
             "./app/**/*.js",
             "./app/**/*.html",
@@ -34,10 +35,13 @@ module.exports = function() {
         libCss: [
             "node_modules/bootstrap/dist/css/bootstrap.min.css",
             "node_modules/font-awesome/css/font-awesome.css",
-            "node_modules/font-awesome/fonts/**/*.*",
             "css/site.css"
         ],
+        fonts: [
+            "node_modules/font-awesome/fonts/**/*.*",
+        ],
         dist: "./wwwroot",
+        libJsDist: "./wwwroot/lib.js",
         app: "./app"
     };
     return config;
