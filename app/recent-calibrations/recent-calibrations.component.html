@@ -7,7 +7,8 @@
             <div class="form-group">
                 <label for="depotName">Filter by depot name</label>
                 <div class="input-group search">
-                    <input type="text" class="form-control" id="depotName" (blur)="search()" [(ngModel)]="_filterValue" placeholder="Search by depot name..." required>
+                    <input type="text" class="form-control" id="depotName" (blur)="search()" [(ngModel)]="_filterValue" placeholder="Search by depot name..."
+                    required>
                     <div class="input-group-addon">
                         <i class="fa fa-search"></i>
                     </div>
@@ -36,8 +37,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="#recentCalibration of _recentCalibrations | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: _page, totalItems: _total }" class="pointer"
-                (click)="downloadCertificate($event, recentCalibration)">
+                <tr *ngIf="_isRequesting">
+                    <td colspan="8" class="text-center">
+                        <spinner [isRunning]="_isRequesting"></spinner>
+                    </td>
+                </tr>
+                <tr *ngFor="#recentCalibration of _recentCalibrations | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: _page, totalItems: _total }"
+                class="pointer" (click)="downloadCertificate($event, recentCalibration)">
                     <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" />                        </td>
                     <td>{{recentCalibration.companyName}}</td>
                     <td>{{recentCalibration.documentType}}</td>

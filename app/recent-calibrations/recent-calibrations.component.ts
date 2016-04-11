@@ -55,6 +55,10 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     search() {
+        if (!this._filterValue){
+            return;
+        }
+        
         this._isSearching = true;
         this.getPage(1);
     }
