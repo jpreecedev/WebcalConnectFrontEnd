@@ -47,6 +47,8 @@ gulp.task("inject", ["app"], function() {
 
     return gulp.src("./index.html")
         .pipe($.inject(es.merge(js, css), { ignorePath: "/wwwroot" }))
+        .pipe($.stripComments())
+        .pipe($.htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(config.dist));
 });
 
