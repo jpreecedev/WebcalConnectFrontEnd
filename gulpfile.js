@@ -25,8 +25,9 @@ gulp.task("app-css", ["fonts"], function() {
 
 gulp.task("app-js", ["app-css"], function(){
     return gulp.src(config.tsSource, { base: "./" })
-        .pipe($.typescript())
+        .pipe($.typescript($.typescript.createProject('tsconfig.json')))
         .pipe(gulp.dest(config.dist))
+        .pipe(gulp.dest("."));
 });
 
 gulp.task("app-root", ["app-js"], function() {
