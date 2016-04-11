@@ -42,6 +42,7 @@ module.exports = function() {
         ],
         dist: "./wwwroot",
         libJsDist: "./wwwroot/lib.js",
+        fontsDist: "./wwwroot/fonts/",
         app: "./app"
     };
     return config;

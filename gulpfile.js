@@ -9,22 +9,18 @@ gulp.task("clean", function() {
         .pipe($.clean());
 });
 
-gulp.task("lib-css", ["clean"], function() {
-    return gulp.src(config.libCss, { base: "./" })
-        .pipe(gulp.dest(config.dist))
+gulp.task("fonts", ["clean"], function(){
+    return gulp.src(config.fonts, { base: "./" })
+        .pipe($.flatten())
+        .pipe(gulp.dest(config.fontsDist));
 });
 
-gulp.task("lib-js", ["lib-css"], function() {
-    return gulp.src(config.libJs, { base: "./" })
-        .pipe(gulp.dest(config.dist))
-})
-
-gulp.task("app-css", ["lib-js"], function() {
+gulp.task("app-css", ["fonts"], function() {
     return gulp.src(config.scss, { base: "./" })
         .pipe($.sass())
         .pipe($.autoprefixer({ browsers: ["last 2 versions", "> 5%"] }))
-        .pipe(gulp.dest("."))
-        .pipe(gulp.dest(config.dist));
+        .pipe(gulp.dest(config.dist))
+        .pipe(gulp.dest("."));
 });
 
 gulp.task("app-root", ["app-css"], function() {
@@ -54,8 +50,4 @@ gulp.task("inject", ["app"], function() {
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task("dist", ["inject"], function() {
-
-});
-
-gulp.task("default", ["dist"]);
+gulp.task("default", ["inject"]);
