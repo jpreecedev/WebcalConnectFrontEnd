@@ -13,8 +13,12 @@ export class RecentCalibrationsService {
 
     }
 
-    getRecent(pageIndex: number, pageSize: number, filter: string): Observable<Response> {
-        return this._httpService.get(`${AppSettings.API_ENDPOINT}/recentcalibrations/${pageIndex}/${pageSize}/${filter ? filter : ""}`);
+    getRecent(from: string, to: string, filter: string): Observable<Response> {
+        if (filter === "- All -"){
+            filter = null;
+        }
+        
+        return this._httpService.get(`${AppSettings.API_ENDPOINT}/recentcalibrations/${from}/${to}/${filter ? filter : ""}`);
     }
 
     downloadCertificate(id: Number, documentType: string): void {

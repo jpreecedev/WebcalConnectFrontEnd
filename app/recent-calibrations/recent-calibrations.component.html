@@ -2,24 +2,42 @@
     <h1>Recent Calibrations</h1>
     <hr/>
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
-            <div class="form-group">
-                <label for="depotName">Filter by depot name</label>
-                <div class="input-group search">
-                    <input type="text" class="form-control" id="depotName" (blur)="search()" [(ngModel)]="_filterValue" placeholder="Search by depot name..."
-                    required>
-                    <div class="input-group-addon">
-                        <i class="fa fa-search"></i>
-                    </div>
+    <form role="form">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    <label for="depotName">Filter by depot name</label>
+                    <select id="depotName" name="depotName" class="form-control" [(ngModel)]="selectedDepotName" required>
+                        <option *ngFor="#item of _depotNames">{{item}}</option>
+                    </select>
                 </div>
-                <wc-button [isDisabled]="_isSearching" (click)="search()" [style]="'btn btn-primary'" [label]="'Search'" [workingLabel]="'Searching...'"></wc-button>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    <label for="from">From</label>
+                    <input type="date" class="form-control" id="from" [(ngModel)]="from" required>
+                    <span class="form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="form-group">
+                    <label for="to">To</label>
+                    <input type="date" class="form-control" id="to" [(ngModel)]="to" required>
+                    <span class="form-control-feedback"></span>
+                </div>
             </div>
         </div>
-        <div class="col-xs-12 text-right">
-            <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+        <div class="row">
+            <div class="col-xs-12">
+                <wc-button [isDisabled]="_isRequesting" (click)="search()" [style]="'btn btn-primary'" [label]="'Search'" [workingLabel]="'Searching...'"></wc-button>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-xs-12 text-right" *ngIf="!_isRequesting">
+                <pagination-controls class="text-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+            </div>
+        </div>
+    </form>
     <hr/>
 
     <div class="table-responsive">
@@ -42,9 +60,11 @@
                         <spinner [isRunning]="_isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="#recentCalibration of _recentCalibrations | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: _page, totalItems: _total }"
+                <tr *ngFor="#recentCalibration of _recentCalibrations | paginate: { itemsPerPage: 10, currentPage: _page, totalItems: _total }"
                 class="pointer" (click)="downloadCertificate($event, recentCalibration)">
-                    <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" />                        </td>
+                    <td>
+                        <img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" />
+                    </td>
                     <td>{{recentCalibration.companyName}}</td>
                     <td>{{recentCalibration.documentType}}</td>
                     <td>{{asDate(recentCalibration.expiration) | date}}</td>
