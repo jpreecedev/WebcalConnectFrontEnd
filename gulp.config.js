@@ -8,7 +8,9 @@ module.exports = function() {
         rootFiles: [
             "favicon.ico",
             "index.html",
-            "./img/*.png"
+        ],
+        images: [
+            "./img/*.png"            
         ],
         scss: [
             './css/site.scss',
