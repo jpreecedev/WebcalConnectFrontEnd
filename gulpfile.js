@@ -54,8 +54,7 @@ gulp.task("inject", ["app"], function () {
     var es = require("event-stream");
 
     var js = gulp.src(config.libJs)
-        .pipe($.concat("lib.min.js"))
-        .pipe(gulp.dest(config.dist));
+        .pipe(gulp.dest(config.dist + "/js"));
 
     var css = gulp.src(config.libCss)
         .pipe($.minifyCss())
