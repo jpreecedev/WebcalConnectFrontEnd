@@ -13,7 +13,6 @@ import {CentreCheckComponent} from "./centre-check/centre-check.component";
 import {RegisterUserComponent} from "./register-user/register-user.component";
 import {ManageAccessComponent} from "./manage-access/manage-access.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
-import {ConfirmAccountComponent} from "./confirm-account/confirm-account.component";
 
 import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
 import {JwtHelper} from "./utilities/JwtHelper";
@@ -46,8 +45,7 @@ export var Routes: Route[] = [
     { path: "/centre-check", name: "CentreCheck", role: "TachographCentre", component: CentreCheckComponent },
     { path: "/register-user", name: "RegisterUser", role: "Administrator", component: RegisterUserComponent },
     { path: "/manage-access", name: "ManageAccess", role: "Administrator", component: ManageAccessComponent },
-    { path: "/software-licenses", name: "SoftwareLicenses", role: "Administrator", component: SoftwareLicensesComponent },
-    { path: "/confirm-account/:userId/:code", name: "ConfirmAccount", role: "", component: ConfirmAccountComponent },
+    { path: "/software-licenses", name: "SoftwareLicenses", role: "Administrator", component: SoftwareLicensesComponent }
 ];
 
 @Component({

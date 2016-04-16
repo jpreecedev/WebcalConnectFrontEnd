@@ -11,6 +11,7 @@ export interface UserRegistration {
     companyName: string;
     expiration: string;
     licenseKey: string;
+    password: string;
 }
 
 @Component({
@@ -23,6 +24,8 @@ export class RegisterUserComponent {
 
     private _userRegistration: UserRegistration;
     private _isRequesting: boolean = false;
+    private _validationErrors: string;
+    private _confirmPassword: string;
 
     constructor(private _router: Router, private _service: RegisterUserService) {
         this.resetForm();
@@ -35,18 +38,38 @@ export class RegisterUserComponent {
     }
 
     submit(): void {
+        if (!this.validateForm()) {
+            return;
+        }
+
         this._isRequesting = true;
         this._service.registerUser(this._userRegistration).subscribe(() => {
             this.resetForm();
             ShowMessage("The user was registered successfully");
-        }, 
+        },
         (error: any) => {
             this._isRequesting = false;
             ShowError("Unable to register user, please try again later.", error);;
-        }, 
+        },
         () => {
             this._isRequesting = false;
         });
+    }
+
+    validateForm(): boolean {
+        this._validationErrors = "";
+
+        if (!this._userRegistration.password || this._userRegistration.password.length < 6) {
+            this._validationErrors = "Password is too short<br/>";
+        }
+        if (!this._confirmPassword || this._confirmPassword.length < 6) {
+            this._validationErrors += "Confirm password is too short<br/>";
+        }
+        if (this._userRegistration.password !== this._confirmPassword) {
+            this._validationErrors += "Passwords do not match<br/>"
+        }
+
+        return !this._validationErrors;
     }
 
     cancel(): void {
@@ -58,8 +81,11 @@ export class RegisterUserComponent {
             emailAddress: "",
             companyName: "",
             expiration: "",
-            licenseKey: ""
+            licenseKey: "",
+            password: ""
         };
+        
+        this._confirmPassword = "";
     }
 
 }
