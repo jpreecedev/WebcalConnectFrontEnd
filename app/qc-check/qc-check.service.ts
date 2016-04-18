@@ -3,7 +3,7 @@ import {Response} from "angular2/http";
 import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
 import {AppSettings} from "../app.settings";
-import {ShowError} from "../utilities/messageBox";
+import {ShowError, ShowMessage} from "../utilities/messageBox";
 
 @Injectable()
 export class QCCheckService {
@@ -25,7 +25,12 @@ export class QCCheckService {
                     window.navigator.msSaveOrOpenBlob(blobObject, "document.pdf");
                 }
                 else {
-                    window.open("data:application/pdf;base64," + encodeURIComponent(response.text()));
+                    var popup = window.open("data:application/pdf;base64," + encodeURIComponent(response.text()));
+                    setTimeout(function () {
+                        if (!popup || popup.outerHeight === 0) {
+                            ShowMessage("Your web browser might be blocking popups from opening on this page, please add this site to your exception list.");
+                        }
+                    }, 25);
                 }
             },
             (error: any) => {
