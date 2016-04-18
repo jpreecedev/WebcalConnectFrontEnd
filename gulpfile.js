@@ -57,7 +57,7 @@ gulp.task("inject", ["app"], function () {
         .pipe(gulp.dest(config.dist + "/js"));
 
     var css = gulp.src(config.libCss)
-        .pipe($.minifyCss())
+        .pipe($.cleanCss({compatibility: 'ie8'}))
         .pipe($.concat("lib.min.css"))
         .pipe(gulp.dest(config.dist));
 
