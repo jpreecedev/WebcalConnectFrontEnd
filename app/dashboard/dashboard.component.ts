@@ -32,12 +32,6 @@ export class DashboardComponent implements OnInit {
                 <MenuItem>{ icon: "fa-at", routerLink: "RegisterUser", text: "Register User" }
             ]);
         }
-        
-        this._dashboardItems.push(...[
-            <MenuItem>{ icon: "fa-briefcase", routerLink: "DeskBasedAssessment", text: "Desk Based Assessment" },
-            <MenuItem>{ icon: "fa-download", routerLink: "DownloadedData", text: "Downloaded Data" },
-            <MenuItem>{ icon: "fa-cog", routerLink: "EquipmentCertificates", text: "Equipment Certificates" }
-        ]);
     }
 
     navigate(dashboardItem: MenuItem): void {
