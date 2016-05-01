@@ -30,24 +30,24 @@ export class QCCheckComponent implements OnInit {
 
     public selectedDepotName: string;
 
-    private _qcChecks: QCCheck[];
-    private _isRequesting: boolean;
+    private qcChecks: QCCheck[];
+    private isRequesting: boolean;
 
-    constructor(private _service: QCCheckService, private _http: Http) {
+    constructor(private service: QCCheckService, private http: Http) {
 
     }
 
     ngOnInit(): void {
-        this._isRequesting = true;
-        this._service.getQCChecks().subscribe((response: Response) => {
-            this._qcChecks = response.json();
+        this.isRequesting = true;
+        this.service.getQCChecks().subscribe((response: Response) => {
+            this.qcChecks = response.json();
         },
         (error: any) =>{
             ShowError("Unable to get a list of QC checks, please try again later.", error);
-            this._isRequesting = false;            
+            this.isRequesting = false;            
         },
         () => {
-            this._isRequesting = false;            
+            this.isRequesting = false;            
         });
     }
 
@@ -56,7 +56,7 @@ export class QCCheckComponent implements OnInit {
             return;
         }
 
-        this._service.downloadPdf(selectedQCCheck.documentId, selectedQCCheck.documentTypeEnum);
+        this.service.downloadPdf(selectedQCCheck.documentId, selectedQCCheck.documentTypeEnum);
     }
 
     asDate(input: string): Date {

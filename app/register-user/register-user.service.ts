@@ -8,16 +8,16 @@ import {UserRegistration} from "./register-user.component";
 @Injectable()
 export class RegisterUserService {
 
-    constructor(private _httpService: HttpService) {
+    constructor(private httpService: HttpService) {
 
     }
 
     getLicenseKey(expiration: string): Observable<Response> {
-        return this._httpService.get(`${AppSettings.API_ENDPOINT}/licenses/license/${expiration}`);
+        return this.httpService.get(`${AppSettings.API_ENDPOINT}/licenses/license/${expiration}`);
     }
 
     registerUser(userRegistration: UserRegistration): Observable<Response> {
-        return this._httpService.post(`${AppSettings.API_ENDPOINT}/registeruser/`, JSON.stringify(userRegistration));
+        return this.httpService.post(`${AppSettings.API_ENDPOINT}/registeruser/`, JSON.stringify(userRegistration));
     }
 
 }

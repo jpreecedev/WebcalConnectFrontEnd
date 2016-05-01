@@ -15,7 +15,7 @@ export interface PagedResponse<T> {
 @Injectable()
 export class HttpService {
 
-    constructor(private _http: Http, private _jwtHelper: JwtHelper) {
+    constructor(private http: Http, private jwtHelper: JwtHelper) {
 
     }
 
@@ -40,7 +40,7 @@ export class HttpService {
 
         return this._request({ url: `${AppSettings.SERVER_ADDRESS}/oauth2/token`, body: creds, method: RequestMethod.Post, headers: this.getRequestHeaders(true) })
             .do((response: Response) => {
-                this._jwtHelper.setToken(response.json(), rememberMe);
+                this.jwtHelper.setToken(response.json(), rememberMe);
             })
             .map((res: Response) => {
                 if (res.status === 200) {
@@ -59,7 +59,7 @@ export class HttpService {
         } else {
             headers.append("Content-Type", "application/json");
 
-            var token: IJwt = this._jwtHelper.getToken();
+            var token: IJwt = this.jwtHelper.getToken();
             if (token && token.access_token) {
                 headers.append("Authorization", "Bearer " + token.access_token);
             }
@@ -75,6 +75,6 @@ export class HttpService {
     }
 
     private _request(options: RequestOptionsArgs): Observable<Response> {
-        return this._http.request(options.url, options);
+        return this.http.request(options.url, options);
     }
 }

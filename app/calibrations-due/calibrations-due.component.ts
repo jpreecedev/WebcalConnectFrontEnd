@@ -30,28 +30,29 @@ export interface CalibrationDue {
 })
 export class CalibrationsDueComponent implements OnInit {
 
-    private _selectedDepotName: string;
-    private _calibrationsDue: CalibrationDue[];
-    private _depotNames: string[];
-    private _isRequesting: boolean;
+    private selectedDepotName: string;
+    private depotNames: string[];
+    private isRequesting: boolean;
 
-    constructor(private _service: CalibrationsDueService, private _http: Http) {
+    calibrationsDue: CalibrationDue[];
+
+    constructor(private service: CalibrationsDueService, private http: Http) {
     }
 
     ngOnInit(): void {
-        this._isRequesting = true;
-        this._service.getCalibrationsDue().subscribe((response: Response) => {
-            this._calibrationsDue = response.json();
-            this._depotNames = this.getDepotNames();
-            this._depotNames.unshift("- All -");
-            this._selectedDepotName = "- All -";
+        this.isRequesting = true;
+        this.service.getCalibrationsDue().subscribe((response: Response) => {
+            this.calibrationsDue = response.json();
+            this.depotNames = this.getDepotNames();
+            this.depotNames.unshift("- All -");
+            this.selectedDepotName = "- All -";
         },
         (error: any) => {
-            this._isRequesting = false;
+            this.isRequesting = false;
             ShowError("Unable to get list of calibrations due, please try again later.", error);
         },
         () => {
-            this._isRequesting = false;            
+            this.isRequesting = false;
         });
     }
 
@@ -60,16 +61,16 @@ export class CalibrationsDueComponent implements OnInit {
             return;
         }
 
-        this._service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
+        this.service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
     }
 
     getDepotNames(): string[] {
-        if (!this._calibrationsDue) {
+        if (!this.calibrationsDue) {
             return;
         }
         var depotNames: Array<string> = new Array<string>();
-        for (var index: number = 0; index < this._calibrationsDue.length; index++) {
-            var element: CalibrationDue = this._calibrationsDue[index];
+        for (var index: number = 0; index < this.calibrationsDue.length; index++) {
+            var element: CalibrationDue = this.calibrationsDue[index];
             if (element.depotName && depotNames.indexOf(element.depotName) === -1) {
                 depotNames.push(element.depotName);
             }

@@ -22,18 +22,18 @@ export interface UserRegistration {
 })
 export class RegisterUserComponent {
 
-    private _userRegistration: UserRegistration;
-    private _isRequesting: boolean = false;
-    private _validationErrors: string;
-    private _confirmPassword: string;
+    private userRegistration: UserRegistration;
+    private isRequesting: boolean = false;
+    private validationErrors: string;
+    private confirmPassword: string;
 
-    constructor(private _router: Router, private _service: RegisterUserService) {
+    constructor(private router: Router, private service: RegisterUserService) {
         this.resetForm();
     }
 
     getLicenseKey(expiration: string): void {
-        this._service.getLicenseKey(expiration).subscribe((response: Response) => {
-            this._userRegistration.licenseKey = response.json().key;
+        this.service.getLicenseKey(expiration).subscribe((response: Response) => {
+            this.userRegistration.licenseKey = response.json().key;
         });
     }
 
@@ -42,42 +42,42 @@ export class RegisterUserComponent {
             return;
         }
 
-        this._isRequesting = true;
-        this._service.registerUser(this._userRegistration).subscribe(() => {
+        this.isRequesting = true;
+        this.service.registerUser(this.userRegistration).subscribe(() => {
             this.resetForm();
             ShowMessage("The user was registered successfully");
         },
         (error: any) => {
-            this._isRequesting = false;
+            this.isRequesting = false;
             ShowError("Unable to register user, please try again later.", error);;
         },
         () => {
-            this._isRequesting = false;
+            this.isRequesting = false;
         });
     }
 
     validateForm(): boolean {
-        this._validationErrors = "";
+        this.validationErrors = "";
 
-        if (!this._userRegistration.password || this._userRegistration.password.length < 6) {
-            this._validationErrors = "Password is too short<br/>";
+        if (!this.userRegistration.password || this.userRegistration.password.length < 6) {
+            this.validationErrors = "Password is too short<br/>";
         }
-        if (!this._confirmPassword || this._confirmPassword.length < 6) {
-            this._validationErrors += "Confirm password is too short<br/>";
+        if (!this.confirmPassword || this.confirmPassword.length < 6) {
+            this.validationErrors += "Confirm password is too short<br/>";
         }
-        if (this._userRegistration.password !== this._confirmPassword) {
-            this._validationErrors += "Passwords do not match<br/>"
+        if (this.userRegistration.password !== this.confirmPassword) {
+            this.validationErrors += "Passwords do not match<br/>"
         }
 
-        return !this._validationErrors;
+        return !this.validationErrors;
     }
 
     cancel(): void {
-        this._router.parent.navigate(["Dashboard"]);
+        this.router.parent.navigate(["Dashboard"]);
     }
 
     resetForm(): void {
-        this._userRegistration = {
+        this.userRegistration = {
             emailAddress: "",
             companyName: "",
             expiration: "",
@@ -85,7 +85,7 @@ export class RegisterUserComponent {
             password: ""
         };
         
-        this._confirmPassword = "";
+        this.confirmPassword = "";
     }
 
 }

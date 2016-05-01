@@ -8,34 +8,34 @@ import {AppSettings} from "../app.settings";
 @Injectable()
 export class SoftwareLicensesService {
 
-    constructor(private _httpService: HttpService) {
+    constructor(private httpService: HttpService) {
 
     }
 
     addClient(clientName: string): Observable<Client> {
-        return this._httpService.post(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ "name": clientName }))
+        return this.httpService.post(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ "name": clientName }))
             .map((response: Response) => {
                 return response.json();
             });
     }
 
     addLicense(accessId: string, expiration: string): Observable<License> {
-        return this._httpService.post(`${AppSettings.API_ENDPOINT}/licenses/license`, JSON.stringify({ accessId: accessId, expiration: expiration }))
+        return this.httpService.post(`${AppSettings.API_ENDPOINT}/licenses/license`, JSON.stringify({ accessId: accessId, expiration: expiration }))
             .map((response: Response) => {
                 return response.json();
             });
     }
     
     deleteClient(client: Client):Observable<Response>{
-        return this._httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ clientAccessId: client.accessId }));
+        return this.httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ clientAccessId: client.accessId }));
     }
     
     deleteLicense(client: Client, license: License):Observable<Response>{
-        return this._httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/license`, JSON.stringify({ clientAccessId: client.accessId, licenseAccessId: license.accessId }));
+        return this.httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/license`, JSON.stringify({ clientAccessId: client.accessId, licenseAccessId: license.accessId }));
     }
 
     getClients(): Observable<Client[]> {
-        return this._httpService.get(`${AppSettings.API_ENDPOINT}/licenses/clients`)
+        return this.httpService.get(`${AppSettings.API_ENDPOINT}/licenses/clients`)
             .map((response: Response) => {
                 return response.json();
             });

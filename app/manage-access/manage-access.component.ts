@@ -23,61 +23,61 @@ export interface ManageAccessSite {
 })
 export class ManageAccessComponent implements OnInit {
 
-    private _isRequesting: boolean;
-    private _isUpdating: boolean;
-    private _users: ManageAccessUser[];
-    private _connectedSites: ManageAccessSite[];
-    private _selectedSiteId: number;
+    private isRequesting: boolean;
+    private isUpdating: boolean;
+    private users: ManageAccessUser[];
+    private connectedSites: ManageAccessSite[];
+    private selectedSiteId: number;
 
-    constructor(private _service: ManageAccessService) {
+    constructor(private service: ManageAccessService) {
     }
 
     ngOnInit(): void {
-        this._isRequesting = true;
-        this._service.getUsers().subscribe((data: ManageAccessUser[]) => {
-            this._users = data;
-            this._selectedSiteId = this._users[0].id;
-            this.getConnectedSites(this._selectedSiteId);
+        this.isRequesting = true;
+        this.service.getUsers().subscribe((data: ManageAccessUser[]) => {
+            this.users = data;
+            this.selectedSiteId = this.users[0].id;
+            this.getConnectedSites(this.selectedSiteId);
         },
         (error: any) => {
             ShowError("Unable to get a list of users, please try again later.", error);
-            this._isRequesting = false;
+            this.isRequesting = false;
         },
         () => {
-            this._isRequesting = false;
+            this.isRequesting = false;
         });
     }
 
     getConnectedSites(siteId: number): void {
         if (siteId < 1) {
-            this._connectedSites = undefined;
+            this.connectedSites = undefined;
             return;
         }
 
-        this._isRequesting = true;
-        this._service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) => {
-            this._connectedSites = data;
+        this.isRequesting = true;
+        this.service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) => {
+            this.connectedSites = data;
         },
         (error: any) => {
             ShowError("Unable to get a list of connected sites, please try again later.", error);
-            this._isRequesting = false;            
+            this.isRequesting = false;            
         }, 
         () => {
-            this._isRequesting = false;            
+            this.isRequesting = false;            
         });
     }
 
     toggleAccess(site: ManageAccessSite): void {
-        this._isUpdating = true;
-        this._service.toggleSite(site).subscribe(() => {
+        this.isUpdating = true;
+        this.service.toggleSite(site).subscribe(() => {
             site.isRevoked = !site.isRevoked;
         },
         (error: any) =>{
             ShowError("Unable to change the access permission for this site, please try again later.", error);
-            this._isUpdating = false;            
+            this.isUpdating = false;            
         },
         () => {
-            this._isUpdating = false;            
+            this.isUpdating = false;            
         });
     }
 

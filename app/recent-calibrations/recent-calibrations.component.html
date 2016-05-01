@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label for="depotName">Filter by depot name</label>
                     <select id="depotName" name="depotName" class="form-control" [(ngModel)]="selectedDepotName" required>
-                        <option *ngFor="#item of _depotNames">{{item}}</option>
+                        <option *ngFor="#item of depotNames">{{item}}</option>
                     </select>
                 </div>
             </div>
@@ -29,12 +29,12 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <wc-button [isDisabled]="_isRequesting" (click)="search()" [style]="'btn btn-primary'" [label]="'Search'" [workingLabel]="'Searching...'"></wc-button>
+                <wc-button [isDisabled]="isRequesting" (click)="search()" [style]="'btn btn-primary'" [label]="'Search'" [workingLabel]="'Searching...'"></wc-button>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 text-right" *ngIf="!_isRequesting">
-                <pagination-controls class="text-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+            <div class="col-xs-12 text-right" *ngIf="!isRequesting">
+                <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
             </div>
         </div>
     </form>
@@ -55,12 +55,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="_isRequesting">
+                <tr *ngIf="isRequesting">
                     <td colspan="8" class="text-center">
-                        <spinner [isRunning]="_isRequesting"></spinner>
+                        <spinner [isRunning]="isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="#recentCalibration of _recentCalibrations | paginate: { itemsPerPage: 10, currentPage: _page, totalItems: _total }"
+                <tr *ngFor="#recentCalibration of recentCalibrations | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }"
                 class="pointer" (click)="downloadCertificate($event, recentCalibration)">
                     <td>
                         <img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" />
@@ -79,8 +79,8 @@
             <tfoot>
                 <tr>
                     <td colspan="8">
-                        <wc-button [isDisabled]="_isDownloading" [label]="'Download'" [workingLabel]="'Downloading...'" (click)="downloadGridData()"></wc-button>
-                        <wc-button [isDisabled]="_isEmailing" [label]="'Email'" [workingLabel]="'Emailing...'" (click)="emailGridData()"></wc-button>
+                        <wc-button [isDisabled]="isDownloading" [label]="'Download'" [workingLabel]="'Downloading...'" (click)="downloadGridData()"></wc-button>
+                        <wc-button [isDisabled]="isEmailing" [label]="'Email'" [workingLabel]="'Emailing...'" (click)="emailGridData()"></wc-button>
                     </td>
                 </tr>
             </tfoot>

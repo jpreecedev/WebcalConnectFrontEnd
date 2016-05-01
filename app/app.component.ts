@@ -60,12 +60,12 @@ export class AppComponent {
 
     public isLoggedIn: boolean = true;
     
-    constructor(private _router: Router, private _jwtHelper: JwtHelper) {
+    constructor(private router: Router, private jwtHelper: JwtHelper) {
                 
     }
 
     logout(): void {
-        this._jwtHelper.logout();
-        this._router.navigate(["Home"]);
+        this.jwtHelper.logout();
+        this.router.navigate(["Home"]);
     }
 }

@@ -3,38 +3,38 @@
     <hr/>
     <div class="card card-container">
         <form role="form" class="form-signup" (ngSubmit)="submit()" #form="ngForm">
-            <div *ngIf="_validationErrors" [innerHtml]="_validationErrors" class="alert alert-danger"></div>
+            <div *ngIf="validationErrors" [innerHtml]="validationErrors" class="alert alert-danger"></div>
             <div class="form-group has-feedback">
                 <label for="emailAddress">Email address</label>
-                <input type="email" class="form-control" id="emailAddress" placeholder="you@example.com" [(ngModel)]="_userRegistration.emailAddress"
+                <input type="email" class="form-control" id="emailAddress" placeholder="you@example.com" [(ngModel)]="userRegistration.emailAddress"
                     ngControl="emailAddress" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
                 <span class="form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <label for="companyName">Company Name</label>
-                <input type="text" class="form-control" id="companyName" [(ngModel)]="_userRegistration.companyName" ngControl="companyName"
+                <input type="text" class="form-control" id="companyName" [(ngModel)]="userRegistration.companyName" ngControl="companyName"
                     required>
                 <span class="form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <label for="password">Enter a password</label>
-                <input type="password" class="form-control" id="password" [(ngModel)]="_userRegistration.password" required>
+                <input type="password" class="form-control" id="password" [(ngModel)]="userRegistration.password" required>
             </div>
             <div class="form-group has-feedback">
                 <label for="confirmPassword">Confirm password</label>
-                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="_confirmPassword" required>
+                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" required>
             </div>
             <div class="form-group has-feedback">
                 <label for="licenseKey">License Expiration Date</label>
-                <input type="date" class="form-control" id="licenseKey" #licenseKey (change)="getLicenseKey(licenseKey.value)" [(ngModel)]="_userRegistration.expiration"
+                <input type="date" class="form-control" id="licenseKey" #licenseKey (change)="getLicenseKey(licenseKey.value)" [(ngModel)]="userRegistration.expiration"
                     ngControl="expiration" required>
                 <span class="form-control-feedback"></span>
             </div>
-            <div class="form-group" *ngIf="_userRegistration.licenseKey">
-                <p><strong>License Key:</strong> {{_userRegistration.licenseKey}}</p>
+            <div class="form-group" *ngIf="userRegistration.licenseKey">
+                <p><strong>License Key:</strong> {{userRegistration.licenseKey}}</p>
             </div>
             <div class="two-buttons">
-                <wc-button [isDisabled]="_isRequesting" [style]="'btn btn-lg btn-primary btn-block btn-reigster'" [label]="'Register'" [workingLabel]="'Registering...'"></wc-button>
+                <wc-button [isDisabled]="isRequesting" [style]="'btn btn-lg btn-primary btn-block btn-reigster'" [label]="'Register'" [workingLabel]="'Registering...'"></wc-button>
                 <button class="btn btn-lg btn-primary btn-block" (click)="cancel()" type="button">Cancel</button>
             </div>
         </form>

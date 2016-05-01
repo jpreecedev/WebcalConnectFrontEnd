@@ -36,15 +36,15 @@ export class RecentCalibrationsComponent implements OnInit {
     public from: string;
     public to: string;
 
-    private _recentCalibrations: RecentCalibration[];
-    private _isRequesting: boolean;
-    private _isDownloading: boolean = false;
-    private _isEmailing: boolean = false;
-    private _depotNames: string[];
+    private recentCalibrations: RecentCalibration[];
+    private isRequesting: boolean;
+    private isDownloading: boolean = false;
+    private isEmailing: boolean = false;
+    private depotNames: string[];
 
-    private _page: number = 1;
+    private page: number = 1;
 
-    constructor(private _service: RecentCalibrationsService) {
+    constructor(private service: RecentCalibrationsService) {
         var d = new Date();
         d.setDate(d.getDate() - 28);
         this.from = d.toISOString().split("T")[0];
@@ -56,30 +56,30 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     search() {
-        this._isRequesting = true;
-        this._service.getRecent(this.from, this.to, this.selectedDepotName).subscribe((response: Response) => {
-            this._recentCalibrations = response.json();
-            this._depotNames = this.getDepotNames();
-            this._depotNames.unshift("- All -");
+        this.isRequesting = true;
+        this.service.getRecent(this.from, this.to, this.selectedDepotName).subscribe((response: Response) => {
+            this.recentCalibrations = response.json();
+            this.depotNames = this.getDepotNames();
+            this.depotNames.unshift("- All -");
             this.selectedDepotName = "- All -";
-            this._isRequesting = false;
+            this.isRequesting = false;
         },
         (error: any) => {
-            this._isRequesting = false;
+            this.isRequesting = false;
             ShowError("Unable to get list of recent calibrations, please try again later.", error);
         },
         () => {
-            this._isRequesting = false;
+            this.isRequesting = false;
         });
     }
 
     getDepotNames(): string[] {
-        if (!this._recentCalibrations) {
+        if (!this.recentCalibrations) {
             return;
         }
         var depotNames: Array<string> = new Array<string>();
-        for (var index: number = 0; index < this._recentCalibrations.length; index++) {
-            var element: RecentCalibration = this._recentCalibrations[index];
+        for (var index: number = 0; index < this.recentCalibrations.length; index++) {
+            var element: RecentCalibration = this.recentCalibrations[index];
             if (element.depotName && depotNames.indexOf(element.depotName) === -1) {
                 depotNames.push(element.depotName);
             }
@@ -88,13 +88,13 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     private getGridData(): RecentCalibration[] {
-        return this._recentCalibrations.filter((item: RecentCalibration) => {
+        return this.recentCalibrations.filter((item: RecentCalibration) => {
             if (!this.selectedDepotName) {
                 return true;
             }
             return this.selectedDepotName === "- All -" || item.depotName === this.selectedDepotName;
         })
-            .slice((this._page - 1) * 10, ((this._page - 1) * 10) + 10);
+            .slice((this.page - 1) * 10, ((this.page - 1) * 10) + 10);
     }
 
     downloadCertificate($event: Event, selectedCalibration: RecentCalibration): void {
@@ -102,7 +102,7 @@ export class RecentCalibrationsComponent implements OnInit {
             return;
         }
 
-        this._service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
+        this.service.downloadCertificate(selectedCalibration.documentId, selectedCalibration.documentTypeEnum);
     }
 
     emailCertificate($event: Event, selectedCalibration: RecentCalibration): void {
@@ -115,17 +115,17 @@ export class RecentCalibrationsComponent implements OnInit {
         this.showDialog(function() {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-                $this._service.emailCertificate(email, selectedCalibration).subscribe();
+                $this.service.emailCertificate(email, selectedCalibration).subscribe();
                 ShowMessage("Your email has been sent.");
             }
         });
     }
 
     downloadGridData(): void {
-        this._isDownloading = true;
+        this.isDownloading = true;
         var csvHelper: CsvHelper = new CsvHelper();
-        csvHelper.download(this.getGridData(), this._page, this.selectGridData);
-        this._isDownloading = false;
+        csvHelper.download(this.getGridData(), this.page, this.selectGridData);
+        this.isDownloading = false;
     }
 
     emailGridData(): void {
@@ -133,11 +133,11 @@ export class RecentCalibrationsComponent implements OnInit {
         this.showDialog(function() {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-                $this._isEmailing = true;
-                $this._service.emailGridData(email, $this.getGridData()).subscribe();
+                $this.isEmailing = true;
+                $this.service.emailGridData(email, $this.getGridData()).subscribe();
                 ShowMessage("Your email has been sent.");
             }
-            $this._isEmailing = false;
+            $this.isEmailing = false;
         });
     }
 

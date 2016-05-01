@@ -8,12 +8,12 @@ import {AppSettings} from "../app.settings";
 @Injectable()
 export class InspectionDataService {
 
-    constructor(private _httpService: HttpService) {
+    constructor(private httpService: HttpService) {
 
     }
 
     getVehicleInspectionData<T>(vehicleRegistration: string): Observable<T> {
-        return this._httpService.get(`${AppSettings.API_ENDPOINT}/inspectiondata/${vehicleRegistration}`)
+        return this.httpService.get(`${AppSettings.API_ENDPOINT}/inspectiondata/${vehicleRegistration}`)
             .map((res: Response) => {
                 return res.json();
             });

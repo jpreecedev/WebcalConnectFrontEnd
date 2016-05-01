@@ -38,49 +38,49 @@ export interface EmailReportData {
 })
 export class GenerateEmailComponent implements OnInit {
 
-    private _isAdministrator: boolean = false;
-    private _generateReport: GenerateReport;
-    private _clientNames: ClientName[];
-    private _selectedClientId: number;
-    private _reportType: string = "RecentCalibrations";
+    private isAdministrator: boolean = false;
+    private generateReport: GenerateReport;
+    private clientNames: ClientName[];
+    private selectedClientId: number;
+    private reportType: string = "RecentCalibrations";
 
-    private _recentCalibrations: RecentCalibration[];
-    private _calibrationsDue: CalibrationDue[];
+    private recentCalibrations: RecentCalibration[];
+    private calibrationsDue: CalibrationDue[];
 
-    private _isRequesting: boolean = false;
-    private _isUpdating: boolean = false;
-    private _isSending: boolean = false;
+    private isRequesting: boolean = false;
+    private isUpdating: boolean = false;
+    private isSending: boolean = false;
     
-    constructor(private _service: GenerateEmailService) {
-        this._isAdministrator = isAdministrator();
+    constructor(private service: GenerateEmailService) {
+        this.isAdministrator = isAdministrator();
     }
 
     ngOnInit(): void {
-        this._isRequesting = true;
-        this._service.getGenerateReportData().subscribe((response: Response) => {
-            this._generateReport = response.json();
-            this._generateReport.from = this.asDate(this._generateReport.from).toISOString().split('T')[0];
-            this._generateReport.to = this.asDate(this._generateReport.to).toISOString().split('T')[0];
-            this._clientNames = this._generateReport.clients;
-            this._selectedClientId = this._clientNames[0].id;
+        this.isRequesting = true;
+        this.service.getGenerateReportData().subscribe((response: Response) => {
+            this.generateReport = response.json();
+            this.generateReport.from = this.asDate(this.generateReport.from).toISOString().split('T')[0];
+            this.generateReport.to = this.asDate(this.generateReport.to).toISOString().split('T')[0];
+            this.clientNames = this.generateReport.clients;
+            this.selectedClientId = this.clientNames[0].id;
             this.updateReport();
         },
         (error: any) => {
             ShowError("Unable to get email report configuration, please try again later.", error);
-            this._isRequesting = false;
+            this.isRequesting = false;
         },
         () => {
-            this._isRequesting = false;
+            this.isRequesting = false;
         });
     }
 
     clearData() {
-        this._recentCalibrations = null;
-        this._calibrationsDue = null;
+        this.recentCalibrations = null;
+        this.calibrationsDue = null;
     }
 
     updateReport(): void {
-        if (this._reportType === "RecentCalibrations") {
+        if (this.reportType === "RecentCalibrations") {
             this.updateRecentReport();
         }
         else {
@@ -89,62 +89,62 @@ export class GenerateEmailComponent implements OnInit {
     }
 
     updateRecentReport() {
-        this._isUpdating = true;
+        this.isUpdating = true;
 
-        this._service.getRecentCalibrationsData(this._selectedClientId, this._generateReport.from).subscribe((response: Response) => {
+        this.service.getRecentCalibrationsData(this.selectedClientId, this.generateReport.from).subscribe((response: Response) => {
             var data = response.json();
-            this._recentCalibrations = data;
+            this.recentCalibrations = data;
         },
         (error: any) => {
             ShowError("Unable to get report data, please try again later.", error);
-            this._isUpdating = false;
+            this.isUpdating = false;
         },
         () => {
-            this._isUpdating = false;
+            this.isUpdating = false;
         });
     }
 
     updateDueReport() {
-        this._isUpdating = true;
+        this.isUpdating = true;
 
-        this._service.getCalibrationsDueData(this._selectedClientId, this._generateReport.from, this._generateReport.to).subscribe((response: Response) => {
+        this.service.getCalibrationsDueData(this.selectedClientId, this.generateReport.from, this.generateReport.to).subscribe((response: Response) => {
             var data = response.json();
-            this._calibrationsDue = data;
+            this.calibrationsDue = data;
         },
         (error: any) => {
             ShowError("Unable to get report data, please try again later.", error);
-            this._isUpdating = false;
+            this.isUpdating = false;
         },
         () => {
-            this._isUpdating = false;
+            this.isUpdating = false;
         });
     }
 
     sendEmail(): void {
         var $this: GenerateEmailComponent = this;
         var emailData = <EmailReportData>{
-            userId: this._selectedClientId,
+            userId: this.selectedClientId,
             recipient: "",
-            reportType: this._reportType,
-            from: this._generateReport.from,
-            to: this._generateReport.to
+            reportType: this.reportType,
+            from: this.generateReport.from,
+            to: this.generateReport.to
         };
 
         this.showDialog(function() {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
-                $this._isSending = true;
+                $this.isSending = true;
                 emailData.recipient = email;
 
-                $this._service.sendEmail(emailData).subscribe((response: Response) => {
+                $this.service.sendEmail(emailData).subscribe((response: Response) => {
                     ShowMessage("Your email has been sent.");
                 },
                 (error: any)=>{
                     ShowError("Unable to send email, please try again later.", error);
-                    $this._isSending = false;
+                    $this.isSending = false;
                 },
                 () => {
-                    $this._isSending = false;                    
+                    $this.isSending = false;                    
                 });
             }
         });

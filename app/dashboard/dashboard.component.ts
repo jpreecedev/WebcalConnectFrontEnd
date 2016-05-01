@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
     dashboardItems: Array<MenuItem>;
 
-    constructor(private _router: Router) {
+    constructor(private router: Router) {
     }
 
     ngOnInit(): void {
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
     }
 
     navigate(dashboardItem: MenuItem): void {
-        this._router.navigate([dashboardItem.routerLink]);
+        this.router.navigate([dashboardItem.routerLink]);
     }
 
 }

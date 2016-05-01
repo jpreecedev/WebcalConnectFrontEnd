@@ -7,22 +7,22 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     <label for="favourite">Filter by depot name</label>
-                    <select id="favourite" name="favourite" class="form-control" [(ngModel)]="_selectedDepotName">
-                        <option *ngFor="#item of _depotNames">{{item}}</option>
+                    <select id="favourite" name="favourite" class="form-control" [(ngModel)]="selectedDepotName">
+                        <option *ngFor="#item of depotNames">{{item}}</option>
                     </select>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6" *ngIf="!_isRequesting">
-                <pagination-controls class="text-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+            <div class="col-xs-12 col-sm-6" *ngIf="!isRequesting">
+                <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
             </div>
         </div>
     </form>
     <hr/>
 
-    <p class="text-center" *ngIf="!_isRequesting && (!_calibrationsDue || _calibrationsDue.length === 0)">No data to display</p>
+    <p class="text-center" *ngIf="!isRequesting && (!calibrationsDue || calibrationsDue.length === 0)">No data to display</p>
 
     <div class="table-responsive">
-        <table class="table table-striped table-hover" *ngIf="_calibrationsDue && _calibrationsDue.length > 0">
+        <table class="table table-striped table-hover" *ngIf="calibrationsDue && calibrationsDue.length > 0">
             <thead>
                 <tr>
                     <th>&nbsp;</th>
@@ -35,12 +35,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="_isRequesting">
+                <tr *ngIf="isRequesting">
                     <td colspan="8">
-                        <spinner [isRunning]="_isRequesting"></spinner>
+                        <spinner [isRunning]="isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="#calibrationDue of _calibrationsDue | depotname : _selectedDepotName | paginate: { itemsPerPage: 10, currentPage: p }"
+                <tr *ngFor="#calibrationDue of calibrationsDue | depotname : selectedDepotName | paginate: { itemsPerPage: 10, currentPage: p }"
                 class="pointer" (click)="downloadCertificate($event, calibrationDue)">
                     <td><img src="/img/{{calibrationDue.documentIcon}}.png" [attr.alt]="calibrationDue.documentType" /> </td>
                     <td>{{asDate(calibrationDue.date) | date}}</td>

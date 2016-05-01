@@ -9,7 +9,7 @@ import {ShowError, ShowMessage} from "../utilities/messageBox";
 @Injectable()
 export class RecentCalibrationsService {
 
-    constructor(private _httpService: HttpService) {
+    constructor(private httpService: HttpService) {
 
     }
 
@@ -18,12 +18,12 @@ export class RecentCalibrationsService {
             filter = null;
         }
 
-        return this._httpService.get(`${AppSettings.API_ENDPOINT}/recentcalibrations/${from}/${to}/${filter ? filter : ""}`);
+        return this.httpService.get(`${AppSettings.API_ENDPOINT}/recentcalibrations/${from}/${to}/${filter ? filter : ""}`);
     }
 
     downloadCertificate(id: Number, documentType: string): void {
 
-        this._httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
+        this.httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
             .subscribe((response: Response) => {
                 if (window.navigator.msSaveOrOpenBlob) {
                     var blobObject = new Blob([response.text()]);
@@ -45,7 +45,7 @@ export class RecentCalibrationsService {
 
     emailCertificate(recipient: string, calibration: RecentCalibration): Observable<Response> {
 
-        return this._httpService.post(`${AppSettings.API_ENDPOINT}/recentcalibrations/emailcertificate/`, JSON.stringify({
+        return this.httpService.post(`${AppSettings.API_ENDPOINT}/recentcalibrations/emailcertificate/`, JSON.stringify({
             recipient: recipient,
             documentId: calibration.documentId,
             documentType: calibration.documentTypeEnum
@@ -55,7 +55,7 @@ export class RecentCalibrationsService {
 
     emailGridData(recipient: string, calibrations: RecentCalibration[]): Observable<Response> {
 
-        return this._httpService.post(`${AppSettings.API_ENDPOINT}/recentcalibrations/email/`, JSON.stringify({
+        return this.httpService.post(`${AppSettings.API_ENDPOINT}/recentcalibrations/email/`, JSON.stringify({
             recipient: recipient,
             calibrations: calibrations
         }));

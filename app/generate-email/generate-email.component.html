@@ -2,60 +2,60 @@
     <h1>Generate Email Report</h1>
     <hr/>
     <div class="row">
-        <div class="col-xs-12 col-sm-6" *ngIf="_isAdministrator">
+        <div class="col-xs-12 col-sm-6" *ngIf="isAdministrator">
             <div class="form-group">
                 <label for="clientName">Client</label>
-                <select id="clientName" name="clientName" class="form-control" [(ngModel)]="_selectedClientId" (change)="clearData()">
-                    <option [value]="item.id" *ngFor="#item of _clientNames">{{item.name}}</option>
+                <select id="clientName" name="clientName" class="form-control" [(ngModel)]="selectedClientId" (change)="clearData()">
+                    <option [value]="item.id" *ngFor="#item of clientNames">{{item.name}}</option>
                 </select>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6" *ngIf="_isAdministrator">
+        <div class="col-xs-12 col-sm-6" *ngIf="isAdministrator">
             <div class="form-group">
                 <label for="reportType">Report Type</label>
-                <select id="reportType" name="reportType" class="form-control" [(ngModel)]="_reportType">
+                <select id="reportType" name="reportType" class="form-control" [(ngModel)]="reportType">
                     <option value="RecentCalibrations">Recent Calibrations</option>
                     <option value="CalibrationsDue">Calibrations Due</option>
                 </select>
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="_generateReport">
+    <div class="row" *ngIf="generateReport">
         <div class="col-xs-12 col-sm-6">
             <div class="form-group has-feedback">
                 <label for="from">From</label>
-                <input type="date" class="form-control" id="from" [(ngModel)]="_generateReport.from" required>
+                <input type="date" class="form-control" id="from" [(ngModel)]="generateReport.from" required>
                 <span class="form-control-feedback"></span>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6" *ngIf="_reportType === 'CalibrationsDue'">
+        <div class="col-xs-12 col-sm-6" *ngIf="reportType === 'CalibrationsDue'">
             <div class="form-group has-feedback">
                 <label for="to">To</label>
-                <input type="date" class="form-control" id="to" [(ngModel)]="_generateReport.to" required>
+                <input type="date" class="form-control" id="to" [(ngModel)]="generateReport.to" required>
                 <span class="form-control-feedback"></span>
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="!_isRequesting">
+    <div class="row" *ngIf="!isRequesting">
         <div class="col-xs-12 col-sm-6">
-            <wc-button (click)="updateReport()" [isDisabled]="_isUpdating" [label]="'Update Report'" [workingLabel]="'Updating Report...'"></wc-button>
-            <wc-button (click)="sendEmail()" [isDisabled]="_isSending" [label]="'Send Email'" [workingLabel]="'Sending Email...'"></wc-button>
+            <wc-button (click)="updateReport()" [isDisabled]="isUpdating" [label]="'Update Report'" [workingLabel]="'Updating Report...'"></wc-button>
+            <wc-button (click)="sendEmail()" [isDisabled]="isSending" [label]="'Send Email'" [workingLabel]="'Sending Email...'"></wc-button>
         </div>
     </div>
     <div class="row">
-        <spinner [isRunning]="_isRequesting || _isUpdating"></spinner>
+        <spinner [isRunning]="isRequesting || isUpdating"></spinner>
     </div>
-    <hr *ngIf="_generateReport" />
+    <hr *ngIf="generateReport" />
 
-    <div class="email-template" *ngIf="_generateReport">
+    <div class="email-template" *ngIf="generateReport">
         <div>
             <img style="max-width:200px; margin-top: -7px; margin-left: auto; margin-right: auto; display: block;" src="/img/webcal.png"
             alt="Webcal Calibration Software">
         </div>
         <div>
-            <h2>Your {{_reportType | splitByCapitals}} Report</h2>
+            <h2>Your {{reportType | splitByCapitals}} Report</h2>
             <div class="table-responsive">
-                <table class="table table-striped table-hover" *ngIf="_reportType === 'RecentCalibrations'">
+                <table class="table table-striped table-hover" *ngIf="reportType === 'RecentCalibrations'">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="#recentCalibration of _recentCalibrations">
+                        <tr *ngFor="#recentCalibration of recentCalibrations">
                             <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType"
                                 /> </td>
                             <td>{{recentCalibration.companyName}}</td>
@@ -82,7 +82,7 @@
                 </table>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped table-hover" *ngIf="_reportType === 'CalibrationsDue'">
+                <table class="table table-striped table-hover" *ngIf="reportType === 'CalibrationsDue'">
                     <thead>
                         <tr>
                             <th>&nbsp;</th>
@@ -95,7 +95,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="#calibrationDue of _calibrationsDue">
+                        <tr *ngFor="#calibrationDue of calibrationsDue">
                             <td><img src="/img/{{calibrationDue.documentIcon}}.png" [attr.alt]="calibrationDue.documentType"
                                 /> </td>
                             <td>{{asDate(calibrationDue.date) | date}}</td>

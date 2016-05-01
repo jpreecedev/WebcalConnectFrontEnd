@@ -2,8 +2,8 @@
     <h1>QC Check</h1>
     <hr/>
     <div class="row">
-        <div class="col-xs-12" *ngIf="!_isRequesting">
-            <pagination-controls class="text-right" (pageChange)="p = $event; _page = p;" #api></pagination-controls>
+        <div class="col-xs-12" *ngIf="!isRequesting">
+            <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
         </div>
     </div>
     <div class="row">
@@ -21,12 +21,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngIf="_isRequesting">
+                        <tr *ngIf="isRequesting">
                             <td colspan="6">
-                                <spinner [isRunning]="_isRequesting"></spinner>
+                                <spinner [isRunning]="isRequesting"></spinner>
                             </td>
                         </tr>
-                        <tr *ngFor="#qcCheck of _qcChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, qcCheck)">
+                        <tr *ngFor="#qcCheck of qcChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, qcCheck)">
                             <td><img src="/img/qccheck.png" alt="QC Check" /> </td>
                             <td>{{qcCheck.centreName}}</td>
                             <td>{{asDate(qcCheck.date) | date}}</td>

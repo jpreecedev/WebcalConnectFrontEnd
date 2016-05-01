@@ -29,36 +29,36 @@ export interface History {
 })
 export class InspectionDataComponent {
 
-    private _isRequesting: boolean = false;
-    private _vehicleRegistration: string;
-    private _inspectionData: InspectionData;
+    private isRequesting: boolean = false;
+    private vehicleRegistration: string;
+    private inspectionData: InspectionData;
 
-    constructor(private _service: InspectionDataService) {
+    constructor(private service: InspectionDataService) {
     }
 
     submit(): void {
-        if (!this._vehicleRegistration) {
+        if (!this.vehicleRegistration) {
             return;
         }
 
-        this._inspectionData = undefined;
-        this._isRequesting = true;
-        this._service.getVehicleInspectionData<InspectionData>(this._vehicleRegistration).subscribe((data: InspectionData) => {
-            this._inspectionData = data;
+        this.inspectionData = undefined;
+        this.isRequesting = true;
+        this.service.getVehicleInspectionData<InspectionData>(this.vehicleRegistration).subscribe((data: InspectionData) => {
+            this.inspectionData = data;
         },
         (error: any) => {
-            this._isRequesting = false;            
+            this.isRequesting = false;            
             ShowError("Unable to get vehicle inspection data, please try again later.", error);
         },
         () => {
-            this._isRequesting = false;            
+            this.isRequesting = false;            
         });
     }
 
     reset(): void {
-        this._inspectionData = undefined;
-        this._isRequesting = false;
-        this._vehicleRegistration = "";
+        this.inspectionData = undefined;
+        this.isRequesting = false;
+        this.vehicleRegistration = "";
     }
 
     asDate(input: string): Date {

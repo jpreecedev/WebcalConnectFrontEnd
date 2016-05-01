@@ -7,55 +7,55 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     <label for="vehicleRegistration">Enter a vehicle registration number</label>
-                    <input type="text" id="vehicleRegistration" name="vehicleRegistration" class="form-control" [(ngModel)]="_vehicleRegistration">
+                    <input type="text" id="vehicleRegistration" name="vehicleRegistration" class="form-control" [(ngModel)]="vehicleRegistration">
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-6">
-                <wc-button [isDisabled]="_isRequesting" [label]="'Find'" [workingLabel]="'Finding...'"></wc-button>
+                <wc-button [isDisabled]="isRequesting" [label]="'Find'" [workingLabel]="'Finding...'"></wc-button>
                 <button class="btn btn-default" type="button" (click)="reset()">Reset</button>
             </div>
         </div>
     </form>
     <hr/>
 
-    <spinner [isRunning]="_isRequesting"></spinner>
+    <spinner [isRunning]="isRequesting"></spinner>
 
-    <p class="text-center" *ngIf="!_isRequesting && (!_inspectionData || _inspectionData.isDefault)">No data to display</p>
+    <p class="text-center" *ngIf="!isRequesting && (!inspectionData || inspectionData.isDefault)">No data to display</p>
 
-    <div class="row" *ngIf="_inspectionData && !_inspectionData.isDefault">
+    <div class="row" *ngIf="inspectionData && !inspectionData.isDefault">
         <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Calibration Date</strong>
-                <br>{{asDate(_inspectionData.calibrationDate) | date}}</p>
+                <br>{{asDate(inspectionData.calibrationDate) | date}}</p>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Inspection Date</strong>
-                <br>{{asDate(_inspectionData.inspectionDate) | date}}</p>
+                <br>{{asDate(inspectionData.inspectionDate) | date}}</p>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Vehicle Make</strong>
-                <br>{{_inspectionData.vehicleMake}}</p>
+                <br>{{inspectionData.vehicleMake}}</p>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Vehicle Model</strong>
-                <br>{{_inspectionData.vehicleModel}}</p>
+                <br>{{inspectionData.vehicleModel}}</p>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-3">
             <p><strong>Tacho Model</strong>
-                <br>{{_inspectionData.tachoModel}}</p>
+                <br>{{inspectionData.tachoModel}}</p>
         </div>
         <div class="col-xs-9">
             <p><strong>Inspection Data</strong>
-                <br>{{_inspectionData.inspectionData}}</p>
+                <br>{{inspectionData.inspectionData}}</p>
         </div>
     </div>
-    <hr *ngIf="_inspectionData && !_inspectionData.isDefault" />
+    <hr *ngIf="inspectionData && !inspectionData.isDefault" />
 
-    <div *ngIf="_inspectionData && _inspectionData.history && !_inspectionData.isDefault">
+    <div *ngIf="inspectionData && inspectionData.history && !inspectionData.isDefault">
         <h2>Inspection data history</h2>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default" *ngFor="#item of _inspectionData.history; #i=index">
+            <div class="panel panel-default" *ngFor="#item of inspectionData.history; #i=index">
                 <div class="panel-heading" role="tab" [attr.id]="'heading'+i">
                     <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" [attr.href]="'#collapse'+i" aria-expanded="true" [attr.aria-controls]="'collapse'+i">

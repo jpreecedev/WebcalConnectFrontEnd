@@ -27,23 +27,23 @@ export interface CentreCheck {
 })
 export class CentreCheckComponent implements OnInit {
 
-    private _centreChecks: CentreCheck[];
-    private _isRequesting: boolean;
+    private centreChecks: CentreCheck[];
+    private isRequesting: boolean;
 
-    constructor(private _service: CentreCheckService, private _http: Http) {
+    constructor(private service: CentreCheckService, private http: Http) {
     }
 
     ngOnInit(): void {
-        this._isRequesting = true;
-        this._service.getCentreChecks().subscribe((response: Response) => {
-            this._centreChecks = response.json();
+        this.isRequesting = true;
+        this.service.getCentreChecks().subscribe((response: Response) => {
+            this.centreChecks = response.json();
         },
         (error: any) => {
             ShowError("Unable to get list of centre checks, please try again later.", error);
-            this._isRequesting = false;
+            this.isRequesting = false;
         },
         () => {
-            this._isRequesting = false;            
+            this.isRequesting = false;            
         });
     }
 
@@ -52,7 +52,7 @@ export class CentreCheckComponent implements OnInit {
             return;
         }
 
-        this._service.downloadPdf(selectedCentreCheck.documentId, selectedCentreCheck.documentTypeEnum);
+        this.service.downloadPdf(selectedCentreCheck.documentId, selectedCentreCheck.documentTypeEnum);
     }
 
     asDate(input: string): Date {

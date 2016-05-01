@@ -8,17 +8,17 @@ import {ShowError, ShowMessage} from "../utilities/messageBox";
 @Injectable()
 export class QCCheckService {
 
-    constructor(private _httpService: HttpService) {
+    constructor(private httpService: HttpService) {
 
     }
 
     getQCChecks(): Observable<Response> {
-        return this._httpService.get(`${AppSettings.API_ENDPOINT}/qccheck/`);
+        return this.httpService.get(`${AppSettings.API_ENDPOINT}/qccheck/`);
     }
 
     downloadPdf(id: Number, documentType: string): void {
 
-        this._httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
+        this.httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
             .subscribe((response: Response) => {
                 if (window.navigator.msSaveOrOpenBlob) {
                     var blobObject = new Blob([response.text()]);
