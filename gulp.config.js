@@ -1,6 +1,8 @@
 module.exports = function() {
     var config = {
         tsSource: ["./app/**/*.ts"],
+        jsSource: ["app/**/!(*.spec).js"],
+        specSource: ["./app/**/*.spec.js"],
         appSource: [
             "./app/**/*.html",
             "./app/**/*.css",
