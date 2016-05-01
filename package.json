@@ -2,7 +2,7 @@
   "name": "webcalconnectfrontend",
   "version": "2.0.0",
   "scripts": {
-    "test": "karma start karma.conf.js",
+    "test": "concurrent \"npm run tsc:w\" \"karma start karma.conf.js\"",
     "prestart": "npm run test",
     "start": "concurrent \"npm run tsc:w\" \"npm run lite\"",
     "docker-build": "docker build -t webcalconnectfrontend .",

@@ -33,7 +33,7 @@ export function hasValidToken(roles?: string[]): boolean {
 export function isAdministrator(): boolean {
     var jwtHelper: JwtHelper = new JwtHelper();
     var token: IJwt = jwtHelper.getToken();
-    var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : undefined;
+    var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : [];
 
     for (var index: number = 0; index < userRoles.length; index++) {
         var element: string = userRoles[index];

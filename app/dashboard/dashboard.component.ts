@@ -10,13 +10,13 @@ import { MenuItem } from "../app.component";
 })
 export class DashboardComponent implements OnInit {
 
-    private _dashboardItems: Array<MenuItem>;
+    dashboardItems: Array<MenuItem>;
 
     constructor(private _router: Router) {
     }
 
     ngOnInit(): void {
-        this._dashboardItems = [
+        this.dashboardItems = [
             <MenuItem>{ icon: "fa-history", routerLink: "RecentCalibrations", text: "Recent Calibrations" },
             <MenuItem>{ icon: "fa-clipboard", routerLink: "QCCheck", text: "QC Check" },
             <MenuItem>{ icon: "fa-clock-o", routerLink: "CentreCheck", text: "Centre Check" },
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
         ];
 
         if (isAdministrator()) {
-            this._dashboardItems.push(...[
+            this.dashboardItems.push(...[
                 <MenuItem>{ icon: "fa-users", routerLink: "ManageAccess", text: "Manage Access" },
                 <MenuItem>{ icon: "fa-certificate", routerLink: "SoftwareLicenses", text: "Software Licenses" },
                 <MenuItem>{ icon: "fa-at", routerLink: "RegisterUser", text: "Register User" }

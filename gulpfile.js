@@ -69,24 +69,3 @@ gulp.task("inject", ["app"], function () {
 });
 
 gulp.task("default", ["inject"]);
-
-gulp.task("test", function () {
-
-    var js = gulp.src(config.jsSource, { read: false });
-    var spec = gulp.src(config.specSource, { read: false });
-    
-    var transform = function(filepath, file, i, length){
-        return '<script src="' + filepath.substring(1) + '"></script>';
-    };
-
-    return gulp.src("SpecRunner.html", { base: "./" })
-        .pipe($.inject(js, {
-            starttag: "<!-- inject:js -->",
-            transform: transform
-        }))
-        .pipe($.inject(spec, {
-            starttag: "<!-- spec:js -->",
-            transform: transform
-        }))
-        .pipe(gulp.dest("."));
-});
