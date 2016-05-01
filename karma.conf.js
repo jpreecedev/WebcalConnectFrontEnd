@@ -6,7 +6,18 @@ module.exports = function (config) {
 
     frameworks: ["jasmine"],
     browsers: ["PhantomJS"],
-    reporters: ["progress"],
+    reporters: ["progress", "coverage"],
+    preprocessors: {
+      "app/**/!(*.spec)+(.js)": ["coverage"],
+      "app/**/*.js": ["sourcemap"]
+    },
+    
+    coverageReporter: {
+      dir: "coverage/",
+      reporters: [
+        { type: "json", subdir: "report-json" }
+      ]
+    },
 
     files: [
       "node_modules/traceur/bin/traceur-runtime.js",
@@ -48,7 +59,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    singleRun: false,
+    singleRun: true,
   };
 
   Object.keys(dependencies).forEach(function (key) {

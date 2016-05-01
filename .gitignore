@@ -250,3 +250,4 @@ css/**/*.css.map
 
 .vscode/
 npm-debug.log*
+coverage/
