@@ -17,7 +17,7 @@
     "typings": "typings"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
+    "angular2": "2.0.0-beta.17",
     "bootbox": "^4.4.0",
     "bootstrap": "^3.3.6",
     "es6-promise": "^3.1.2",
@@ -28,10 +28,10 @@
     "jquery": "^2.2.3",
     "ng2-pagination": "^0.2.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
+    "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.25",
     "tslint": "^3.9.0",
-    "zone.js": "0.6.10"
+    "zone.js": "0.6.12"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
