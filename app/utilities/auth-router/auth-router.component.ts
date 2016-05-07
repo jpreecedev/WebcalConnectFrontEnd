@@ -1,4 +1,4 @@
-import {Directive, Attribute, ElementRef, DynamicComponentLoader} from "angular2/core";
+import {Directive, Attribute, ViewContainerRef, DynamicComponentLoader} from "angular2/core";
 import {Router, RouterOutlet, ComponentInstruction} from "angular2/router";
 import {hasValidToken, isAdministrator} from "../Jwt";
 import {Route, Routes} from "../../app.component";
@@ -9,8 +9,8 @@ import {Route, Routes} from "../../app.component";
 export class AuthRouterOutlet extends RouterOutlet {
     private parentRouter: Router;
 
-    constructor(_elementRef: ElementRef, _loader: DynamicComponentLoader, _parentRouter: Router, @Attribute("name") nameAttr: string) {
-        super(_elementRef, _loader, _parentRouter, nameAttr);
+    constructor(_viewContainerRef: ViewContainerRef, _loader: DynamicComponentLoader, _parentRouter: Router, @Attribute("name") nameAttr: string) {
+        super(_viewContainerRef, _loader, _parentRouter, nameAttr);
 
         this.parentRouter = _parentRouter;
     }

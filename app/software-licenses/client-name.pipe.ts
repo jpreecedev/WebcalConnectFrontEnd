@@ -6,7 +6,7 @@ import {Client} from "./software-licenses.component";
 })
 export class ClientNamePipe implements PipeTransform {
     public transform(data: Client[], filterValue: any): Client[] {
-        if (!data || !filterValue[0]) {
+        if (!data || !filterValue || !filterValue[0]) {
             return data;
         }
         return data.filter((item: Client) => {

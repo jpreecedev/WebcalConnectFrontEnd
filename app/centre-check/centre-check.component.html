@@ -25,7 +25,7 @@
                                 <spinner [isRunning]="isRequesting"></spinner>
                             </td>
                         </tr>
-                        <tr *ngFor="#centreCheck of centreChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, centreCheck)">
+                        <tr *ngFor="let centreCheck of centreChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, centreCheck)">
                             <td><img src="/img/centrecheck.png" alt="Centre Check" /> </td>
                             <td>{{centreCheck.centreName}}</td>
                             <td>{{centreCheck.sealNumber}}</td>

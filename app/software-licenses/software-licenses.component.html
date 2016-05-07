@@ -41,7 +41,7 @@
                         <spinner [isRunning]="isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="#client of clients | clientName:filterValue | paginate: { itemsPerPage: 10, currentPage: p }">
+                <tr *ngFor="let client of clients | clientName:filterValue | paginate: { itemsPerPage: 10, currentPage: p }">
                     <td>{{client.name}}</td>
                     <td>{{client.licenses.length}}</td>
                     <td class="actions text-right">
@@ -87,7 +87,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="#license of selectedClient.licenses">
+                                    <tr *ngFor="let license of selectedClient.licenses">
                                         <td>{{license.license}}</td>
                                         <td>{{asDate(license.expiration) | date}}</td>
                                         <td [innerHtml]="license.hasExpired | tick"></td>

@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label for="depotName">Filter by depot name</label>
                     <select id="depotName" name="depotName" class="form-control" [(ngModel)]="selectedDepotName" required>
-                        <option *ngFor="#item of depotNames">{{item}}</option>
+                        <option *ngFor="let item of depotNames">{{item}}</option>
                     </select>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                         <spinner [isRunning]="isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="#recentCalibration of recentCalibrations | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }"
+                <tr *ngFor="let recentCalibration of recentCalibrations | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }"
                 class="pointer" (click)="downloadCertificate($event, recentCalibration)">
                     <td>
                         <img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" />

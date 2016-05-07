@@ -26,7 +26,7 @@
                                 <spinner [isRunning]="isRequesting"></spinner>
                             </td>
                         </tr>
-                        <tr *ngFor="#qcCheck of qcChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, qcCheck)">
+                        <tr *ngFor="let qcCheck of qcChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, qcCheck)">
                             <td><img src="/img/qccheck.png" alt="QC Check" /> </td>
                             <td>{{qcCheck.centreName}}</td>
                             <td>{{asDate(qcCheck.date) | date}}</td>

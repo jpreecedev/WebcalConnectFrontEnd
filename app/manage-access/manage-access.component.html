@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <label for="selectUser">Select user</label>
                     <select id="selectUser" name="selectUser" class="form-control" #site [(ngModel)]="selectedSiteId" (change)="getConnectedSites(site.value, site)">
-                        <option [value]="item.id" *ngFor="#item of users" #index>{{item.name}}</option>
+                        <option [value]="item.id" *ngFor="let item of users" #index>{{item.name}}</option>
                     </select>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="#site of connectedSites">
+                <tr *ngFor="let site of connectedSites">
                     <td>{{site.description}}</td>
                     <td class="actions">
                         <wc-button [isDisabled]="isUpdating" [style]="'btn btn-secondary pull-right'" [label]="site.isRevoked ? 'Authorize' : 'Revoke'"

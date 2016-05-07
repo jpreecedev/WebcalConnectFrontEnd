@@ -6,7 +6,7 @@
             <div class="form-group">
                 <label for="clientName">Client</label>
                 <select id="clientName" name="clientName" class="form-control" [(ngModel)]="selectedClientId" (change)="clearData()">
-                    <option [value]="item.id" *ngFor="#item of clientNames">{{item.name}}</option>
+                    <option [value]="item.id" *ngFor="let item of clientNames">{{item.name}}</option>
                 </select>
             </div>
         </div>
@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="#recentCalibration of recentCalibrations">
+                        <tr *ngFor="let recentCalibration of recentCalibrations">
                             <td><img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType"
                                 /> </td>
                             <td>{{recentCalibration.companyName}}</td>
@@ -95,7 +95,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="#calibrationDue of calibrationsDue">
+                        <tr *ngFor="let calibrationDue of calibrationsDue">
                             <td><img src="/img/{{calibrationDue.documentIcon}}.png" [attr.alt]="calibrationDue.documentType"
                                 /> </td>
                             <td>{{asDate(calibrationDue.date) | date}}</td>

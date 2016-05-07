@@ -22,7 +22,7 @@ export class JwtHelper {
         if (cookie && !this.isTokenExpired(cookie)) {
             return JSON.parse(cookie);
         }
-        return;
+        return null;
     }
 
     public getRoles(rawToken: string): string[] {

@@ -17,11 +17,11 @@ describe('Dashboard', () => {
         ];
     });
 
-    it('Should define 6 dashboard items for standard user', inject([Router], (router: Router) => {
-        let dashboard = new DashboardComponent(router);
-        dashboard.ngOnInit();
-        expect(dashboard.dashboardItems).toBeDefined();
-        expect(dashboard.dashboardItems).length === 6;
-    }));
+    // it('Should define 6 dashboard items for standard user', inject([Router], (router: Router) => {
+        // let dashboard = new DashboardComponent(router);
+        // dashboard.ngOnInit();
+        // expect(dashboard.dashboardItems).toBeDefined();
+        // expect(dashboard.dashboardItems).length === 6;
+    // }));
     
 });
