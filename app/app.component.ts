@@ -13,6 +13,7 @@ import {CentreCheckComponent} from "./centre-check/centre-check.component";
 import {RegisterUserComponent} from "./register-user/register-user.component";
 import {ManageAccessComponent} from "./manage-access/manage-access.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
+import {StatusReportComponent} from "./status-report/status-report.component";
 
 import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
 import {JwtHelper} from "./utilities/JwtHelper";
@@ -39,6 +40,7 @@ export var Routes: Route[] = [
     { path: "/dashboard", name: "Dashboard", role: "TachographCentre", component: DashboardComponent },
     { path: "/calibrations-due", name: "CalibrationsDue", role: "TachographCentre", component: CalibrationsDueComponent },
     { path: "/generate-email", name: "GenerateEmail", role: "TachographCentre", component: GenerateEmailComponent },
+    { path: "/status-report", name: "StatusReport", role: "TachographCentre", component: StatusReportComponent },
     { path: "/inspection-data", name: "InspectionData", role: "TachographCentre", component: InspectionDataComponent },
     { path: "/recent-calibrations", name: "RecentCalibrations", role: "TachographCentre", component: RecentCalibrationsComponent },
     { path: "/qc-check", name: "QCCheck", role: "TachographCentre", component: QCCheckComponent },

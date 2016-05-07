@@ -25,13 +25,15 @@ module.exports = function() {
             "node_modules/angular2/bundles/angular2-polyfills.js",
             "node_modules/systemjs/dist/system.src.js",
             "node_modules/rxjs/bundles/Rx.js",
-            "node_modules/angular2/bundles/angular2.dev.js",
-            "node_modules/angular2/bundles/router.dev.js",
-            "node_modules/angular2/bundles/http.dev.js",
+            "node_modules/angular2/bundles/angular2.js",
+            "node_modules/angular2/bundles/router.js",
+            "node_modules/angular2/bundles/http.js",
             "node_modules/jquery/dist/jquery.min.js",
             "node_modules/bootstrap/dist/js/bootstrap.min.js",
             "node_modules/ng2-pagination/dist/ng2-pagination-bundle.js",
-            "node_modules/bootbox/bootbox.min.js"
+            "node_modules/bootbox/bootbox.min.js",
+            "lib/chart.min.js",
+            "lib/gauge.min.js"
         ],
         libCss: [
             "node_modules/bootstrap/dist/css/bootstrap.min.css",
