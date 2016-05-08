@@ -13,7 +13,7 @@ export class StatusReportService {
     }
 
     getStatusReport(): Observable<StatusReport> {
-        return this.httpService.get(`${AppSettings.API_ENDPOINT}/statusreport`)
+        return this.httpService.get(`${AppSettings.API_ENDPOINT}/statusreport/27`)
             .map((response: Response) => {
                 return response.json();
             });
