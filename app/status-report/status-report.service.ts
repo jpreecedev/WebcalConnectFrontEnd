@@ -12,8 +12,8 @@ export class StatusReportService {
 
     }
 
-    getStatusReport(): Observable<StatusReport> {
-        return this.httpService.get(`${AppSettings.API_ENDPOINT}/statusreport/27`)
+    getStatusReport(userId?: number): Observable<StatusReport> {
+        return this.httpService.get(`${AppSettings.API_ENDPOINT}/statusreport/${userId ? userId : 'null'}`)
             .map((response: Response) => {
                 return response.json();
             });
