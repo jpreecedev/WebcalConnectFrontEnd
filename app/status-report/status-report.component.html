@@ -18,6 +18,8 @@
     </form>
     <hr *ngIf="users && users.length > 0" />
 
+    <spinner [isRunning]="isRequesting"></spinner>
+    
     <p class="text-center" *ngIf="!isRequesting && !hasData">No data to display</p>
 
     <div class="row-wrapper" [hidden]="!hasData">
@@ -46,7 +48,7 @@
         <div class="col-xs-12 col-md-6">
             <h3>Centre Quarterly Check</h3>
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover" *ngIf="statusReportData">
                     <thead>
                         <tr>
                             <th>Date of last check</th>
@@ -56,9 +58,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span style="color:#B22222;">01 Jan 01</span></td>
-                            <td><span style="color:#B22222;">01 Apr 01</span></td>
-                            <td><span style="color:#B22222;">Unknown</span></td>
+                            <td><span *ngIf="statusReportData.tachoCentreLastCheck" [style.color]="statusReportData.tachoCentreQuarterlyStatusTextColor">{{asDate(statusReportData.tachoCentreLastCheck) | date:'longDate'}}</span></td>
+                            <td><span *ngIf="statusReportData.tachoCentreNextCheck" [style.color]="statusReportData.tachoCentreQuarterlyStatusTextColor">{{asDate(statusReportData.tachoCentreNextCheck) | date:'longDate'}}</span></td>
+                            <td><span *ngIf="statusReportData.tachoCentreQuarterlyStatusText" [style.color]="statusReportData.tachoCentreQuarterlyStatusTextColor">{{statusReportData.tachoCentreQuarterlyStatusText}}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -67,7 +69,7 @@
         <div class="col-xs-12 col-md-6">
             <h3>Monthly GV212</h3>
             <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover" *ngIf="statusReportData">
                     <thead>
                         <tr>
                             <th>Generated and printed</th>
@@ -76,8 +78,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><span style="color:#B22222;">01 Jan 01</span></td>
-                            <td><span style="color:#B22222;">Unknown</span></td>
+                            <td><span *ngIf="statusReportData.gV212LastCheck" [style.color]="statusReportData.gV212StatusTextColor">{{asDate(statusReportData.gV212LastCheck) | date:'longDate'}}</span></td>
+                            <td><span *ngIf="statusReportData.gV212StatusText" [style.color]="statusReportData.gV212StatusTextColor">{{statusReportData.gV212StatusText}}</span></td>
                         </tr>
                     </tbody>
                 </table>
