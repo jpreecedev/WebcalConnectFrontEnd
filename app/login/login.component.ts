@@ -1,5 +1,5 @@
-﻿import {Component, OnInit} from "angular2/core";
-import {Router} from "angular2/router";
+﻿import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router-deprecated";
 import {HttpService} from "../utilities/HttpService";
 import {JwtHelper} from "../utilities/JwtHelper";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";

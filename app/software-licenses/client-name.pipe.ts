@@ -1,4 +1,4 @@
-﻿import {Pipe, PipeTransform} from "angular2/core";
+﻿import {Pipe, PipeTransform} from "@angular/core";
 import {Client} from "./software-licenses.component";
 
 @Pipe({

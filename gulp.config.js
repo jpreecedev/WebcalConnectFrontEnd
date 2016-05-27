@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function () {
     var config = {
         tsSource: ["./app/**/*.ts"],
         jsSource: ["app/**/!(*.spec).js"],
@@ -12,26 +12,22 @@ module.exports = function() {
             "index.html",
         ],
         images: [
-            "./img/*.png"            
+            "./img/*.png"
         ],
         scss: [
-            './css/site.scss',
-            './app/**/*.scss'
+            "./css/site.scss",
+            "./app/**/*.scss"
         ],
         libJs: [
-            "node_modules/es6-shim/es6-shim.min.js",
-            "node_modules/systemjs/dist/system-polyfills.js",
-            "node_modules/angular2/es6/dev/src/testing/shims_for_IE.js",
-            "node_modules/angular2/bundles/angular2-polyfills.js",
-            "node_modules/systemjs/dist/system.src.js",
-            "node_modules/rxjs/bundles/Rx.js",
-            "node_modules/angular2/bundles/angular2.js",
-            "node_modules/angular2/bundles/router.js",
-            "node_modules/angular2/bundles/http.js",
+            "node_modules/core-js/client/shim.min.js",
+            "node_modules/zone.js/dist/zone.js",
+            "node_modules/reflect-metadata/Reflect.js",
+            "node_modules/systemjs/dist/system.src.js",    
             "node_modules/jquery/dist/jquery.min.js",
             "node_modules/bootstrap/dist/js/bootstrap.min.js",
             "node_modules/ng2-pagination/dist/ng2-pagination-bundle.js",
             "node_modules/bootbox/bootbox.min.js",
+            "lib/systemjs.config.js",
             "lib/chart.min.js",
             "lib/gauge.min.js"
         ],

@@ -1,7 +1,7 @@
-import {Component} from "angular2/core";
-import {Router} from "angular2/router";
+import {Component} from "@angular/core";
+import {Router} from "@angular/router-deprecated";
 import {HttpService} from "../utilities/HttpService";
-import {Response} from "angular2/http";
+import {Response} from "@angular/http";
 import {RegisterUserService} from "./register-user.service";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {ShowMessage, ShowError} from "../utilities/messageBox";

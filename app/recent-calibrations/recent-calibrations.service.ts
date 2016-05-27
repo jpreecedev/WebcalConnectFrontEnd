@@ -1,5 +1,5 @@
-import {Injectable} from "angular2/core";
-import {Response} from "angular2/http";
+import {Injectable} from "@angular/core";
+import {Response} from "@angular/http";
 import {HttpService} from "../utilities/HttpService";
 import {Observable} from "rxjs/Observable";
 import {RecentCalibration} from "./recent-calibrations.component";

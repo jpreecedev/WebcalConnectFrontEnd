@@ -1,5 +1,5 @@
-import {Component, enableProdMode} from "angular2/core";
-import {Router, RouteConfig, ROUTER_DIRECTIVES} from "angular2/router";
+import {Component, enableProdMode} from "@angular/core";
+import {Router, ROUTER_DIRECTIVES, RouteConfig} from "@angular/router-deprecated";
 
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";

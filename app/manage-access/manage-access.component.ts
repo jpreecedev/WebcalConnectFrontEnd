@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 import {HttpService} from "../utilities/HttpService";
 import {ManageAccessService} from "./manage-access.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";

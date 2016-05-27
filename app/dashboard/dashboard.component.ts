@@ -1,5 +1,5 @@
-import { Component, OnInit } from "angular2/core";
-import { Router, ROUTER_DIRECTIVES } from "angular2/router";
+import { Component, OnInit } from "@angular/core";
+import { Router, ROUTER_DIRECTIVES } from "@angular/router-deprecated";
 import { isAdministrator } from "../utilities/Jwt";
 import { MenuItem } from "../app.component";
 

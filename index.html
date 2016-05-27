@@ -52,25 +52,21 @@
     </footer>
 
     <!-- inject:js -->
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-    <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script src="node_modules/angular2/bundles/router.dev.js"></script>
-    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>    
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/ng2-pagination/dist/ng2-pagination-bundle.js"></script>
     <script src="node_modules/bootbox/bootbox.min.js"></script>
+    <script src="lib/systemjs.config.js"></script>
     <script src="lib/chart.min.js"></script>
     <script src="lib/gauge.min.js"></script>
     <!-- endinject -->
 
     <script>
-System.config({packages:{app:{format:"register",defaultExtension:"js"}}}),System["import"]("app/main").then(null,console.error.bind(console));
+      System.import('app').catch(function(err){ console.error(err); });
     </script>
     <script>
         (function(){
@@ -78,7 +74,7 @@ System.config({packages:{app:{format:"register",defaultExtension:"js"}}}),System
         })();
     </script>
     <script>
-!function(e,t,a,n,c,s,o){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,s=t.createElement(a),o=t.getElementsByTagName(a)[0],s.async=1,s.src=n,o.parentNode.insertBefore(s,o)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-42743116-3","auto"),ga("send","pageview");
+        !function(e,t,a,n,c,s,o){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,s=t.createElement(a),o=t.getElementsByTagName(a)[0],s.async=1,s.src=n,o.parentNode.insertBefore(s,o)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-42743116-3","auto"),ga("send","pageview");
     </script>
 </body>
 

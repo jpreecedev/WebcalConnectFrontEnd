@@ -1,5 +1,5 @@
-import {Component, OnInit} from "angular2/core";
-import {Response} from "angular2/http";
+import {Component, OnInit} from "@angular/core";
+import {Response} from "@angular/http";
 import {GenerateEmailService} from "./generate-email.service";
 import {RecentCalibration} from "../recent-calibrations/recent-calibrations.component";
 import {CalibrationDue} from "../calibrations-due/calibrations-due.component";

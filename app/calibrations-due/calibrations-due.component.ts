@@ -1,5 +1,5 @@
-import {Component, OnInit} from "angular2/core";
-import {Response, Http} from "angular2/http";
+import {Component, OnInit} from "@angular/core";
+import {Response, Http} from "@angular/http";
 import {CalibrationsDueService} from "./calibrations-due.service";
 import {HttpService} from "../utilities/HttpService";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";

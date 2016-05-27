@@ -1,5 +1,5 @@
-import {Component, OnInit} from "angular2/core";
-import {Response} from "angular2/http";
+import {Component, OnInit} from "@angular/core";
+import {Response} from "@angular/http";
 import {SoftwareLicensesService} from "./software-licenses.service";
 import {TickPipe} from "../utilities/tick.pipe";
 import {ClientNamePipe} from "./client-name.pipe";
