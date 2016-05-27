@@ -1,4 +1,4 @@
-import {Component, Input, ElementRef} from "@angular/core";
+import {Component, Input, Output, EventEmitter, ElementRef} from "@angular/core";
 declare var Pikaday: any;
 
 @Component({
@@ -7,21 +7,13 @@ declare var Pikaday: any;
     styleUrls: ["./app/utilities/date-picker/date-picker.css"]
 })
 export class DatePickerComponent {
-    private theDate: string;
-    private theLabel: string;
-    private nativeElement: any;
+        
+    @Input() date: Date;    
+    @Input() label: string;
     
-    constructor(private _elementRef: ElementRef) {
-        this.nativeElement = _elementRef.nativeElement;
-    }
+    @Output() dateChanged: EventEmitter<Date> = new EventEmitter();
     
-    @Input()
-    public set date(value: string){
-        this.theDate = value; 
-    }
-    
-    @Input()
-    public set label(value: string) {
-        this.theLabel = value;
+    fireChange(){
+        this.dateChanged.emit(this.date);
     }
 }
