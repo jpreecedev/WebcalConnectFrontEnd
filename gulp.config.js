@@ -31,6 +31,7 @@ module.exports = function () {
             "node_modules/bootstrap/dist/js/bootstrap.min.js",
             "node_modules/ng2-pagination/dist/ng2-pagination-bundle.js",
             "node_modules/bootbox/bootbox.min.js",
+            "node_modules/pikaday/pikaday.js",
             "lib/systemjs.config.js",
             "lib/chart.min.js",
             "lib/gauge.min.js"
@@ -38,6 +39,7 @@ module.exports = function () {
         libCss: [
             "node_modules/bootstrap/dist/css/bootstrap.min.css",
             "node_modules/font-awesome/css/font-awesome.css",
+            "node_modules/pikaday/css/pikaday.css",
             "css/site.css"
         ],
         fonts: [

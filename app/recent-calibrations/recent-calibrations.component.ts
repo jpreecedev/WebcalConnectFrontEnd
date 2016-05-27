@@ -4,6 +4,7 @@ import {HttpService} from "../utilities/HttpService";
 import {RecentCalibrationsService} from "./recent-calibrations.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {DepotNamePipe} from "./depot-name.pipe";
 import {CsvHelper} from "../utilities/csv.helper";
@@ -28,7 +29,7 @@ export interface RecentCalibration {
     styleUrls: ["app/recent-calibrations/styles.css"],
     providers: [RecentCalibrationsService, HttpService, PaginationService],
     pipes: [PaginatePipe, DepotNamePipe],
-    directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent]
+    directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent, DatePickerComponent]
 })
 export class RecentCalibrationsComponent implements OnInit {
 
