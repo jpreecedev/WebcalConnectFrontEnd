@@ -22,7 +22,12 @@ gulp.task("app-css", ["fonts"], function () {
         .pipe(gulp.dest("."));
 });
 
-gulp.task("app-js", ["app-css"], function () {
+gulp.task("js-modules", ["app-css"], function() {
+    return gulp.src(config.modules, { base: "./" })
+        .pipe(gulp.dest(config.dist));
+});
+
+gulp.task("app-js", ["js-modules"], function () {
     return gulp.src(config.tsSource, { base: "./" })
         .pipe($.inlineNg2Template({ target: 'es5' }))
         .pipe($.typescript($.typescript.createProject('tsconfig.json')))

@@ -18,6 +18,10 @@ module.exports = function () {
             "./css/site.scss",
             "./app/**/*.scss"
         ],
+        modules: [
+            "node_modules/@angular/**/*",
+            "node_modules/rxjs/**/*"
+        ],
         libJs: [
             "node_modules/core-js/client/shim.min.js",
             "node_modules/zone.js/dist/zone.js",
