@@ -149,6 +149,10 @@ export class RecentCalibrationsComponent implements OnInit {
     fromChanged(from: string){
         this.from = from;
     }
+    
+    toChanged(to: string){
+        this.to = to;
+    }
 
     private selectGridData(item: RecentCalibration): Array<any> {
         return [item.companyName,

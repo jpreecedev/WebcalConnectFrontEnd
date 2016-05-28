@@ -19,9 +19,7 @@
             </div>
             <div class="col-xs-12 col-sm-4">
                 <div class="form-group">
-                    <label for="to">To</label>
-                    <input type="date" class="form-control" id="to" [(ngModel)]="to" required>
-                    <span class="form-control-feedback"></span>
+                    <date-picker label="To" (dateChanged)="toChanged($event)" date="{{to}}"></date-picker>
                 </div>
             </div>
         </div>

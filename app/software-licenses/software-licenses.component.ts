@@ -8,6 +8,7 @@ import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {ShowError} from "../utilities/messageBox";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
 
 export interface License {
     expiration: Date;
@@ -28,7 +29,7 @@ export interface Client {
     styleUrls: ["app/software-licenses/styles.css"],
     providers: [SoftwareLicensesService, HttpService, PaginationService],
     pipes: [TickPipe, ClientNamePipe, PaginatePipe],
-    directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp]
+    directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp, DatePickerComponent]
 })
 export class SoftwareLicensesComponent implements OnInit {
 
@@ -138,6 +139,10 @@ export class SoftwareLicensesComponent implements OnInit {
 
     selectClient(client: Client): void {
         this.selectedClient = client;
+    }
+    
+    expirationChanged(date: string){
+        this.newLicenseExpiration = date;
     }
 
     asDate(input: string): Date {

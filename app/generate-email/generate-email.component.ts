@@ -9,6 +9,7 @@ import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {isAdministrator} from "../utilities/Jwt";
 import {HttpService} from "../utilities/HttpService";
+import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
 
 export interface GenerateReport {
     from: string;
@@ -34,7 +35,7 @@ export interface EmailReportData {
     providers: [GenerateEmailService, HttpService],
     styleUrls: ["app/generate-email/styles.css"],
     pipes: [SplitByCapitalsPipe],
-    directives: [SpinnerComponent, WCButtonComponent]
+    directives: [SpinnerComponent, WCButtonComponent, DatePickerComponent]
 })
 export class GenerateEmailComponent implements OnInit {
 
@@ -148,6 +149,10 @@ export class GenerateEmailComponent implements OnInit {
                 });
             }
         });
+    }
+    
+    fromChanged(from: string){
+        this.generateReport.from = from;
     }
 
     asDate(input: string): Date {

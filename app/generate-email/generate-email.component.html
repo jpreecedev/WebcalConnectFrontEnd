@@ -23,9 +23,7 @@
     <div class="row" *ngIf="generateReport">
         <div class="col-xs-12 col-sm-6">
             <div class="form-group has-feedback">
-                <label for="from">From</label>
-                <input type="date" class="form-control" id="from" [(ngModel)]="generateReport.from" required>
-                <span class="form-control-feedback"></span>
+                <date-picker label="From" (dateChanged)="fromChanged($event)" date="{{generateReport.from}}"></date-picker>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6" *ngIf="reportType === 'CalibrationsDue'">

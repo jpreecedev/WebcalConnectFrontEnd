@@ -12,6 +12,8 @@ export class DatePickerComponent implements OnInit {
     private nativeElement: any;
     private picker: Pikaday;
     private theDate: string;
+    private labelId: string;
+    private theLabel: string;
 
     constructor(elementRef: ElementRef) {
         this.nativeElement = elementRef.nativeElement;
@@ -25,7 +27,11 @@ export class DatePickerComponent implements OnInit {
         this.theDate = moment(val).format("ddd Do MMMM YYYY");
     }
 
-    @Input() label: string;
+    @Input()
+    public set label(val: string){
+        this.theLabel = val;
+        this.labelId = val.replace(/ /g,'').toLowerCase();
+    }
 
     @Output() dateChanged: EventEmitter<string> = new EventEmitter();
 

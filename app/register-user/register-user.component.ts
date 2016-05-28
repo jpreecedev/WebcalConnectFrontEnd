@@ -5,6 +5,7 @@ import {Response} from "@angular/http";
 import {RegisterUserService} from "./register-user.service";
 import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {ShowMessage, ShowError} from "../utilities/messageBox";
+import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
 
 export interface UserRegistration {
     emailAddress: string;
@@ -18,7 +19,7 @@ export interface UserRegistration {
     templateUrl: "app/register-user/register-user.component.html",
     styleUrls: ["app/register-user/styles.css"],
     providers: [RegisterUserService, HttpService],
-    directives: [WCButtonComponent]
+    directives: [WCButtonComponent, DatePickerComponent]
 })
 export class RegisterUserComponent {
 
@@ -32,6 +33,7 @@ export class RegisterUserComponent {
     }
 
     getLicenseKey(expiration: string): void {
+        this.userRegistration.expiration = expiration;
         this.service.getLicenseKey(expiration).subscribe((response: Response) => {
             this.userRegistration.licenseKey = response.json().key;
         });

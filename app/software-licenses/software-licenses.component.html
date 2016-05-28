@@ -66,8 +66,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
-                            <label for="newLicense">Add New License</label>
-                            <input type="date" id="newLicense" name="newLicense" [(ngModel)]="newLicenseExpiration" class="form-control" />
+                            <date-picker label="Add New License" (dateChanged)="expirationChanged($event)" date="{{newLicenseExpiration}}"></date-picker>
                         </div>
                         <wc-button [isDisabled]="isAddingLicense" (click)="addLicense(newLicenseExpiration)" [style]="'btn btn-primary'" [label]="'Add License'"
                             [workingLabel]="'Adding License...'"></wc-button>

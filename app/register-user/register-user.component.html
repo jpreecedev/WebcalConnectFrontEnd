@@ -25,10 +25,7 @@
                 <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" required>
             </div>
             <div class="form-group has-feedback">
-                <label for="licenseKey">License Expiration Date</label>
-                <input type="date" class="form-control" id="licenseKey" #licenseKey (change)="getLicenseKey(licenseKey.value)" [(ngModel)]="userRegistration.expiration"
-                    ngControl="expiration" required>
-                <span class="form-control-feedback"></span>
+                <date-picker label="License Expiration Date" (dateChanged)="getLicenseKey($event)" date="{{userRegistration.expiration}}"></date-picker>
             </div>
             <div class="form-group" *ngIf="userRegistration.licenseKey">
                 <p><strong>License Key:</strong> {{userRegistration.licenseKey}}</p>
