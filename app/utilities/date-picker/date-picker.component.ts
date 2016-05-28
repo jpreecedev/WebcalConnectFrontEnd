@@ -17,29 +17,28 @@ export class DatePickerComponent implements OnInit {
         this.nativeElement = elementRef.nativeElement;
     }
 
-    ngOnInit() {
-        var that = this;
-        
-        var picker = new Pikaday({
-            field: this.nativeElement.getElementsByTagName("input")[0],
-            onSelect: function (dt: Date) {
-                var formatted = moment(dt).format("YYYY-MM-DD");
-                that.dateChanged.emit(formatted);
-                that.theDate = formatted;
-            }
-        });
-        picker.setDate(this.theDate);
-    }
-
     @Input()
     public set date(val: string) {
         if (this.picker) {
             this.picker.setDate(val);
         }
-        this.theDate = val;
+        this.theDate = moment(val).format("ddd Do MMMM YYYY");
     }
 
     @Input() label: string;
 
     @Output() dateChanged: EventEmitter<string> = new EventEmitter();
+
+    ngOnInit() {
+        var that = this;
+
+        var picker = new Pikaday({
+            field: this.nativeElement.getElementsByTagName("input")[0],
+            onSelect: function (dt: Date) {
+                var formatted = moment(dt).format("YYYY-MM-DD");
+                that.dateChanged.emit(formatted);
+            }
+        });
+        picker.setDate(moment(this.theDate).format("ddd Do MMMM YYYY"));
+    }
 }
