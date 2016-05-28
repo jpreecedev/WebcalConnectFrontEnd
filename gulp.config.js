@@ -20,7 +20,8 @@ module.exports = function () {
         ],
         modules: [
             "node_modules/@angular/**/*",
-            "node_modules/rxjs/**/*"
+            "node_modules/rxjs/**/*",
+            "node_modules/moment/moment.js",
         ],
         libJs: [
             "node_modules/core-js/client/shim.min.js",
