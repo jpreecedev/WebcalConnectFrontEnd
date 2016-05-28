@@ -146,7 +146,7 @@ export class RecentCalibrationsComponent implements OnInit {
         return new Date(input);
     }
     
-    fromChanged(from: any){
+    fromChanged(from: string){
         this.from = from;
     }
 

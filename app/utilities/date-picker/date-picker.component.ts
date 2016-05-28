@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter, ElementRef, OnInit} from "@angular/core";
-declare var Pikaday: any;
+import moment from 'moment/moment';
+
 
 @Component({
     selector: "date-picker",
@@ -9,6 +10,8 @@ declare var Pikaday: any;
 export class DatePickerComponent implements OnInit {
 
     private nativeElement: any;
+    private picker: Pikaday;
+    private theDate: string;
 
     constructor(elementRef: ElementRef) {
         this.nativeElement = elementRef.nativeElement;
@@ -16,17 +19,27 @@ export class DatePickerComponent implements OnInit {
 
     ngOnInit() {
         var that = this;
+        
         var picker = new Pikaday({
             field: this.nativeElement.getElementsByTagName("input")[0],
             onSelect: function (dt: Date) {
-                that.dateChanged.emit(dt);
+                var formatted = moment(dt).format("YYYY-MM-DD");
+                that.dateChanged.emit(formatted);
+                that.theDate = formatted;
             }
         });
+        picker.setDate(this.theDate);
     }
 
-    @Input() date: Date;
+    @Input()
+    public set date(val: string) {
+        if (this.picker) {
+            this.picker.setDate(val);
+        }
+        this.theDate = val;
+    }
 
     @Input() label: string;
 
-    @Output() dateChanged: EventEmitter<Date> = new EventEmitter();
+    @Output() dateChanged: EventEmitter<string> = new EventEmitter();
 }
