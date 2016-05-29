@@ -1,5 +1,7 @@
 module.exports = function () {
     var config = {
+        testUrl: "http://localhost:50139",
+        liveUrl: "https://www.webcalconnect.com",
         tsSource: ["./app/**/*.ts"],
         appSource: [
             "./app/**/*.html",
@@ -46,7 +48,6 @@ module.exports = function () {
             "node_modules/font-awesome/fonts/**/*.*",
         ],
         dist: "./wwwroot",
-        libJsDist: "./wwwroot/lib.js",
         fontsDist: "./wwwroot/fonts/",
         app: "./app"
     };

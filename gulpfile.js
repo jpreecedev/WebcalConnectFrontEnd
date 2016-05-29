@@ -31,6 +31,13 @@ gulp.task("app-js", ["js-modules"], function () {
     return gulp.src(config.tsSource, { base: "./" })
         .pipe($.inlineNg2Template({ target: 'es5' }))
         .pipe($.typescript($.typescript.createProject('tsconfig.json')))
+        .pipe($.change(function(content, done){
+            var search = config.testUrl;
+            var replace = config.liveUrl;
+            var exp = new RegExp(search, "g");
+            content = content.replace(exp, replace);
+            done(null, content);
+        }))
         .pipe($.uglify())
         .pipe(gulp.dest("."));
 });
