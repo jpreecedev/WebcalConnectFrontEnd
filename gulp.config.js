@@ -1,8 +1,6 @@
 module.exports = function () {
     var config = {
         tsSource: ["./app/**/*.ts"],
-        jsSource: ["app/**/!(*.spec).js"],
-        specSource: ["./app/**/*.spec.js"],
         appSource: [
             "./app/**/*.html",
             "./app/**/*.css",
@@ -19,8 +17,8 @@ module.exports = function () {
             "./app/**/*.scss"
         ],
         modules: [
-            "node_modules/@angular/**/*",
-            "node_modules/rxjs/**/*",
+            "node_modules/@angular/**/*.umd.js",
+            "node_modules/rxjs/**/*.js",
             "node_modules/moment/moment.js",
         ],
         libJs: [
@@ -35,7 +33,8 @@ module.exports = function () {
             "node_modules/pikaday/pikaday.js",
             "lib/systemjs.config.js",
             "lib/chart.min.js",
-            "lib/gauge.min.js"
+            "lib/gauge.min.js",
+            "lib/app.js"
         ],
         libCss: [
             "node_modules/bootstrap/dist/css/bootstrap.min.css",

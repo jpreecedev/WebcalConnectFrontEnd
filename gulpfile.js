@@ -31,7 +31,7 @@ gulp.task("app-js", ["js-modules"], function () {
     return gulp.src(config.tsSource, { base: "./" })
         .pipe($.inlineNg2Template({ target: 'es5' }))
         .pipe($.typescript($.typescript.createProject('tsconfig.json')))
-        .pipe(gulp.dest(config.dist))
+        .pipe($.uglify())
         .pipe(gulp.dest("."));
 });
 
