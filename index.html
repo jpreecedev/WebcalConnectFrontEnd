@@ -72,8 +72,9 @@
     </script>
     <script>
         (function(){
-            if (window.location.protocol != "https:")
+            if (window.location.protocol != "https:" && window.location.href.indexOf("webcalconnect.com") > -1) {
                 window.location.href = "https:" + window.location.href.substring(window.location.protocol.length);
+            }
             document.getElementById("year").innerText = new Date().getFullYear();
         })();
     </script>
