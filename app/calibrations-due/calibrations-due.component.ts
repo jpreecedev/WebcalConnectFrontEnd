@@ -4,7 +4,7 @@ import {CalibrationsDueService} from "./calibrations-due.service";
 import {HttpService} from "../utilities/HttpService";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {DepotNamePipe} from "../recent-calibrations/depot-name.pipe";
+import {DepotNamePipe} from "./depot-name.pipe";
 import {ShowError} from "../utilities/messageBox";
 
 export interface CalibrationDue {
