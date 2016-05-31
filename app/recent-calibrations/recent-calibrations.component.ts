@@ -34,10 +34,13 @@ export interface RecentCalibration {
 export class RecentCalibrationsComponent implements OnInit {
 
     public selectedDepotName: string;
+    public vehicleRegistration: string;
     public from: string;
     public to: string;
 
     private recentCalibrations: RecentCalibration[];
+    private filteredCalibrations: RecentCalibration[];
+
     private isRequesting: boolean;
     private isDownloading: boolean = false;
     private isEmailing: boolean = false;
@@ -60,6 +63,7 @@ export class RecentCalibrationsComponent implements OnInit {
         this.isRequesting = true;
         this.service.getRecent(this.from, this.to, this.selectedDepotName).subscribe((response: Response) => {
             this.recentCalibrations = response.json();
+            this.registrationChanged(this.vehicleRegistration)
             this.depotNames = this.getDepotNames();
             this.depotNames.unshift("- All -");
             this.selectedDepotName = "- All -";
@@ -113,7 +117,7 @@ export class RecentCalibrationsComponent implements OnInit {
         $event.preventDefault();
 
         var $this: RecentCalibrationsComponent = this;
-        this.showDialog(function() {
+        this.showDialog(function () {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this.service.emailCertificate(email, selectedCalibration).subscribe();
@@ -131,7 +135,7 @@ export class RecentCalibrationsComponent implements OnInit {
 
     emailGridData(): void {
         var $this: RecentCalibrationsComponent = this;
-        this.showDialog(function() {
+        this.showDialog(function () {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this.isEmailing = true;
@@ -142,15 +146,29 @@ export class RecentCalibrationsComponent implements OnInit {
         });
     }
 
+    registrationChanged(vehicleRegistration: string): void {
+        if (!vehicleRegistration) {
+            this.filteredCalibrations = this.recentCalibrations;
+            return;
+        }
+
+        this.filteredCalibrations = this.recentCalibrations.filter((item: RecentCalibration) => {
+            if (!item.registration) {
+                return false;
+            }
+            return item.registration.toLowerCase().indexOf(vehicleRegistration.toLowerCase()) > -1;
+        });
+    }
+
     asDate(input: string): Date {
         return new Date(input);
     }
-    
-    fromChanged(from: string){
+
+    fromChanged(from: string) {
         this.from = from;
     }
-    
-    toChanged(to: string){
+
+    toChanged(to: string) {
         this.to = to;
     }
 

@@ -253,3 +253,4 @@ npm-debug.log*
 coverage/
 
 lib/app.js
+lib/app.js.map

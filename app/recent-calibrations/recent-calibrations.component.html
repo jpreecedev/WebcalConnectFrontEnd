@@ -29,14 +29,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-12 text-right" *ngIf="!isRequesting">
+            <div class="col-xs-12 text-right" *ngIf="!isRequesting && recentCalibrations && recentCalibrations.length > 0">
                 <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
             </div>
         </div>
     </form>
     <hr/>
 
-    <div class="table-responsive">
+    <p class="text-center" *ngIf="!isRequesting && (!recentCalibrations || recentCalibrations.length === 0)">No data to display</p>
+
+    <div class="table-responsive" *ngIf="recentCalibrations && recentCalibrations.length > 0">
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -56,8 +58,8 @@
                         <spinner [isRunning]="isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="let recentCalibration of recentCalibrations | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }"
-                class="pointer" (click)="downloadCertificate($event, recentCalibration)">
+                <tr *ngFor="let recentCalibration of filteredCalibrations | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }"
+                    class="pointer" (click)="downloadCertificate($event, recentCalibration)">
                     <td>
                         <img src="/img/{{recentCalibration.documentIcon}}.png" [attr.alt]="recentCalibration.documentType" />
                     </td>
@@ -81,5 +83,14 @@
                 </tr>
             </tfoot>
         </table>
+    </div>
+
+    <div class="row" *ngIf="recentCalibrations && recentCalibrations.length > 0">
+        <div class="col-xs-12 col-sm-offset-9 col-sm-3">
+            <div class="form-group">
+                <label for="vehicleRegistration">Filter by vehicle registration</label>
+                <input type="text" id="vehicleRegistration" name="vehicleRegistration" class="form-control" (keyup)="registrationChanged(vehicleRegistration)" [(ngModel)]="vehicleRegistration">
+            </div>
+        </div>
     </div>
 </div>
