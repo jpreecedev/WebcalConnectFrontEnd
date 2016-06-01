@@ -2,13 +2,16 @@
     <h1>QC Check</h1>
     <hr/>
     <div class="row">
-        <div class="col-xs-12" *ngIf="!isRequesting">
+        <div class="col-xs-12" *ngIf="!isRequesting && qcChecks && qcChecks.length > 1">
             <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="table-responsive">
+            
+            <p class="text-center" *ngIf="!isRequesting && (!qcChecks || qcChecks.length === 0)">No data to display</p>
+            
+            <div class="table-responsive" *ngIf="qcChecks && qcChecks.length > 1">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
