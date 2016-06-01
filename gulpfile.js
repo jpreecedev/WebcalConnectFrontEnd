@@ -1,7 +1,9 @@
 "use strict";
 
 var gulp = require("gulp");
-var config = require('./gulp.config.js')();
+var config = require("./gulp.config.js")();
+var runSequence = require("run-sequence");
+
 var $ = require('gulp-load-plugins')();
 
 gulp.task("clean", function () {
@@ -9,25 +11,25 @@ gulp.task("clean", function () {
         .pipe($.clean());
 });
 
-gulp.task("fonts", ["clean"], function () {
+gulp.task("fonts", function () {
     return gulp.src(config.fonts, { base: "./" })
         .pipe($.flatten())
         .pipe(gulp.dest(config.fontsDist));
 });
 
-gulp.task("app-css", ["fonts"], function () {
+gulp.task("app-css", function () {
     return gulp.src(config.scss, { base: "./" })
         .pipe($.sass())
         .pipe($.autoprefixer({ browsers: ["last 2 versions", "> 5%"] }))
         .pipe(gulp.dest("."));
 });
 
-gulp.task("js-modules", ["app-css"], function() {
+gulp.task("js-modules", function() {
     return gulp.src(config.modules, { base: "./" })
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task("app-js", ["js-modules"], function () {
+gulp.task("app-js", function () {
     return gulp.src(config.tsSource, { base: "./" })
         .pipe($.inlineNg2Template({ target: 'es5' }))
         .pipe($.typescript($.typescript.createProject('tsconfig.json')))
@@ -42,7 +44,7 @@ gulp.task("app-js", ["js-modules"], function () {
         .pipe(gulp.dest("."));
 });
 
-gulp.task("app-images", ["app-js"], function () {
+gulp.task("app-images", function () {
     var pngquant = require("imagemin-pngquant");
 
     return gulp.src(config.images)
@@ -57,12 +59,12 @@ gulp.task("app-images", ["app-js"], function () {
         .pipe(gulp.dest(config.dist + "/img"));
 });
 
-gulp.task("app", ["app-images"], function () {
+gulp.task("app", function () {
     return gulp.src(config.rootFiles, { base: "./" })
         .pipe(gulp.dest(config.dist))
 });
 
-gulp.task("inject", ["app"], function () {
+gulp.task("inject", function () {
     var es = require("event-stream");
 
     var js = gulp.src(config.libJs)
@@ -80,4 +82,6 @@ gulp.task("inject", ["app"], function () {
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task("default", ["inject"]);
+gulp.task("default", function(callback){
+    runSequence("clean", "fonts", "app-css", "js-modules", "app-js", "app-images", "app", "inject", callback);
+});
