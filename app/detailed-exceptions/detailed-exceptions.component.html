@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>Detailed Exceptions</h1>
+    <hr/>
+
+    <p class="text-center" *ngIf="!isRequesting && (!detailedExceptions || detailedExceptions.length === 0)">No data to display</p>
+
+    <spinner [isRunning]="isRequesting"></spinner>
+
+    <div class="table-responsive" *ngIf="detailedExceptions && detailedExceptions.length > 0">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Company</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let detailedException of detailedExceptions | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer">
+                    <td class="text-truncate" (click)="showExceptionMessage(detailedException)">{{detailedException.message}}</td>                
+                    <td>{{asDate(detailedException.date) | date}}</td>
+                    <td>{{detailedException.company}}</td>
+                    <td>
+                        <button class="btn btn-secondary" (click)="showRawImage($event, detailedException)">View Image</button>
+                        <wc-button [isDisabled]="isDeleting" (click)="deleteDetailedException($event, detailedException)" [style]="'btn btn-secondary'" [label]="'Delete'" [workingLabel]="'Delete'"></wc-button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

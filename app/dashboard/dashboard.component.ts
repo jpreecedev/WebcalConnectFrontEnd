@@ -30,7 +30,8 @@ export class DashboardComponent implements OnInit {
             this.dashboardItems.push(...[
                 <MenuItem>{ icon: "fa-users", routerLink: "ManageAccess", text: "Manage Access" },
                 <MenuItem>{ icon: "fa-certificate", routerLink: "SoftwareLicenses", text: "Software Licenses" },
-                <MenuItem>{ icon: "fa-at", routerLink: "RegisterUser", text: "Register User" }
+                <MenuItem>{ icon: "fa-at", routerLink: "RegisterUser", text: "Register User" },
+                <MenuItem>{ icon: "fa-bug", routerLink: "DetailedExceptions", text: "Exception Log" }
             ]);
         }
     }
