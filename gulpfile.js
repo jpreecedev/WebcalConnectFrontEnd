@@ -70,11 +70,13 @@ gulp.task("inject", function () {
     var js = gulp.src(config.libJs)
         .pipe($.concat("lib.min.js"))
         .pipe($.uglify())
+        .pipe($.rev())
         .pipe(gulp.dest(config.dist + "/js"));
 
     var css = gulp.src(config.libCss)
         .pipe($.cleanCss({ compatibility: 'ie8' }))
         .pipe($.concat("lib.min.css"))
+        .pipe($.rev())
         .pipe(gulp.dest(config.dist));
 
     return gulp.src("./index.html")
