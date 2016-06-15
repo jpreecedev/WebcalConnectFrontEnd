@@ -9,6 +9,8 @@ import {ShowError, ShowMessage} from "../utilities/messageBox";
 @Injectable()
 export class DirectUploadService {
 
+    public UploadPath: string = `${AppSettings.API_ENDPOINT}/directupload`;
+
     constructor(private httpService: HttpService) {
 
     }

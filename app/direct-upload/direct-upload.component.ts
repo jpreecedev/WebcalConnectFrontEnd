@@ -3,12 +3,11 @@ import {Response} from "@angular/http";
 import {HttpService} from "../utilities/HttpService";
 import {DirectUploadService} from "./direct-upload.service";
 import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
 import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
 import {ShowMessage, ShowError} from "../utilities/messageBox";
 import {Observable} from "rxjs/Observable";
 import {AppSettings} from "../app.settings";
-import {UPLOAD_DIRECTIVES} from 'ng2-uploader/ng2-uploader';
+import {FileUploadService} from '../utilities/file-upload.service.ts';
 
 export interface DirectUploadDocument {
     documentId: number;
@@ -19,18 +18,11 @@ export interface DirectUploadDocument {
 @Component({
     templateUrl: "app/direct-upload/direct-upload.component.html",
     styleUrls: ["app/direct-upload/styles.css"],
-    providers: [DirectUploadService, HttpService, PaginationService],
+    providers: [DirectUploadService, HttpService, PaginationService, FileUploadService],
     pipes: [PaginatePipe],
-    directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent]
+    directives: [SpinnerComponent, PaginationControlsCmp]
 })
 export class DirectUploadComponent implements OnInit {
-
-    private zone: NgZone;
-    private options: Object = {
-        url: AppSettings.API_ENDPOINT + "resource/directupload"
-    };
-    private multipleProgress: number = 0;
-    private multipleResp: any[] = [];
 
     private uploadedCertificates: DirectUploadDocument[];
 
@@ -38,29 +30,11 @@ export class DirectUploadComponent implements OnInit {
     private isUploading: boolean = false;
 
     private page: number = 1;
+    private uploadProgress: number = 0;
+    private selectedFileName: string;
 
-    constructor(private service: DirectUploadService) {
-        this.zone = new NgZone({ enableLongStackTrace: false });
-    }
+    constructor(private service: DirectUploadService, private uploadService: FileUploadService) {
 
-    handleMultipleUpload(data: any): void {
-        let index = this.multipleResp.findIndex(x => x.id === data.id);
-        if (index === -1) {
-            this.multipleResp.push(data);
-        }
-        else {
-            this.zone.run(() => {
-                this.multipleResp[index] = data;
-            });
-        }
-
-        let total = 0, uploaded = 0;
-        this.multipleResp.forEach(resp => {
-            total += resp.progress.total;
-            uploaded += resp.progress.loaded;
-        });
-
-        this.multipleProgress = Math.floor(uploaded / (total / 100));
     }
 
     ngOnInit(): void {
@@ -80,6 +54,42 @@ export class DirectUploadComponent implements OnInit {
             () => {
                 this.isRequesting = false;
             });
+    }
+
+    selectionChanged($event: Event) {
+        var fileList = (<HTMLInputElement>$event.srcElement).files;
+        var files = <File[]>[];
+
+        for (var i = 0; i < fileList.length; i++) {
+            var element = fileList[i];
+            files.push(element);
+        }
+
+        this.upload(files)
+    }
+
+    upload(files: File[]): void {
+        this.uploadProgress = 0;
+        this.isUploading = true;
+
+        this.uploadService.getObserver()
+            .subscribe(progress => {
+                this.uploadProgress = progress;
+            });
+
+        try {
+            this.uploadService.upload(this.service.UploadPath, files).then(() => {
+                this.isUploading = false;
+                this.search();
+            })
+            .catch((error: any) => {
+                this.isUploading = false;
+                ShowError("Unable to upload certificates, please try again later.", error);
+            });
+        } catch (error) {
+            ShowError("There was an error whilst uploading the document", error);
+            this.isUploading = false;
+        }
     }
 
     downloadCertificate(selectedDocument: DirectUploadDocument): void {

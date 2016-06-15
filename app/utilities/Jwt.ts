@@ -40,8 +40,8 @@ export function isAdministrator(): boolean {
         if (element === "Administrator") {
             return true;
         }
-        return false;
     }
+    return false;
 }
 
 export function isDirectUploadUser(): boolean {
@@ -54,6 +54,6 @@ export function isDirectUploadUser(): boolean {
         if (element === "DirectUpload" || element === "Administrator") {
             return true;
         }
-        return false;
     }
+    return false;
 }
