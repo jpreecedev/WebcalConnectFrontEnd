@@ -43,3 +43,17 @@ export function isAdministrator(): boolean {
         return false;
     }
 }
+
+export function isDirectUploadUser(): boolean {
+    var jwtHelper: JwtHelper = new JwtHelper();
+    var token: IJwt = jwtHelper.getToken();
+    var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : [];
+
+    for (var index: number = 0; index < userRoles.length; index++) {
+        var element: string = userRoles[index];
+        if (element === "DirectUpload" || element === "Administrator") {
+            return true;
+        }
+        return false;
+    }
+}

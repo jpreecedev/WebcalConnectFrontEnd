@@ -34,6 +34,10 @@ export class AuthRouterOutlet extends RouterOutlet {
             return super.activate(instruction);
         }
 
+        if (route.role === "DirectUpload" && hasValidToken(["DirectUpload", "Administrator"])) {
+            return super.activate(instruction);
+        }
+
         this.parentRouter.navigate(["Login"]);
         return;
     }
@@ -48,7 +52,7 @@ export class AuthRouterOutlet extends RouterOutlet {
             if (url.indexOf(element.path) > -1) {
                 return element;
             }
-            if (url.startsWith("/confirm-account/") && element.path.startsWith("/confirm-account")){
+            if (url.startsWith("/confirm-account/") && element.path.startsWith("/confirm-account")) {
                 return element;
             }
         }

@@ -15,6 +15,7 @@ import {ManageAccessComponent} from "./manage-access/manage-access.component";
 import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
 import {StatusReportComponent} from "./status-report/status-report.component";
 import {DetailedExceptionsComponent} from "./detailed-exceptions/detailed-exceptions.component";
+import {DirectUploadComponent} from "./direct-upload/direct-upload.component";
 
 import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
 import {JwtHelper} from "./utilities/JwtHelper";
@@ -49,7 +50,8 @@ export var Routes: Route[] = [
     { path: "/register-user", name: "RegisterUser", role: "Administrator", component: RegisterUserComponent },
     { path: "/manage-access", name: "ManageAccess", role: "Administrator", component: ManageAccessComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", role: "Administrator", component: SoftwareLicensesComponent },
-    { path: "/detailed-exceptions", name: "DetailedExceptions", role: "Administrator", component: DetailedExceptionsComponent }
+    { path: "/detailed-exceptions", name: "DetailedExceptions", role: "Administrator", component: DetailedExceptionsComponent },
+    { path: "/direct-upload", name: "DirectUpload", role: "DirectUpload", component: DirectUploadComponent }
 ];
 
 @Component({

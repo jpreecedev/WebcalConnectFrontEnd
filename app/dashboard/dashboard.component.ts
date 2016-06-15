@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ROUTER_DIRECTIVES } from "@angular/router-deprecated";
-import { isAdministrator } from "../utilities/Jwt";
+import { isAdministrator, isDirectUploadUser } from "../utilities/Jwt";
 import { MenuItem } from "../app.component";
 
 @Component({
@@ -32,6 +32,12 @@ export class DashboardComponent implements OnInit {
                 <MenuItem>{ icon: "fa-certificate", routerLink: "SoftwareLicenses", text: "Software Licenses" },
                 <MenuItem>{ icon: "fa-at", routerLink: "RegisterUser", text: "Register User" },
                 <MenuItem>{ icon: "fa-bug", routerLink: "DetailedExceptions", text: "Exception Log" }
+            ]);
+        }
+
+        if (isDirectUploadUser()) {
+            this.dashboardItems.push(...[
+                <MenuItem>{ icon: "fa-cloud-upload", routerLink: "DirectUpload", text: "Certificate Upload" }
             ]);
         }
     }
