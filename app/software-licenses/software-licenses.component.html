@@ -6,7 +6,7 @@
             <div class="form-group">
                 <label for="clientName">Filter by client name</label>
                 <div class="input-group search">
-                    <input type="text" class="form-control" id="clientName" [(ngModel)]="filterValue" placeholder="Search clients...">
+                    <input type="text" class="form-control" id="clientName" name="clientName" [(ngModel)]="filterValue" placeholder="Search clients...">
                     <div class="input-group-addon">
                         <i class="fa fa-search"></i>
                     </div>
@@ -16,7 +16,7 @@
         <div class="col-xs-12 col-sm-6">
             <div class="form-group">
                 <label for="newClientName">Add new client</label>
-                <input type="text" class="form-control" id="newClientName" [(ngModel)]="newClientName" placeholder="New Client Name" required>
+                <input type="text" class="form-control" id="newClientName" name="newClientName" [(ngModel)]="newClientName" placeholder="New Client Name" required>
                 <wc-button [isDisabled]="isAdding" (click)="addClient(newClientName)" [style]="'btn btn-primary'" [label]="'Add Client'"
                     [workingLabel]="'Adding Client...'"></wc-button>
             </div>

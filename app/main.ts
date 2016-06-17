@@ -6,5 +6,6 @@ import {HTTP_PROVIDERS} from "@angular/http";
 import {provide} from '@angular/core';
 import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {disableDeprecatedForms, provideForms} from "@angular/forms";
 
-bootstrap(AppComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS, provide(LocationStrategy, { useClass: HashLocationStrategy })])
+bootstrap(AppComponent, [disableDeprecatedForms(), provideForms(),HTTP_PROVIDERS, ROUTER_PROVIDERS, provide(LocationStrategy, { useClass: HashLocationStrategy })])
