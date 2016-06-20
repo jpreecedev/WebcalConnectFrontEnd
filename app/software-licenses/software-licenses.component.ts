@@ -1,14 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {Response} from "@angular/http";
-import {SoftwareLicensesService} from "./software-licenses.service";
-import {TickPipe} from "../utilities/tick.pipe";
-import {ClientNamePipe} from "./client-name.pipe";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {ShowError} from "../utilities/messageBox";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
+import { Component, OnInit } from "@angular/core";
+import { Response } from "@angular/http";
+import { SoftwareLicensesService } from "./software-licenses.service";
+import { TickPipe } from "../utilities/tick.pipe";
+import { ClientNamePipe } from "./client-name.pipe";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { ShowError } from "../utilities/messageBox";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
 
 export interface License {
     expiration: Date;

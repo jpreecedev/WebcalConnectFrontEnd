@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ElementRef, OnInit} from "@angular/core";
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from "@angular/core";
 import moment from 'moment/moment';
 
 

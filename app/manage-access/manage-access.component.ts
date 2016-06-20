@@ -1,9 +1,9 @@
-import {Component, OnInit} from "@angular/core";
-import {HttpService} from "../utilities/HttpService";
-import {ManageAccessService} from "./manage-access.service";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowError} from "../utilities/messageBox";
+import { Component, OnInit } from "@angular/core";
+import { HttpService } from "../utilities/HttpService";
+import { ManageAccessService } from "./manage-access.service";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowError } from "../utilities/messageBox";
 
 export interface ManageAccessUser {
     id: number;

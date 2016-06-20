@@ -1,14 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {Response} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {RecentCalibrationsService} from "./recent-calibrations.service";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {CsvHelper} from "../utilities/csv.helper";
-import {ShowMessage, ShowError, ShowDialog} from "../utilities/messageBox";
-import {Observable} from "rxjs/Observable";
+import { Component, OnInit } from "@angular/core";
+import { Response } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { RecentCalibrationsService } from "./recent-calibrations.service";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { CsvHelper } from "../utilities/csv.helper";
+import { ShowMessage, ShowError, ShowDialog } from "../utilities/messageBox";
+import { Observable } from "rxjs/Observable";
 
 export interface RecentCalibration {
     companyName: string;

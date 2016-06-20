@@ -1,7 +1,7 @@
-import {Directive, Attribute, ViewContainerRef, DynamicComponentLoader} from "@angular/core";
-import {Router, RouterOutlet, ComponentInstruction} from "@angular/router-deprecated";
-import {hasValidToken, isAdministrator} from "../Jwt";
-import {Route, Routes} from "../../app.component";
+import { Directive, Attribute, ViewContainerRef, DynamicComponentLoader } from "@angular/core";
+import { Router, RouterOutlet, ComponentInstruction } from "@angular/router-deprecated";
+import { hasValidToken, isAdministrator } from "../Jwt";
+import { Route, Routes } from "../../app.component";
 
 @Directive({
     selector: "auth-router-outlet"

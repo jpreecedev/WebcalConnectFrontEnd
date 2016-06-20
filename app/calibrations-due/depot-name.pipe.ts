@@ -1,5 +1,5 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {CalibrationDue} from "./calibrations-due.component";
+import { Pipe, PipeTransform } from "@angular/core";
+import { CalibrationDue } from "./calibrations-due.component";
 
 @Pipe({
     name: "depotname"

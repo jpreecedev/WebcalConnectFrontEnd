@@ -1,9 +1,9 @@
-import {Component} from "@angular/core";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {InspectionDataService} from "./inspection-data.service";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowError} from "../utilities/messageBox";
+import { Component } from "@angular/core";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { InspectionDataService } from "./inspection-data.service";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowError } from "../utilities/messageBox";
 
 export interface InspectionData {
     calibrationDate: string;

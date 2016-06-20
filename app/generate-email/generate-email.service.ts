@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {Observable} from "rxjs/Observable";
-import {AppSettings} from "../app.settings";
-import {EmailReportData} from "./generate-email.component";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { Observable } from "rxjs/Observable";
+import { AppSettings } from "../app.settings";
+import { EmailReportData } from "./generate-email.component";
 
 @Injectable()
 export class GenerateEmailService {

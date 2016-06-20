@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Response, Http} from "@angular/http";
-import {DetailedExceptionsService} from "./detailed-exceptions.service";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {ShowError, ShowMessage} from "../utilities/messageBox";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import { Component, OnInit } from "@angular/core";
+import { Response, Http } from "@angular/http";
+import { DetailedExceptionsService } from "./detailed-exceptions.service";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { ShowError, ShowMessage } from "../utilities/messageBox";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
 
 export interface DetailedException {
     id: number;

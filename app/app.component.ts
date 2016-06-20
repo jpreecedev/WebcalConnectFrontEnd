@@ -1,24 +1,24 @@
-import {Component, enableProdMode} from "@angular/core";
-import {Router, ROUTER_DIRECTIVES, RouteConfig} from "@angular/router-deprecated";
+import { Component, enableProdMode } from "@angular/core";
+import { Router, ROUTER_DIRECTIVES, RouteConfig } from "@angular/router-deprecated";
 
-import {HomeComponent} from "./home/home.component";
-import {LoginComponent} from "./login/login.component";
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {CalibrationsDueComponent} from "./calibrations-due/calibrations-due.component";
-import {GenerateEmailComponent} from "./generate-email/generate-email.component";
-import {InspectionDataComponent} from "./inspection-data/inspection-data.component";
-import {RecentCalibrationsComponent} from "./recent-calibrations/recent-calibrations.component";
-import {QCCheckComponent} from "./qc-check/qc-check.component";
-import {CentreCheckComponent} from "./centre-check/centre-check.component";
-import {RegisterUserComponent} from "./register-user/register-user.component";
-import {ManageAccessComponent} from "./manage-access/manage-access.component";
-import {SoftwareLicensesComponent} from "./software-licenses/software-licenses.component";
-import {StatusReportComponent} from "./status-report/status-report.component";
-import {DetailedExceptionsComponent} from "./detailed-exceptions/detailed-exceptions.component";
-import {DirectUploadComponent} from "./direct-upload/direct-upload.component";
+import { HomeComponent } from "./home/home.component";
+import { LoginComponent } from "./login/login.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
+import { CalibrationsDueComponent } from "./calibrations-due/calibrations-due.component";
+import { GenerateEmailComponent } from "./generate-email/generate-email.component";
+import { InspectionDataComponent } from "./inspection-data/inspection-data.component";
+import { RecentCalibrationsComponent } from "./recent-calibrations/recent-calibrations.component";
+import { QCCheckComponent } from "./qc-check/qc-check.component";
+import { CentreCheckComponent } from "./centre-check/centre-check.component";
+import { RegisterUserComponent } from "./register-user/register-user.component";
+import { ManageAccessComponent } from "./manage-access/manage-access.component";
+import { SoftwareLicensesComponent } from "./software-licenses/software-licenses.component";
+import { StatusReportComponent } from "./status-report/status-report.component";
+import { DetailedExceptionsComponent } from "./detailed-exceptions/detailed-exceptions.component";
+import { DirectUploadComponent } from "./direct-upload/direct-upload.component";
 
-import {AuthRouterOutlet} from "./utilities/auth-router/auth-router.component";
-import {JwtHelper} from "./utilities/JwtHelper";
+import { AuthRouterOutlet } from "./utilities/auth-router/auth-router.component";
+import { JwtHelper } from "./utilities/JwtHelper";
 
 enableProdMode();
 

@@ -1,4 +1,4 @@
-import {JwtHelper} from "./JwtHelper";
+import { JwtHelper } from "./JwtHelper";
 declare var escape: any;
 
 export interface IJwt {

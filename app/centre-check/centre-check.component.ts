@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Response, Http} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {CentreCheckService} from "./centre-check.service";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {TickPipe} from "../utilities/tick.pipe";
-import {ShowError} from "../utilities/messageBox";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
+import { Component, OnInit } from "@angular/core";
+import { Response, Http } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { CentreCheckService } from "./centre-check.service";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { TickPipe } from "../utilities/tick.pipe";
+import { ShowError } from "../utilities/messageBox";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 

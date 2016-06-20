@@ -1,15 +1,15 @@
-import {Component, OnInit} from "@angular/core";
-import {Response} from "@angular/http";
-import {GenerateEmailService} from "./generate-email.service";
-import {RecentCalibration} from "../recent-calibrations/recent-calibrations.component";
-import {CalibrationDue} from "../calibrations-due/calibrations-due.component";
-import {ShowDialog, ShowError, ShowMessage} from "../utilities/messageBox";
-import {SplitByCapitalsPipe} from "../utilities/split-by-capitals.pipe";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {isAdministrator} from "../utilities/Jwt";
-import {HttpService} from "../utilities/HttpService";
-import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
+import { Component, OnInit } from "@angular/core";
+import { Response } from "@angular/http";
+import { GenerateEmailService } from "./generate-email.service";
+import { RecentCalibration } from "../recent-calibrations/recent-calibrations.component";
+import { CalibrationDue } from "../calibrations-due/calibrations-due.component";
+import { ShowDialog, ShowError, ShowMessage } from "../utilities/messageBox";
+import { SplitByCapitalsPipe } from "../utilities/split-by-capitals.pipe";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { isAdministrator } from "../utilities/Jwt";
+import { HttpService } from "../utilities/HttpService";
+import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
 
 export interface GenerateReport {
     from: string;

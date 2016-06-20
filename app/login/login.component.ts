@@ -1,10 +1,10 @@
-﻿import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router-deprecated";
-import {HttpService} from "../utilities/HttpService";
-import {JwtHelper} from "../utilities/JwtHelper";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowError} from "../utilities/messageBox";
-import {hasValidToken} from "../utilities/Jwt";
+﻿import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router-deprecated";
+import { HttpService } from "../utilities/HttpService";
+import { JwtHelper } from "../utilities/JwtHelper";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowError } from "../utilities/messageBox";
+import { hasValidToken } from "../utilities/Jwt";
 
 @Component({
     selector: "login",

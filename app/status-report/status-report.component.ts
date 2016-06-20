@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Response} from "@angular/http";
-import {StatusReportService} from "./status-report.service";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowError} from "../utilities/messageBox";
-import {isAdministrator} from "../utilities/Jwt";
+import { Component, OnInit } from "@angular/core";
+import { Response } from "@angular/http";
+import { StatusReportService } from "./status-report.service";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowError } from "../utilities/messageBox";
+import { isAdministrator } from "../utilities/Jwt";
 
 declare var Gauge: any;
 
