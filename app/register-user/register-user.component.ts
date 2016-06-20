@@ -49,13 +49,13 @@ export class RegisterUserComponent {
             this.resetForm();
             ShowMessage("The user was registered successfully");
         },
-            (error: any) => {
-                this.isRequesting = false;
-                ShowError("Unable to register user, please try again later.", error);;
-            },
-            () => {
-                this.isRequesting = false;
-            });
+        (error: any) => {
+            this.isRequesting = false;
+            ShowError("Unable to register user, please try again later.", error);
+        },
+        () => {
+            this.isRequesting = false;
+        });
     }
 
     validateForm(): boolean {
@@ -68,7 +68,7 @@ export class RegisterUserComponent {
             this.validationErrors += "Confirm password is too short<br/>";
         }
         if (this.userRegistration.password !== this.confirmPassword) {
-            this.validationErrors += "Passwords do not match<br/>"
+            this.validationErrors += "Passwords do not match<br/>";
         }
 
         return !this.validationErrors;

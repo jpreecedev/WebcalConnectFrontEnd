@@ -10,19 +10,19 @@ import { isAdministrator } from "../utilities/Jwt";
 declare var Gauge: any;
 
 export interface StatusReportTechnician {
-    value: number,
-    color: string,
-    label: string
+    value: number;
+    color: string;
+    label: string;
 }
 
 export interface StatusReport {
-    performance: StatusReportTechnician[],
-    score: number,
-    colorStart: string,
-    colorStop: string,
-    lineChartLabels: string[],
-    lineChartData: number[],
-    users: StatusReportUser[]
+    performance: StatusReportTechnician[];
+    score: number;
+    colorStart: string;
+    colorStop: string;
+    lineChartLabels: string[];
+    lineChartData: number[];
+    users: StatusReportUser[];
 }
 
 export interface StatusReportUser {
@@ -68,7 +68,7 @@ export class StatusReportComponent implements OnInit {
             });
     }
 
-    buildChart(data: StatusReport) {
+    buildChart(data: StatusReport): void {
         this.hasData = data.score > 0 && data.performance != null && data.colorStart != null && data.colorStop != null;
         if (!this.hasData) {
             this.statusReportData = null;

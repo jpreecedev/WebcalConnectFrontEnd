@@ -19,7 +19,7 @@ export class WCButtonComponent {
 
     constructor(private _elementRef: ElementRef) {
         this._domElement = _elementRef.nativeElement;
-        this._style = "btn btn-primary"
+        this._style = "btn btn-primary";
     }
 
     @Input()
