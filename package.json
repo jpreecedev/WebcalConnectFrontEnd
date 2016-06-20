@@ -40,6 +40,7 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
+    "codelyzer": "0.0.23",
     "concurrently": "^2.1.0",
     "event-stream": "^3.3.2",
     "gulp": "^3.9.1",
