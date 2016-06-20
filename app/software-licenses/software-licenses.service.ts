@@ -25,12 +25,12 @@ export class SoftwareLicensesService {
                 return response.json();
             });
     }
-    
-    deleteClient(client: Client):Observable<Response>{
+
+    deleteClient(client: Client): Observable<Response> {
         return this.httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ clientAccessId: client.accessId }));
     }
-    
-    deleteLicense(client: Client, license: License):Observable<Response>{
+
+    deleteLicense(client: Client, license: License): Observable<Response> {
         return this.httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/license`, JSON.stringify({ clientAccessId: client.accessId, licenseAccessId: license.accessId }));
     }
 

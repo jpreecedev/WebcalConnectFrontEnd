@@ -39,13 +39,13 @@ export class ManageAccessComponent implements OnInit {
             this.selectedSiteId = this.users[0].id;
             this.getConnectedSites(this.selectedSiteId);
         },
-        (error: any) => {
-            ShowError("Unable to get a list of users, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                ShowError("Unable to get a list of users, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     getConnectedSites(siteId: number): void {
@@ -58,13 +58,13 @@ export class ManageAccessComponent implements OnInit {
         this.service.getConnectedSites(siteId).subscribe((data: ManageAccessSite[]) => {
             this.connectedSites = data;
         },
-        (error: any) => {
-            ShowError("Unable to get a list of connected sites, please try again later.", error);
-            this.isRequesting = false;            
-        }, 
-        () => {
-            this.isRequesting = false;            
-        });
+            (error: any) => {
+                ShowError("Unable to get a list of connected sites, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     toggleAccess(site: ManageAccessSite): void {
@@ -72,13 +72,13 @@ export class ManageAccessComponent implements OnInit {
         this.service.toggleSite(site).subscribe(() => {
             site.isRevoked = !site.isRevoked;
         },
-        (error: any) =>{
-            ShowError("Unable to change the access permission for this site, please try again later.", error);
-            this.isUpdating = false;            
-        },
-        () => {
-            this.isUpdating = false;            
-        });
+            (error: any) => {
+                ShowError("Unable to change the access permission for this site, please try again later.", error);
+                this.isUpdating = false;
+            },
+            () => {
+                this.isUpdating = false;
+            });
     }
 
 }

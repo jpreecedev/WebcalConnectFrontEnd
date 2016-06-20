@@ -15,9 +15,9 @@ export class DetailedExceptionsService {
     getDetailedExceptions(): Observable<Response> {
         return this.httpService.get(`${AppSettings.API_ENDPOINT}/detailedexceptions/`);
     }
-    
-    deleteDetailedException(id: number): Observable<Response>{
-        return this.httpService.delete(`${AppSettings.API_ENDPOINT}/detailedexceptions`, JSON.stringify({id: id}));
+
+    deleteDetailedException(id: number): Observable<Response> {
+        return this.httpService.delete(`${AppSettings.API_ENDPOINT}/detailedexceptions`, JSON.stringify({ id: id }));
     }
 
     showRawImage(id: Number): void {

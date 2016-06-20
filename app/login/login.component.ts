@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(["Dashboard"]);
             }
         },
-        (error: any) => {
-            ShowError("Unable to log in at this time, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                ShowError("Unable to log in at this time, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     loggedInChanged(value: boolean) {

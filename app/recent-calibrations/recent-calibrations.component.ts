@@ -68,13 +68,13 @@ export class RecentCalibrationsComponent implements OnInit {
             this.selectedDepotName = "- All -";
             this.isRequesting = false;
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError("Unable to get list of recent calibrations, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError("Unable to get list of recent calibrations, please try again later.", error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     getDepotNames(): string[] {

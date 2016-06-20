@@ -38,13 +38,13 @@ export class CentreCheckComponent implements OnInit {
         this.service.getCentreChecks().subscribe((response: Response) => {
             this.centreChecks = response.json();
         },
-        (error: any) => {
-            ShowError("Unable to get list of centre checks, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;            
-        });
+            (error: any) => {
+                ShowError("Unable to get list of centre checks, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     downloadPdf($event: Event, selectedCentreCheck: CentreCheck): void {

@@ -47,13 +47,13 @@ export class CalibrationsDueComponent implements OnInit {
             this.depotNames.unshift("- All -");
             this.selectedDepotName = "- All -";
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError("Unable to get list of calibrations due, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError("Unable to get list of calibrations due, please try again later.", error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     downloadCertificate($event: Event, selectedCalibration: CalibrationDue): void {

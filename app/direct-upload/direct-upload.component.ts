@@ -82,10 +82,10 @@ export class DirectUploadComponent implements OnInit {
                 this.isUploading = false;
                 this.search();
             })
-            .catch((error: any) => {
-                this.isUploading = false;
-                ShowError("Unable to upload certificates, please try again later.", error);
-            });
+                .catch((error: any) => {
+                    this.isUploading = false;
+                    ShowError("Unable to upload certificates, please try again later.", error);
+                });
         } catch (error) {
             ShowError("There was an error whilst uploading the document", error);
             this.isUploading = false;

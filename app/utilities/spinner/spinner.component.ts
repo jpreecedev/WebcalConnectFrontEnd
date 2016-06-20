@@ -5,7 +5,7 @@ import { Component, Input } from "@angular/core";
     templateUrl: "./app/utilities/spinner/spinner.component.html",
     styleUrls: ["./app/utilities/spinner/spinner.css"]
 })
-export class SpinnerComponent {  
+export class SpinnerComponent {
     private isDelayedRunning: boolean = false;
 
     @Input()

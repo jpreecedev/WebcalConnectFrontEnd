@@ -42,13 +42,13 @@ export class QCCheckComponent implements OnInit {
         this.service.getQCChecks().subscribe((response: Response) => {
             this.qcChecks = response.json();
         },
-        (error: any) =>{
-            ShowError("Unable to get a list of QC checks, please try again later.", error);
-            this.isRequesting = false;            
-        },
-        () => {
-            this.isRequesting = false;            
-        });
+            (error: any) => {
+                ShowError("Unable to get a list of QC checks, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     downloadPdf($event: Event, selectedQCCheck: QCCheck): void {

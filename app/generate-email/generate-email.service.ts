@@ -22,9 +22,9 @@ export class GenerateEmailService {
     getCalibrationsDueData(userId: number, from: string, to: string): Observable<Response> {
         return this.httpService.get(`${AppSettings.API_ENDPOINT}/calibrationsDue/${userId}/${from}/${to}`);
     }
-    
-    sendEmail(data: EmailReportData): Observable<Response>{
-        return this.httpService.post(`${AppSettings.API_ENDPOINT}/generateemailreport`, JSON.stringify(data));        
+
+    sendEmail(data: EmailReportData): Observable<Response> {
+        return this.httpService.post(`${AppSettings.API_ENDPOINT}/generateemailreport`, JSON.stringify(data));
     }
 
 }

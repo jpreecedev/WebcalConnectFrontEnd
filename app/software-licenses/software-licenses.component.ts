@@ -54,33 +54,33 @@ export class SoftwareLicensesComponent implements OnInit {
         this.service.getClients().subscribe((response: Client[]) => {
             this.clients = response;
         },
-        (error: any) => {
-            ShowError("Unable to get list of clients, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                ShowError("Unable to get list of clients, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     addLicense(expiration: string): void {
-        if (!expiration){
+        if (!expiration) {
             return;
         }
-        
+
         this.isAddingLicense = true;
         this.service.addLicense(this.selectedClient.accessId, expiration).subscribe((response: License) => {
             this.selectedClient.licenses.unshift(response);
         },
-        (error: any) => {
-            ShowError("Unable to add license, please try again later.", error);
-            this.newLicenseExpiration = "";
-            this.isAddingLicense = false;
-        },
-        () => {
-            this.newLicenseExpiration = "";
-            this.isAddingLicense = false;
-        });
+            (error: any) => {
+                ShowError("Unable to add license, please try again later.", error);
+                this.newLicenseExpiration = "";
+                this.isAddingLicense = false;
+            },
+            () => {
+                this.newLicenseExpiration = "";
+                this.isAddingLicense = false;
+            });
     }
 
     addClient(clientName: string): void {
@@ -92,56 +92,56 @@ export class SoftwareLicensesComponent implements OnInit {
         this.service.addClient(clientName).subscribe((response: Client) => {
             this.clients.unshift(response);
         },
-        (error: any) => {
-            ShowError("Unable to add client, please try again later.", error);
-            this.isAdding = false;
-            this.newClientName = "";
-        },
-        () => {
-            this.isAdding = false;
-            this.newClientName = "";
-        });
+            (error: any) => {
+                ShowError("Unable to add client, please try again later.", error);
+                this.isAdding = false;
+                this.newClientName = "";
+            },
+            () => {
+                this.isAdding = false;
+                this.newClientName = "";
+            });
     }
 
     deleteLicense(client: Client, license: License) {
         this.isDeletingLicense = true;
         this.service.deleteLicense(client, license).subscribe((response: Response) => {
             var index = client.licenses.indexOf(license);
-            if (index > -1){
+            if (index > -1) {
                 client.licenses.splice(index, 1);
             }
         },
-        (error: any) => {
-            ShowError("Unable to delete license, please try again later.", error);
-            this.isDeletingLicense = false;
-        },
-        () => {
-            this.isDeletingLicense = false;
-        });
+            (error: any) => {
+                ShowError("Unable to delete license, please try again later.", error);
+                this.isDeletingLicense = false;
+            },
+            () => {
+                this.isDeletingLicense = false;
+            });
     }
 
     deleteClient(client: Client) {
         this.isDeletingClient = true;
         this.service.deleteClient(client).subscribe((response: Response) => {
             var index = this.clients.indexOf(client);
-            if (index > -1){
+            if (index > -1) {
                 this.clients.splice(index, 1);
             }
         },
-        (error: any) => {
-            ShowError("Unable to delete client, please try again later.", error);
-            this.isDeletingClient = false;
-        },
-        () => {
-            this.isDeletingClient = false;
-        });
+            (error: any) => {
+                ShowError("Unable to delete client, please try again later.", error);
+                this.isDeletingClient = false;
+            },
+            () => {
+                this.isDeletingClient = false;
+            });
     }
 
     selectClient(client: Client): void {
         this.selectedClient = client;
     }
-    
-    expirationChanged(date: string){
+
+    expirationChanged(date: string) {
         this.newLicenseExpiration = date;
     }
 

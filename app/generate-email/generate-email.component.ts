@@ -51,7 +51,7 @@ export class GenerateEmailComponent implements OnInit {
     private isRequesting: boolean = false;
     private isUpdating: boolean = false;
     private isSending: boolean = false;
-    
+
     constructor(private service: GenerateEmailService) {
         this.isAdministrator = isAdministrator();
     }
@@ -66,13 +66,13 @@ export class GenerateEmailComponent implements OnInit {
             this.selectedClientId = this.clientNames[0].id;
             this.updateReport();
         },
-        (error: any) => {
-            ShowError("Unable to get email report configuration, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                ShowError("Unable to get email report configuration, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     clearData() {
@@ -96,13 +96,13 @@ export class GenerateEmailComponent implements OnInit {
             var data = response.json();
             this.recentCalibrations = data;
         },
-        (error: any) => {
-            ShowError("Unable to get report data, please try again later.", error);
-            this.isUpdating = false;
-        },
-        () => {
-            this.isUpdating = false;
-        });
+            (error: any) => {
+                ShowError("Unable to get report data, please try again later.", error);
+                this.isUpdating = false;
+            },
+            () => {
+                this.isUpdating = false;
+            });
     }
 
     updateDueReport() {
@@ -112,13 +112,13 @@ export class GenerateEmailComponent implements OnInit {
             var data = response.json();
             this.calibrationsDue = data;
         },
-        (error: any) => {
-            ShowError("Unable to get report data, please try again later.", error);
-            this.isUpdating = false;
-        },
-        () => {
-            this.isUpdating = false;
-        });
+            (error: any) => {
+                ShowError("Unable to get report data, please try again later.", error);
+                this.isUpdating = false;
+            },
+            () => {
+                this.isUpdating = false;
+            });
     }
 
     sendEmail(): void {
@@ -131,7 +131,7 @@ export class GenerateEmailComponent implements OnInit {
             to: this.generateReport.to
         };
 
-        this.showDialog(function() {
+        this.showDialog(function () {
             var email: string = this.find("#email").val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this.isSending = true;
@@ -140,18 +140,18 @@ export class GenerateEmailComponent implements OnInit {
                 $this.service.sendEmail(emailData).subscribe((response: Response) => {
                     ShowMessage("Your email has been sent.");
                 },
-                (error: any)=>{
-                    ShowError("Unable to send email, please try again later.", error);
-                    $this.isSending = false;
-                },
-                () => {
-                    $this.isSending = false;                    
-                });
+                    (error: any) => {
+                        ShowError("Unable to send email, please try again later.", error);
+                        $this.isSending = false;
+                    },
+                    () => {
+                        $this.isSending = false;
+                    });
             }
         });
     }
-    
-    fromChanged(from: string){
+
+    fromChanged(from: string) {
         this.generateReport.from = from;
     }
 

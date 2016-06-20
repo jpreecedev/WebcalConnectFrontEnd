@@ -46,13 +46,13 @@ export class InspectionDataComponent {
         this.service.getVehicleInspectionData<InspectionData>(this.vehicleRegistration).subscribe((data: InspectionData) => {
             this.inspectionData = data;
         },
-        (error: any) => {
-            this.isRequesting = false;            
-            ShowError("Unable to get vehicle inspection data, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;            
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError("Unable to get vehicle inspection data, please try again later.", error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     reset(): void {

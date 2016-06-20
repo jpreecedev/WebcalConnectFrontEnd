@@ -59,13 +59,13 @@ export class StatusReportComponent implements OnInit {
             }
             this.buildChart(response);
         },
-        (error: any) => {
-            ShowError("Unable to get status report, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                ShowError("Unable to get status report, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     buildChart(data: StatusReport) {
@@ -119,7 +119,7 @@ export class StatusReportComponent implements OnInit {
             }, { barShowStroke: false });
         }, 500);
     }
-    
+
     asDate(input: string): Date {
         return new Date(input);
     }

@@ -28,9 +28,9 @@ export class DatePickerComponent implements OnInit {
     }
 
     @Input()
-    public set label(val: string){
+    public set label(val: string) {
         this.theLabel = val;
-        this.labelId = val.replace(/ /g,'').toLowerCase();
+        this.labelId = val.replace(/ /g, '').toLowerCase();
     }
 
     @Output() dateChanged: EventEmitter<string> = new EventEmitter();

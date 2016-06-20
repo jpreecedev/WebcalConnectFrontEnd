@@ -12,7 +12,7 @@ export class DepotNamePipe implements PipeTransform {
         if (!selectedDepot) {
             return value;
         }
-        if (selectedDepot === "- All -"){
+        if (selectedDepot === "- All -") {
             return value;
         }
         return value.filter((item: CalibrationDue) => item.depotName === selectedDepot);
