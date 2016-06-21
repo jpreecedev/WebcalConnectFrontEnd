@@ -19,6 +19,7 @@ import { DirectUploadComponent } from "./direct-upload/direct-upload.component";
 
 import { AuthRouterOutlet } from "./utilities/auth-router/auth-router.component";
 import { JwtHelper } from "./utilities/JwtHelper";
+import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 
 enableProdMode();
 
@@ -59,7 +60,7 @@ export var Routes: Route[] = [
     templateUrl: "app/app.component.html",
     styleUrls: ["app/styles.css"],
     directives: [ROUTER_DIRECTIVES, AuthRouterOutlet],
-    providers: [JwtHelper],
+    providers: [Angulartics2GoogleAnalytics, JwtHelper],
 })
 @RouteConfig(Routes)
 export class AppComponent {
