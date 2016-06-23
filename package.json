@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^2.0.0-rc.2",
     "@angular/platform-browser-dynamic": "^2.0.0-rc.2",
     "@angular/router-deprecated": "^2.0.0-rc.2",
+    "angulartics2": "^1.1.1",
     "bootbox": "^4.4.0",
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
@@ -40,6 +41,7 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
+    "codelyzer": "0.0.23",
     "concurrently": "^2.1.0",
     "event-stream": "^3.3.2",
     "gulp": "^3.9.1",

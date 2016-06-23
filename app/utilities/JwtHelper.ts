@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {IJwt} from "./Jwt";
-import {Cookie} from "./cookies";
+import { Injectable } from "@angular/core";
+import { IJwt } from "./Jwt";
+import { Cookie } from "./cookies";
 
 declare var escape: any;
 

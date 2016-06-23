@@ -1,6 +1,5 @@
-import {Component, Input, Output, EventEmitter, ElementRef, OnInit} from "@angular/core";
-import moment from 'moment/moment';
-
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from "@angular/core";
+import moment from "moment/moment";
 
 @Component({
     selector: "date-picker",
@@ -8,6 +7,8 @@ import moment from 'moment/moment';
     styleUrls: ["./app/utilities/date-picker/date-picker.css"]
 })
 export class DatePickerComponent implements OnInit {
+
+    @Output() dateChanged: EventEmitter<string> = new EventEmitter();
 
     private nativeElement: any;
     private picker: Pikaday;
@@ -28,12 +29,10 @@ export class DatePickerComponent implements OnInit {
     }
 
     @Input()
-    public set label(val: string){
+    public set label(val: string) {
         this.theLabel = val;
-        this.labelId = val.replace(/ /g,'').toLowerCase();
+        this.labelId = val.replace(/ /g, "").toLowerCase();
     }
-
-    @Output() dateChanged: EventEmitter<string> = new EventEmitter();
 
     ngOnInit() {
         var that = this;

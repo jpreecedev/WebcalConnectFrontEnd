@@ -1,8 +1,8 @@
-import {Component, Injectable} from "@angular/core";
-import {Observable} from "rxjs/Observable";
+import { Component, Injectable } from "@angular/core";
+import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/share";
-import {JwtHelper} from "./JwtHelper";
-import {IJwt} from "./Jwt";
+import { JwtHelper } from "./JwtHelper";
+import { IJwt } from "./Jwt";
 
 @Injectable()
 export class FileUploadService {

@@ -11,6 +11,12 @@ gulp.task("clean", function () {
         .pipe($.clean());
 });
 
+gulp.task("tslint", function () {
+    gulp.src(config.tsSource)
+        .pipe($.tslint())
+        .pipe($.tslint.report("verbose"));
+});
+
 gulp.task("fonts", function () {
     return gulp.src(config.fonts, { base: "./" })
         .pipe($.flatten())
@@ -24,7 +30,7 @@ gulp.task("app-css", function () {
         .pipe(gulp.dest("."));
 });
 
-gulp.task("js-modules", function() {
+gulp.task("js-modules", function () {
     return gulp.src(config.modules, { base: "./" })
         .pipe(gulp.dest(config.dist));
 });
@@ -33,7 +39,7 @@ gulp.task("app-js", function () {
     return gulp.src(config.tsSource, { base: "./" })
         .pipe($.inlineNg2Template({ target: 'es5' }))
         .pipe($.typescript($.typescript.createProject('tsconfig.json')))
-        .pipe($.change(function(content, done){
+        .pipe($.change(function (content, done) {
             var search = config.testUrl;
             var replace = config.liveUrl;
             var exp = new RegExp(search, "g");
@@ -86,6 +92,6 @@ gulp.task("inject", function () {
         .pipe(gulp.dest(config.dist));
 });
 
-gulp.task("default", function(callback){
+gulp.task("default", function (callback) {
     runSequence("clean", "fonts", "app-css", "js-modules", "app-js", "app-images", "app", "inject", callback);
 });

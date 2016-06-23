@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Response, Http} from "@angular/http";
-import {DetailedExceptionsService} from "./detailed-exceptions.service";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {ShowError, ShowMessage} from "../utilities/messageBox";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
+import { Component, OnInit } from "@angular/core";
+import { Response, Http } from "@angular/http";
+import { DetailedExceptionsService } from "./detailed-exceptions.service";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { ShowError, ShowMessage } from "../utilities/messageBox";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
 
 export interface DetailedException {
     id: number;
@@ -24,7 +24,7 @@ export interface DetailedException {
 export class DetailedExceptionsComponent implements OnInit {
 
     private isRequesting: boolean;
-    private isDeleting : boolean;
+    private isDeleting: boolean;
 
     detailedExceptions: DetailedException[];
 
@@ -36,13 +36,13 @@ export class DetailedExceptionsComponent implements OnInit {
         this.service.getDetailedExceptions().subscribe((response: Response) => {
             this.detailedExceptions = response.json();
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError("Unable to get list of detailed exceptions, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError("Unable to get list of detailed exceptions, please try again later.", error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     showRawImage($event: Event, selectedDetailedException: DetailedException): void {
@@ -52,33 +52,33 @@ export class DetailedExceptionsComponent implements OnInit {
 
         this.service.showRawImage(selectedDetailedException.id);
     }
-    
+
     showExceptionMessage(selectedDetailedException: DetailedException): void {
-        if (selectedDetailedException){
+        if (selectedDetailedException) {
             ShowMessage(selectedDetailedException.message);
         }
     }
-    
+
     deleteDetailedException($event: Event, selectedDetailedException: DetailedException): void {
         if (!selectedDetailedException || $event.defaultPrevented) {
             return;
         }
-        
+
         this.isDeleting = true;
 
         this.service.deleteDetailedException(selectedDetailedException.id).subscribe((response: Response) => {
             var index = this.detailedExceptions.indexOf(selectedDetailedException);
-            if (index > -1){
+            if (index > -1) {
                 this.detailedExceptions.splice(index, 1);
             }
-        },        
-        (error: any) => {
-            ShowError("Unable to delete detailed exception, please try again later.", error);
-            this.isDeleting = false;
         },
-        () => {
-            this.isDeleting = false;            
-        });
+            (error: any) => {
+                ShowError("Unable to delete detailed exception, please try again later.", error);
+                this.isDeleting = false;
+            },
+            () => {
+                this.isDeleting = false;
+            });
     }
 
     asDate(input: string): Date {

@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Response, Http} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {QCCheckService} from "./qc-check.service";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {TickPipe} from "../utilities/tick.pipe";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {ShowError} from "../utilities/messageBox";
+import { Component, OnInit } from "@angular/core";
+import { Response, Http } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { QCCheckService } from "./qc-check.service";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { TickPipe } from "../utilities/tick.pipe";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { ShowError } from "../utilities/messageBox";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
@@ -42,13 +42,13 @@ export class QCCheckComponent implements OnInit {
         this.service.getQCChecks().subscribe((response: Response) => {
             this.qcChecks = response.json();
         },
-        (error: any) =>{
-            ShowError("Unable to get a list of QC checks, please try again later.", error);
-            this.isRequesting = false;            
-        },
-        () => {
-            this.isRequesting = false;            
-        });
+            (error: any) => {
+                ShowError("Unable to get a list of QC checks, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     downloadPdf($event: Event, selectedQCCheck: QCCheck): void {

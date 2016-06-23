@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Response, Http} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {CentreCheckService} from "./centre-check.service";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {TickPipe} from "../utilities/tick.pipe";
-import {ShowError} from "../utilities/messageBox";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
+import { Component, OnInit } from "@angular/core";
+import { Response, Http } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { CentreCheckService } from "./centre-check.service";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { TickPipe } from "../utilities/tick.pipe";
+import { ShowError } from "../utilities/messageBox";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
@@ -38,13 +38,13 @@ export class CentreCheckComponent implements OnInit {
         this.service.getCentreChecks().subscribe((response: Response) => {
             this.centreChecks = response.json();
         },
-        (error: any) => {
-            ShowError("Unable to get list of centre checks, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;            
-        });
+            (error: any) => {
+                ShowError("Unable to get list of centre checks, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     downloadPdf($event: Event, selectedCentreCheck: CentreCheck): void {

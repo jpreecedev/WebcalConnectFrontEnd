@@ -1,9 +1,9 @@
-import {Component} from "@angular/core";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {InspectionDataService} from "./inspection-data.service";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowError} from "../utilities/messageBox";
+import { Component } from "@angular/core";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { InspectionDataService } from "./inspection-data.service";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowError } from "../utilities/messageBox";
 
 export interface InspectionData {
     calibrationDate: string;
@@ -46,13 +46,13 @@ export class InspectionDataComponent {
         this.service.getVehicleInspectionData<InspectionData>(this.vehicleRegistration).subscribe((data: InspectionData) => {
             this.inspectionData = data;
         },
-        (error: any) => {
-            this.isRequesting = false;            
-            ShowError("Unable to get vehicle inspection data, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;            
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError("Unable to get vehicle inspection data, please try again later.", error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     reset(): void {

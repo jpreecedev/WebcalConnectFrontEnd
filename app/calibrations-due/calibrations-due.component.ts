@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
-import {Response, Http} from "@angular/http";
-import {CalibrationsDueService} from "./calibrations-due.service";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {DepotNamePipe} from "./depot-name.pipe";
-import {ShowError} from "../utilities/messageBox";
+import { Component, OnInit } from "@angular/core";
+import { Response, Http } from "@angular/http";
+import { CalibrationsDueService } from "./calibrations-due.service";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { DepotNamePipe } from "./depot-name.pipe";
+import { ShowError } from "../utilities/messageBox";
 
 export interface CalibrationDue {
     date: string;
@@ -47,13 +47,13 @@ export class CalibrationsDueComponent implements OnInit {
             this.depotNames.unshift("- All -");
             this.selectedDepotName = "- All -";
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError("Unable to get list of calibrations due, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError("Unable to get list of calibrations due, please try again later.", error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     downloadCertificate($event: Event, selectedCalibration: CalibrationDue): void {

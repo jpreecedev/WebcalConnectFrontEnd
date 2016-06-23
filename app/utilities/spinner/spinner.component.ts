@@ -1,11 +1,11 @@
-import {Component, Input} from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector: "spinner",
     templateUrl: "./app/utilities/spinner/spinner.component.html",
     styleUrls: ["./app/utilities/spinner/spinner.css"]
 })
-export class SpinnerComponent {  
+export class SpinnerComponent {
     private isDelayedRunning: boolean = false;
 
     @Input()

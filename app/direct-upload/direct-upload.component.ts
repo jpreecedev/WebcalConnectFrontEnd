@@ -1,13 +1,13 @@
-import {Component, Directive, NgZone, OnInit} from "@angular/core";
-import {Response} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {DirectUploadService} from "./direct-upload.service";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {ShowMessage, ShowError} from "../utilities/messageBox";
-import {Observable} from "rxjs/Observable";
-import {AppSettings} from "../app.settings";
-import {FileUploadService} from '../utilities/file-upload.service.ts';
+import { Component, Directive, NgZone, OnInit } from "@angular/core";
+import { Response } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { DirectUploadService } from "./direct-upload.service";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { ShowMessage, ShowError } from "../utilities/messageBox";
+import { Observable } from "rxjs/Observable";
+import { AppSettings } from "../app.settings";
+import { FileUploadService } from '../utilities/file-upload.service.ts';
 
 export interface DirectUploadDocument {
     documentId: number;
@@ -82,10 +82,10 @@ export class DirectUploadComponent implements OnInit {
                 this.isUploading = false;
                 this.search();
             })
-            .catch((error: any) => {
-                this.isUploading = false;
-                ShowError("Unable to upload certificates, please try again later.", error);
-            });
+                .catch((error: any) => {
+                    this.isUploading = false;
+                    ShowError("Unable to upload certificates, please try again later.", error);
+                });
         } catch (error) {
             ShowError("There was an error whilst uploading the document", error);
             this.isUploading = false;

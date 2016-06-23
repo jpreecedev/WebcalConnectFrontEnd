@@ -1,10 +1,10 @@
-﻿import {Component, OnInit} from "@angular/core";
-import {Router} from "@angular/router-deprecated";
-import {HttpService} from "../utilities/HttpService";
-import {JwtHelper} from "../utilities/JwtHelper";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowError} from "../utilities/messageBox";
-import {hasValidToken} from "../utilities/Jwt";
+﻿import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router-deprecated";
+import { HttpService } from "../utilities/HttpService";
+import { JwtHelper } from "../utilities/JwtHelper";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowError } from "../utilities/messageBox";
+import { hasValidToken } from "../utilities/Jwt";
 
 @Component({
     selector: "login",
@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(["Dashboard"]);
             }
         },
-        (error: any) => {
-            ShowError("Unable to log in at this time, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                ShowError("Unable to log in at this time, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     loggedInChanged(value: boolean) {

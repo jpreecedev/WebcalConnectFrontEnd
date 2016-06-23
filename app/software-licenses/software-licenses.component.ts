@@ -1,14 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {Response} from "@angular/http";
-import {SoftwareLicensesService} from "./software-licenses.service";
-import {TickPipe} from "../utilities/tick.pipe";
-import {ClientNamePipe} from "./client-name.pipe";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {PaginatePipe, PaginationService, PaginationControlsCmp} from "ng2-pagination";
-import {ShowError} from "../utilities/messageBox";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
+import { Component, OnInit } from "@angular/core";
+import { Response } from "@angular/http";
+import { SoftwareLicensesService } from "./software-licenses.service";
+import { TickPipe } from "../utilities/tick.pipe";
+import { ClientNamePipe } from "./client-name.pipe";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { ShowError } from "../utilities/messageBox";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
 
 export interface License {
     expiration: Date;
@@ -64,10 +64,10 @@ export class SoftwareLicensesComponent implements OnInit {
     }
 
     addLicense(expiration: string): void {
-        if (!expiration){
+        if (!expiration) {
             return;
         }
-        
+
         this.isAddingLicense = true;
         this.service.addLicense(this.selectedClient.accessId, expiration).subscribe((response: License) => {
             this.selectedClient.licenses.unshift(response);
@@ -103,11 +103,11 @@ export class SoftwareLicensesComponent implements OnInit {
         });
     }
 
-    deleteLicense(client: Client, license: License) {
+    deleteLicense(client: Client, license: License): void {
         this.isDeletingLicense = true;
         this.service.deleteLicense(client, license).subscribe((response: Response) => {
             var index = client.licenses.indexOf(license);
-            if (index > -1){
+            if (index > -1) {
                 client.licenses.splice(index, 1);
             }
         },
@@ -120,11 +120,11 @@ export class SoftwareLicensesComponent implements OnInit {
         });
     }
 
-    deleteClient(client: Client) {
+    deleteClient(client: Client): void {
         this.isDeletingClient = true;
         this.service.deleteClient(client).subscribe((response: Response) => {
             var index = this.clients.indexOf(client);
-            if (index > -1){
+            if (index > -1) {
                 this.clients.splice(index, 1);
             }
         },
@@ -140,8 +140,8 @@ export class SoftwareLicensesComponent implements OnInit {
     selectClient(client: Client): void {
         this.selectedClient = client;
     }
-    
-    expirationChanged(date: string){
+
+    expirationChanged(date: string): void {
         this.newLicenseExpiration = date;
     }
 

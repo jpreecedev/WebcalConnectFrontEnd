@@ -1,28 +1,28 @@
-import {Component, OnInit} from "@angular/core";
-import {Response} from "@angular/http";
-import {StatusReportService} from "./status-report.service";
-import {HttpService} from "../utilities/HttpService";
-import {SpinnerComponent} from "../utilities/spinner/spinner.component";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowError} from "../utilities/messageBox";
-import {isAdministrator} from "../utilities/Jwt";
+import { Component, OnInit } from "@angular/core";
+import { Response } from "@angular/http";
+import { StatusReportService } from "./status-report.service";
+import { HttpService } from "../utilities/HttpService";
+import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowError } from "../utilities/messageBox";
+import { isAdministrator } from "../utilities/Jwt";
 
 declare var Gauge: any;
 
 export interface StatusReportTechnician {
-    value: number,
-    color: string,
-    label: string
+    value: number;
+    color: string;
+    label: string;
 }
 
 export interface StatusReport {
-    performance: StatusReportTechnician[],
-    score: number,
-    colorStart: string,
-    colorStop: string,
-    lineChartLabels: string[],
-    lineChartData: number[],
-    users: StatusReportUser[]
+    performance: StatusReportTechnician[];
+    score: number;
+    colorStart: string;
+    colorStop: string;
+    lineChartLabels: string[];
+    lineChartData: number[];
+    users: StatusReportUser[];
 }
 
 export interface StatusReportUser {
@@ -59,16 +59,16 @@ export class StatusReportComponent implements OnInit {
             }
             this.buildChart(response);
         },
-        (error: any) => {
-            ShowError("Unable to get status report, please try again later.", error);
-            this.isRequesting = false;
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                ShowError("Unable to get status report, please try again later.", error);
+                this.isRequesting = false;
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
-    buildChart(data: StatusReport) {
+    buildChart(data: StatusReport): void {
         this.hasData = data.score > 0 && data.performance != null && data.colorStart != null && data.colorStop != null;
         if (!this.hasData) {
             this.statusReportData = null;
@@ -119,7 +119,7 @@ export class StatusReportComponent implements OnInit {
             }, { barShowStroke: false });
         }, 500);
     }
-    
+
     asDate(input: string): Date {
         return new Date(input);
     }

@@ -1,11 +1,11 @@
-import {Injectable} from "@angular/core";
-import {Http, Headers, Response, RequestMethod, RequestOptionsArgs} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import {JwtHelper} from "./JwtHelper";
-import {IJwt} from "./Jwt";
+import { Injectable } from "@angular/core";
+import { Http, Headers, Response, RequestMethod, RequestOptionsArgs } from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import { JwtHelper } from "./JwtHelper";
+import { IJwt } from "./Jwt";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
-import {AppSettings} from "../app.settings";
+import { AppSettings } from "../app.settings";
 
 export interface PagedResponse<T> {
     total: number;

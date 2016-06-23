@@ -1,10 +1,10 @@
-import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {Observable} from "rxjs/Observable";
-import {DirectUploadDocument} from "./direct-upload.component";
-import {AppSettings} from "../app.settings";
-import {ShowError, ShowMessage} from "../utilities/messageBox";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { Observable } from "rxjs/Observable";
+import { DirectUploadDocument } from "./direct-upload.component";
+import { AppSettings } from "../app.settings";
+import { ShowError, ShowMessage } from "../utilities/messageBox";
 
 @Injectable()
 export class DirectUploadService {

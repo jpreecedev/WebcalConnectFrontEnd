@@ -1,9 +1,9 @@
-﻿import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {Observable} from "rxjs/Observable";
-import {License, Client} from "./software-licenses.component";
-import {AppSettings} from "../app.settings";
+﻿import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { Observable } from "rxjs/Observable";
+import { License, Client } from "./software-licenses.component";
+import { AppSettings } from "../app.settings";
 
 @Injectable()
 export class SoftwareLicensesService {
@@ -25,12 +25,12 @@ export class SoftwareLicensesService {
                 return response.json();
             });
     }
-    
-    deleteClient(client: Client):Observable<Response>{
+
+    deleteClient(client: Client): Observable<Response> {
         return this.httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ clientAccessId: client.accessId }));
     }
-    
-    deleteLicense(client: Client, license: License):Observable<Response>{
+
+    deleteLicense(client: Client, license: License): Observable<Response> {
         return this.httpService.delete(`${AppSettings.API_ENDPOINT}/licenses/license`, JSON.stringify({ clientAccessId: client.accessId, licenseAccessId: license.accessId }));
     }
 

@@ -1,11 +1,11 @@
-import {Component} from "@angular/core";
-import {Router} from "@angular/router-deprecated";
-import {HttpService} from "../utilities/HttpService";
-import {Response} from "@angular/http";
-import {RegisterUserService} from "./register-user.service";
-import {WCButtonComponent} from "../utilities/wc-button/wc-button.component";
-import {ShowMessage, ShowError} from "../utilities/messageBox";
-import {DatePickerComponent} from "../utilities/date-picker/date-picker.component";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router-deprecated";
+import { HttpService } from "../utilities/HttpService";
+import { Response } from "@angular/http";
+import { RegisterUserService } from "./register-user.service";
+import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { ShowMessage, ShowError } from "../utilities/messageBox";
+import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
 
 export interface UserRegistration {
     emailAddress: string;
@@ -51,7 +51,7 @@ export class RegisterUserComponent {
         },
         (error: any) => {
             this.isRequesting = false;
-            ShowError("Unable to register user, please try again later.", error);;
+            ShowError("Unable to register user, please try again later.", error);
         },
         () => {
             this.isRequesting = false;
@@ -68,7 +68,7 @@ export class RegisterUserComponent {
             this.validationErrors += "Confirm password is too short<br/>";
         }
         if (this.userRegistration.password !== this.confirmPassword) {
-            this.validationErrors += "Passwords do not match<br/>"
+            this.validationErrors += "Passwords do not match<br/>";
         }
 
         return !this.validationErrors;
@@ -86,7 +86,7 @@ export class RegisterUserComponent {
             licenseKey: "",
             password: ""
         };
-        
+
         this.confirmPassword = "";
     }
 

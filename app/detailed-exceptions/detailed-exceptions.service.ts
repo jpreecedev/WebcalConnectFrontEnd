@@ -1,9 +1,9 @@
-import {Injectable} from "@angular/core";
-import {Response} from "@angular/http";
-import {HttpService} from "../utilities/HttpService";
-import {Observable} from "rxjs/Observable";
-import {AppSettings} from "../app.settings";
-import {ShowError, ShowMessage} from "../utilities/messageBox";
+import { Injectable } from "@angular/core";
+import { Response } from "@angular/http";
+import { HttpService } from "../utilities/HttpService";
+import { Observable } from "rxjs/Observable";
+import { AppSettings } from "../app.settings";
+import { ShowError, ShowMessage } from "../utilities/messageBox";
 
 @Injectable()
 export class DetailedExceptionsService {
@@ -15,9 +15,9 @@ export class DetailedExceptionsService {
     getDetailedExceptions(): Observable<Response> {
         return this.httpService.get(`${AppSettings.API_ENDPOINT}/detailedexceptions/`);
     }
-    
-    deleteDetailedException(id: number): Observable<Response>{
-        return this.httpService.delete(`${AppSettings.API_ENDPOINT}/detailedexceptions`, JSON.stringify({id: id}));
+
+    deleteDetailedException(id: number): Observable<Response> {
+        return this.httpService.delete(`${AppSettings.API_ENDPOINT}/detailedexceptions`, JSON.stringify({ id: id }));
     }
 
     showRawImage(id: Number): void {
