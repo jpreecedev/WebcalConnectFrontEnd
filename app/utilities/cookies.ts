@@ -5,7 +5,7 @@ export class Cookie {
 		name = myWindow.escape(name);
 		let regexp = new RegExp("(?:^" + name + "|;\\s*" + name + ")=(.*?)(?:;|$)", "g");
 		let result = regexp.exec(document.cookie);
-		return (result === undefined) ? undefined : myWindow.unescape(result[1]);
+		return (result === null) ? null : myWindow.unescape(result[1]);
 	}
 
 	public static setCookie(name: string, value: string, expires?: number, path?: string, domain?: string) {
