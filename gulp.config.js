@@ -22,6 +22,7 @@ module.exports = function () {
             "node_modules/@angular/**/*.umd.js",
             "node_modules/rxjs/**/*.js",
             "node_modules/moment/moment.js",
+            "node_modules/angulartics2/src/**/*.js"
         ],
         libJs: [
             "node_modules/core-js/client/shim.min.js",
