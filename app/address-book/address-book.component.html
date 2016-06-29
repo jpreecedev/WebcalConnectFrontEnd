@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Address Book</h1>
+    <hr/>
+
+    <div class="row">
+        <div class="col-xs-12 text-right" *ngIf="!isRequesting && addressBookEntries && addressBookEntries.length > 0">
+            <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
+        </div>
+    </div>
+
+    <p class="text-center" *ngIf="!isRequesting && (!addressBookEntries || addressBookEntries.length === 0)">No data to display</p>
+
+    <spinner *ngIf="isRequesting" [isRunning]="isRequesting"></spinner>
+
+    <div class="table-responsive" *ngIf="addressBookEntries && addressBookEntries.length > 0">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Secondary Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let addressBookEntry of addressBookEntries | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }">
+                    <td>{{addressBookEntry.name}}</td>
+                    <td>{{addressBookEntry.address}}</td>
+                    <td>{{addressBookEntry.email}}</td>
+                    <td>{{addressBookEntry.secondaryEmail}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

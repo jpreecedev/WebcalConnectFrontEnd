@@ -7,6 +7,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { CalibrationsDueComponent } from "./calibrations-due/calibrations-due.component";
 import { GenerateEmailComponent } from "./generate-email/generate-email.component";
 import { InspectionDataComponent } from "./inspection-data/inspection-data.component";
+import { AddressBookComponent } from "./address-book/address-book.component";
 import { RecentCalibrationsComponent } from "./recent-calibrations/recent-calibrations.component";
 import { QCCheckComponent } from "./qc-check/qc-check.component";
 import { CentreCheckComponent } from "./centre-check/centre-check.component";
@@ -53,7 +54,8 @@ export var Routes: Route[] = [
     { path: "/manage-access", name: "ManageAccess", role: "Administrator", component: ManageAccessComponent },
     { path: "/software-licenses", name: "SoftwareLicenses", role: "Administrator", component: SoftwareLicensesComponent },
     { path: "/detailed-exceptions", name: "DetailedExceptions", role: "Administrator", component: DetailedExceptionsComponent },
-    { path: "/direct-upload", name: "DirectUpload", role: "DirectUpload", component: DirectUploadComponent }
+    { path: "/direct-upload", name: "DirectUpload", role: "DirectUpload", component: DirectUploadComponent },
+    { path: "/address-book", name: "AddressBook", role: "TachographCentre", component: AddressBookComponent }
 ];
 
 @Component({

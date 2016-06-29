@@ -28,7 +28,7 @@ export class DetailedExceptionsComponent implements OnInit {
 
     detailedExceptions: DetailedException[];
 
-    constructor(private service: DetailedExceptionsService, private http: Http) {
+    constructor(private service: DetailedExceptionsService) {
     }
 
     ngOnInit(): void {

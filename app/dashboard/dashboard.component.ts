@@ -24,7 +24,8 @@ export class DashboardComponent implements OnInit {
             <MenuItem>{ icon: "fa-bar-chart", routerLink: "StatusReport", text: "Status Report" },
             <MenuItem>{ icon: "fa-list-alt", routerLink: "CalibrationsDue", text: "Calibrations Due" },
             <MenuItem>{ icon: "fa-envelope", routerLink: "GenerateEmail", text: "Generate Email" },
-            <MenuItem>{ icon: "fa-search", routerLink: "InspectionData", text: "Inspection Data" }
+            <MenuItem>{ icon: "fa-search", routerLink: "InspectionData", text: "Inspection Data" },
+            <MenuItem>{ icon: "fa-book", routerLink: "AddressBook", text: "Address Book" }
         ];
 
         if (isAdministrator()) {
