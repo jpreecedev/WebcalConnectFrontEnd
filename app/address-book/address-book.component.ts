@@ -13,6 +13,7 @@ export interface AddressBookEntry {
     address: string;
     email: string;
     secondaryEmail: string;
+    isEditing: boolean;
 }
 
 @Component({
@@ -27,39 +28,74 @@ export class AddressBookComponent implements OnInit {
     private isRequesting: boolean;
     private isUpdating: boolean;
     private addressBookEntries: AddressBookEntry[];
+    private filteredAddressBookEntries: AddressBookEntry[];
+    private selectedAddressBookEntry: AddressBookEntry;
+    private originalCopy: AddressBookEntry;
 
     private page: number = 1;
 
     constructor(private service: AddressBookService) {
-
+        this.selectedAddressBookEntry = <AddressBookEntry>{};
     }
 
     ngOnInit() {
         this.isRequesting = true;
         this.service.getAddressBook().subscribe((response: Response) => {
-            this.addressBookEntries = response.json();
+            this.filteredAddressBookEntries = this.addressBookEntries = response.json();
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError("Unable to get address book, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError("Unable to get address book, please try again later.", error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     updateEntry(entry: AddressBookEntry) {
         this.isUpdating = true;
         this.service.updateEntry(entry).subscribe((response: Response) => {
-
+            entry.isEditing = false;
         },
         (error: any) => {
             this.isUpdating = false;
+            entry.isEditing = false;
             ShowError("Unable to update address book, please try again later.", error);
         },
         () => {
             this.isUpdating = false;
+            entry.isEditing = false;
         });
+    }
+
+    cancel(entry: AddressBookEntry) {
+        if (!this.originalCopy) {
+            return;
+        }
+        entry.isEditing = false;
+        entry.email = this.originalCopy.email;
+        entry.secondaryEmail = this.originalCopy.secondaryEmail;
+        this.updateEntry(this.originalCopy);
+    }
+
+    contactNameChanged(contactName: string): void {
+        if (!contactName) {
+            this.filteredAddressBookEntries = this.addressBookEntries;
+            return;
+        }
+
+        this.filteredAddressBookEntries = this.addressBookEntries.filter((item: AddressBookEntry) => {
+            if (!item.name) {
+                return false;
+            }
+            return item.name.toLowerCase().indexOf(contactName.toLowerCase()) > -1;
+        });
+    }
+
+    selectContactName(addressBookEntry: AddressBookEntry): void {
+        this.originalCopy = JSON.parse(JSON.stringify(addressBookEntry));     
+        this.addressBookEntries.forEach(c => c.isEditing = false);
+        addressBookEntry.isEditing = true;
     }
 
 }
