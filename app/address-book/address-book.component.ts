@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from "@angular/http";
+import { RouteParams } from "@angular/router-deprecated";
 import { AddressBookService } from "./address-book.service";
 import { HttpService } from "../utilities/HttpService";
 import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
@@ -33,23 +34,35 @@ export class AddressBookComponent implements OnInit {
     private originalCopy: AddressBookEntry;
 
     private page: number = 1;
+    private routeCustomer: string;
+    private contactName: string;
 
-    constructor(private service: AddressBookService) {
+    constructor(private service: AddressBookService, private routeParams: RouteParams) {
         this.selectedAddressBookEntry = <AddressBookEntry>{};
+
+        var customer = routeParams.get("customerName");
+        if (customer) {
+            this.routeCustomer = customer;
+        }
     }
 
     ngOnInit() {
         this.isRequesting = true;
         this.service.getAddressBook().subscribe((response: Response) => {
             this.filteredAddressBookEntries = this.addressBookEntries = response.json();
+
+            if (this.routeCustomer){
+                this.contactNameChanged(this.routeCustomer);           
+                this.contactName = this.routeCustomer;     
+            }
         },
-            (error: any) => {
-                this.isRequesting = false;
-                ShowError("Unable to get address book, please try again later.", error);
-            },
-            () => {
-                this.isRequesting = false;
-            });
+        (error: any) => {
+            this.isRequesting = false;
+            ShowError("Unable to get address book, please try again later.", error);
+        },
+        () => {
+            this.isRequesting = false;
+        });
     }
 
     updateEntry(entry: AddressBookEntry) {
@@ -93,7 +106,7 @@ export class AddressBookComponent implements OnInit {
     }
 
     selectContactName(addressBookEntry: AddressBookEntry): void {
-        this.originalCopy = JSON.parse(JSON.stringify(addressBookEntry));     
+        this.originalCopy = JSON.parse(JSON.stringify(addressBookEntry));
         this.addressBookEntries.forEach(c => c.isEditing = false);
         addressBookEntry.isEditing = true;
     }

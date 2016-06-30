@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router-deprecated";
 import { Response } from "@angular/http";
 import { HttpService } from "../utilities/HttpService";
 import { RecentCalibrationsService } from "./recent-calibrations.service";
@@ -47,7 +48,7 @@ export class RecentCalibrationsComponent implements OnInit {
 
     private page: number = 1;
 
-    constructor(private service: RecentCalibrationsService) {
+    constructor(private service: RecentCalibrationsService, private router: Router) {
         var d = new Date();
         d.setDate(d.getDate() - 28);
         this.from = d.toISOString().split("T")[0];
@@ -169,6 +170,10 @@ export class RecentCalibrationsComponent implements OnInit {
 
     toChanged(to: string) {
         this.to = to;
+    }
+
+    editCustomer(customerName: string){
+        this.router.navigate(["AddressBook", { customerName: customerName }]);
     }
 
     private selectGridData(item: RecentCalibration): Array<any> {

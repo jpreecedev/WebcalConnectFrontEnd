@@ -51,7 +51,7 @@
                     <th>Registration</th>
                     <th>Technician</th>
                     <th>Customer</th>
-                    <th>Actions</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,7 +67,10 @@
                     <td>{{recentCalibration.technician}}</td>
                     <td>{{recentCalibration.customer}}</td>
                     <td>
-                        <button class="btn btn-secondary" (click)="emailCertificate($event, recentCalibration)">Email</button>
+                        <div class="no-wrap">
+                            <button class="btn btn-secondary" (click)="emailCertificate($event, recentCalibration)">Email</button>
+                            <button class="btn btn-secondary" (click)="editCustomer(recentCalibration.customer)">Edit Customer</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>
