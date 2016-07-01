@@ -24,7 +24,7 @@ export interface DetailedException {
 export class DetailedExceptionsComponent implements OnInit {
 
     public paginationConfig: IPaginationInstance = {
-        id: "recentCalibrations",
+        id: "detailedExceptions",
         itemsPerPage: 10,
         currentPage: 1
     };
