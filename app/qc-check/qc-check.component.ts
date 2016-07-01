@@ -4,7 +4,7 @@ import { HttpService } from "../utilities/HttpService";
 import { QCCheckService } from "./qc-check.service";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 import { TickPipe } from "../utilities/tick.pipe";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp } from "ng2-pagination";
 import { ShowError } from "../utilities/messageBox";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
@@ -22,7 +22,7 @@ export interface QCCheck {
 @Component({
     templateUrl: "app/qc-check/qc-check.component.html",
     styleUrls: ["app/qc-check/styles.css"],
-    providers: [QCCheckService, HttpService, PaginationService],
+    providers: [QCCheckService, HttpService],
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
 })

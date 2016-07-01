@@ -24,7 +24,7 @@
     </div>
     <hr />
     <div>
-        <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
+        <pagination-controls class="text-right" [id]="paginationConfig.id" (pageChange)="onPageChange($event)"></pagination-controls>
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -41,7 +41,7 @@
                         <spinner [isRunning]="isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="let client of clients | clientName:filterValue | paginate: { itemsPerPage: 10, currentPage: p }">
+                <tr *ngFor="let client of clients | clientName:filterValue | paginate: paginationConfig">
                     <td>{{client.name}}</td>
                     <td>{{client.licenses.length}}</td>
                     <td class="actions text-right">

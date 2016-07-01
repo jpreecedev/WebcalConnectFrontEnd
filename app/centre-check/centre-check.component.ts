@@ -5,7 +5,7 @@ import { CentreCheckService } from "./centre-check.service";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 import { TickPipe } from "../utilities/tick.pipe";
 import { ShowError } from "../utilities/messageBox";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 
@@ -21,11 +21,17 @@ export interface CentreCheck {
 @Component({
     templateUrl: "app/centre-check/centre-check.component.html",
     styleUrls: ["app/centre-check/styles.css"],
-    providers: [CentreCheckService, HttpService, PaginationService],
+    providers: [CentreCheckService, HttpService],
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
 })
 export class CentreCheckComponent implements OnInit {
+
+    public paginationConfig: IPaginationInstance = {
+        id: "centreCheck",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
 
     private centreChecks: CentreCheck[];
     private isRequesting: boolean;
@@ -38,13 +44,13 @@ export class CentreCheckComponent implements OnInit {
         this.service.getCentreChecks().subscribe((response: Response) => {
             this.centreChecks = response.json();
         },
-            (error: any) => {
-                ShowError("Unable to get list of centre checks, please try again later.", error);
-                this.isRequesting = false;
-            },
-            () => {
-                this.isRequesting = false;
-            });
+        (error: any) => {
+            ShowError("Unable to get list of centre checks, please try again later.", error);
+            this.isRequesting = false;
+        },
+        () => {
+            this.isRequesting = false;
+        });
     }
 
     downloadPdf($event: Event, selectedCentreCheck: CentreCheck): void {
@@ -57,5 +63,9 @@ export class CentreCheckComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
     }
 }

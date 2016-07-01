@@ -6,7 +6,7 @@ import { RecentCalibrationsService } from "./recent-calibrations.service";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
 import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import { CsvHelper } from "../utilities/csv.helper";
 import { ShowMessage, ShowError, ShowDialog } from "../utilities/messageBox";
 import { Observable } from "rxjs/Observable";
@@ -27,7 +27,7 @@ export interface RecentCalibration {
 @Component({
     templateUrl: "app/recent-calibrations/recent-calibrations.component.html",
     styleUrls: ["app/recent-calibrations/styles.css"],
-    providers: [RecentCalibrationsService, HttpService, PaginationService],
+    providers: [RecentCalibrationsService, HttpService],
     pipes: [PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent, DatePickerComponent]
 })
@@ -38,6 +38,12 @@ export class RecentCalibrationsComponent implements OnInit {
     public from: string;
     public to: string;
 
+    public paginationConfig: IPaginationInstance = {
+        id: "recentCalibrations",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
+
     private recentCalibrations: RecentCalibration[];
     private filteredCalibrations: RecentCalibration[];
 
@@ -45,8 +51,6 @@ export class RecentCalibrationsComponent implements OnInit {
     private isDownloading: boolean = false;
     private isEmailing: boolean = false;
     private depotNames: string[];
-
-    private page: number = 1;
 
     constructor(private service: RecentCalibrationsService, private router: Router) {
         var d = new Date();
@@ -69,13 +73,13 @@ export class RecentCalibrationsComponent implements OnInit {
             this.selectedDepotName = "- All -";
             this.isRequesting = false;
         },
-            (error: any) => {
-                this.isRequesting = false;
-                ShowError("Unable to get list of recent calibrations, please try again later.", error);
-            },
-            () => {
-                this.isRequesting = false;
-            });
+        (error: any) => {
+            this.isRequesting = false;
+            ShowError("Unable to get list of recent calibrations, please try again later.", error);
+        },
+        () => {
+            this.isRequesting = false;
+        });
     }
 
     getDepotNames(): string[] {
@@ -99,7 +103,7 @@ export class RecentCalibrationsComponent implements OnInit {
             }
             return this.selectedDepotName === "- All -" || item.depotName === this.selectedDepotName;
         })
-            .slice((this.page - 1) * 10, ((this.page - 1) * 10) + 10);
+        .slice((this.paginationConfig.currentPage - 1) * 10, ((this.paginationConfig.currentPage - 1) * 10) + 10);
     }
 
     downloadCertificate($event: Event, selectedCalibration: RecentCalibration): void {
@@ -129,7 +133,7 @@ export class RecentCalibrationsComponent implements OnInit {
     downloadGridData(): void {
         this.isDownloading = true;
         var csvHelper: CsvHelper = new CsvHelper();
-        csvHelper.download(this.getGridData(), this.page, this.selectGridData);
+        csvHelper.download(this.getGridData(), this.paginationConfig.currentPage, this.selectGridData);
         this.isDownloading = false;
     }
 
@@ -172,7 +176,7 @@ export class RecentCalibrationsComponent implements OnInit {
         this.to = to;
     }
 
-    editCustomer(customerName: string){
+    editCustomer(customerName: string) {
         this.router.navigate(["AddressBook", { customerName: customerName }]);
     }
 
@@ -206,5 +210,9 @@ export class RecentCalibrationsComponent implements OnInit {
                 }
             }
         });
+    }
+
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
     }
 }

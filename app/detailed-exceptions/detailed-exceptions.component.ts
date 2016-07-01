@@ -3,7 +3,7 @@ import { Response, Http } from "@angular/http";
 import { DetailedExceptionsService } from "./detailed-exceptions.service";
 import { HttpService } from "../utilities/HttpService";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import { ShowError, ShowMessage } from "../utilities/messageBox";
 import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
 
@@ -17,16 +17,22 @@ export interface DetailedException {
 @Component({
     templateUrl: "app/detailed-exceptions/detailed-exceptions.component.html",
     styleUrls: ["app/detailed-exceptions/styles.css"],
-    providers: [DetailedExceptionsService, HttpService, PaginationService],
+    providers: [DetailedExceptionsService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
     pipes: [PaginatePipe]
 })
 export class DetailedExceptionsComponent implements OnInit {
 
+    public paginationConfig: IPaginationInstance = {
+        id: "recentCalibrations",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
+
+    public detailedExceptions: DetailedException[];
+
     private isRequesting: boolean;
     private isDeleting: boolean;
-
-    detailedExceptions: DetailedException[];
 
     constructor(private service: DetailedExceptionsService) {
     }
@@ -83,5 +89,9 @@ export class DetailedExceptionsComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
     }
 }

@@ -20,8 +20,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 text-right" *ngIf="!isRequesting && uploadedCertificates && uploadedCertificates.length > 0">
-        <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
+      <div class="col-xs-12 text-right">
+        <pagination-controls class="text-right" [id]="paginationConfig.id" (pageChange)="onPageChange($event)"></pagination-controls>
       </div>
     </div>
   </form>
@@ -40,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let uploadedCertificate of uploadedCertificates | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }"
+        <tr *ngFor="let uploadedCertificate of uploadedCertificates | paginate: paginationConfig"
           class="pointer" (click)="downloadCertificate(uploadedCertificate)">
           <td>{{uploadedCertificate.fileName}}</td>
           <td>{{asDate(uploadedCertificate.uploaded) | date}}</td>

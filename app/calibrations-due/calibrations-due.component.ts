@@ -3,7 +3,7 @@ import { Response, Http } from "@angular/http";
 import { CalibrationsDueService } from "./calibrations-due.service";
 import { HttpService } from "../utilities/HttpService";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import { DepotNamePipe } from "./depot-name.pipe";
 import { ShowError } from "../utilities/messageBox";
 
@@ -24,17 +24,23 @@ export interface CalibrationDue {
 @Component({
     templateUrl: "app/calibrations-due/calibrations-due.component.html",
     styleUrls: ["app/calibrations-due/styles.css"],
-    providers: [CalibrationsDueService, HttpService, PaginationService],
+    providers: [CalibrationsDueService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp],
     pipes: [PaginatePipe, DepotNamePipe]
 })
 export class CalibrationsDueComponent implements OnInit {
 
+    public calibrationsDue: CalibrationDue[];
+
+    public paginationConfig: IPaginationInstance = {
+        id: "calibrationsDue",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
+
     private selectedDepotName: string;
     private depotNames: string[];
     private isRequesting: boolean;
-
-    calibrationsDue: CalibrationDue[];
 
     constructor(private service: CalibrationsDueService, private http: Http) {
     }
@@ -47,13 +53,13 @@ export class CalibrationsDueComponent implements OnInit {
             this.depotNames.unshift("- All -");
             this.selectedDepotName = "- All -";
         },
-            (error: any) => {
-                this.isRequesting = false;
-                ShowError("Unable to get list of calibrations due, please try again later.", error);
-            },
-            () => {
-                this.isRequesting = false;
-            });
+        (error: any) => {
+            this.isRequesting = false;
+            ShowError("Unable to get list of calibrations due, please try again later.", error);
+        },
+        () => {
+            this.isRequesting = false;
+        });
     }
 
     downloadCertificate($event: Event, selectedCalibration: CalibrationDue): void {
@@ -80,5 +86,9 @@ export class CalibrationsDueComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
     }
 }

@@ -2,8 +2,8 @@
     <h1>Centre Check</h1>
     <hr/>
     <div class="row">
-        <div class="col-xs-12" *ngIf="!isRequesting && centreChecks && centreChecks.length > 1">
-            <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
+        <div class="col-xs-12">
+            <pagination-controls class="text-right" [id]="paginationConfig.id" (pageChange)="onPageChange($event)"></pagination-controls>
         </div>
     </div>
     <div class="row">
@@ -28,7 +28,7 @@
                                 <spinner [isRunning]="isRequesting"></spinner>
                             </td>
                         </tr>
-                        <tr *ngFor="let centreCheck of centreChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, centreCheck)">
+                        <tr *ngFor="let centreCheck of centreChecks | paginate: paginationConfig" class="pointer" (click)="downloadPdf($event, centreCheck)">
                             <td><img src="/img/centrecheck.png" alt="Centre Check" /> </td>
                             <td>{{centreCheck.centreName}}</td>
                             <td>{{centreCheck.sealNumber}}</td>

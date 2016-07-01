@@ -3,7 +3,7 @@ import { Response } from "@angular/http";
 import { RouteParams } from "@angular/router-deprecated";
 import { AddressBookService } from "./address-book.service";
 import { HttpService } from "../utilities/HttpService";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import { ShowError, ShowMessage } from "../utilities/messageBox";
 import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
@@ -20,11 +20,17 @@ export interface AddressBookEntry {
 @Component({
     templateUrl: "app/address-book/address-book.component.html",
     styleUrls: ["app/address-book/styles.css"],
-    providers: [AddressBookService, HttpService, PaginationService],
+    providers: [AddressBookService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
     pipes: [PaginatePipe]
 })
 export class AddressBookComponent implements OnInit {
+
+    public paginationConfig: IPaginationInstance = {
+        id: "addressBook",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
 
     private isRequesting: boolean;
     private isUpdating: boolean;
@@ -33,7 +39,6 @@ export class AddressBookComponent implements OnInit {
     private selectedAddressBookEntry: AddressBookEntry;
     private originalCopy: AddressBookEntry;
 
-    private page: number = 1;
     private routeCustomer: string;
     private contactName: string;
 
@@ -111,4 +116,7 @@ export class AddressBookComponent implements OnInit {
         addressBookEntry.isEditing = true;
     }
 
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
+    }
 }

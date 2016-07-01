@@ -2,7 +2,7 @@
     <h1>QC Check</h1>
     <hr/>
     <div class="row">
-        <div class="col-xs-12" *ngIf="!isRequesting && qcChecks && qcChecks.length > 1">
+        <div class="col-xs-12">
             <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
         </div>
     </div>

@@ -5,7 +5,7 @@ import { TickPipe } from "../utilities/tick.pipe";
 import { ClientNamePipe } from "./client-name.pipe";
 import { HttpService } from "../utilities/HttpService";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import { ShowError } from "../utilities/messageBox";
 import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
 import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
@@ -27,11 +27,17 @@ export interface Client {
 @Component({
     templateUrl: "app/software-licenses/software-licenses.component.html",
     styleUrls: ["app/software-licenses/styles.css"],
-    providers: [SoftwareLicensesService, HttpService, PaginationService],
+    providers: [SoftwareLicensesService, HttpService],
     pipes: [TickPipe, ClientNamePipe, PaginatePipe],
     directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp, DatePickerComponent]
 })
 export class SoftwareLicensesComponent implements OnInit {
+
+    public paginationConfig: IPaginationInstance = {
+        id: "softwareLicenses",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
 
     private clients: Client[];
     private selectedClient: Client;
@@ -147,5 +153,9 @@ export class SoftwareLicensesComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
     }
 }

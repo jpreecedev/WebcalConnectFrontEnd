@@ -3,8 +3,8 @@
     <hr/>
 
     <div class="row">
-        <div class="col-xs-12 text-right" *ngIf="!isRequesting && addressBookEntries && addressBookEntries.length > 0">
-            <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
+        <div class="col-xs-12 text-right">
+            <pagination-controls class="text-right" [id]="paginationConfig.id" (pageChange)="onPageChange($event)"></pagination-controls>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let addressBookEntry of filteredAddressBookEntries | paginate: { itemsPerPage: 10, currentPage: page, totalItems: total }">
+                <tr *ngFor="let addressBookEntry of filteredAddressBookEntries | paginate: paginationConfig">
                     <td>{{addressBookEntry.name}}</td>
                     <td>{{addressBookEntry.address}}</td>
                     <td><span *ngIf="!addressBookEntry.isEditing">{{addressBookEntry.email}}</span><input *ngIf="addressBookEntry.isEditing" type="email" id="email" name="email" class="form-control" [(ngModel)]="addressBookEntry.email"></td>

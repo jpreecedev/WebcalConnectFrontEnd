@@ -3,7 +3,7 @@ import { Response } from "@angular/http";
 import { HttpService } from "../utilities/HttpService";
 import { DirectUploadService } from "./direct-upload.service";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationService, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import { ShowMessage, ShowError } from "../utilities/messageBox";
 import { Observable } from "rxjs/Observable";
 import { AppSettings } from "../app.settings";
@@ -18,11 +18,17 @@ export interface DirectUploadDocument {
 @Component({
     templateUrl: "app/direct-upload/direct-upload.component.html",
     styleUrls: ["app/direct-upload/styles.css"],
-    providers: [DirectUploadService, HttpService, PaginationService, FileUploadService],
+    providers: [DirectUploadService, HttpService, FileUploadService],
     pipes: [PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
 })
 export class DirectUploadComponent implements OnInit {
+
+    public paginationConfig: IPaginationInstance = {
+        id: "directUpload",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
 
     private uploadedCertificates: DirectUploadDocument[];
 
@@ -102,5 +108,9 @@ export class DirectUploadComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
     }
 }

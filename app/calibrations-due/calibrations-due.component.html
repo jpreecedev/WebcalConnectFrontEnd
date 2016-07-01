@@ -12,8 +12,8 @@
                     </select>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6" *ngIf="!isRequesting">
-                <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
+            <div class="col-xs-12 col-sm-6">
+                <pagination-controls class="text-right" [id]="paginationConfig.id" (pageChange)="onPageChange($event)"></pagination-controls>
             </div>
         </div>
     </form>
@@ -40,7 +40,7 @@
                         <spinner [isRunning]="isRequesting"></spinner>
                     </td>
                 </tr>
-                <tr *ngFor="let calibrationDue of calibrationsDue | depotname : selectedDepotName | paginate: { itemsPerPage: 10, currentPage: p }"
+                <tr *ngFor="let calibrationDue of calibrationsDue | depotname : selectedDepotName | paginate: paginationConfig"
                 class="pointer" (click)="downloadCertificate($event, calibrationDue)">
                     <td><img src="/img/{{calibrationDue.documentIcon}}.png" [attr.alt]="calibrationDue.documentType" /> </td>
                     <td>{{asDate(calibrationDue.date) | date}}</td>
