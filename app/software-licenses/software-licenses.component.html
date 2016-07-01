@@ -24,7 +24,7 @@
     </div>
     <hr />
     <div>
-        <pagination-controls class="text-right" [id]="paginationConfig.id" (pageChange)="onPageChange($event)"></pagination-controls>
+        <pagination-controls class="text-right" [id]="paginationConfig.id" [autoHide]="true" [directionLinks]="true" (pageChange)="onPageChange($event)"></pagination-controls>
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-hover">

@@ -3,7 +3,7 @@
     <hr/>
     <div class="row">
         <div class="col-xs-12">
-            <pagination-controls class="text-right" [id]="paginationConfig.id" (pageChange)="onPageChange($event)"></pagination-controls>
+            <pagination-controls class="text-right" [id]="paginationConfig.id" [autoHide]="true" [directionLinks]="true" (pageChange)="onPageChange($event)"></pagination-controls>
         </div>
     </div>
     <div class="row">

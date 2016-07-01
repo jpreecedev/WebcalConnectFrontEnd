@@ -3,7 +3,7 @@
     <hr/>
     <div class="row">
         <div class="col-xs-12">
-            <pagination-controls class="text-right" (pageChange)="p = $event; page = p;" #api></pagination-controls>
+            <pagination-controls class="text-right" [id]="paginationConfig.id" [autoHide]="true" [directionLinks]="true" (pageChange)="onPageChange($event)"></pagination-controls>
         </div>
     </div>
     <div class="row">
@@ -29,7 +29,7 @@
                                 <spinner [isRunning]="isRequesting"></spinner>
                             </td>
                         </tr>
-                        <tr *ngFor="let qcCheck of qcChecks | paginate: { itemsPerPage: 10, currentPage: p }" class="pointer" (click)="downloadPdf($event, qcCheck)">
+                        <tr *ngFor="let qcCheck of qcChecks | paginate: paginationConfig" class="pointer" (click)="downloadPdf($event, qcCheck)">
                             <td><img src="/img/qccheck.png" alt="QC Check" /> </td>
                             <td>{{qcCheck.centreName}}</td>
                             <td>{{asDate(qcCheck.date) | date}}</td>

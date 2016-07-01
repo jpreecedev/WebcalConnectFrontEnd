@@ -4,7 +4,7 @@ import { HttpService } from "../utilities/HttpService";
 import { QCCheckService } from "./qc-check.service";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 import { TickPipe } from "../utilities/tick.pipe";
-import { PaginatePipe, PaginationControlsCmp } from "ng2-pagination";
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
 import { ShowError } from "../utilities/messageBox";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
@@ -30,6 +30,12 @@ export class QCCheckComponent implements OnInit {
 
     public selectedDepotName: string;
 
+    public paginationConfig: IPaginationInstance = {
+        id: "qcCheck",
+        itemsPerPage: 10,
+        currentPage: 1
+    };
+
     private qcChecks: QCCheck[];
     private isRequesting: boolean;
 
@@ -42,13 +48,13 @@ export class QCCheckComponent implements OnInit {
         this.service.getQCChecks().subscribe((response: Response) => {
             this.qcChecks = response.json();
         },
-            (error: any) => {
-                ShowError("Unable to get a list of QC checks, please try again later.", error);
-                this.isRequesting = false;
-            },
-            () => {
-                this.isRequesting = false;
-            });
+        (error: any) => {
+            ShowError("Unable to get a list of QC checks, please try again later.", error);
+            this.isRequesting = false;
+        },
+        () => {
+            this.isRequesting = false;
+        });
     }
 
     downloadPdf($event: Event, selectedQCCheck: QCCheck): void {
@@ -61,5 +67,9 @@ export class QCCheckComponent implements OnInit {
 
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    onPageChange(number: number) {
+        this.paginationConfig.currentPage = number;
     }
 }
