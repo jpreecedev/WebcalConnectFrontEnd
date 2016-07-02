@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Response } from "@angular/http";
 import { HttpService } from "../utilities/HttpService";
+import { FileUploadService} from "../utilities/file-upload.service";
 import { Observable } from "rxjs/Observable";
 import { AppSettings } from "../app.settings";
 import { StatusReport } from "./status-report.component";
@@ -8,7 +9,7 @@ import { StatusReport } from "./status-report.component";
 @Injectable()
 export class StatusReportService {
 
-    constructor(private httpService: HttpService) {
+    constructor(private httpService: HttpService, private fileUploadService: FileUploadService) {
 
     }
 
@@ -19,4 +20,12 @@ export class StatusReportService {
             });
     }
 
+    sendStatusReportData(userId: number, images: File[], callback: Function): void {
+        this.fileUploadService.upload(`${AppSettings.API_ENDPOINT}/statusreport/${userId}`, images).then(() => {
+            callback();
+        })
+        .catch(() => {
+            callback();
+        });
+    }
 }

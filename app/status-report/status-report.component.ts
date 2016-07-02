@@ -2,12 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { Response } from "@angular/http";
 import { StatusReportService } from "./status-report.service";
 import { HttpService } from "../utilities/HttpService";
+import { FileUploadService } from "../utilities/file-upload.service";
 import { SpinnerComponent } from "../utilities/spinner/spinner.component";
 import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { ShowError } from "../utilities/messageBox";
+import { ShowError, ShowConfirm } from "../utilities/messageBox";
 import { isAdministrator } from "../utilities/Jwt";
+import { Subscription } from "rxjs/Subscription";
 
 declare var Gauge: any;
+declare var Chart: any;
 
 export interface StatusReportTechnician {
     value: number;
@@ -33,7 +36,7 @@ export interface StatusReportUser {
 @Component({
     templateUrl: "app/status-report/status-report.component.html",
     styleUrls: ["app/status-report/styles.css"],
-    providers: [StatusReportService, HttpService],
+    providers: [StatusReportService, HttpService, FileUploadService],
     directives: [SpinnerComponent, WCButtonComponent]
 })
 export class StatusReportComponent implements OnInit {
@@ -43,6 +46,7 @@ export class StatusReportComponent implements OnInit {
     private selectedSiteId: number;
     private hasData: boolean;
     private statusReportData: StatusReport;
+    private isBuildingReport: boolean;
 
     constructor(private service: StatusReportService) {
     }
@@ -51,21 +55,23 @@ export class StatusReportComponent implements OnInit {
         this.loadReport();
     }
 
-    loadReport(): void {
+    loadReport(selectedSiteId?: number, complete?: Function): void {
         this.isRequesting = true;
-        this.service.getStatusReport(this.selectedSiteId).subscribe((response: StatusReport) => {
+        this.service.getStatusReport(selectedSiteId || this.selectedSiteId).subscribe((response: StatusReport) => {
             if (!this.users) {
                 this.users = response.users;
             }
             this.buildChart(response);
         },
-            (error: any) => {
-                ShowError("Unable to get status report, please try again later.", error);
-                this.isRequesting = false;
-            },
-            () => {
-                this.isRequesting = false;
-            });
+        (error: any) => {
+            ShowError("Unable to get status report, please try again later.", error);
+            this.isRequesting = false;
+            this.tryCallback(complete);
+        },
+        () => {
+            this.isRequesting = false;
+            this.tryCallback(complete);
+        });
     }
 
     buildChart(data: StatusReport): void {
@@ -120,7 +126,79 @@ export class StatusReportComponent implements OnInit {
         }, 500);
     }
 
+    tryCallback(callback?: Function): void {
+        if (!callback) {
+            return;
+        }
+
+        setTimeout(() => {
+            callback();
+        }, 4000);
+    }
+
+    buildReport(): void {
+        ShowConfirm("Are you sure you want to generate the status report email data for each user?  This action is long running.", (result: boolean) => {
+            if (result) {
+                this.isBuildingReport = true;
+                this.doBuildReport(0);
+            }
+        });
+    }
+
+    doBuildReport(position: number) {
+        if (!this.users[position]) {
+            this.isBuildingReport = false;
+            return;
+        }
+
+        var siteId = this.users[position].id;
+        this.loadReport(siteId, () => {
+            if (!this.statusReportData) {
+                this.doBuildReport(position += 1);
+                return;
+            }
+
+            var canvases: string[] = ["overall-status", "piechart", "barchart"];
+            var canvasData: File[] = [];
+            canvases.forEach((canvasId: string) => {
+                canvasData.push(this.blobToFile(this.convertCanvasToBlob(<HTMLCanvasElement>document.getElementById(canvasId)), canvasId + ".png"));
+            });
+
+            this.service.sendStatusReportData(siteId, canvasData, () => {
+                this.doBuildReport(position += 1);
+            });
+        });
+    }
+
+    blobToFile(theBlob: Blob, fileName: string): File {
+        var b: any = theBlob;
+        b.lastModifiedDate = new Date();
+        b.name = fileName;
+        return <File>theBlob;
+    }
+
+    convertCanvasToBlob(canvas: HTMLCanvasElement): Blob {
+        return this.dataURItoBlob(canvas.toDataURL("image/png"));
+    }
+
+    dataURItoBlob(dataURI: string): Blob {
+        var byteString = atob(dataURI.split(',')[1]);
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+
+        return new Blob([ab], { type: mimeString });
+    }
+
     asDate(input: string): Date {
         return new Date(input);
+    }
+
+    canBuildReport(): boolean {
+        return new Date().getDate() === 2;
     }
 }
