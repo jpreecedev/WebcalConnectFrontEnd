@@ -8,6 +8,7 @@ import { ROUTER_PROVIDERS } from "@angular/router-deprecated";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { disableDeprecatedForms, provideForms } from "@angular/forms";
 import { PaginationService } from "ng2-pagination";
+import "./site.scss";
 
 if (process.env.ENV === 'production') {
     enableProdMode();
