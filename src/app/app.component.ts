@@ -18,7 +18,7 @@ import { StatusReportComponent } from './status-report/status-report.component';
 import { DetailedExceptionsComponent } from './detailed-exceptions/detailed-exceptions.component';
 import { DirectUploadComponent } from './direct-upload/direct-upload.component';
 
-import { AuthRouterOutletComponent } from './utilities/auth-router/auth-router.component';
+import { AuthRouterOutletDirective } from './utilities/auth-router/auth-router.directive';
 import { JwtHelper } from './utilities/JwtHelper';
 import '../style/app.scss';
 
@@ -59,7 +59,7 @@ export var Routes: Route[] = [
     selector: 'wc-app',
     templateUrl: './app.component.html',
     styleUrls: ['./styles.css'],
-    directives: [...ROUTER_DIRECTIVES, AuthRouterOutletComponent],
+    directives: [...ROUTER_DIRECTIVES, AuthRouterOutletDirective],
     providers: [JwtHelper],
 })
 @RouteConfig(Routes)

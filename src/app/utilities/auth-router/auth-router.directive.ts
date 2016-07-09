@@ -1,12 +1,12 @@
-import { Component, Attribute, ViewContainerRef, DynamicComponentLoader } from '@angular/core';
+import { Directive, Attribute, ViewContainerRef, DynamicComponentLoader } from '@angular/core';
 import { Router, RouterOutlet, ComponentInstruction } from '@angular/router-deprecated';
 import { hasValidToken } from '../Jwt';
 import { Route, Routes } from '../../app.component';
 
-@Component({
-    selector: 'wc-auth-router-outlet'
+@Directive({
+    selector: '[wcAuthRouterOutlet]'
 })
-export class AuthRouterOutletComponent extends RouterOutlet {
+export class AuthRouterOutletDirective extends RouterOutlet {
     private parentRouter: Router;
 
     constructor(_viewContainerRef: ViewContainerRef, _loader: DynamicComponentLoader, _parentRouter: Router, @Attribute('name') nameAttr: string) {

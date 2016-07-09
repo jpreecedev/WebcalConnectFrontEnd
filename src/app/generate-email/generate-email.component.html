@@ -67,7 +67,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let recentCalibration of recentCalibrations">
-                            <td><img [attr.src]="'/images/' + recentCalibration.documentIcon + '.png'" [attr.alt]="recentCalibration.documentType"
+                            <td><img [src]="getIconPath(recentCalibration.documentIcon)" [attr.alt]="recentCalibration.documentType"
                                 /> </td>
                             <td>{{recentCalibration.companyName}}</td>
                             <td>{{recentCalibration.documentType}}</td>
@@ -94,7 +94,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let calibrationDue of calibrationsDue">
-                            <td><img [attr.src]="'/images/' + calibrationDue.documentIcon + '.png'" [attr.alt]="calibrationDue.documentType"
+                            <td><img [src]="getIconPath(calibrationDue.documentIcon)" [attr.alt]="calibrationDue.documentType"
                                 /> </td>
                             <td>{{asDate(calibrationDue.date) | date}}</td>
                             <td>{{asDate(calibrationDue.expiration) | date}}</td>

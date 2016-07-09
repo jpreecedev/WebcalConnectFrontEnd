@@ -72,13 +72,13 @@ export class RecentCalibrationsComponent implements OnInit {
             this.selectedDepotName = '- All -';
             this.isRequesting = false;
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError('Unable to get list of recent calibrations, please try again later.', error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError('Unable to get list of recent calibrations, please try again later.', error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     getDepotNames(): string[] {
@@ -102,7 +102,7 @@ export class RecentCalibrationsComponent implements OnInit {
             }
             return this.selectedDepotName === '- All -' || item.depotName === this.selectedDepotName;
         })
-        .slice((this.paginationConfig.currentPage - 1) * 10, ((this.paginationConfig.currentPage - 1) * 10) + 10);
+            .slice((this.paginationConfig.currentPage - 1) * 10, ((this.paginationConfig.currentPage - 1) * 10) + 10);
     }
 
     downloadCertificate($event: Event, selectedCalibration: RecentCalibration): void {
@@ -213,5 +213,9 @@ export class RecentCalibrationsComponent implements OnInit {
 
     onPageChange(number: number) {
         this.paginationConfig.currentPage = number;
+    }
+
+    getIconPath(documentIcon: string): string {
+        return '/images/' + documentIcon + '.png';
     }
 }

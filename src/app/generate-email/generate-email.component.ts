@@ -158,6 +158,10 @@ export class GenerateEmailComponent implements OnInit {
         return new Date(input);
     }
 
+    getIconPath(documentIcon: string): string {
+        return '/images/' + documentIcon + '.png';
+    }
+
     private showDialog(callback: Function): void {
         ShowDialog({
             title: 'Enter the email address of the recipient',

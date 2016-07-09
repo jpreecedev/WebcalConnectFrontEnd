@@ -58,7 +58,7 @@
                 <tr *ngFor="let recentCalibration of filteredCalibrations | paginate: paginationConfig"
                     class="pointer" (click)="downloadCertificate($event, recentCalibration)">
                     <td>
-                        <img src="'/images/' + recentCalibration.documentIcon + '.png'" [attr.alt]="recentCalibration.documentType" />
+                        <img [src]="getIconPath(recentCalibration.documentIcon)" [attr.alt]="recentCalibration.documentType" />
                     </td>
                     <td>{{recentCalibration.companyName}}</td>
                     <td>{{recentCalibration.documentType}}</td>
