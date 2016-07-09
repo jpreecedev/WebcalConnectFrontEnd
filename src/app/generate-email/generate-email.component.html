@@ -1,0 +1,111 @@
+<div class="container">
+    <h1>Generate Email Report</h1>
+    <hr/>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6" *ngIf="isAdministrator">
+            <div class="form-group">
+                <label for="clientName">Client</label>
+                <select id="clientName" name="clientName" class="form-control" [(ngModel)]="selectedClientId" (change)="clearData()">
+                    <option [value]="item.id" *ngFor="let item of clientNames">{{item.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6" *ngIf="isAdministrator">
+            <div class="form-group">
+                <label for="reportType">Report Type</label>
+                <select id="reportType" name="reportType" class="form-control" [(ngModel)]="reportType">
+                    <option value="RecentCalibrations">Recent Calibrations</option>
+                    <option value="CalibrationsDue">Calibrations Due</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="generateReport">
+        <div class="col-xs-12 col-sm-6">
+            <div class="form-group has-feedback">
+                <date-picker label="From" (dateChanged)="fromChanged($event)" date="{{generateReport.from}}"></date-picker>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6" *ngIf="reportType === 'CalibrationsDue'">
+            <div class="form-group has-feedback">
+                <label for="to">To</label>
+                <input type="date" class="form-control" id="to" name="to" [(ngModel)]="generateReport.to" required>
+                <span class="form-control-feedback"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="!isRequesting">
+        <div class="col-xs-12 col-sm-6">
+            <wc-button (click)="updateReport()" [isDisabled]="isUpdating" [label]="'Update Report'" [workingLabel]="'Updating Report...'"></wc-button>
+            <wc-button (click)="sendEmail()" [isDisabled]="isSending" [label]="'Send Email'" [workingLabel]="'Sending Email...'"></wc-button>
+        </div>
+    </div>
+    <div class="row">
+        <spinner [isRunning]="isRequesting || isUpdating"></spinner>
+    </div>
+    <hr *ngIf="generateReport" />
+
+    <div class="email-template" *ngIf="generateReport">
+        <div>
+            <img style="max-width:200px; margin-top: -7px; margin-left: auto; margin-right: auto; display: block;" src="../../../public/images/webcal.png"
+            alt="Webcal Calibration Software">
+        </div>
+        <div>
+            <h2>Your {{reportType | splitByCapitals}} Report</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" *ngIf="reportType === 'RecentCalibrations'">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Company Name</th>
+                            <th>Doc Type</th>
+                            <th>Expiration</th>
+                            <th>Registration</th>
+                            <th>Technician</th>
+                            <th>Customer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let recentCalibration of recentCalibrations">
+                            <td><img [attr.src]="'../../../public/images/' + recentCalibration.documentIcon + '.png'" [attr.alt]="recentCalibration.documentType"
+                                /> </td>
+                            <td>{{recentCalibration.companyName}}</td>
+                            <td>{{recentCalibration.documentType}}</td>
+                            <td>{{asDate(recentCalibration.expiration) | date}}</td>
+                            <td>{{recentCalibration.registration}}</td>
+                            <td>{{recentCalibration.technician}}</td>
+                            <td>{{recentCalibration.customer}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" *ngIf="reportType === 'CalibrationsDue'">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Date</th>
+                            <th>Expiration</th>
+                            <th>Registration</th>
+                            <th>Technician</th>
+                            <th>Customer</th>
+                            <th>Vehicle Manufacturer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let calibrationDue of calibrationsDue">
+                            <td><img [attr.src]="'../../../public/images/' + calibrationDue.documentIcon + '.png'" [attr.alt]="calibrationDue.documentType"
+                                /> </td>
+                            <td>{{asDate(calibrationDue.date) | date}}</td>
+                            <td>{{asDate(calibrationDue.expiration) | date}}</td>
+                            <td>{{calibrationDue.registration}}</td>
+                            <td>{{calibrationDue.technician}}</td>
+                            <td>{{calibrationDue.customer}}</td>
+                            <td>{{calibrationDue.vehicleManufacturer}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

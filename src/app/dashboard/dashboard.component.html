@@ -1,0 +1,12 @@
+<div class="container">
+    <h1>Dashboard</h1>
+    <hr />
+    <ul class="dashboard-menu">
+        <li class="col-xs-6 col-sm-3 pointer" *ngFor="let dashboardItem of dashboardItems" (click)="navigate(dashboardItem)">
+            <p>
+                <i class="fa {{dashboardItem.icon}} fa-4x"></i>
+                <br /><span>{{dashboardItem.text}}</span>
+            </p>
+        </li>
+    </ul>
+</div>

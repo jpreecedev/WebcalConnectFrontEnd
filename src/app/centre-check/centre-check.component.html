@@ -1,0 +1,43 @@
+<div class="container">
+    <h1>Centre Check</h1>
+    <hr/>
+    <div class="row">
+        <div class="col-xs-12">
+            <pagination-controls class="text-right" [id]="paginationConfig.id" [autoHide]="true" [directionLinks]="true" (pageChange)="onPageChange($event)"></pagination-controls>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            
+            <p class="text-center" *ngIf="!isRequesting && (!centreChecks || centreChecks.length === 0)">No data to display</p>
+            
+            <div class="table-responsive" *ngIf="centreChecks && centreChecks.length > 1">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Centre Name</th>
+                            <th>Seal Number</th>
+                            <th>Date</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="isRequesting">
+                            <td colspan="6">
+                                <spinner [isRunning]="isRequesting"></spinner>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let centreCheck of centreChecks | paginate: paginationConfig" class="pointer" (click)="downloadPdf($event, centreCheck)">
+                            <td><img src="../../../public/images/centrecheck.png" alt="Centre Check" /> </td>
+                            <td>{{centreCheck.centreName}}</td>
+                            <td>{{centreCheck.sealNumber}}</td>
+                            <td>{{asDate(centreCheck.date) | date}}</td>
+                            <td>{{centreCheck.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

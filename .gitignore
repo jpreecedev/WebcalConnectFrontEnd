@@ -240,17 +240,16 @@ _Pvt_Extensions
 .sass-cache/
 typings/
 
-app/**/*.js
-app/**/*.js.map
-app/**/*.css
-app/**/*.css.map
+src/app/**/*.js
+src/app/**/*.js.map
+src/app/**/*.css
+src/app/**/*.css.map
 
-css/**/*.css
-css/**/*.css.map
+src/css/**/*.css
+src/css/**/*.css.map
 
 .vscode/
 npm-debug.log*
-coverage/
 
-lib/app.js
-lib/app.js.map
+dist/
+
