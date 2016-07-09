@@ -29,7 +29,7 @@
                             </td>
                         </tr>
                         <tr *ngFor="let centreCheck of centreChecks | paginate: paginationConfig" class="pointer" (click)="downloadPdf($event, centreCheck)">
-                            <td><img src="../../../public/images/centrecheck.png" alt="Centre Check" /> </td>
+                            <td><img src="/images/centrecheck.png" alt="Centre Check" /> </td>
                             <td>{{centreCheck.centreName}}</td>
                             <td>{{centreCheck.sealNumber}}</td>
                             <td>{{asDate(centreCheck.date) | date}}</td>

@@ -47,7 +47,7 @@
 
     <div class="email-template" *ngIf="generateReport">
         <div>
-            <img style="max-width:200px; margin-top: -7px; margin-left: auto; margin-right: auto; display: block;" src="../../../public/images/webcal.png"
+            <img style="max-width:200px; margin-top: -7px; margin-left: auto; margin-right: auto; display: block;" src="/images/webcal.png"
             alt="Webcal Calibration Software">
         </div>
         <div>
@@ -67,7 +67,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let recentCalibration of recentCalibrations">
-                            <td><img [attr.src]="'../../../public/images/' + recentCalibration.documentIcon + '.png'" [attr.alt]="recentCalibration.documentType"
+                            <td><img [attr.src]="'/images/' + recentCalibration.documentIcon + '.png'" [attr.alt]="recentCalibration.documentType"
                                 /> </td>
                             <td>{{recentCalibration.companyName}}</td>
                             <td>{{recentCalibration.documentType}}</td>
@@ -94,7 +94,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let calibrationDue of calibrationsDue">
-                            <td><img [attr.src]="'../../../public/images/' + calibrationDue.documentIcon + '.png'" [attr.alt]="calibrationDue.documentType"
+                            <td><img [attr.src]="'/images/' + calibrationDue.documentIcon + '.png'" [attr.alt]="calibrationDue.documentType"
                                 /> </td>
                             <td>{{asDate(calibrationDue.date) | date}}</td>
                             <td>{{asDate(calibrationDue.expiration) | date}}</td>

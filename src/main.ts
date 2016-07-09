@@ -8,10 +8,19 @@ import { ROUTER_PROVIDERS } from "@angular/router-deprecated";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 import { disableDeprecatedForms, provideForms } from "@angular/forms";
 import { PaginationService } from "ng2-pagination";
-import "./site.scss";
 
-if (process.env.ENV === 'production') {
-    enableProdMode();
+if (process.env.ENV === 'build') {
+  enableProdMode();
 }
 
-bootstrap(AppComponent, [disableDeprecatedForms(), provideForms(), HTTP_PROVIDERS, ROUTER_PROVIDERS, PaginationService, provide(LocationStrategy, { useClass: HashLocationStrategy })])
+bootstrap(AppComponent, [
+    disableDeprecatedForms(),
+    provideForms(),
+    HTTP_PROVIDERS,
+    ROUTER_PROVIDERS,
+    PaginationService,
+    provide(LocationStrategy, {
+        useClass: HashLocationStrategy
+    })
+])
+.catch(err => console.error(err));

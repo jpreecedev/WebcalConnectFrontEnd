@@ -20,6 +20,7 @@ import { DirectUploadComponent } from "./direct-upload/direct-upload.component";
 
 import { AuthRouterOutlet } from "./utilities/auth-router/auth-router.component";
 import { JwtHelper } from "./utilities/JwtHelper";
+import '../style/app.scss';
 
 export interface MenuItem {
     icon: string;
@@ -58,7 +59,7 @@ export var Routes: Route[] = [
     selector: "wc-app",
     templateUrl: "./app.component.html",
     styleUrls: ["./styles.css"],
-    directives: [ROUTER_DIRECTIVES, AuthRouterOutlet],
+    directives: [...ROUTER_DIRECTIVES, AuthRouterOutlet],
     providers: [JwtHelper],
 })
 @RouteConfig(Routes)

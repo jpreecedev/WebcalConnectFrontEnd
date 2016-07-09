@@ -30,7 +30,7 @@
                             </td>
                         </tr>
                         <tr *ngFor="let qcCheck of qcChecks | paginate: paginationConfig" class="pointer" (click)="downloadPdf($event, qcCheck)">
-                            <td><img src="../../../public/images/qccheck.png" alt="QC Check" /> </td>
+                            <td><img src="/images/qccheck.png" alt="QC Check" /> </td>
                             <td>{{qcCheck.centreName}}</td>
                             <td>{{asDate(qcCheck.date) | date}}</td>
                             <td>{{qcCheck.managerName}}</td>

@@ -42,7 +42,7 @@
                 </tr>
                 <tr *ngFor="let calibrationDue of calibrationsDue | depotname : selectedDepotName | paginate: paginationConfig"
                 class="pointer" (click)="downloadCertificate($event, calibrationDue)">
-                    <td><img [attr.src]="'../../../public/images/' + calibrationDue.documentIcon + '.png'" [attr.alt]="calibrationDue.documentType" /> </td>
+                    <td><img [attr.src]="'/images/' + calibrationDue.documentIcon + '.png'" [attr.alt]="calibrationDue.documentType" /> </td>
                     <td>{{asDate(calibrationDue.date) | date}}</td>
                     <td>{{asDate(calibrationDue.expiration) | date}}</td>
                     <td>{{calibrationDue.registration}}</td>
