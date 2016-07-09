@@ -1,4 +1,4 @@
-import { JwtHelper } from "./JwtHelper";
+import { JwtHelper } from './JwtHelper';
 declare var escape: any;
 
 export interface IJwt {
@@ -8,18 +8,18 @@ export interface IJwt {
 
 export function hasValidToken(roles?: string[]): boolean {
 
-    roles = roles || ["TachographCentre"];
+    roles = roles || ['TachographCentre'];
 
-    var jwtHelper: JwtHelper = new JwtHelper();
-    var token: IJwt = jwtHelper.getToken();
-    var hasTokenExpired: boolean = jwtHelper.isTokenExpired(token ? token.access_token : undefined);
-    var hasUserRole: boolean = false;
+    let jwtHelper = new JwtHelper();
+    let token = jwtHelper.getToken();
+    let hasTokenExpired = jwtHelper.isTokenExpired(token ? token.access_token : undefined);
+    let hasUserRole = false;
 
-    var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : undefined;
+    let userRoles = token ? jwtHelper.getRoles(token.access_token) : undefined;
 
     if (userRoles) {
-        for (var index: number = 0; index < userRoles.length; index++) {
-            var element: string = userRoles[index];
+        for (let index = 0; index < userRoles.length; index++) {
+            let element = userRoles[index];
             if (roles.indexOf(element) > -1) {
                 hasUserRole = true;
                 break;
@@ -31,13 +31,13 @@ export function hasValidToken(roles?: string[]): boolean {
 }
 
 export function isAdministrator(): boolean {
-    var jwtHelper: JwtHelper = new JwtHelper();
-    var token: IJwt = jwtHelper.getToken();
-    var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : [];
+    let jwtHelper = new JwtHelper();
+    let token = jwtHelper.getToken();
+    let userRoles = token ? jwtHelper.getRoles(token.access_token) : [];
 
-    for (var index: number = 0; index < userRoles.length; index++) {
-        var element: string = userRoles[index];
-        if (element === "Administrator") {
+    for (let index = 0; index < userRoles.length; index++) {
+        let element = userRoles[index];
+        if (element === 'Administrator') {
             return true;
         }
     }
@@ -45,13 +45,13 @@ export function isAdministrator(): boolean {
 }
 
 export function isDirectUploadUser(): boolean {
-    var jwtHelper: JwtHelper = new JwtHelper();
-    var token: IJwt = jwtHelper.getToken();
-    var userRoles: string[] = token ? jwtHelper.getRoles(token.access_token) : [];
+    let jwtHelper = new JwtHelper();
+    let token = jwtHelper.getToken();
+    let userRoles = token ? jwtHelper.getRoles(token.access_token) : [];
 
-    for (var index: number = 0; index < userRoles.length; index++) {
-        var element: string = userRoles[index];
-        if (element === "DirectUpload" || element === "Administrator") {
+    for (let index = 0; index < userRoles.length; index++) {
+        let element = userRoles[index];
+        if (element === 'DirectUpload' || element === 'Administrator') {
             return true;
         }
     }

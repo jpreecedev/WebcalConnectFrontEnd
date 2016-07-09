@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
-import { AppSettings } from "../app.settings";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class InspectionDataService {

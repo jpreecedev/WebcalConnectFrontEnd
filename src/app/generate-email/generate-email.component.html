@@ -23,7 +23,7 @@
     <div class="row" *ngIf="generateReport">
         <div class="col-xs-12 col-sm-6">
             <div class="form-group has-feedback">
-                <date-picker label="From" (dateChanged)="fromChanged($event)" date="{{generateReport.from}}"></date-picker>
+                <wc-date-picker label="From" (dateChanged)="fromChanged($event)" date="{{generateReport.from}}"></wc-date-picker>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6" *ngIf="reportType === 'CalibrationsDue'">
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="row">
-        <spinner [isRunning]="isRequesting || isUpdating"></spinner>
+        <wc-spinner [isRunning]="isRequesting || isUpdating"></wc-spinner>
     </div>
     <hr *ngIf="generateReport" />
 
@@ -51,7 +51,7 @@
             alt="Webcal Calibration Software">
         </div>
         <div>
-            <h2>Your {{reportType | splitByCapitals}} Report</h2>
+            <h2>Your {{reportType | wcSplitByCapitals}} Report</h2>
             <div class="table-responsive">
                 <table class="table table-striped table-hover" *ngIf="reportType === 'RecentCalibrations'">
                     <thead>

@@ -1,12 +1,10 @@
-import { Component, Directive, NgZone, OnInit } from "@angular/core";
-import { Response } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { DirectUploadService } from "./direct-upload.service";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import { ShowMessage, ShowError } from "../utilities/messageBox";
-import { Observable } from "rxjs/Observable";
-import { AppSettings } from "../app.settings";
+import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { DirectUploadService } from './direct-upload.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { ShowError } from '../utilities/messageBox';
 import { FileUploadService } from '../utilities/file-upload.service.ts';
 
 export interface DirectUploadDocument {
@@ -16,8 +14,8 @@ export interface DirectUploadDocument {
 }
 
 @Component({
-    templateUrl: "./direct-upload.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './direct-upload.component.html',
+    styleUrls: ['./styles.css'],
     providers: [DirectUploadService, HttpService, FileUploadService],
     pipes: [PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
@@ -25,19 +23,15 @@ export interface DirectUploadDocument {
 export class DirectUploadComponent implements OnInit {
 
     public paginationConfig: IPaginationInstance = {
-        id: "directUpload",
+        id: 'directUpload',
         itemsPerPage: 10,
         currentPage: 1
     };
 
     private uploadedCertificates: DirectUploadDocument[];
-
     private isRequesting: boolean;
     private isUploading: boolean = false;
-
-    private page: number = 1;
     private uploadProgress: number = 0;
-    private selectedFileName: string;
 
     constructor(private service: DirectUploadService, private uploadService: FileUploadService) {
 
@@ -55,7 +49,7 @@ export class DirectUploadComponent implements OnInit {
         },
             (error: any) => {
                 this.isRequesting = false;
-                ShowError("Unable to get list of direct upload certificates, please try again later.", error);
+                ShowError('Unable to get list of direct upload certificates, please try again later.', error);
             },
             () => {
                 this.isRequesting = false;
@@ -63,15 +57,15 @@ export class DirectUploadComponent implements OnInit {
     }
 
     selectionChanged($event: Event) {
-        var fileList = (<HTMLInputElement>$event.srcElement).files;
-        var files = <File[]>[];
+        let fileList = (<HTMLInputElement>$event.srcElement).files;
+        let files = <File[]>[];
 
-        for (var i = 0; i < fileList.length; i++) {
-            var element = fileList[i];
+        for (let i = 0; i < fileList.length; i++) {
+            let element = fileList[i];
             files.push(element);
         }
 
-        this.upload(files)
+        this.upload(files);
     }
 
     upload(files: File[]): void {
@@ -90,10 +84,10 @@ export class DirectUploadComponent implements OnInit {
             })
                 .catch((error: any) => {
                     this.isUploading = false;
-                    ShowError("Unable to upload certificates, please try again later.", error);
+                    ShowError('Unable to upload certificates, please try again later.', error);
                 });
         } catch (error) {
-            ShowError("There was an error whilst uploading the document", error);
+            ShowError('There was an error whilst uploading the document', error);
             this.isUploading = false;
         }
     }

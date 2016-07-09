@@ -38,10 +38,10 @@
             <tbody>
                 <tr *ngIf="isRequesting">
                     <td colspan="8">
-                        <spinner [isRunning]="isRequesting"></spinner>
+                        <wc-spinner [isRunning]="isRequesting"></wc-spinner>
                     </td>
                 </tr>
-                <tr *ngFor="let client of clients | clientName:filterValue | paginate: paginationConfig">
+                <tr *ngFor="let client of clients | wcClientName:filterValue | paginate: paginationConfig">
                     <td>{{client.name}}</td>
                     <td>{{client.licenses.length}}</td>
                     <td class="actions text-right">
@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
-                            <date-picker label="Add New License" (dateChanged)="expirationChanged($event)" date="{{newLicenseExpiration}}"></date-picker>
+                            <wc-date-picker label="Add New License" (dateChanged)="expirationChanged($event)" date="{{newLicenseExpiration}}"></wc-date-picker>
                         </div>
                         <wc-button [isDisabled]="isAddingLicense" (click)="addLicense(newLicenseExpiration)" [style]="'btn btn-primary'" [label]="'Add License'"
                             [workingLabel]="'Adding License...'"></wc-button>
@@ -89,7 +89,7 @@
                                     <tr *ngFor="let license of selectedClient.licenses">
                                         <td>{{license.license}}</td>
                                         <td>{{asDate(license.expiration) | date}}</td>
-                                        <td [innerHtml]="license.hasExpired | tick"></td>
+                                        <td [innerHtml]="license.hasExpired | wcTick"></td>
                                         <td class="actions">
                                             <wc-button [isDisabled]="isDeletingLicense" (click)="deleteLicense(selectedClient, license)" [style]="'btn btn-secondary pull-right'"
                                                 [label]="'Delete License'" [workingLabel]="'Deleting License...'"></wc-button>

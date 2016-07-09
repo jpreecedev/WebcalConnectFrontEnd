@@ -1,13 +1,13 @@
-import { Pipe, PipeTransform } from "@angular/core";
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: "splitByCapitals"
+    name: 'wcSplitByCapitals'
 })
 export class SplitByCapitalsPipe implements PipeTransform {
     transform(value: string): string {
         if (!value) {
-            return "";
+            return '';
         }
-        return value.match(/[A-Z][a-z]+/g).join(" ");
+        return value.match(/[A-Z][a-z]+/g).join(' ');
     }
 }

@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { Observable } from "rxjs/Observable";
-import { AppSettings } from "../app.settings";
-import { UserRegistration } from "./register-user.component";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { Observable } from 'rxjs/Observable';
+import { AppSettings } from '../app.settings';
+import { UserRegistration } from './register-user.component';
 
 @Injectable()
 export class RegisterUserService {

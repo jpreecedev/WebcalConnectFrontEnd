@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { Response } from "@angular/http";
-import { SoftwareLicensesService } from "./software-licenses.service";
-import { TickPipe } from "../utilities/tick.pipe";
-import { ClientNamePipe } from "./client-name.pipe";
-import { HttpService } from "../utilities/HttpService";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import { ShowError } from "../utilities/messageBox";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
+import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { SoftwareLicensesService } from './software-licenses.service';
+import { TickPipe } from '../utilities/tick.pipe';
+import { ClientNamePipe } from './client-name.pipe';
+import { HttpService } from '../utilities/http.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { ShowError } from '../utilities/messageBox';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
 
 export interface License {
     expiration: Date;
@@ -25,8 +25,8 @@ export interface Client {
 }
 
 @Component({
-    templateUrl: "./software-licenses.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './software-licenses.component.html',
+    styleUrls: ['./styles.css'],
     providers: [SoftwareLicensesService, HttpService],
     pipes: [TickPipe, ClientNamePipe, PaginatePipe],
     directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp, DatePickerComponent]
@@ -34,7 +34,7 @@ export interface Client {
 export class SoftwareLicensesComponent implements OnInit {
 
     public paginationConfig: IPaginationInstance = {
-        id: "softwareLicenses",
+        id: 'softwareLicenses',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -61,7 +61,7 @@ export class SoftwareLicensesComponent implements OnInit {
             this.clients = response;
         },
         (error: any) => {
-            ShowError("Unable to get list of clients, please try again later.", error);
+            ShowError('Unable to get list of clients, please try again later.', error);
             this.isRequesting = false;
         },
         () => {
@@ -79,12 +79,12 @@ export class SoftwareLicensesComponent implements OnInit {
             this.selectedClient.licenses.unshift(response);
         },
         (error: any) => {
-            ShowError("Unable to add license, please try again later.", error);
-            this.newLicenseExpiration = "";
+            ShowError('Unable to add license, please try again later.', error);
+            this.newLicenseExpiration = '';
             this.isAddingLicense = false;
         },
         () => {
-            this.newLicenseExpiration = "";
+            this.newLicenseExpiration = '';
             this.isAddingLicense = false;
         });
     }
@@ -99,26 +99,26 @@ export class SoftwareLicensesComponent implements OnInit {
             this.clients.unshift(response);
         },
         (error: any) => {
-            ShowError("Unable to add client, please try again later.", error);
+            ShowError('Unable to add client, please try again later.', error);
             this.isAdding = false;
-            this.newClientName = "";
+            this.newClientName = '';
         },
         () => {
             this.isAdding = false;
-            this.newClientName = "";
+            this.newClientName = '';
         });
     }
 
     deleteLicense(client: Client, license: License): void {
         this.isDeletingLicense = true;
         this.service.deleteLicense(client, license).subscribe((response: Response) => {
-            var index = client.licenses.indexOf(license);
+            let index = client.licenses.indexOf(license);
             if (index > -1) {
                 client.licenses.splice(index, 1);
             }
         },
         (error: any) => {
-            ShowError("Unable to delete license, please try again later.", error);
+            ShowError('Unable to delete license, please try again later.', error);
             this.isDeletingLicense = false;
         },
         () => {
@@ -129,13 +129,13 @@ export class SoftwareLicensesComponent implements OnInit {
     deleteClient(client: Client): void {
         this.isDeletingClient = true;
         this.service.deleteClient(client).subscribe((response: Response) => {
-            var index = this.clients.indexOf(client);
+            let index = this.clients.indexOf(client);
             if (index > -1) {
                 this.clients.splice(index, 1);
             }
         },
         (error: any) => {
-            ShowError("Unable to delete client, please try again later.", error);
+            ShowError('Unable to delete client, please try again later.', error);
             this.isDeletingClient = false;
         },
         () => {

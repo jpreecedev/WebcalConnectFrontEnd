@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Http, Headers, Response, RequestMethod, RequestOptionsArgs } from "@angular/http";
-import { Observable } from "rxjs/Observable";
-import { JwtHelper } from "./JwtHelper";
-import { IJwt } from "./Jwt";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/do";
-import { AppSettings } from "../app.settings";
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response, RequestMethod, RequestOptionsArgs } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { JwtHelper } from './JwtHelper';
+import { IJwt } from './Jwt';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import { AppSettings } from '../app.settings';
 
 export interface PagedResponse<T> {
     total: number;
@@ -36,7 +36,7 @@ export class HttpService {
     }
 
     authenticate(username: string, password: string, rememberMe: boolean): Observable<boolean> {
-        var creds: string = "username=" + username + "&password=" + password + "&grant_type=password&client_id=099153c2625149bc8ecb3e85e03f0022";
+        let creds: string = 'username=' + username + '&password=' + password + '&grant_type=password&client_id=099153c2625149bc8ecb3e85e03f0022';
 
         return this._request({ url: `${AppSettings.SERVER_ADDRESS}/oauth2/token`, body: creds, method: RequestMethod.Post, headers: this.getRequestHeaders(true) })
             .do((response: Response) => {
@@ -51,17 +51,17 @@ export class HttpService {
     }
 
     getRequestHeaders(isAuthenticating: boolean): Headers {
-        var headers: Headers = new Headers();
-        headers.append("Accept", "application/json");
+        let headers: Headers = new Headers();
+        headers.append('Accept', 'application/json');
 
         if (isAuthenticating) {
-            headers.append("Content-Type", "application/x-www-form-urlencoded");
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
         } else {
-            headers.append("Content-Type", "application/json");
+            headers.append('Content-Type', 'application/json');
 
-            var token: IJwt = this.jwtHelper.getToken();
+            let token: IJwt = this.jwtHelper.getToken();
             if (token && token.access_token) {
-                headers.append("Authorization", "Bearer " + token.access_token);
+                headers.append('Authorization', 'Bearer ' + token.access_token);
             }
         }
 
@@ -69,9 +69,8 @@ export class HttpService {
     }
 
     handleError<T>(error: Response): Observable<T> {
-        debugger;
         console.error(error);
-        return Observable.throw(error || "Server Error");
+        return Observable.throw(error || 'Server Error');
     }
 
     private _request(options: RequestOptionsArgs): Observable<Response> {

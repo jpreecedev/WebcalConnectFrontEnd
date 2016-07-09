@@ -4,7 +4,7 @@
 
     <p class="text-center" *ngIf="!isRequesting && (!detailedExceptions || detailedExceptions.length === 0)">No data to display</p>
 
-    <spinner [isRunning]="isRequesting"></spinner>
+    <wc-spinner [isRunning]="isRequesting"></wc-spinner>
 
     <div class="row">
         <div class="col-xs-12">

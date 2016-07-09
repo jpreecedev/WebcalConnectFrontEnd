@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { FileUploadService} from "../utilities/file-upload.service";
-import { Observable } from "rxjs/Observable";
-import { AppSettings } from "../app.settings";
-import { StatusReport } from "./status-report.component";
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { FileUploadService} from '../utilities/file-upload.service';
+import { Observable } from 'rxjs/Observable';
+import { AppSettings } from '../app.settings';
+import { StatusReport } from './status-report.component';
 
 @Injectable()
 export class StatusReportService {

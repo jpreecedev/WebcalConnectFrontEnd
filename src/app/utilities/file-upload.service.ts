@@ -1,8 +1,7 @@
-import { Component, Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/share";
-import { JwtHelper } from "./JwtHelper";
-import { IJwt } from "./Jwt";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
+import { JwtHelper } from './JwtHelper';
 
 @Injectable()
 export class FileUploadService {
@@ -13,7 +12,7 @@ export class FileUploadService {
 
     constructor(private jwtHelper: JwtHelper) {
         this.progress$ = new Observable((observer: any) => {
-            this.progressObserver = observer
+            this.progressObserver = observer;
         });
     }
 
@@ -23,11 +22,11 @@ export class FileUploadService {
 
     public upload(url: string, files: File[]): Promise<any> {
         return new Promise((resolve, reject) => {
-            let formData: FormData = new FormData();
-            let xhr: XMLHttpRequest = new XMLHttpRequest();
+            let formData = new FormData();
+            let xhr = new XMLHttpRequest();
 
             for (let i = 0; i < files.length; i++) {
-                formData.append("uploads[]", files[i], files[i].name);
+                formData.append('uploads[]', files[i], files[i].name);
             }
 
             xhr.onreadystatechange = () => {
@@ -48,12 +47,11 @@ export class FileUploadService {
                 }
             };
 
-            xhr.open("POST", url, true);
-            xhr
+            xhr.open('POST', url, true);
 
-            var token: IJwt = this.jwtHelper.getToken();
+            let token = this.jwtHelper.getToken();
             if (token && token.access_token) {
-                xhr.setRequestHeader("Authorization", "Bearer " + token.access_token);
+                xhr.setRequestHeader('Authorization', 'Bearer ' + token.access_token);
             }
 
             xhr.send(formData);

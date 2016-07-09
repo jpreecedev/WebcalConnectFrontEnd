@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <spinner [isRunning]="isRequesting"></spinner>
+    <wc-spinner [isRunning]="isRequesting"></wc-spinner>
 
     <p class="text-center" *ngIf="!isRequesting && selectedSiteId && (!connectedSites || connectedSites.length === 0)">No data to display</p>
 

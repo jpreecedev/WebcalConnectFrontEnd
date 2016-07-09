@@ -1,14 +1,14 @@
-﻿import { Pipe } from "@angular/core";
+﻿import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-    name: "tick"
+    name: 'wcTick'
 })
-export class TickPipe {
+export class TickPipe implements PipeTransform {
     transform(value: boolean): string {
         if (value) {
-            return "&#10003;";
+            return '&#10003;';
         } else {
-            return "&#10007;";
+            return '&#10007;';
         }
     }
 }

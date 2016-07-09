@@ -20,7 +20,7 @@
     </form>
     <hr *ngIf="users && users.length > 0" />
 
-    <spinner [isRunning]="isRequesting"></spinner>
+    <wc-spinner [isRunning]="isRequesting"></wc-spinner>
 
     <p class="text-center" *ngIf="!isRequesting && !hasData">No data to display</p>
 

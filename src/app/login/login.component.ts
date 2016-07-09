@@ -1,15 +1,14 @@
-﻿import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router-deprecated";
-import { HttpService } from "../utilities/HttpService";
-import { JwtHelper } from "../utilities/JwtHelper";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { ShowError } from "../utilities/messageBox";
-import { hasValidToken } from "../utilities/Jwt";
+﻿import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
+import { HttpService } from '../utilities/http.service';
+import { JwtHelper } from '../utilities/JwtHelper';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { ShowError } from '../utilities/messageBox';
+import { hasValidToken } from '../utilities/Jwt';
 
 @Component({
-    selector: "login",
-    templateUrl: "./login.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './login.component.html',
+    styleUrls: ['./styles.css'],
     providers: [HttpService, JwtHelper],
     directives: [WCButtonComponent]
 })
@@ -28,11 +27,11 @@ export class LoginComponent implements OnInit {
         this.httpService.authenticate(username, password, rememberMe).subscribe((response: boolean) => {
             if (response) {
                 this.loggedInChanged(true);
-                this.router.navigate(["Dashboard"]);
+                this.router.navigate(['Dashboard']);
             }
         },
             (error: any) => {
-                ShowError("Unable to log in at this time, please try again later.", error);
+                ShowError('Unable to log in at this time, please try again later.', error);
                 this.isRequesting = false;
             },
             () => {
@@ -47,9 +46,8 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         if (hasValidToken()) {
             this.loggedInChanged(true);
-            this.router.navigate(["Dashboard"]);
-        }
-        else {
+            this.router.navigate(['Dashboard']);
+        } else {
             this.loggedInChanged(false);
         }
     }

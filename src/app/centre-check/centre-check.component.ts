@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Response, Http } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { CentreCheckService } from "./centre-check.service";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { TickPipe } from "../utilities/tick.pipe";
-import { ShowError } from "../utilities/messageBox";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/do";
+import { Component, OnInit } from '@angular/core';
+import { Response, Http } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { CentreCheckService } from './centre-check.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { TickPipe } from '../utilities/tick.pipe';
+import { ShowError } from '../utilities/messageBox';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 export interface CentreCheck {
     centreName: string;
@@ -19,8 +19,8 @@ export interface CentreCheck {
 }
 
 @Component({
-    templateUrl: "./centre-check.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './centre-check.component.html',
+    styleUrls: ['./styles.css'],
     providers: [CentreCheckService, HttpService],
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
@@ -28,7 +28,7 @@ export interface CentreCheck {
 export class CentreCheckComponent implements OnInit {
 
     public paginationConfig: IPaginationInstance = {
-        id: "centreCheck",
+        id: 'centreCheck',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -45,7 +45,7 @@ export class CentreCheckComponent implements OnInit {
             this.centreChecks = response.json();
         },
         (error: any) => {
-            ShowError("Unable to get list of centre checks, please try again later.", error);
+            ShowError('Unable to get list of centre checks, please try again later.', error);
             this.isRequesting = false;
         },
         () => {

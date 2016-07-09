@@ -1,9 +1,9 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: "spinner",
-    templateUrl: "./spinner.component.html",
-    styleUrls: ["./spinner.css"]
+    selector: 'wc-spinner',
+    templateUrl: './spinner.component.html',
+    styleUrls: ['./spinner.css']
 })
 export class SpinnerComponent {
     private isDelayedRunning: boolean = false;

@@ -1,16 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Response } from "@angular/http";
-import { StatusReportService } from "./status-report.service";
-import { HttpService } from "../utilities/HttpService";
-import { FileUploadService } from "../utilities/file-upload.service";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { ShowError, ShowConfirm } from "../utilities/messageBox";
-import { isAdministrator } from "../utilities/Jwt";
-import { Subscription } from "rxjs/Subscription";
+import { Component, OnInit } from '@angular/core';
+import { StatusReportService } from './status-report.service';
+import { HttpService } from '../utilities/http.service';
+import { FileUploadService } from '../utilities/file-upload.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { ShowError, ShowConfirm } from '../utilities/messageBox';
 
-declare var Gauge: any;
-declare var Chart: any;
+declare let Gauge: any;
+declare let Chart: any;
 
 export interface StatusReportTechnician {
     value: number;
@@ -34,8 +31,8 @@ export interface StatusReportUser {
 }
 
 @Component({
-    templateUrl: "./status-report.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './status-report.component.html',
+    styleUrls: ['./styles.css'],
     providers: [StatusReportService, HttpService, FileUploadService],
     directives: [SpinnerComponent, WCButtonComponent]
 })
@@ -64,7 +61,7 @@ export class StatusReportComponent implements OnInit {
             this.buildChart(response);
         },
         (error: any) => {
-            ShowError("Unable to get status report, please try again later.", error);
+            ShowError('Unable to get status report, please try again later.', error);
             this.isRequesting = false;
             this.tryCallback(complete);
         },
@@ -84,13 +81,15 @@ export class StatusReportComponent implements OnInit {
         this.statusReportData = data;
 
         setTimeout(() => {
-            var pieChartData = data.performance;
-            var ctx = (<HTMLCanvasElement>document.getElementById("piechart")).getContext("2d");
-            var myChart = new Chart(ctx).Pie(pieChartData, {
-                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%> (<%=segments[i].value%>)<%}%></li><%}%></ul>",
+            let pieChartData = data.performance;
+            let ctx = (<HTMLCanvasElement>document.getElementById('piechart')).getContext('2d');
+            let myChart = new Chart(ctx).Pie(pieChartData, {
+                legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<segments.length; i++){%>' +
+                 + '<li><span style=\'background-color:<%=segments[i].fillColor%>\'>/</span><%if(segments[i].label){%>' +
+                 + '<%=segments[i].label%> (<%=segments[i].value%>)<%}%></li><%}%></ul>',
             });
             document.getElementById('js-legend').innerHTML = myChart.generateLegend();
-            var opts = {
+            let opts = {
                 lines: 12,
                 angle: 0.15,
                 lineWidth: 0.44,
@@ -105,21 +104,21 @@ export class StatusReportComponent implements OnInit {
                 strokeColor: '#E0E0E0',
                 generateGradient: true
             };
-            var target = document.getElementById('overall-status');
-            var gauge = new Gauge(target).setOptions(opts);
+            let target = document.getElementById('overall-status');
+            let gauge = new Gauge(target).setOptions(opts);
             gauge.maxValue = 100;
             gauge.animationSpeed = 32;
             gauge.set(data.score);
 
-            var ctx = (<HTMLCanvasElement>document.getElementById("barchart")).getContext("2d");
-            new Chart(ctx).Bar({
+            let ctx2 = (<HTMLCanvasElement>document.getElementById('barchart')).getContext('2d');
+            new Chart(ctx2).Bar({
                 labels: data.lineChartLabels,
                 datasets: [{
-                    label: "Jobs Completed",
-                    fillColor: "#09355C",
-                    strokeColor: "rgba(220,220,220,0.8)",
-                    highlightFill: "rgba(220,220,220,0.75)",
-                    highlightStroke: "rgba(220,220,220,1)",
+                    label: 'Jobs Completed',
+                    fillColor: '#09355C',
+                    strokeColor: 'rgba(220,220,220,0.8)',
+                    highlightFill: 'rgba(220,220,220,0.75)',
+                    highlightStroke: 'rgba(220,220,220,1)',
                     data: data.lineChartData
                 }]
             }, { barShowStroke: false });
@@ -137,7 +136,7 @@ export class StatusReportComponent implements OnInit {
     }
 
     buildReport(): void {
-        ShowConfirm("Are you sure you want to generate the status report email data for each user?  This action is long running.", (result: boolean) => {
+        ShowConfirm('Are you sure you want to generate the status report email data for each user?  This action is long running.', (result: boolean) => {
             if (result) {
                 this.isBuildingReport = true;
                 this.doBuildReport(0);
@@ -151,17 +150,17 @@ export class StatusReportComponent implements OnInit {
             return;
         }
 
-        var siteId = this.users[position].id;
+        let siteId = this.users[position].id;
         this.loadReport(siteId, () => {
             if (!this.statusReportData) {
                 this.doBuildReport(position += 1);
                 return;
             }
 
-            var canvases: string[] = ["overall-status", "piechart", "barchart"];
-            var canvasData: File[] = [];
+            let canvases: string[] = ['overall-status', 'piechart', 'barchart'];
+            let canvasData: File[] = [];
             canvases.forEach((canvasId: string) => {
-                canvasData.push(this.blobToFile(this.convertCanvasToBlob(<HTMLCanvasElement>document.getElementById(canvasId)), canvasId + ".png"));
+                canvasData.push(this.blobToFile(this.convertCanvasToBlob(<HTMLCanvasElement>document.getElementById(canvasId)), canvasId + '.png'));
             });
 
             this.service.sendStatusReportData(siteId, canvasData, () => {
@@ -171,23 +170,23 @@ export class StatusReportComponent implements OnInit {
     }
 
     blobToFile(theBlob: Blob, fileName: string): File {
-        var b: any = theBlob;
+        let b: any = theBlob;
         b.lastModifiedDate = new Date();
         b.name = fileName;
         return <File>theBlob;
     }
 
     convertCanvasToBlob(canvas: HTMLCanvasElement): Blob {
-        return this.dataURItoBlob(canvas.toDataURL("image/png"));
+        return this.dataURItoBlob(canvas.toDataURL('image/png'));
     }
 
     dataURItoBlob(dataURI: string): Blob {
-        var byteString = atob(dataURI.split(',')[1]);
-        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+        let byteString = atob(dataURI.split(',')[1]);
+        let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
 
-        var ab = new ArrayBuffer(byteString.length);
-        var ia = new Uint8Array(ab);
-        for (var i = 0; i < byteString.length; i++) {
+        let ab = new ArrayBuffer(byteString.length);
+        let ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
             ia[i] = byteString.charCodeAt(i);
         }
 

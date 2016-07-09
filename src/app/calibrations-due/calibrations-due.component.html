@@ -37,7 +37,7 @@
             <tbody>
                 <tr *ngIf="isRequesting">
                     <td colspan="8">
-                        <spinner [isRunning]="isRequesting"></spinner>
+                        <wc-spinner [isRunning]="isRequesting"></wc-spinner>
                     </td>
                 </tr>
                 <tr *ngFor="let calibrationDue of calibrationsDue | depotname : selectedDepotName | paginate: paginationConfig"

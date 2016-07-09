@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { Response, Http } from "@angular/http";
-import { CalibrationsDueService } from "./calibrations-due.service";
-import { HttpService } from "../utilities/HttpService";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import { DepotNamePipe } from "./depot-name.pipe";
-import { ShowError } from "../utilities/messageBox";
+import { Component, OnInit } from '@angular/core';
+import { Response, Http } from '@angular/http';
+import { CalibrationsDueService } from './calibrations-due.service';
+import { HttpService } from '../utilities/http.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { DepotNamePipe } from './depot-name.pipe';
+import { ShowError } from '../utilities/messageBox';
 
 export interface CalibrationDue {
     date: string;
@@ -22,8 +22,8 @@ export interface CalibrationDue {
 }
 
 @Component({
-    templateUrl: "./calibrations-due.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './calibrations-due.component.html',
+    styleUrls: ['./styles.css'],
     providers: [CalibrationsDueService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp],
     pipes: [PaginatePipe, DepotNamePipe]
@@ -33,7 +33,7 @@ export class CalibrationsDueComponent implements OnInit {
     public calibrationsDue: CalibrationDue[];
 
     public paginationConfig: IPaginationInstance = {
-        id: "calibrationsDue",
+        id: 'calibrationsDue',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -50,16 +50,16 @@ export class CalibrationsDueComponent implements OnInit {
         this.service.getCalibrationsDue().subscribe((response: Response) => {
             this.calibrationsDue = response.json();
             this.depotNames = this.getDepotNames();
-            this.depotNames.unshift("- All -");
-            this.selectedDepotName = "- All -";
+            this.depotNames.unshift('- All -');
+            this.selectedDepotName = '- All -';
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError("Unable to get list of calibrations due, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError('Unable to get list of calibrations due, please try again later.', error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     downloadCertificate($event: Event, selectedCalibration: CalibrationDue): void {
@@ -74,9 +74,9 @@ export class CalibrationsDueComponent implements OnInit {
         if (!this.calibrationsDue) {
             return;
         }
-        var depotNames: Array<string> = new Array<string>();
-        for (var index: number = 0; index < this.calibrationsDue.length; index++) {
-            var element: CalibrationDue = this.calibrationsDue[index];
+        let depotNames = new Array<string>();
+        for (let index = 0; index < this.calibrationsDue.length; index++) {
+            let element = this.calibrationsDue[index];
             if (element.depotName && depotNames.indexOf(element.depotName) === -1) {
                 depotNames.push(element.depotName);
             }

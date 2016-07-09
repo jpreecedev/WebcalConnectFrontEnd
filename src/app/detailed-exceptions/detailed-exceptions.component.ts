@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { Response, Http } from "@angular/http";
-import { DetailedExceptionsService } from "./detailed-exceptions.service";
-import { HttpService } from "../utilities/HttpService";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import { ShowError, ShowMessage } from "../utilities/messageBox";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
+import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { DetailedExceptionsService } from './detailed-exceptions.service';
+import { HttpService } from '../utilities/http.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { ShowError, ShowMessage } from '../utilities/messageBox';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 
 export interface DetailedException {
     id: number;
@@ -15,8 +15,8 @@ export interface DetailedException {
 }
 
 @Component({
-    templateUrl: "./detailed-exceptions.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './detailed-exceptions.component.html',
+    styleUrls: ['./styles.css'],
     providers: [DetailedExceptionsService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
     pipes: [PaginatePipe]
@@ -24,7 +24,7 @@ export interface DetailedException {
 export class DetailedExceptionsComponent implements OnInit {
 
     public paginationConfig: IPaginationInstance = {
-        id: "detailedExceptions",
+        id: 'detailedExceptions',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -44,7 +44,7 @@ export class DetailedExceptionsComponent implements OnInit {
         },
             (error: any) => {
                 this.isRequesting = false;
-                ShowError("Unable to get list of detailed exceptions, please try again later.", error);
+                ShowError('Unable to get list of detailed exceptions, please try again later.', error);
             },
             () => {
                 this.isRequesting = false;
@@ -73,13 +73,13 @@ export class DetailedExceptionsComponent implements OnInit {
         this.isDeleting = true;
 
         this.service.deleteDetailedException(selectedDetailedException.id).subscribe((response: Response) => {
-            var index = this.detailedExceptions.indexOf(selectedDetailedException);
+            let index = this.detailedExceptions.indexOf(selectedDetailedException);
             if (index > -1) {
                 this.detailedExceptions.splice(index, 1);
             }
         },
             (error: any) => {
-                ShowError("Unable to delete detailed exception, please try again later.", error);
+                ShowError('Unable to delete detailed exception, please try again later.', error);
                 this.isDeleting = false;
             },
             () => {

@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpService } from "../utilities/HttpService";
-import { ManageAccessService } from "./manage-access.service";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { ShowError } from "../utilities/messageBox";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
+import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../utilities/http.service';
+import { ManageAccessService } from './manage-access.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { ShowError } from '../utilities/messageBox';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
 
 export interface ManageAccessUser {
     id: number;
@@ -17,8 +17,8 @@ export interface ManageAccessSite {
 }
 
 @Component({
-    templateUrl: "./manage-access.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './manage-access.component.html',
+    styleUrls: ['./styles.css'],
     providers: [HttpService, ManageAccessService],
     directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp],
     pipes: [PaginatePipe]
@@ -26,7 +26,7 @@ export interface ManageAccessSite {
 export class ManageAccessComponent implements OnInit {
 
     public paginationConfig: IPaginationInstance = {
-        id: "manageAccess",
+        id: 'manageAccess',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -48,7 +48,7 @@ export class ManageAccessComponent implements OnInit {
             this.getConnectedSites(this.selectedSiteId);
         },
         (error: any) => {
-            ShowError("Unable to get a list of users, please try again later.", error);
+            ShowError('Unable to get a list of users, please try again later.', error);
             this.isRequesting = false;
         },
         () => {
@@ -67,7 +67,7 @@ export class ManageAccessComponent implements OnInit {
             this.connectedSites = data;
         },
         (error: any) => {
-            ShowError("Unable to get a list of connected sites, please try again later.", error);
+            ShowError('Unable to get a list of connected sites, please try again later.', error);
             this.isRequesting = false;
         },
         () => {
@@ -81,7 +81,7 @@ export class ManageAccessComponent implements OnInit {
             site.isRevoked = !site.isRevoked;
         },
         (error: any) => {
-            ShowError("Unable to change the access permission for this site, please try again later.", error);
+            ShowError('Unable to change the access permission for this site, please try again later.', error);
             this.isUpdating = false;
         },
         () => {

@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router-deprecated";
-import { HttpService } from "../utilities/HttpService";
-import { Response } from "@angular/http";
-import { RegisterUserService } from "./register-user.service";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { ShowMessage, ShowError } from "../utilities/messageBox";
-import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
+import { HttpService } from '../utilities/http.service';
+import { Response } from '@angular/http';
+import { RegisterUserService } from './register-user.service';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { ShowMessage, ShowError } from '../utilities/messageBox';
+import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
 
 export interface UserRegistration {
     emailAddress: string;
@@ -16,8 +16,8 @@ export interface UserRegistration {
 }
 
 @Component({
-    templateUrl: "./register-user.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './register-user.component.html',
+    styleUrls: ['./styles.css'],
     providers: [RegisterUserService, HttpService],
     directives: [WCButtonComponent, DatePickerComponent]
 })
@@ -47,11 +47,11 @@ export class RegisterUserComponent {
         this.isRequesting = true;
         this.service.registerUser(this.userRegistration).subscribe(() => {
             this.resetForm();
-            ShowMessage("The user was registered successfully");
+            ShowMessage('The user was registered successfully');
         },
         (error: any) => {
             this.isRequesting = false;
-            ShowError("Unable to register user, please try again later.", error);
+            ShowError('Unable to register user, please try again later.', error);
         },
         () => {
             this.isRequesting = false;
@@ -59,35 +59,35 @@ export class RegisterUserComponent {
     }
 
     validateForm(): boolean {
-        this.validationErrors = "";
+        this.validationErrors = '';
 
         if (!this.userRegistration.password || this.userRegistration.password.length < 6) {
-            this.validationErrors = "Password is too short<br/>";
+            this.validationErrors = 'Password is too short<br/>';
         }
         if (!this.confirmPassword || this.confirmPassword.length < 6) {
-            this.validationErrors += "Confirm password is too short<br/>";
+            this.validationErrors += 'Confirm password is too short<br/>';
         }
         if (this.userRegistration.password !== this.confirmPassword) {
-            this.validationErrors += "Passwords do not match<br/>";
+            this.validationErrors += 'Passwords do not match<br/>';
         }
 
         return !this.validationErrors;
     }
 
     cancel(): void {
-        this.router.parent.navigate(["Dashboard"]);
+        this.router.parent.navigate(['Dashboard']);
     }
 
     resetForm(): void {
         this.userRegistration = {
-            emailAddress: "",
-            companyName: "",
-            expiration: "",
-            licenseKey: "",
-            password: ""
+            emailAddress: '',
+            companyName: '',
+            expiration: '',
+            licenseKey: '',
+            password: ''
         };
 
-        this.confirmPassword = "";
+        this.confirmPassword = '';
     }
 
 }

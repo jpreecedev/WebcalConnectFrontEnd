@@ -25,7 +25,7 @@
                     <tbody>
                         <tr *ngIf="isRequesting">
                             <td colspan="6">
-                                <spinner [isRunning]="isRequesting"></spinner>
+                                <wc-spinner [isRunning]="isRequesting"></wc-spinner>
                             </td>
                         </tr>
                         <tr *ngFor="let centreCheck of centreChecks | paginate: paginationConfig" class="pointer" (click)="downloadPdf($event, centreCheck)">

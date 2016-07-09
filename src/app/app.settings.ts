@@ -1,9 +1,9 @@
-export class AppSettings{
+export class AppSettings {
     public static get API_ENDPOINT(): string {
-        return "http://localhost:50139/api";
+        return 'http://localhost:50139/api';
     }
-    
-    public static get SERVER_ADDRESS(): string{
-        return "http://localhost:50139";
+
+    public static get SERVER_ADDRESS(): string {
+        return 'http://localhost:50139';
     }
 }

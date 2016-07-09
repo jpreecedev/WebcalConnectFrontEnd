@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { Response } from "@angular/http";
-import { GenerateEmailService } from "./generate-email.service";
-import { RecentCalibration } from "../recent-calibrations/recent-calibrations.component";
-import { CalibrationDue } from "../calibrations-due/calibrations-due.component";
-import { ShowDialog, ShowError, ShowMessage } from "../utilities/messageBox";
-import { SplitByCapitalsPipe } from "../utilities/split-by-capitals.pipe";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { isAdministrator } from "../utilities/Jwt";
-import { HttpService } from "../utilities/HttpService";
-import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
+import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { GenerateEmailService } from './generate-email.service';
+import { RecentCalibration } from '../recent-calibrations/recent-calibrations.component';
+import { CalibrationDue } from '../calibrations-due/calibrations-due.component';
+import { ShowDialog, ShowError, ShowMessage } from '../utilities/messageBox';
+import { SplitByCapitalsPipe } from '../utilities/split-by-capitals.pipe';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { isAdministrator } from '../utilities/Jwt';
+import { HttpService } from '../utilities/http.service';
+import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
 
 export interface GenerateReport {
     from: string;
@@ -31,9 +31,9 @@ export interface EmailReportData {
 }
 
 @Component({
-    templateUrl: "./generate-email.component.html",
+    templateUrl: './generate-email.component.html',
     providers: [GenerateEmailService, HttpService],
-    styleUrls: ["./styles.css"],
+    styleUrls: ['./styles.css'],
     pipes: [SplitByCapitalsPipe],
     directives: [SpinnerComponent, WCButtonComponent, DatePickerComponent]
 })
@@ -43,7 +43,7 @@ export class GenerateEmailComponent implements OnInit {
     private generateReport: GenerateReport;
     private clientNames: ClientName[];
     private selectedClientId: number;
-    private reportType: string = "RecentCalibrations";
+    private reportType: string = 'RecentCalibrations';
 
     private recentCalibrations: RecentCalibration[];
     private calibrationsDue: CalibrationDue[];
@@ -67,7 +67,7 @@ export class GenerateEmailComponent implements OnInit {
             this.updateReport();
         },
             (error: any) => {
-                ShowError("Unable to get email report configuration, please try again later.", error);
+                ShowError('Unable to get email report configuration, please try again later.', error);
                 this.isRequesting = false;
             },
             () => {
@@ -81,10 +81,9 @@ export class GenerateEmailComponent implements OnInit {
     }
 
     updateReport(): void {
-        if (this.reportType === "RecentCalibrations") {
+        if (this.reportType === 'RecentCalibrations') {
             this.updateRecentReport();
-        }
-        else {
+        } else {
             this.updateDueReport();
         }
     }
@@ -93,11 +92,11 @@ export class GenerateEmailComponent implements OnInit {
         this.isUpdating = true;
 
         this.service.getRecentCalibrationsData(this.selectedClientId, this.generateReport.from).subscribe((response: Response) => {
-            var data = response.json();
+            let data = response.json();
             this.recentCalibrations = data;
         },
             (error: any) => {
-                ShowError("Unable to get report data, please try again later.", error);
+                ShowError('Unable to get report data, please try again later.', error);
                 this.isUpdating = false;
             },
             () => {
@@ -109,11 +108,11 @@ export class GenerateEmailComponent implements OnInit {
         this.isUpdating = true;
 
         this.service.getCalibrationsDueData(this.selectedClientId, this.generateReport.from, this.generateReport.to).subscribe((response: Response) => {
-            var data = response.json();
+            let data = response.json();
             this.calibrationsDue = data;
         },
             (error: any) => {
-                ShowError("Unable to get report data, please try again later.", error);
+                ShowError('Unable to get report data, please try again later.', error);
                 this.isUpdating = false;
             },
             () => {
@@ -122,26 +121,26 @@ export class GenerateEmailComponent implements OnInit {
     }
 
     sendEmail(): void {
-        var $this: GenerateEmailComponent = this;
-        var emailData = <EmailReportData>{
+        let $this: GenerateEmailComponent = this;
+        let emailData = <EmailReportData>{
             userId: this.selectedClientId,
-            recipient: "",
+            recipient: '',
             reportType: this.reportType,
             from: this.generateReport.from,
             to: this.generateReport.to
         };
 
         this.showDialog(function () {
-            var email: string = this.find("#email").val();
+            let email: string = this.find('#email').val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this.isSending = true;
                 emailData.recipient = email;
 
                 $this.service.sendEmail(emailData).subscribe((response: Response) => {
-                    ShowMessage("Your email has been sent.");
+                    ShowMessage('Your email has been sent.');
                 },
                     (error: any) => {
-                        ShowError("Unable to send email, please try again later.", error);
+                        ShowError('Unable to send email, please try again later.', error);
                         $this.isSending = false;
                     },
                     () => {
@@ -161,21 +160,21 @@ export class GenerateEmailComponent implements OnInit {
 
     private showDialog(callback: Function): void {
         ShowDialog({
-            title: "Enter the email address of the recipient",
-            message: "<div class=\"row\">  " +
-            "<div class=\"col-md-12\"> " +
-            "<form class=\"form-horizontal\"> " +
-            "<input id=\"email\" name=\"email\" type=\"email\" placeholder=\"you@yourcompany.com\" class=\"form-control\" required> " +
-            "</form> </div> </div>",
+            title: 'Enter the email address of the recipient',
+            message: '<div class=\'row\'>  ' +
+            '<div class=\'col-md-12\'> ' +
+            '<form class=\'form-horizontal\'> ' +
+            '<input id=\'email\' name=\'email\' type=\'email\' placeholder=\'you@yourcompany.com\' class=\'form-control\' required> ' +
+            '</form> </div> </div>',
             buttons: {
                 cancel: {
-                    label: "Cancel",
-                    className: "btn-default",
+                    label: 'Cancel',
+                    className: 'btn-default',
                     callback: callback
                 },
                 success: {
-                    label: "Send Email",
-                    className: "btn-primary",
+                    label: 'Send Email',
+                    className: 'btn-primary',
                     callback: callback
                 }
             }

@@ -1,9 +1,9 @@
-﻿import { Injectable } from "@angular/core";
-import { Response } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { Observable } from "rxjs/Observable";
-import { License, Client } from "./software-licenses.component";
-import { AppSettings } from "../app.settings";
+﻿import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { Observable } from 'rxjs/Observable';
+import { License, Client } from './software-licenses.component';
+import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class SoftwareLicensesService {
@@ -13,7 +13,7 @@ export class SoftwareLicensesService {
     }
 
     addClient(clientName: string): Observable<Client> {
-        return this.httpService.post(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ "name": clientName }))
+        return this.httpService.post(`${AppSettings.API_ENDPOINT}/licenses/client`, JSON.stringify({ 'name': clientName }))
             .map((response: Response) => {
                 return response.json();
             });

@@ -1,15 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router-deprecated";
-import { Response } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { RecentCalibrationsService } from "./recent-calibrations.service";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { DatePickerComponent } from "../utilities/date-picker/date-picker.component";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import { CsvHelper } from "../utilities/csv.helper";
-import { ShowMessage, ShowError, ShowDialog } from "../utilities/messageBox";
-import { Observable } from "rxjs/Observable";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
+import { Response } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { RecentCalibrationsService } from './recent-calibrations.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { CsvHelper } from '../utilities/csv.helper';
+import { ShowMessage, ShowError, ShowDialog } from '../utilities/messageBox';
 
 export interface RecentCalibration {
     companyName: string;
@@ -25,8 +24,8 @@ export interface RecentCalibration {
 }
 
 @Component({
-    templateUrl: "./recent-calibrations.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './recent-calibrations.component.html',
+    styleUrls: ['./styles.css'],
     providers: [RecentCalibrationsService, HttpService],
     pipes: [PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent, DatePickerComponent]
@@ -39,7 +38,7 @@ export class RecentCalibrationsComponent implements OnInit {
     public to: string;
 
     public paginationConfig: IPaginationInstance = {
-        id: "recentCalibrations",
+        id: 'recentCalibrations',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -53,10 +52,10 @@ export class RecentCalibrationsComponent implements OnInit {
     private depotNames: string[];
 
     constructor(private service: RecentCalibrationsService, private router: Router) {
-        var d = new Date();
+        let d = new Date();
         d.setDate(d.getDate() - 28);
-        this.from = d.toISOString().split("T")[0];
-        this.to = new Date().toISOString().split("T")[0];
+        this.from = d.toISOString().split('T')[0];
+        this.to = new Date().toISOString().split('T')[0];
     }
 
     ngOnInit(): void {
@@ -67,15 +66,15 @@ export class RecentCalibrationsComponent implements OnInit {
         this.isRequesting = true;
         this.service.getRecent(this.from, this.to, this.selectedDepotName).subscribe((response: Response) => {
             this.recentCalibrations = response.json();
-            this.registrationChanged(this.vehicleRegistration)
+            this.registrationChanged(this.vehicleRegistration);
             this.depotNames = this.getDepotNames();
-            this.depotNames.unshift("- All -");
-            this.selectedDepotName = "- All -";
+            this.depotNames.unshift('- All -');
+            this.selectedDepotName = '- All -';
             this.isRequesting = false;
         },
         (error: any) => {
             this.isRequesting = false;
-            ShowError("Unable to get list of recent calibrations, please try again later.", error);
+            ShowError('Unable to get list of recent calibrations, please try again later.', error);
         },
         () => {
             this.isRequesting = false;
@@ -86,9 +85,9 @@ export class RecentCalibrationsComponent implements OnInit {
         if (!this.recentCalibrations) {
             return;
         }
-        var depotNames: Array<string> = new Array<string>();
-        for (var index: number = 0; index < this.recentCalibrations.length; index++) {
-            var element: RecentCalibration = this.recentCalibrations[index];
+        let depotNames = new Array<string>();
+        for (let index = 0; index < this.recentCalibrations.length; index++) {
+            let element = this.recentCalibrations[index];
             if (element.depotName && depotNames.indexOf(element.depotName) === -1) {
                 depotNames.push(element.depotName);
             }
@@ -101,7 +100,7 @@ export class RecentCalibrationsComponent implements OnInit {
             if (!this.selectedDepotName) {
                 return true;
             }
-            return this.selectedDepotName === "- All -" || item.depotName === this.selectedDepotName;
+            return this.selectedDepotName === '- All -' || item.depotName === this.selectedDepotName;
         })
         .slice((this.paginationConfig.currentPage - 1) * 10, ((this.paginationConfig.currentPage - 1) * 10) + 10);
     }
@@ -120,31 +119,31 @@ export class RecentCalibrationsComponent implements OnInit {
         }
         $event.preventDefault();
 
-        var $this: RecentCalibrationsComponent = this;
+        let $this: RecentCalibrationsComponent = this;
         this.showDialog(function () {
-            var email: string = this.find("#email").val();
+            let email = this.find('#email').val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this.service.emailCertificate(email, selectedCalibration).subscribe();
-                ShowMessage("Your email has been sent.");
+                ShowMessage('Your email has been sent.');
             }
         });
     }
 
     downloadGridData(): void {
         this.isDownloading = true;
-        var csvHelper: CsvHelper = new CsvHelper();
+        let csvHelper = new CsvHelper();
         csvHelper.download(this.getGridData(), this.paginationConfig.currentPage, this.selectGridData);
         this.isDownloading = false;
     }
 
     emailGridData(): void {
-        var $this: RecentCalibrationsComponent = this;
+        let $this: RecentCalibrationsComponent = this;
         this.showDialog(function () {
-            var email: string = this.find("#email").val();
+            let email = this.find('#email').val();
             if (email && /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
                 $this.isEmailing = true;
                 $this.service.emailGridData(email, $this.getGridData()).subscribe();
-                ShowMessage("Your email has been sent.");
+                ShowMessage('Your email has been sent.');
             }
             $this.isEmailing = false;
         });
@@ -177,7 +176,7 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     editCustomer(customerName: string) {
-        this.router.navigate(["AddressBook", { customerName: customerName }]);
+        this.router.navigate(['AddressBook', { customerName: customerName }]);
     }
 
     private selectGridData(item: RecentCalibration): Array<any> {
@@ -191,21 +190,21 @@ export class RecentCalibrationsComponent implements OnInit {
 
     private showDialog(callback: Function): void {
         ShowDialog({
-            title: "Enter the email address of the recipient",
-            message: "<div class=\"row\">  " +
-            "<div class=\"col-md-12\"> " +
-            "<form class=\"form-horizontal\"> " +
-            "<input id=\"email\" name=\"email\" type=\"email\" placeholder=\"you@yourcompany.com\" class=\"form-control\" required> " +
-            "</form> </div> </div>",
+            title: 'Enter the email address of the recipient',
+            message: '<div class=\'row\'>  ' +
+            '<div class=\'col-md-12\'> ' +
+            '<form class=\'form-horizontal\'> ' +
+            '<input id=\'email\' name=\'email\' type=\'email\' placeholder=\'you@yourcompany.com\' class=\'form-control\' required> ' +
+            '</form> </div> </div>',
             buttons: {
                 cancel: {
-                    label: "Cancel",
-                    className: "btn-default",
+                    label: 'Cancel',
+                    className: 'btn-default',
                     callback: callback
                 },
                 success: {
-                    label: "Send Email",
-                    className: "btn-primary",
+                    label: 'Send Email',
+                    className: 'btn-primary',
                     callback: callback
                 }
             }

@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Response, Http } from "@angular/http";
-import { HttpService } from "../utilities/HttpService";
-import { QCCheckService } from "./qc-check.service";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { TickPipe } from "../utilities/tick.pipe";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import { ShowError } from "../utilities/messageBox";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/do";
+import { Component, OnInit } from '@angular/core';
+import { Response, Http } from '@angular/http';
+import { HttpService } from '../utilities/http.service';
+import { QCCheckService } from './qc-check.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { TickPipe } from '../utilities/tick.pipe';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { ShowError } from '../utilities/messageBox';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 export interface QCCheck {
     centreName: string;
@@ -20,8 +20,8 @@ export interface QCCheck {
 }
 
 @Component({
-    templateUrl: "./qc-check.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './qc-check.component.html',
+    styleUrls: ['./styles.css'],
     providers: [QCCheckService, HttpService],
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]
@@ -31,7 +31,7 @@ export class QCCheckComponent implements OnInit {
     public selectedDepotName: string;
 
     public paginationConfig: IPaginationInstance = {
-        id: "qcCheck",
+        id: 'qcCheck',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -49,7 +49,7 @@ export class QCCheckComponent implements OnInit {
             this.qcChecks = response.json();
         },
         (error: any) => {
-            ShowError("Unable to get a list of QC checks, please try again later.", error);
+            ShowError('Unable to get a list of QC checks, please try again later.', error);
             this.isRequesting = false;
         },
         () => {

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from "@angular/http";
-import { RouteParams } from "@angular/router-deprecated";
-import { AddressBookService } from "./address-book.service";
-import { HttpService } from "../utilities/HttpService";
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from "ng2-pagination";
-import { ShowError, ShowMessage } from "../utilities/messageBox";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
+import { Response } from '@angular/http';
+import { RouteParams } from '@angular/router-deprecated';
+import { AddressBookService } from './address-book.service';
+import { HttpService } from '../utilities/http.service';
+import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { ShowError } from '../utilities/messageBox';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
 
 export interface AddressBookEntry {
     id: number;
@@ -18,8 +18,8 @@ export interface AddressBookEntry {
 }
 
 @Component({
-    templateUrl: "./address-book.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './address-book.component.html',
+    styleUrls: ['./styles.css'],
     providers: [AddressBookService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
     pipes: [PaginatePipe]
@@ -27,7 +27,7 @@ export interface AddressBookEntry {
 export class AddressBookComponent implements OnInit {
 
     public paginationConfig: IPaginationInstance = {
-        id: "addressBook",
+        id: 'addressBook',
         itemsPerPage: 10,
         currentPage: 1
     };
@@ -45,7 +45,7 @@ export class AddressBookComponent implements OnInit {
     constructor(private service: AddressBookService, private routeParams: RouteParams) {
         this.selectedAddressBookEntry = <AddressBookEntry>{};
 
-        var customer = routeParams.get("customerName");
+        let customer = routeParams.get('customerName');
         if (customer) {
             this.routeCustomer = customer;
         }
@@ -56,18 +56,18 @@ export class AddressBookComponent implements OnInit {
         this.service.getAddressBook().subscribe((response: Response) => {
             this.filteredAddressBookEntries = this.addressBookEntries = response.json();
 
-            if (this.routeCustomer){
-                this.contactNameChanged(this.routeCustomer);           
-                this.contactName = this.routeCustomer;     
+            if (this.routeCustomer) {
+                this.contactNameChanged(this.routeCustomer);
+                this.contactName = this.routeCustomer;
             }
         },
-        (error: any) => {
-            this.isRequesting = false;
-            ShowError("Unable to get address book, please try again later.", error);
-        },
-        () => {
-            this.isRequesting = false;
-        });
+            (error: any) => {
+                this.isRequesting = false;
+                ShowError('Unable to get address book, please try again later.', error);
+            },
+            () => {
+                this.isRequesting = false;
+            });
     }
 
     updateEntry(entry: AddressBookEntry) {
@@ -75,15 +75,15 @@ export class AddressBookComponent implements OnInit {
         this.service.updateEntry(entry).subscribe((response: Response) => {
             entry.isEditing = false;
         },
-        (error: any) => {
-            this.isUpdating = false;
-            entry.isEditing = false;
-            ShowError("Unable to update address book, please try again later.", error);
-        },
-        () => {
-            this.isUpdating = false;
-            entry.isEditing = false;
-        });
+            (error: any) => {
+                this.isUpdating = false;
+                entry.isEditing = false;
+                ShowError('Unable to update address book, please try again later.', error);
+            },
+            () => {
+                this.isUpdating = false;
+                entry.isEditing = false;
+            });
     }
 
     cancel(entry: AddressBookEntry) {

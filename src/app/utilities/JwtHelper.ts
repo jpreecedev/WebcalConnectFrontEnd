@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { IJwt } from "./Jwt";
-import { Cookie } from "./cookies";
+import { Injectable } from '@angular/core';
+import { IJwt } from './Jwt';
+import { Cookie } from './cookies';
 
 declare var escape: any;
 
@@ -18,7 +18,7 @@ export interface IJwtBody {
 export class JwtHelper {
 
     public getToken(): IJwt {
-        var cookie: string = Cookie.getCookie("token");
+        let cookie: string = Cookie.getCookie('token');
         if (cookie && !this.isTokenExpired(cookie)) {
             return JSON.parse(cookie);
         }
@@ -26,7 +26,7 @@ export class JwtHelper {
     }
 
     public getRoles(rawToken: string): string[] {
-        var decoded: IJwtBody = this.decodeToken(rawToken);
+        let decoded: IJwtBody = this.decodeToken(rawToken);
         if (!decoded) {
             return;
         }
@@ -38,51 +38,51 @@ export class JwtHelper {
     }
 
     public setToken(token: IJwt, rememberMe: boolean): void {
-        Cookie.setCookie("token", JSON.stringify(token), rememberMe ? token.expires_in : undefined);
+        Cookie.setCookie('token', JSON.stringify(token), rememberMe ? token.expires_in : undefined);
     }
 
     public urlBase64Decode(str: string): string {
-        var output: string = str.replace(/-/g, "+").replace(/_/g, "/");
+        let output: string = str.replace(/-/g, '+').replace(/_/g, '/');
         switch (output.length % 4) {
             case 0:
                 break;
             case 2:
-                output += "==";
+                output += '==';
                 break;
             case 3:
-                output += "=";
+                output += '=';
                 break;
             default:
-                throw "Illegal base64url string!";
+                throw 'Illegal base64url string!';
         }
 
-        return decodeURIComponent(escape(window.atob(output))); //polifyll https://github.com/davidchambers/Base64.js
+        return decodeURIComponent(escape(window.atob(output))); // polifyll https://github.com/davidchambers/Base64.js
     }
 
     public decodeToken(token: string): IJwtBody {
-        var parts: string[] = token.split(".");
+        let parts: string[] = token.split('.');
 
         if (parts.length !== 3) {
-            throw new Error("JWT must have 3 parts");
+            throw new Error('JWT must have 3 parts');
         }
 
-        var decoded: string = this.urlBase64Decode(parts[1]);
+        let decoded: string = this.urlBase64Decode(parts[1]);
         if (!decoded) {
-            throw new Error("Cannot decode the token");
+            throw new Error('Cannot decode the token');
         }
 
         return JSON.parse(decoded);
     }
 
     public getTokenExpirationDate(token: string): Date {
-        var decoded: any;
+        let decoded: any;
         decoded = this.decodeToken(token);
 
-        if (typeof decoded.exp === "undefined") {
+        if (typeof decoded.exp === 'undefined') {
             return undefined;
         }
 
-        var date: Date = new Date(0); // The 0 here is the key, which sets the date to the epoch
+        let date: Date = new Date(0); // The 0 here is the key, which sets the date to the epoch
         date.setUTCSeconds(decoded.exp);
 
         return date;
@@ -93,7 +93,7 @@ export class JwtHelper {
             return true;
         }
 
-        var date: Date = this.getTokenExpirationDate(token);
+        let date: Date = this.getTokenExpirationDate(token);
         offsetSeconds = offsetSeconds || 0;
         if (!date) {
             return false;
@@ -103,6 +103,6 @@ export class JwtHelper {
     }
 
     public logout(): void {
-        Cookie.deleteCookie("token");
+        Cookie.deleteCookie('token');
     }
 }

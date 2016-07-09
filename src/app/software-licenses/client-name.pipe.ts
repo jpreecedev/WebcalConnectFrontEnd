@@ -1,8 +1,8 @@
-﻿import { Pipe, PipeTransform } from "@angular/core";
-import { Client } from "./software-licenses.component";
+﻿import { Pipe, PipeTransform } from '@angular/core';
+import { Client } from './software-licenses.component';
 
 @Pipe({
-    name: "clientName"
+    name: 'wcClientName'
 })
 export class ClientNamePipe implements PipeTransform {
     public transform(data: Client[], filterValue: any): Client[] {

@@ -1,12 +1,12 @@
-import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from "@angular/core";
+import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 
-var moment = require('moment');
-var Pikaday = require("Pikaday");
+let moment = require('moment');
+let Pikaday = require('Pikaday');
 
 @Component({
-    selector: "date-picker",
-    templateUrl: "./date-picker.component.html",
-    styleUrls: ["./date-picker.css"]
+    selector: 'wc-date-picker',
+    templateUrl: './date-picker.component.html',
+    styleUrls: ['./date-picker.css']
 })
 export class DatePickerComponent implements OnInit {
 
@@ -20,32 +20,32 @@ export class DatePickerComponent implements OnInit {
 
     constructor(elementRef: ElementRef) {
         this.nativeElement = elementRef.nativeElement;
-    } 
+    }
 
     @Input()
     public set date(val: string) {
         if (this.picker) {
             this.picker.setDate(val);
         }
-        this.theDate = moment(val).format("ddd Do MMMM YYYY");
+        this.theDate = moment(val).format('ddd Do MMMM YYYY');
     }
 
     @Input()
     public set label(val: string) {
         this.theLabel = val;
-        this.labelId = val.replace(/ /g, "").toLowerCase();
+        this.labelId = val.replace(/ /g, '').toLowerCase();
     }
 
     ngOnInit() {
-        var that = this;
+        let that = this;
 
-        var picker = new Pikaday({
-            field: this.nativeElement.getElementsByTagName("input")[0],
+        let picker = new Pikaday({
+            field: this.nativeElement.getElementsByTagName('input')[0],
             onSelect: function (dt: Date) {
-                var formatted = moment(dt).format("YYYY-MM-DD");
+                let formatted = moment(dt).format('YYYY-MM-DD');
                 that.dateChanged.emit(formatted);
             }
         });
-        picker.setDate(moment(this.theDate).format("ddd Do MMMM YYYY"));
+        picker.setDate(moment(this.theDate).format('ddd Do MMMM YYYY'));
     }
 }

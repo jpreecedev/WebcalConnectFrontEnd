@@ -1,9 +1,9 @@
-import { Component } from "@angular/core";
-import { HttpService } from "../utilities/HttpService";
-import { SpinnerComponent } from "../utilities/spinner/spinner.component";
-import { InspectionDataService } from "./inspection-data.service";
-import { WCButtonComponent } from "../utilities/wc-button/wc-button.component";
-import { ShowError } from "../utilities/messageBox";
+import { Component } from '@angular/core';
+import { HttpService } from '../utilities/http.service';
+import { SpinnerComponent } from '../utilities/spinner/spinner.component';
+import { InspectionDataService } from './inspection-data.service';
+import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
+import { ShowError } from '../utilities/messageBox';
 
 export interface InspectionData {
     calibrationDate: string;
@@ -22,8 +22,8 @@ export interface History {
 }
 
 @Component({
-    templateUrl: "./inspection-data.component.html",
-    styleUrls: ["./styles.css"],
+    templateUrl: './inspection-data.component.html',
+    styleUrls: ['./styles.css'],
     directives: [SpinnerComponent, WCButtonComponent],
     providers: [InspectionDataService, HttpService]
 })
@@ -48,7 +48,7 @@ export class InspectionDataComponent {
         },
             (error: any) => {
                 this.isRequesting = false;
-                ShowError("Unable to get vehicle inspection data, please try again later.", error);
+                ShowError('Unable to get vehicle inspection data, please try again later.', error);
             },
             () => {
                 this.isRequesting = false;
@@ -58,7 +58,7 @@ export class InspectionDataComponent {
     reset(): void {
         this.inspectionData = undefined;
         this.isRequesting = false;
-        this.vehicleRegistration = "";
+        this.vehicleRegistration = '';
     }
 
     asDate(input: string): Date {
