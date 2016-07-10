@@ -13,6 +13,5 @@ import 'rxjs';
 // You can import js, ts, css, sass, ...
 
 import 'jquery';
-import 'bootstrap/dist/js/bootstrap.js';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-loader';
 import 'font-awesome-webpack';
