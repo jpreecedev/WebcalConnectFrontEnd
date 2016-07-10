@@ -34,9 +34,11 @@
             </div>
         </div>
     </form>
-    <hr/>
 
-    <p class="text-center" *ngIf="!isRequesting && (!recentCalibrations || recentCalibrations.length === 0)">No data to display</p>
+    <div *ngIf="!isRequesting && (!recentCalibrations || recentCalibrations.length === 0)">
+        <hr/>
+        <p class="text-center">No data to display</p>
+    </div>
 
     <wc-spinner *ngIf="isRequesting" [isRunning]="isRequesting"></wc-spinner>
 
@@ -55,8 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let recentCalibration of filteredCalibrations | paginate: paginationConfig"
-                    class="pointer" (click)="downloadCertificate($event, recentCalibration)">
+                <tr *ngFor="let recentCalibration of filteredCalibrations | paginate: paginationConfig" class="pointer" (click)="downloadCertificate($event, recentCalibration)">
                     <td>
                         <img [src]="getIconPath(recentCalibration.documentIcon)" [attr.alt]="recentCalibration.documentType" />
                     </td>
@@ -89,7 +90,8 @@
         <div class="col-xs-12 col-sm-offset-9 col-sm-3">
             <div class="form-group">
                 <label for="vehicleRegistration">Filter by vehicle registration</label>
-                <input type="text" id="vehicleRegistration" name="vehicleRegistration" class="form-control" (keyup)="registrationChanged(vehicleRegistration)" [(ngModel)]="vehicleRegistration">
+                <input type="text" id="vehicleRegistration" name="vehicleRegistration" class="form-control" (keyup)="registrationChanged(vehicleRegistration)"
+                    [(ngModel)]="vehicleRegistration">
             </div>
         </div>
     </div>
