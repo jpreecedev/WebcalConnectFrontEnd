@@ -23,7 +23,7 @@ export interface History {
 
 @Component({
     templateUrl: './inspection-data.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     directives: [SpinnerComponent, WCButtonComponent],
     providers: [InspectionDataService, HttpService]
 })

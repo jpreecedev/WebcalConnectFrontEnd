@@ -17,7 +17,7 @@ export interface UserRegistration {
 
 @Component({
     templateUrl: './register-user.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [RegisterUserService, HttpService],
     directives: [WCButtonComponent, DatePickerComponent]
 })

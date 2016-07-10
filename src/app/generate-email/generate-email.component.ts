@@ -33,7 +33,7 @@ export interface EmailReportData {
 @Component({
     templateUrl: './generate-email.component.html',
     providers: [GenerateEmailService, HttpService],
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     pipes: [SplitByCapitalsPipe],
     directives: [SpinnerComponent, WCButtonComponent, DatePickerComponent]
 })

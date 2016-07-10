@@ -20,7 +20,7 @@ export interface CentreCheck {
 
 @Component({
     templateUrl: './centre-check.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [CentreCheckService, HttpService],
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]

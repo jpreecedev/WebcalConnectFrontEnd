@@ -16,7 +16,7 @@ export interface DetailedException {
 
 @Component({
     templateUrl: './detailed-exceptions.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [DetailedExceptionsService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
     pipes: [PaginatePipe]

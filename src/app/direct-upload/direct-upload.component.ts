@@ -15,7 +15,7 @@ export interface DirectUploadDocument {
 
 @Component({
     templateUrl: './direct-upload.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [DirectUploadService, HttpService, FileUploadService],
     pipes: [PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp]

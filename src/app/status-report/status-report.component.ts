@@ -32,7 +32,7 @@ export interface StatusReportUser {
 
 @Component({
     templateUrl: './status-report.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [StatusReportService, HttpService, FileUploadService],
     directives: [SpinnerComponent, WCButtonComponent]
 })

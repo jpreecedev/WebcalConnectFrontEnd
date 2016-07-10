@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'wc-spinner',
     templateUrl: './spinner.component.html',
-    styleUrls: ['./spinner.css']
+    styleUrls: ['./spinner.scss']
 })
 export class SpinnerComponent {
     private isDelayedRunning: boolean = false;

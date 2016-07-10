@@ -5,7 +5,7 @@ export type ButtonType = 'submit' | 'button';
 @Component({
     selector: 'wc-button',
     templateUrl: './wc-button.component.html',
-    styleUrls: ['./style.css']
+    styleUrls: ['./style.scss']
 })
 export class WCButtonComponent {
 

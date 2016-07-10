@@ -26,7 +26,7 @@ export interface Client {
 
 @Component({
     templateUrl: './software-licenses.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [SoftwareLicensesService, HttpService],
     pipes: [TickPipe, ClientNamePipe, PaginatePipe],
     directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp, DatePickerComponent]

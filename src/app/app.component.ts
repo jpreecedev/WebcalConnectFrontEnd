@@ -58,7 +58,7 @@ export var Routes: Route[] = [
 @Component({
     selector: 'wc-app',
     templateUrl: './app.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     directives: [...ROUTER_DIRECTIVES, AuthRouterOutletDirective],
     providers: [JwtHelper],
 })

@@ -8,7 +8,7 @@ import { hasValidToken } from '../utilities/Jwt';
 
 @Component({
     templateUrl: './login.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [HttpService, JwtHelper],
     directives: [WCButtonComponent]
 })

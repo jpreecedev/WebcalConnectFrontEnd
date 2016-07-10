@@ -19,7 +19,7 @@ export interface AddressBookEntry {
 
 @Component({
     templateUrl: './address-book.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [AddressBookService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
     pipes: [PaginatePipe]

@@ -18,7 +18,7 @@ export interface ManageAccessSite {
 
 @Component({
     templateUrl: './manage-access.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [HttpService, ManageAccessService],
     directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp],
     pipes: [PaginatePipe]

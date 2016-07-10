@@ -21,7 +21,7 @@ export interface QCCheck {
 
 @Component({
     templateUrl: './qc-check.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [QCCheckService, HttpService],
     pipes: [PaginatePipe, TickPipe],
     directives: [SpinnerComponent, PaginationControlsCmp]

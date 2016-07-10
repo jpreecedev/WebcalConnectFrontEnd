@@ -23,7 +23,7 @@ export interface CalibrationDue {
 
 @Component({
     templateUrl: './calibrations-due.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [CalibrationsDueService, HttpService],
     directives: [SpinnerComponent, PaginationControlsCmp],
     pipes: [PaginatePipe, DepotNamePipe]

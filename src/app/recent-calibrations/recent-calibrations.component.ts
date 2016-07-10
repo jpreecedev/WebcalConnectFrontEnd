@@ -25,7 +25,7 @@ export interface RecentCalibration {
 
 @Component({
     templateUrl: './recent-calibrations.component.html',
-    styleUrls: ['./styles.css'],
+    styleUrls: ['./styles.scss'],
     providers: [RecentCalibrationsService, HttpService],
     pipes: [PaginatePipe],
     directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent, DatePickerComponent]
