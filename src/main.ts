@@ -8,9 +8,10 @@ import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { PaginationService } from 'ng2-pagination';
+import { JwtHelper } from './app/utilities/JwtHelper';
 
 if (process.env.ENV === 'build') {
-  enableProdMode();
+    enableProdMode();
 }
 
 bootstrap(AppComponent, [
@@ -19,8 +20,9 @@ bootstrap(AppComponent, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
     PaginationService,
+    JwtHelper,
     provide(LocationStrategy, {
         useClass: HashLocationStrategy
     })
 ])
-.catch(err => console.error(err));
+    .catch(err => console.error(err));

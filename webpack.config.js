@@ -71,7 +71,8 @@ module.exports = function makeWebpackConfig() {
         extensions: ['', '.ts', '.js', '.json', '.css', '.scss', '.html'],
         alias: {
             'app': 'src/app',
-            'common': 'src/common'
+            'common': 'src/common',
+            'jquery': 'jquery/dist/jquery'
         }
     };
 
@@ -156,6 +157,12 @@ module.exports = function makeWebpackConfig() {
      * List: http://webpack.github.io/docs/list-of-plugins.html
      */
     config.plugins = [
+        new webpack.ProvidePlugin({
+            "$": "jquery",
+            "jQuery": "jquery",
+            "Tether": 'tether',
+            "window.Tether": "tether"
+        }),
         // Define env variables to help with builds
         // Reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         new webpack.DefinePlugin({

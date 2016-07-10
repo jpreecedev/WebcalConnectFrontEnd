@@ -9,16 +9,14 @@ import { hasValidToken } from '../utilities/Jwt';
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [HttpService, JwtHelper],
+    providers: [HttpService],
     directives: [WCButtonComponent]
 })
 export class LoginComponent implements OnInit {
 
     private isRequesting: boolean = false;
-    private isLoggedIn: boolean = false;
 
     constructor(private httpService: HttpService, private router: Router, private jwtHelper: JwtHelper) {
-
     }
 
     authenticate(username: string, password: string, rememberMe: boolean): void {
@@ -26,7 +24,7 @@ export class LoginComponent implements OnInit {
         this.isRequesting = true;
         this.httpService.authenticate(username, password, rememberMe).subscribe((response: boolean) => {
             if (response) {
-                this.loggedInChanged(true);
+                this.jwtHelper.isLoggedIn = true;
                 this.router.navigate(['Dashboard']);
             }
         },
@@ -39,16 +37,12 @@ export class LoginComponent implements OnInit {
             });
     }
 
-    loggedInChanged(value: boolean) {
-        this.isLoggedIn = value;
-    }
-
     ngOnInit(): void {
         if (hasValidToken()) {
-            this.loggedInChanged(true);
+            this.jwtHelper.isLoggedIn = true;
             this.router.navigate(['Dashboard']);
         } else {
-            this.loggedInChanged(false);
+            this.jwtHelper.isLoggedIn = false;
         }
     }
 

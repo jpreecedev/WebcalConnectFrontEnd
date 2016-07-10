@@ -60,15 +60,11 @@ export var Routes: Route[] = [
     templateUrl: './app.component.html',
     styleUrls: ['./styles.scss'],
     directives: [...ROUTER_DIRECTIVES, AuthRouterOutletDirective],
-    providers: [JwtHelper],
 })
 @RouteConfig(Routes)
 export class AppComponent {
 
-    public isLoggedIn: boolean = true;
-
     constructor(private router: Router, private jwtHelper: JwtHelper) {
-
     }
 
     logout(): void {

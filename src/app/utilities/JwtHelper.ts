@@ -17,9 +17,16 @@ export interface IJwtBody {
 @Injectable()
 export class JwtHelper {
 
+    public isLoggedIn: boolean = false;
+
+    constructor() {
+        this.getToken();
+    }
+
     public getToken(): IJwt {
         let cookie: string = Cookie.getCookie('token');
         if (cookie && !this.isTokenExpired(cookie)) {
+            this.isLoggedIn = true;
             return JSON.parse(cookie);
         }
         return null;
@@ -104,5 +111,6 @@ export class JwtHelper {
 
     public logout(): void {
         Cookie.deleteCookie('token');
+        this.isLoggedIn = false;
     }
 }

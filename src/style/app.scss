@@ -93,14 +93,6 @@ nav {
     background: $color_wild_sand_approx;
     border-bottom: 1px solid $color_gallery_approx;
     padding: 15px 0;
-
-    .navbar-nav {
-        margin: 10px 0 0;
-    }
-
-    &.navbar {
-        margin-bottom: 0;
-    }
 }
 
 .carousel {
@@ -241,10 +233,6 @@ footer {
     padding: 26px 0;
     color: $color_celeste_approx;
     margin-top: 40px;
-}
-
-.navbar-toggle .icon-bar {
-    background-color: #000;
 }
 
 .thumbnail {
@@ -449,15 +437,6 @@ pagination-controls li.current{
 @media(max-width: 480px) {
     .carousel-caption {
         bottom: 85px;
-    }
-        
-    .nav.navbar-nav{
-        width:100%;
-        text-align: center;
-        
-        ul.dropdown-menu{
-            text-align: center;
-        }
     }
 }
 
