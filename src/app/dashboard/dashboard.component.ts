@@ -6,7 +6,7 @@ import { MenuItem } from '../app.component';
 @Component({
     templateUrl: './dashboard.component.html',
     styleUrls: ['./styles.scss'],
-    directives: [ROUTER_DIRECTIVES],
+    directives: [...ROUTER_DIRECTIVES],
 })
 export class DashboardComponent implements OnInit {
 

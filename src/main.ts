@@ -17,12 +17,12 @@ if (process.env.ENV === 'build') {
 bootstrap(AppComponent, [
     disableDeprecatedForms(),
     provideForms(),
-    HTTP_PROVIDERS,
-    ROUTER_PROVIDERS,
+    ...HTTP_PROVIDERS,
+    ...ROUTER_PROVIDERS,
     PaginationService,
     JwtHelper,
     provide(LocationStrategy, {
         useClass: HashLocationStrategy
     })
 ])
-    .catch(err => console.error(err));
+.catch(err => console.error(err));
