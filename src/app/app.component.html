@@ -4,33 +4,33 @@
     &#9776;
   </button>
         <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-            <a [routerLink]="['Home']" class="navbar-brand" rel="home" title="Webcal - Tacho Calibration Software">
+            <a [routerLink]="['']" class="navbar-brand" rel="home" title="Webcal - Tacho Calibration Software">
                 <img src="/images/logo.png" alt="Skillray Transport Services">
             </a>
             <ul class="nav navbar-nav pull-right">
                 <li class="nav-item">
-                    <a class="nav-link" [hidden]="!jwtHelper.isLoggedIn" [routerLink]="['Dashboard']">Dashboard</a>
+                    <a class="nav-link" [hidden]="!jwtHelper.isLoggedIn" [routerLink]="['dashboard']">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <div class="btn-group" [hidden]="!jwtHelper.isLoggedIn"> 
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tools</button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" [routerLink]="['QCCheck']">QC Check</a>
-                            <a class="dropdown-item" [routerLink]="['CentreCheck']">Centre Check</a>
-                            <a class="dropdown-item" [routerLink]="['GenerateEmail']">Generate Email</a>
-                            <a class="dropdown-item" [routerLink]="['InspectionData']">Inspection Data</a>
-                            <a class="dropdown-item" [routerLink]="['CalibrationsDue']">Calibrations Due</a>
-                            <a class="dropdown-item" [routerLink]="['RegisterUser']">Register User</a>
-                            <a class="dropdown-item" [routerLink]="['ManageAccess']">Manage Access</a>
-                            <a class="dropdown-item" [routerLink]="['SoftwareLicenses']">Software Licenses</a>
-                            <a class="dropdown-item" [routerLink]="['AddressBook']">Address Book</a>
+                            <a class="dropdown-item" [routerLink]="['qc-check']">QC Check</a>
+                            <a class="dropdown-item" [routerLink]="['centre-check']">Centre Check</a>
+                            <a class="dropdown-item" [routerLink]="['generate-email']">Generate Email</a>
+                            <a class="dropdown-item" [routerLink]="['inspection-data']">Inspection Data</a>
+                            <a class="dropdown-item" [routerLink]="['calibrations-due']">Calibrations Due</a>
+                            <a class="dropdown-item" [routerLink]="['register-user']">Register User</a>
+                            <a class="dropdown-item" [routerLink]="['manage-access']">Manage Access</a>
+                            <a class="dropdown-item" [routerLink]="['software-licenses']">Software Licenses</a>
+                            <a class="dropdown-item" [routerLink]="['address-book']">Address Book</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" [hidden]="!jwtHelper.isLoggedIn" (click)="logout()">Logout</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [hidden]="!jwtHelper.isLoggedIn" [routerLink]="['RecentCalibrations']">Recent Calibrations</a>
+                    <a class="nav-link" [hidden]="!jwtHelper.isLoggedIn" [routerLink]="['recent-calibrations']">Recent Calibrations</a>
                 </li>
             </ul>
         </div>

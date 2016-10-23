@@ -26,6 +26,8 @@ $url_0: url(../public/images/slide-bg.png);
 	cursor: default;
 }
 
+@import 'node_modules/bootstrap/scss/bootstrap';
+
 body {
     font-family: $font_0, $font_1;
     color: $color_storm_dust_approx;

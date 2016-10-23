@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
         this.httpService.authenticate(username, password, rememberMe).subscribe((response: boolean) => {
             if (response) {
                 this.jwtHelper.isLoggedIn = true;
-                this.router.navigate(['Dashboard']);
+                this.router.navigate(['dashboard']);
             }
         },
             (error: any) => {
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
         if (hasValidToken()) {
             this.jwtHelper.isLoggedIn = true;
-            this.router.navigate(['Dashboard']);
+            this.router.navigate(['dashboard']);
         } else {
             this.jwtHelper.isLoggedIn = false;
         }

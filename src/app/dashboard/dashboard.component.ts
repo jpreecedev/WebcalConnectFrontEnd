@@ -16,28 +16,28 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.dashboardItems = [
-            <MenuItem>{ icon: 'fa-history', routerLink: 'RecentCalibrations', text: 'Recent Calibrations' },
-            <MenuItem>{ icon: 'fa-clipboard', routerLink: 'QCCheck', text: 'QC Check' },
-            <MenuItem>{ icon: 'fa-clock-o', routerLink: 'CentreCheck', text: 'Centre Check' },
-            <MenuItem>{ icon: 'fa-bar-chart', routerLink: 'StatusReport', text: 'Status Report' },
-            <MenuItem>{ icon: 'fa-list-alt', routerLink: 'CalibrationsDue', text: 'Calibrations Due' },
-            <MenuItem>{ icon: 'fa-envelope', routerLink: 'GenerateEmail', text: 'Generate Email' },
-            <MenuItem>{ icon: 'fa-search', routerLink: 'InspectionData', text: 'Inspection Data' },
-            <MenuItem>{ icon: 'fa-book', routerLink: 'AddressBook', text: 'Address Book' }
+            <MenuItem>{ icon: 'fa-history', routerLink: 'recent-calibrations', text: 'Recent Calibrations' },
+            <MenuItem>{ icon: 'fa-clipboard', routerLink: 'qc-check', text: 'QC Check' },
+            <MenuItem>{ icon: 'fa-clock-o', routerLink: 'centre-check', text: 'Centre Check' },
+            <MenuItem>{ icon: 'fa-bar-chart', routerLink: 'status-report', text: 'Status Report' },
+            <MenuItem>{ icon: 'fa-list-alt', routerLink: 'calibrations-due', text: 'Calibrations Due' },
+            <MenuItem>{ icon: 'fa-envelope', routerLink: 'generate-email', text: 'Generate Email' },
+            <MenuItem>{ icon: 'fa-search', routerLink: 'inspection-data', text: 'Inspection Data' },
+            <MenuItem>{ icon: 'fa-book', routerLink: 'address-book', text: 'Address Book' }
         ];
 
         if (isAdministrator()) {
             this.dashboardItems.push(...[
-                <MenuItem>{ icon: 'fa-users', routerLink: 'ManageAccess', text: 'Manage Access' },
-                <MenuItem>{ icon: 'fa-certificate', routerLink: 'SoftwareLicenses', text: 'Software Licenses' },
-                <MenuItem>{ icon: 'fa-at', routerLink: 'RegisterUser', text: 'Register User' },
-                <MenuItem>{ icon: 'fa-bug', routerLink: 'DetailedExceptions', text: 'Exception Log' }
+                <MenuItem>{ icon: 'fa-users', routerLink: 'manage-access', text: 'Manage Access' },
+                <MenuItem>{ icon: 'fa-certificate', routerLink: 'software-licenses', text: 'Software Licenses' },
+                <MenuItem>{ icon: 'fa-at', routerLink: 'register-user', text: 'Register User' },
+                <MenuItem>{ icon: 'fa-bug', routerLink: 'detailed-exceptions', text: 'Exception Log' }
             ]);
         }
 
         if (isDirectUploadUser()) {
             this.dashboardItems.push(...[
-                <MenuItem>{ icon: 'fa-cloud-upload', routerLink: 'DirectUpload', text: 'Certificate Upload' }
+                <MenuItem>{ icon: 'fa-cloud-upload', routerLink: 'direct-upload', text: 'Certificate Upload' }
             ]);
         }
     }

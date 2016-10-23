@@ -1,6 +1,5 @@
 // Angular 2
 import '@angular/platform-browser';
-import '@angular/platform-browser-dynamic';
 import '@angular/core';
 import '@angular/common';
 import '@angular/http';
@@ -13,4 +12,4 @@ import '@angularclass/hmr';
 // You can import js, ts, css, sass, ...
 
 import 'jquery';
-// import 'font-awesome-webpack';
+import 'style!css!less!font-awesome-webpack/font-awesome-styles.loader!font-awesome-webpack/font-awesome.config.js';

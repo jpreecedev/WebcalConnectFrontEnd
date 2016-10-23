@@ -72,7 +72,7 @@ export class RegisterUserComponent {
     }
 
     cancel(): void {
-        this.router.navigate(['Dashboard']);
+        this.router.navigate(['dashboard']);
     }
 
     resetForm(): void {

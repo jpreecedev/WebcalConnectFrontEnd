@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { PaginationControlsCmp, PaginatePipe, PaginationService } from 'ng2-pagination';
 
 import { AppComponent } from './app.component';
@@ -31,14 +32,16 @@ import { SpinnerComponent } from './utilities/spinner/spinner.component';
 import { WCButtonComponent } from './utilities/wc-button/wc-button.component';
 import { FileUploadService } from './utilities/file-upload.service';
 import { JwtHelper } from './utilities/JwtHelper';
+import { LoggedInGuard } from './utilities/loggedin.guard';
 
 import { ROUTES } from './app.routes';
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES),
-    FormsModule
+    RouterModule.forRoot(ROUTES, { useHash: true }),
+    FormsModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,
@@ -71,7 +74,8 @@ import { ROUTES } from './app.routes';
   providers: [
     FileUploadService,
     PaginationService,
-    JwtHelper
+    JwtHelper,
+    LoggedInGuard
   ],
   bootstrap: [AppComponent]
 })

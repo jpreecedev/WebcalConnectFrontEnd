@@ -50,7 +50,6 @@ module.exports = function makeWebpackConfig() {
   config.entry = isTest ? {} : {
     'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
-    'bootstrap-loader': 'bootstrap-loader',
     'app': './src/main.ts' // our angular app,
   };
 
@@ -58,7 +57,12 @@ module.exports = function makeWebpackConfig() {
    * Output
    * Reference: http://webpack.github.io/docs/configuration.html#output
    */
-  config.output = isTest ? {} : {
+  config.output = isTest ? {
+    path: root('build'),
+    publicPath: 'http://localhost:8080/',
+    filename: 'js/[name].js',
+    chunkFilename: '[id].chunk.js'
+  } : {
     path: root('dist'),
     publicPath: isProd ? '/' : 'http://localhost:8080/',
     filename: isProd ? 'js/[name].[hash].js' : 'js/[name].js',

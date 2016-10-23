@@ -171,7 +171,7 @@ export class RecentCalibrationsComponent implements OnInit {
     }
 
     editCustomer(customerName: string) {
-        this.router.navigate(['AddressBook', { customerName: customerName }]);
+        this.router.navigate(['address-book', { customerName: customerName }]);
     }
 
     private selectGridData(item: RecentCalibration): Array<any> {

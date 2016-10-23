@@ -22,6 +22,6 @@ export class AppComponent {
 
     logout(): void {
         this.jwtHelper.logout();
-        this.router.navigate(['Home']);
+        this.router.navigate(['']);
     }
 }
