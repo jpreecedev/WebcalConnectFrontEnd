@@ -1,5 +1,5 @@
 ﻿import { Pipe, PipeTransform } from '@angular/core';
-import { Client } from './software-licenses.component';
+import { Client } from '../software-licenses/software-licenses.component';
 
 @Pipe({
     name: 'wcClientName'

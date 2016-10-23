@@ -40,7 +40,7 @@
                         <wc-spinner [isRunning]="isRequesting"></wc-spinner>
                     </td>
                 </tr>
-                <tr *ngFor="let calibrationDue of calibrationsDue | depotname : selectedDepotName | paginate: paginationConfig"
+                <tr *ngFor="let calibrationDue of calibrationsDue | wcDepotName : selectedDepotName | paginate: paginationConfig"
                 class="pointer" (click)="downloadCertificate($event, calibrationDue)">
                     <td><img [attr.src]="'/images/' + calibrationDue.documentIcon + '.png'" [attr.alt]="calibrationDue.documentType" /> </td>
                     <td>{{asDate(calibrationDue.date) | date}}</td>
