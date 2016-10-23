@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { StatusReportService } from './status-report.service';
 import { HttpService } from '../utilities/http.service';
 import { FileUploadService } from '../utilities/file-upload.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 import { ShowError, ShowConfirm } from '../utilities/messageBox';
 
 declare let Gauge: any;
@@ -33,8 +31,7 @@ export interface StatusReportUser {
 @Component({
     templateUrl: './status-report.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [StatusReportService, HttpService, FileUploadService],
-    directives: [SpinnerComponent, WCButtonComponent]
+    providers: [StatusReportService, HttpService, FileUploadService]
 })
 export class StatusReportComponent implements OnInit {
 

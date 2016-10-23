@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { CentreCheckService } from './centre-check.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { TickPipe } from '../utilities/tick.pipe';
 import { ShowError } from '../utilities/messageBox';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { IPaginationInstance } from 'ng2-pagination';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -21,9 +19,7 @@ export interface CentreCheck {
 @Component({
     templateUrl: './centre-check.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [CentreCheckService, HttpService],
-    pipes: [PaginatePipe, TickPipe],
-    directives: [SpinnerComponent, PaginationControlsCmp]
+    providers: [CentreCheckService, HttpService]
 })
 export class CentreCheckComponent implements OnInit {
 

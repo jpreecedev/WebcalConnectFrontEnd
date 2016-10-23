@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { RecentCalibrationsService } from './recent-calibrations.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
-import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { IPaginationInstance } from 'ng2-pagination';
 import { CsvHelper } from '../utilities/csv.helper';
 import { ShowMessage, ShowError, ShowDialog } from '../utilities/messageBox';
 
@@ -26,9 +23,7 @@ export interface RecentCalibration {
 @Component({
     templateUrl: './recent-calibrations.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [RecentCalibrationsService, HttpService],
-    pipes: [PaginatePipe],
-    directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent, DatePickerComponent]
+    providers: [RecentCalibrationsService, HttpService]
 })
 export class RecentCalibrationsComponent implements OnInit {
 

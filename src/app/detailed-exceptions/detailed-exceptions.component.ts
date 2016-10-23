@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { DetailedExceptionsService } from './detailed-exceptions.service';
 import { HttpService } from '../utilities/http.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError, ShowMessage } from '../utilities/messageBox';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 
 export interface DetailedException {
     id: number;
@@ -17,9 +15,7 @@ export interface DetailedException {
 @Component({
     templateUrl: './detailed-exceptions.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [DetailedExceptionsService, HttpService],
-    directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
-    pipes: [PaginatePipe]
+    providers: [DetailedExceptionsService, HttpService]
 })
 export class DetailedExceptionsComponent implements OnInit {
 

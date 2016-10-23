@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { HttpService } from '../utilities/http.service';
 import { Response } from '@angular/http';
 import { RegisterUserService } from './register-user.service';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 import { ShowMessage, ShowError } from '../utilities/messageBox';
-import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
 
 export interface UserRegistration {
     emailAddress: string;
@@ -18,8 +16,7 @@ export interface UserRegistration {
 @Component({
     templateUrl: './register-user.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [RegisterUserService, HttpService],
-    directives: [WCButtonComponent, DatePickerComponent]
+    providers: [RegisterUserService, HttpService]
 })
 export class RegisterUserComponent {
 
@@ -75,7 +72,7 @@ export class RegisterUserComponent {
     }
 
     cancel(): void {
-        this.router.parent.navigate(['Dashboard']);
+        this.router.navigate(['Dashboard']);
     }
 
     resetForm(): void {

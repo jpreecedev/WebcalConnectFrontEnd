@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { RouteParams } from '@angular/router-deprecated';
+import { ActivatedRoute } from '@angular/router';
 import { AddressBookService } from './address-book.service';
 import { HttpService } from '../utilities/http.service';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
 
 export interface AddressBookEntry {
     id: number;
@@ -20,9 +18,7 @@ export interface AddressBookEntry {
 @Component({
     templateUrl: './address-book.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [AddressBookService, HttpService],
-    directives: [SpinnerComponent, PaginationControlsCmp, WCButtonComponent],
-    pipes: [PaginatePipe]
+    providers: [AddressBookService, HttpService]
 })
 export class AddressBookComponent implements OnInit {
 
@@ -42,13 +38,15 @@ export class AddressBookComponent implements OnInit {
     private routeCustomer: string;
     private contactName: string;
 
-    constructor(private service: AddressBookService, private routeParams: RouteParams) {
+    constructor(private service: AddressBookService, private activatedRoute: ActivatedRoute) {
         this.selectedAddressBookEntry = <AddressBookEntry>{};
 
-        let customer = routeParams.get('customerName');
-        if (customer) {
-            this.routeCustomer = customer;
-        }
+        activatedRoute.params.subscribe(params => {
+            let customer = params['customerName'];
+            if (customer) {
+                this.routeCustomer = customer;
+            }
+        });
     }
 
     ngOnInit() {

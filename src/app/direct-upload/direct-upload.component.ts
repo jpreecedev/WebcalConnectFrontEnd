@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { DirectUploadService } from './direct-upload.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
 import { FileUploadService } from '../utilities/file-upload.service.ts';
 
@@ -16,9 +15,7 @@ export interface DirectUploadDocument {
 @Component({
     templateUrl: './direct-upload.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [DirectUploadService, HttpService, FileUploadService],
-    pipes: [PaginatePipe],
-    directives: [SpinnerComponent, PaginationControlsCmp]
+    providers: [DirectUploadService, HttpService, FileUploadService]
 })
 export class DirectUploadComponent implements OnInit {
 

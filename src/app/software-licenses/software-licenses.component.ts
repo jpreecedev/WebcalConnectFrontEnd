@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { SoftwareLicensesService } from './software-licenses.service';
-import { TickPipe } from '../utilities/tick.pipe';
-import { ClientNamePipe } from './client-name.pipe';
 import { HttpService } from '../utilities/http.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
-import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
 
 export interface License {
     expiration: Date;
@@ -27,9 +22,7 @@ export interface Client {
 @Component({
     templateUrl: './software-licenses.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [SoftwareLicensesService, HttpService],
-    pipes: [TickPipe, ClientNamePipe, PaginatePipe],
-    directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp, DatePickerComponent]
+    providers: [SoftwareLicensesService, HttpService]
 })
 export class SoftwareLicensesComponent implements OnInit {
 

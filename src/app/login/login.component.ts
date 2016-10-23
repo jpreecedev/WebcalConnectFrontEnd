@@ -1,16 +1,14 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { HttpService } from '../utilities/http.service';
 import { JwtHelper } from '../utilities/JwtHelper';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 import { ShowError } from '../utilities/messageBox';
 import { hasValidToken } from '../utilities/Jwt';
 
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [HttpService],
-    directives: [WCButtonComponent]
+    providers: [HttpService]
 })
 export class LoginComponent implements OnInit {
 

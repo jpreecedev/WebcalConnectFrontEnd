@@ -4,12 +4,8 @@ import { GenerateEmailService } from './generate-email.service';
 import { RecentCalibration } from '../recent-calibrations/recent-calibrations.component';
 import { CalibrationDue } from '../calibrations-due/calibrations-due.component';
 import { ShowDialog, ShowError, ShowMessage } from '../utilities/messageBox';
-import { SplitByCapitalsPipe } from '../utilities/split-by-capitals.pipe';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 import { isAdministrator } from '../utilities/Jwt';
 import { HttpService } from '../utilities/http.service';
-import { DatePickerComponent } from '../utilities/date-picker/date-picker.component';
 
 export interface GenerateReport {
     from: string;
@@ -33,9 +29,7 @@ export interface EmailReportData {
 @Component({
     templateUrl: './generate-email.component.html',
     providers: [GenerateEmailService, HttpService],
-    styleUrls: ['./styles.scss'],
-    pipes: [SplitByCapitalsPipe],
-    directives: [SpinnerComponent, WCButtonComponent, DatePickerComponent]
+    styleUrls: ['./styles.scss']
 })
 export class GenerateEmailComponent implements OnInit {
 

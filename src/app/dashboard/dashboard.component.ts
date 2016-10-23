@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { isAdministrator, isDirectUploadUser } from '../utilities/Jwt';
 import { MenuItem } from '../app.component';
 
 @Component({
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./styles.scss'],
-    directives: [...ROUTER_DIRECTIVES],
+    styleUrls: ['./styles.scss']
 })
 export class DashboardComponent implements OnInit {
 

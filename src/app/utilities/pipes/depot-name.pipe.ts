@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { CalibrationDue } from './calibrations-due.component';
+import { CalibrationDue } from '../../calibrations-due/calibrations-due.component';
 
 @Pipe({
     name: 'wcDepotName'

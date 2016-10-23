@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpService } from '../utilities/http.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
 import { InspectionDataService } from './inspection-data.service';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 import { ShowError } from '../utilities/messageBox';
 
 export interface InspectionData {
@@ -24,7 +22,6 @@ export interface History {
 @Component({
     templateUrl: './inspection-data.component.html',
     styleUrls: ['./styles.scss'],
-    directives: [SpinnerComponent, WCButtonComponent],
     providers: [InspectionDataService, HttpService]
 })
 export class InspectionDataComponent {

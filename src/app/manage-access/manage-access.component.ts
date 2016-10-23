@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../utilities/http.service';
 import { ManageAccessService } from './manage-access.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { WCButtonComponent } from '../utilities/wc-button/wc-button.component';
 import { ShowError } from '../utilities/messageBox';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { IPaginationInstance } from 'ng2-pagination';
 
 export interface ManageAccessUser {
     id: number;
@@ -19,9 +17,7 @@ export interface ManageAccessSite {
 @Component({
     templateUrl: './manage-access.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [HttpService, ManageAccessService],
-    directives: [SpinnerComponent, WCButtonComponent, PaginationControlsCmp],
-    pipes: [PaginatePipe]
+    providers: [HttpService, ManageAccessService]
 })
 export class ManageAccessComponent implements OnInit {
 

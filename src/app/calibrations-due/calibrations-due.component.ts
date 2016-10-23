@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { CalibrationsDueService } from './calibrations-due.service';
 import { HttpService } from '../utilities/http.service';
-import { SpinnerComponent } from '../utilities/spinner/spinner.component';
-import { PaginatePipe, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
-import { DepotNamePipe } from './depot-name.pipe';
+import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
 
 export interface CalibrationDue {
@@ -24,9 +22,7 @@ export interface CalibrationDue {
 @Component({
     templateUrl: './calibrations-due.component.html',
     styleUrls: ['./styles.scss'],
-    providers: [CalibrationsDueService, HttpService],
-    directives: [SpinnerComponent, PaginationControlsCmp],
-    pipes: [PaginatePipe, DepotNamePipe]
+    providers: [CalibrationsDueService, HttpService]
 })
 export class CalibrationsDueComponent implements OnInit {
 
