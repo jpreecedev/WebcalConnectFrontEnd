@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { SoftwareLicensesService } from './software-licenses.service';
 import { HttpService } from '../utilities/http.service';
-import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
 
 export interface License {
@@ -26,7 +25,7 @@ export interface Client {
 })
 export class SoftwareLicensesComponent implements OnInit {
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'softwareLicenses',
         itemsPerPage: 10,
         currentPage: 1

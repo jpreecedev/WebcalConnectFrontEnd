@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { RecentCalibrationsService } from './recent-calibrations.service';
-import { IPaginationInstance } from 'ng2-pagination';
 import { CsvHelper } from '../utilities/csv.helper';
 import { ShowMessage, ShowError, ShowDialog } from '../utilities/messageBox';
 
@@ -32,7 +31,7 @@ export class RecentCalibrationsComponent implements OnInit {
     public from: string;
     public to: string;
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'recentCalibrations',
         itemsPerPage: 10,
         currentPage: 1

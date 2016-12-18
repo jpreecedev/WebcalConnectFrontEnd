@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -35,3 +37,6 @@ export const ROUTES = [
     { path: 'direct-upload', role: 'DirectUpload', component: DirectUploadComponent, canActivate: [LoggedInGuard] },
     { path: 'address-book', role: 'TachographCentre', component: AddressBookComponent, canActivate: [LoggedInGuard] }
 ];
+
+
+export const routing = RouterModule.forRoot(ROUTES, { useHash: true });

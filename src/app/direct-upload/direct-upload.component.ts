@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { DirectUploadService } from './direct-upload.service';
-import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
 import { FileUploadService } from '../utilities/file-upload.service.ts';
 
@@ -19,7 +18,7 @@ export interface DirectUploadDocument {
 })
 export class DirectUploadComponent implements OnInit {
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'directUpload',
         itemsPerPage: 10,
         currentPage: 1

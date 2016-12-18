@@ -9,11 +9,8 @@
   },
   "compileOnSave": false,
   "buildOnSave": false,
-  "exclude": [
-    "node_modules",
-    "test",
-    "typings",
-    "wwwroot",
-    "dist"
-  ]
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  }
 }

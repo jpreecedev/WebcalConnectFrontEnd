@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../utilities/http.service';
 import { ManageAccessService } from './manage-access.service';
 import { ShowError } from '../utilities/messageBox';
-import { IPaginationInstance } from 'ng2-pagination';
 
 export interface ManageAccessUser {
     id: number;
@@ -21,7 +20,7 @@ export interface ManageAccessSite {
 })
 export class ManageAccessComponent implements OnInit {
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'manageAccess',
         itemsPerPage: 10,
         currentPage: 1

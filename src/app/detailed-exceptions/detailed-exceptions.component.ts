@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { DetailedExceptionsService } from './detailed-exceptions.service';
 import { HttpService } from '../utilities/http.service';
-import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError, ShowMessage } from '../utilities/messageBox';
 
 export interface DetailedException {
@@ -19,7 +18,7 @@ export interface DetailedException {
 })
 export class DetailedExceptionsComponent implements OnInit {
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'detailedExceptions',
         itemsPerPage: 10,
         currentPage: 1

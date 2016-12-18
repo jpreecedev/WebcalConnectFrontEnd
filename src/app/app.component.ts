@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { JwtHelper } from './utilities/JwtHelper';
+
 import '../style/app.scss';
 
 export interface MenuItem {
@@ -16,7 +16,6 @@ export interface MenuItem {
     styleUrls: ['./styles.scss']
 })
 export class AppComponent {
-
     constructor(private router: Router, private jwtHelper: JwtHelper) {
     }
 

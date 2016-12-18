@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { CalibrationsDueService } from './calibrations-due.service';
 import { HttpService } from '../utilities/http.service';
-import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
 
 export interface CalibrationDue {
@@ -28,7 +27,7 @@ export class CalibrationsDueComponent implements OnInit {
 
     public calibrationsDue: CalibrationDue[];
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'calibrationsDue',
         itemsPerPage: 10,
         currentPage: 1

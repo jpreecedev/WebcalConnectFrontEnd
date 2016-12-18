@@ -3,7 +3,6 @@ import { Response, Http } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { CentreCheckService } from './centre-check.service';
 import { ShowError } from '../utilities/messageBox';
-import { IPaginationInstance } from 'ng2-pagination';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -23,7 +22,7 @@ export interface CentreCheck {
 })
 export class CentreCheckComponent implements OnInit {
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'centreCheck',
         itemsPerPage: 10,
         currentPage: 1

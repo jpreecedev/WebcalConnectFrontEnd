@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { QCCheckService } from './qc-check.service';
-import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -26,7 +25,7 @@ export class QCCheckComponent implements OnInit {
 
     public selectedDepotName: string;
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'qcCheck',
         itemsPerPage: 10,
         currentPage: 1

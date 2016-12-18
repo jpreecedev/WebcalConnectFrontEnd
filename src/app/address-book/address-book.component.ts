@@ -3,7 +3,6 @@ import { Response } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { AddressBookService } from './address-book.service';
 import { HttpService } from '../utilities/http.service';
-import { IPaginationInstance } from 'ng2-pagination';
 import { ShowError } from '../utilities/messageBox';
 
 export interface AddressBookEntry {
@@ -22,7 +21,7 @@ export interface AddressBookEntry {
 })
 export class AddressBookComponent implements OnInit {
 
-    public paginationConfig: IPaginationInstance = {
+    public paginationConfig = {
         id: 'addressBook',
         itemsPerPage: 10,
         currentPage: 1

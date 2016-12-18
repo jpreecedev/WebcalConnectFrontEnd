@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { PaginationControlsCmp, PaginatePipe, PaginationService } from 'ng2-pagination';
+import { FormsModule } from '@angular/forms';
+import { Ng2PaginationModule } from 'ng2-pagination';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -34,14 +33,15 @@ import { FileUploadService } from './utilities/file-upload.service';
 import { JwtHelper } from './utilities/JwtHelper';
 import { LoggedInGuard } from './utilities/loggedin.guard';
 
-import { ROUTES } from './app.routes';
+import { routing } from './app.routing';
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES, { useHash: true }),
+    HttpModule,
     FormsModule,
-    HttpModule
+    Ng2PaginationModule,
+    routing
   ],
   declarations: [
     AppComponent,
@@ -64,16 +64,13 @@ import { ROUTES } from './app.routes';
     StatusReportComponent,
     DetailedExceptionsComponent,
     DirectUploadComponent,
-    PaginationControlsCmp,
     DepotNamePipe,
     SplitByCapitalsPipe,
     TickPipe,
-    ClientNamePipe,
-    PaginatePipe
+    ClientNamePipe
   ],
   providers: [
     FileUploadService,
-    PaginationService,
     JwtHelper,
     LoggedInGuard
   ],
