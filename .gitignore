@@ -253,3 +253,7 @@ npm-debug.log*
 
 dist/
 
+src/**/*.css
+src/**/*.css.map
+*.css
+*.css.map

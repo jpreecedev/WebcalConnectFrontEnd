@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  color: #000; }
+
+[hidden] {
+  display: none; }
+
+#navbar ul li hr {
+  margin-top: 7px;
+  margin-bottom: 7px; }
+
+.navbar-brand > img {
+  max-width: 200px;
+  margin-top: -7px; }
+
+@media (max-width: 1024px) {
+  #navbar ul li hr {
+    display: none; } }
+nav {
+  padding-top: 20px; }
+
+.root-container {
+  margin-top: 50px; }
+
+/*# sourceMappingURL=styles.css.map */

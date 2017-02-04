@@ -1,3 +1,4 @@
+//colors
 $color_storm_dust_approx: #666;
 $white_30: rgba(255,255,255,.3);
 $color_lochmara_approx: #0088cc;
@@ -15,9 +16,11 @@ $color_alto_approx: #ddd;
 $color_wild_sand_approx: #f5f5f5;
 $color_mountain_mist_approx: #999999;
 
+//fonts
 $font_0: Source Sans Pro;
 $font_1: sans-serif;
 
+//urls
 $url_0: url(/images/slide-bg.png);
 
 %extend_1 {
@@ -93,6 +96,14 @@ nav {
     background: $color_wild_sand_approx;
     border-bottom: 1px solid $color_gallery_approx;
     padding: 15px 0;
+
+    .navbar-nav {
+        margin: 10px 0 0;
+    }
+
+    &.navbar {
+        margin-bottom: 0;
+    }
 }
 
 .carousel {
@@ -235,6 +246,10 @@ footer {
     margin-top: 40px;
 }
 
+.navbar-toggle .icon-bar {
+    background-color: #000;
+}
+
 .thumbnail {
     h2 {
         font-size: 25px;
@@ -258,7 +273,7 @@ html {
     min-height: 100%;
 }
 
-app-wc > undefined > .container {
+wc-app > undefined > .container {
     padding-bottom: 50px;
 }
 
@@ -438,6 +453,15 @@ pagination-controls li.current{
     .carousel-caption {
         bottom: 85px;
     }
+        
+    .nav.navbar-nav{
+        width:100%;
+        text-align: center;
+        
+        ul.dropdown-menu{
+            text-align: center;
+        }
+    }
 }
 
 @media(max-width: 768px){
@@ -452,40 +476,4 @@ pagination-controls li.current{
 
 .is-today .pika-button {
     color: #da4f49;
-}
-
-.text-right {
-    text-align: right;
-}
-
-body{
-    color:#000;
-}
-
-[hidden] {
-    display:none;
-}
-
-#navbar ul li hr {
-    margin-top: 7px;
-    margin-bottom: 7px;
-}
-
-.navbar-brand > img {
-    max-width: 200px; 
-    margin-top: -7px; 
-}
-
-@media (max-width: 1024px){
-    #navbar ul li hr{
-        display: none;
-    }
-}
-
-nav {
-    padding-top: 20px;
-}
-
-.root-container {
-    margin-top: 50px;
 }
