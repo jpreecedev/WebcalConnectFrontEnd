@@ -1,148 +1,133 @@
 ﻿<!-- Carousel
     ================================================== -->
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="container">
-                <div class="carousel-caption">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-9">
-                            <img class="hidden-xs" src="/images/webcal.png" alt="Webcal Calibration Software">
-                            <h1>Webcal - Tacho Calibration Software.</h1>
-                            <p>Securely view and manage your your tacho data from your web browser.</p>
-                            <p>
-                                <a class="btn btn-lg btn-primary" role="button" [routerLink]="['login']">Log In Now</a>
-                                <a href="https://www.webcalconnect.com/software/webcal-fast.exe" class="btn btn-primary btn-lg">Download</a>
-                            </p>
-                        </div>
-                        <div class="col-xs-12 col-md-3 hidden-xs">
-                            <img src="/images/skillray-truck.png" alt="Skillray Transport Services" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+<carousel>
+  <slide>
+    <div class="container">
+      <div class="carousel-caption">
+        <div class="row">
+          <div class="col-xs-12 col-md-9">
+            <img class="hidden-xs" src="/images/webcal.png" alt="Webcal Calibration Software">
+            <h1>Webcal - Tacho Calibration Software.</h1>
+            <p>Securely view and manage your your tacho data from your web browser.</p>
+            <p>
+              <a class="btn btn-lg btn-primary" role="button" [routerLink]="['login']">Log In Now</a>
+              <a href="https://www.webcalconnect.com/software/webcal-fast.exe" class="btn btn-primary btn-lg">Download</a>
+            </p>
+          </div>
+          <div class="col-xs-12 col-md-3 hidden-xs">
+            <img src="/images/skillray-truck.png" alt="Skillray Transport Services" />
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </slide>
+</carousel>
 <!-- /.carousel -->
 <!-- Feature
     ==============================================-->
-
 <div class="container">
-    <div class="row feature-box">
-        <div class="col-xs-12 cnt-title">
-            <h1>Manage your data online</h1>
-            <span>With Webcal Connect you can easily view and manage your data directly from a web browser.</span>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <img src="/images/icon3.png">
-            <h2>Data in one place</h2>
-            <p>
-                View recent calibrations, re-print your certificates, and manage your fleet with just a couple of clicks.
-            </p>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <img src="/images/icon2.png">
-            <h2>Your customers can use us</h2>
-            <p>
-                With 1 click you can add your customers to your account and let them see all their own vehicle data.
-            </p>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-            <img src="/images/icon1.png">
-            <h2>Its Secure</h2>
-            <p>
-                We use advanced encryption algorithms to ensure your data is always safe and secure.
-            </p>
-        </div>
+  <div class="row feature-box">
+    <div class="col-xs-12 cnt-title">
+      <h1>Manage your data online</h1>
+      <span>With Webcal Connect you can easily view and manage your data directly from a web browser.</span>
     </div>
-
-    <!-- /.Feature -->
-    <div class="hr-divider"></div>
-
-    <!-- Row View -->
-
-    <div class="row">
-        <div class="col-lg-12 cnt-title">
-            <h1>Our software</h1>
-            <span>Webcal is downloadable software that you install and run on your computer.</span>
-        </div>
+    <div class="col-xs-12 col-sm-4">
+      <img src="/images/icon3.png">
+      <h2>Data in one place</h2>
+      <p>
+        View recent calibrations, re-print your certificates, and manage your fleet with just a couple of clicks.
+      </p>
     </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4 thumb">
-            <div class="thumbnail">
-                <img class="img-responsive" src="/images/1-HomeScreen.png" alt="Home Screen">
-                <h2>Beautifully Designed Software</h2>
-                <p>That's not just skin deep</p>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 thumb">
-            <div class="thumbnail">
-                <img class="img-responsive" src="/images/2-NewDigital.png" alt="New Digital Calibration">
-                <h2>Super fast plaque generator</h2>
-                <p>Print a plaque in less than 5 seconds</p>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 thumb">
-            <div class="thumbnail">
-                <img class="img-responsive" src="/images/3-TachoHistory.png" alt="Document History">
-                <h2>Comprehensive History</h2>
-                <p>Every calibration just a click away</p>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 thumb">
-            <div class="thumbnail">
-                <img class="img-responsive" src="/images/4-DriverCardDetails.png" alt="Driver Card Details" style="max-height: 230px">
-                <h2>Built in Driver Card reader</h2>
-                <p>Can automatically read and display driver card data</p>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 thumb">
-            <div class="thumbnail">
-                <img class="img-responsive" src="/images/5-Reports.png" alt="Reports">
-                <h2>Detailed Reports</h2>
-                <p>Can generate detailed PDF reports of your recent and upcoming calibrations</p>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4 thumb">
-            <div class="thumbnail">
-                <img class="img-responsive" src="/images/6-Options.png" alt="Options">
-                <h2>Highly Configurable</h2>
-                <p>Webcal is highly flexible and can be pre-populated with vehicles, inspectors, tyre sizes, and lots more</p>
-            </div>
-        </div>
+    <div class="col-xs-12 col-sm-4">
+      <img src="/images/icon2.png">
+      <h2>Your customers can use us</h2>
+      <p>
+        With 1 click you can add your customers to your account and let them see all their own vehicle data.
+      </p>
     </div>
-    <div class="row text-center">
-        <a href="https://www.webcalconnect.com/software/webcal-fast.exe" class="btn btn-primary btn-lg">Download For Free</a>
+    <div class="col-xs-12 col-sm-4">
+      <img src="/images/icon1.png">
+      <h2>Its Secure</h2>
+      <p>
+        We use advanced encryption algorithms to ensure your data is always safe and secure.
+      </p>
     </div>
-
-    <div class="hr-divider"></div>
-    <div class="row">
-        <div class="cnt-title">
-            <h1>Contact Us</h1>
-            <span>Get in touch with Skillray Transport Services.</span>
-        </div>
-        <div class="col-md-10">
-            <iframe class="actAsDiv" width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;q=10%20rufford%20court%20hardwick%20grange%20warrington%20wa1%204rf&amp;aq=0&amp;ie=UTF8&amp;t=m&amp;z=13&amp;iwloc=A&amp;output=embed"></iframe>
-        </div>
-
-        <div class="col-md-2">
-            <h3>Opening times</h3>
-            <p>
-                <strong>Customer services</strong>
-            </p>
-            <p>
-                Mon - Friday 8.30 - 5pm
-                <br>Technical support 24/7
-            </p>
-            <p>Tel: 01925 880081</p>
-        </div>
+  </div>
+  <!-- /.Feature -->
+  <div class="hr-divider"></div>
+  <!-- Row View -->
+  <div class="row">
+    <div class="col-lg-12 cnt-title">
+      <h1>Our software</h1>
+      <span>Webcal is downloadable software that you install and run on your computer.</span>
     </div>
-
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 thumb">
+      <div class="thumbnail">
+        <img class="img-responsive" src="/images/1-HomeScreen.png" alt="Home Screen">
+        <h2>Beautifully Designed Software</h2>
+        <p>That's not just skin deep</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 thumb">
+      <div class="thumbnail">
+        <img class="img-responsive" src="/images/2-NewDigital.png" alt="New Digital Calibration">
+        <h2>Super fast plaque generator</h2>
+        <p>Print a plaque in less than 5 seconds</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 thumb">
+      <div class="thumbnail">
+        <img class="img-responsive" src="/images/3-TachoHistory.png" alt="Document History">
+        <h2>Comprehensive History</h2>
+        <p>Every calibration just a click away</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 thumb">
+      <div class="thumbnail">
+        <img class="img-responsive" src="/images/4-DriverCardDetails.png" alt="Driver Card Details" style="max-height: 230px">
+        <h2>Built in Driver Card reader</h2>
+        <p>Can automatically read and display driver card data</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 thumb">
+      <div class="thumbnail">
+        <img class="img-responsive" src="/images/5-Reports.png" alt="Reports">
+        <h2>Detailed Reports</h2>
+        <p>Can generate detailed PDF reports of your recent and upcoming calibrations</p>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 thumb">
+      <div class="thumbnail">
+        <img class="img-responsive" src="/images/6-Options.png" alt="Options">
+        <h2>Highly Configurable</h2>
+        <p>Webcal is highly flexible and can be pre-populated with vehicles, inspectors, tyre sizes, and lots more</p>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center">
+    <a href="https://www.webcalconnect.com/software/webcal-fast.exe" class="btn btn-primary btn-lg">Download For Free</a>
+  </div>
+  <div class="hr-divider"></div>
+  <div class="row">
+    <div class="cnt-title">
+      <h1>Contact Us</h1>
+      <span>Get in touch with Skillray Transport Services.</span>
+    </div>
+    <div class="col-md-10">
+      <iframe class="actAsDiv" width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;q=10%20rufford%20court%20hardwick%20grange%20warrington%20wa1%204rf&amp;aq=0&amp;ie=UTF8&amp;t=m&amp;z=13&amp;iwloc=A&amp;output=embed"></iframe>
+    </div>
+    <div class="col-md-2">
+      <h3>Opening times</h3>
+      <p>
+        <strong>Customer services</strong>
+      </p>
+      <p>
+        Mon - Friday 8.30 - 5pm
+        <br>Technical support 24/7
+      </p>
+      <p>Tel: 01925 880081</p>
+    </div>
+  </div>
 </div>

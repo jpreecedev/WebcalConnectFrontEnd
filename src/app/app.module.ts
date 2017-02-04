@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Ng2PaginationModule } from 'ng2-pagination';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -33,16 +33,13 @@ import { FileUploadService } from './utilities/file-upload.service';
 import { JwtHelper } from './utilities/JwtHelper';
 import { LoggedInGuard } from './utilities/loggedin.guard';
 
-import { routing } from './app.routing';
+import { AlertModule } from 'ng2-bootstrap';
+import { CarouselModule } from 'ng2-bootstrap/carousel'
+
+import { Ng2PaginationModule } from 'ng2-pagination';
+import { ROUTES } from './app.routing';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule,
-    Ng2PaginationModule,
-    routing
-  ],
   declarations: [
     AppComponent,
     DatePickerComponent,
@@ -69,6 +66,15 @@ import { routing } from './app.routing';
     TickPipe,
     ClientNamePipe
   ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    AlertModule.forRoot(),
+    CarouselModule.forRoot(),
+    RouterModule.forRoot(ROUTES),
+    Ng2PaginationModule
+  ],
   providers: [
     FileUploadService,
     JwtHelper,
@@ -76,6 +82,4 @@ import { routing } from './app.routing';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule { }

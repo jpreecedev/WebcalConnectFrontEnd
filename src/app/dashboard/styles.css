@@ -1,0 +1,21 @@
+.dashboard-menu {
+  margin-top: 40px;
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0; }
+  .dashboard-menu li {
+    text-align: center;
+    height: 140px;
+    border-radius: 10px;
+    margin-bottom: 20px; }
+    .dashboard-menu li a {
+      color: #666; }
+      .dashboard-menu li a:hover {
+        color: #fff; }
+    .dashboard-menu li p {
+      padding-top: 20px; }
+    .dashboard-menu li:hover {
+      background-color: #bd362f;
+      color: #fff; }
+
+/*# sourceMappingURL=styles.css.map */

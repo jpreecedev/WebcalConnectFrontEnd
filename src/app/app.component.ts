@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from './utilities/JwtHelper';
 
-import '../style/app.scss';
-
 export interface MenuItem {
     icon: string;
     routerLink: string;
@@ -11,7 +9,7 @@ export interface MenuItem {
 }
 
 @Component({
-    selector: 'wc-app',
+    selector: 'app-wc',
     templateUrl: './app.component.html',
     styleUrls: ['./styles.scss']
 })

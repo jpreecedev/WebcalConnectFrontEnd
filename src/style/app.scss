@@ -26,8 +26,6 @@ $url_0: url(../public/images/slide-bg.png);
 	cursor: default;
 }
 
-@import 'node_modules/bootstrap/scss/bootstrap';
-
 body {
     font-family: $font_0, $font_1;
     color: $color_storm_dust_approx;
@@ -260,7 +258,7 @@ html {
     min-height: 100%;
 }
 
-wc-app > undefined > .container {
+app-wc > undefined > .container {
     padding-bottom: 50px;
 }
 

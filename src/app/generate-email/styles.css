@@ -1,0 +1,10 @@
+.email-template {
+  padding: 45px;
+  background-color: #f5f5f5;
+  margin-bottom: 50px; }
+
+@media (max-width: 1024px) {
+  .email-template {
+    padding: 15px; } }
+
+/*# sourceMappingURL=styles.css.map */
