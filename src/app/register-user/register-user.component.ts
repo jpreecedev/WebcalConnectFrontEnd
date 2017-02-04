@@ -21,7 +21,7 @@ export interface UserRegistration {
 export class RegisterUserComponent {
 
     private userRegistration: UserRegistration;
-    private isRequesting: boolean = false;
+    private isRequesting = false;
     private validationErrors: string;
     private confirmPassword: string;
 

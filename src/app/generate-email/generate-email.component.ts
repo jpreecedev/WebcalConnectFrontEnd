@@ -33,18 +33,18 @@ export interface EmailReportData {
 })
 export class GenerateEmailComponent implements OnInit {
 
-    private isAdministrator: boolean = false;
+    private isAdministrator = false;
     private generateReport: GenerateReport;
     private clientNames: ClientName[];
     private selectedClientId: number;
-    private reportType: string = 'RecentCalibrations';
+    private reportType = 'RecentCalibrations';
 
     private recentCalibrations: RecentCalibration[];
     private calibrationsDue: CalibrationDue[];
 
-    private isRequesting: boolean = false;
-    private isUpdating: boolean = false;
-    private isSending: boolean = false;
+    private isRequesting = false;
+    private isUpdating = false;
+    private isSending = false;
 
     constructor(private service: GenerateEmailService) {
         this.isAdministrator = isAdministrator();

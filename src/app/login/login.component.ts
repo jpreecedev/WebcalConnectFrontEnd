@@ -12,7 +12,7 @@ import { hasValidToken } from '../utilities/Jwt';
 })
 export class LoginComponent implements OnInit {
 
-    private isRequesting: boolean = false;
+    private isRequesting = false;
 
     constructor(private httpService: HttpService, private router: Router, private jwtHelper: JwtHelper) {
     }

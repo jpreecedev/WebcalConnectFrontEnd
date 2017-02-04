@@ -7,7 +7,7 @@ import { JwtHelper } from './JwtHelper';
 export class FileUploadService {
 
     private progress$: Observable<{}>;
-    private progress: number = 0;
+    private progress = 0;
     private progressObserver: any;
 
     constructor(private jwtHelper: JwtHelper) {

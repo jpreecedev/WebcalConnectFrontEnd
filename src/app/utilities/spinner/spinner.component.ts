@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./spinner.scss']
 })
 export class SpinnerComponent {
-    private isDelayedRunning: boolean = false;
+    private isDelayedRunning = false;
 
     @Input()
     public set isRunning(value: boolean) {

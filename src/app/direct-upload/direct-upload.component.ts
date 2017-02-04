@@ -3,7 +3,7 @@ import { Response } from '@angular/http';
 import { HttpService } from '../utilities/http.service';
 import { DirectUploadService } from './direct-upload.service';
 import { ShowError } from '../utilities/messageBox';
-import { FileUploadService } from '../utilities/file-upload.service.ts';
+import { FileUploadService } from '../utilities/file-upload.service';
 
 export interface DirectUploadDocument {
     documentId: number;
@@ -26,8 +26,8 @@ export class DirectUploadComponent implements OnInit {
 
     private uploadedCertificates: DirectUploadDocument[];
     private isRequesting: boolean;
-    private isUploading: boolean = false;
-    private uploadProgress: number = 0;
+    private isUploading = false;
+    private uploadProgress = 0;
 
     constructor(private service: DirectUploadService, private uploadService: FileUploadService) {
 

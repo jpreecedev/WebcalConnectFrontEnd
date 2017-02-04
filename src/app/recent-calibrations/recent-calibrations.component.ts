@@ -41,8 +41,8 @@ export class RecentCalibrationsComponent implements OnInit {
     private filteredCalibrations: RecentCalibration[];
 
     private isRequesting: boolean;
-    private isDownloading: boolean = false;
-    private isEmailing: boolean = false;
+    private isDownloading = false;
+    private isEmailing = false;
     private depotNames: string[];
 
     constructor(private service: RecentCalibrationsService, private router: Router) {

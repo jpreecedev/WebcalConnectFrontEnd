@@ -17,7 +17,7 @@ export interface IJwtBody {
 @Injectable()
 export class JwtHelper {
 
-    public isLoggedIn: boolean = false;
+    public isLoggedIn = false;
 
     constructor() {
         this.getToken();

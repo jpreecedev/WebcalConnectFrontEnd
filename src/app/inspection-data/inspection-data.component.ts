@@ -26,7 +26,7 @@ export interface History {
 })
 export class InspectionDataComponent {
 
-    private isRequesting: boolean = false;
+    private isRequesting = false;
     private vehicleRegistration: string;
     private inspectionData: InspectionData;
 

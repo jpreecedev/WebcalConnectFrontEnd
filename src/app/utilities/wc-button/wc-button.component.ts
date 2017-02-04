@@ -9,11 +9,11 @@ export type ButtonType = 'submit' | 'button';
 })
 export class WCButtonComponent {
 
-    private _isDisabled: boolean = false;
-    private _originalLabel: string = 'Submit';
-    private _label: string = 'Submit';
-    private _workingLabel: string = 'Working...';
-    private _style: string = 'btn btn-primary';
+    private _isDisabled = false;
+    private _originalLabel = 'Submit';
+    private _label = 'Submit';
+    private _workingLabel = 'Working...';
+    private _style = 'btn btn-primary';
     private _buttonType: ButtonType = 'submit';
     private _domElement: Element;
 
