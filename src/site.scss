@@ -273,7 +273,7 @@ html {
     min-height: 100%;
 }
 
-wc-app > undefined > .container {
+app-wc > div > ng-component > .container {
     padding-bottom: 50px;
 }
 
@@ -409,7 +409,7 @@ pagination-controls li.current{
   border-left: 5px solid #42A948;
 }
 
-.ng-invalid {
+.ng-invalid:not(form) {
   border-left: 5px solid #a94442;
 }
 

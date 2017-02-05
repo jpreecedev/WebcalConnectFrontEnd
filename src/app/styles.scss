@@ -394,7 +394,7 @@ pagination-controls li.current{
   border-left: 5px solid #42A948;
 }
 
-.ng-invalid {
+.ng-invalid:not(form) {
   border-left: 5px solid #a94442;
 }
 
@@ -484,8 +484,4 @@ body{
 
 nav {
     padding-top: 20px;
-}
-
-.root-container {
-    margin-top: 50px;
 }

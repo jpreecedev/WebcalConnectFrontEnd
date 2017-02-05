@@ -1,23 +1,23 @@
 <nav class="navbar navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-            aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a routerLink="/home" class="navbar-brand" rel="home" title="Webcal - Tacho Calibration Software">
+            <a routerLink="/" class="navbar-brand" rel="home" title="Webcal - Tacho Calibration Software">
                 <img src="/images/logo.png" alt="Skillray Transport Services">
             </a>
         </div>
+
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav pull-right">
-                <li><a hidden="!isLoggedIn" routerLink="/dashboard">Dashboard</a></li>
-                <li class="dropdown">
-                    <a hidden="!isLoggedIn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+            <ul class="nav navbar-nav pull-right"> 
+                <li><a [hidden]="!jwtHelper.isLoggedIn" routerLink="/dashboard">Dashboard</a></li>
+                <li class="dropdown" [hidden]="!jwtHelper.isLoggedIn" dropdown>
+                    <a dropdownToggle class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
+                    <ul class="dropdown-menu" dropdownMenu>
                         <li><a routerLink="/qc-check">QC Check</a></li>
                         <li><a routerLink="/centre-check">Centre Check</a></li>
                         <li><a routerLink="/generate-email">Generate Email</a></li>
@@ -30,10 +30,10 @@
                         <li>
                             <hr/>
                         </li>
-                        <li><a hidden="!isLoggedIn" (click)="logout()">Logout</a></li>
+                        <li><a [hidden]="!jwtHelper.isLoggedIn" (click)="logout()">Logout</a></li>
                     </ul>
                 </li>
-                <li><a hidden="!isLoggedIn" routerLink="/recent-calibrations">Recent Calibrations</a></li>
+                <li><a [hidden]="!jwtHelper.isLoggedIn" routerLink="recent-calibrations">Recent Calibrations</a></li>
             </ul>
         </div>
     </div>
