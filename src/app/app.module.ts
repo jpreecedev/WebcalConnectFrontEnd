@@ -12,6 +12,7 @@ import { CalibrationsDueComponent } from './calibrations-due/calibrations-due.co
 import { GenerateEmailComponent } from './generate-email/generate-email.component';
 import { InspectionDataComponent } from './inspection-data/inspection-data.component';
 import { AddressBookComponent } from './address-book/address-book.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RecentCalibrationsComponent } from './recent-calibrations/recent-calibrations.component';
 import { QCCheckComponent } from './qc-check/qc-check.component';
 import { CentreCheckComponent } from './centre-check/centre-check.component';
@@ -52,6 +53,7 @@ import { routing } from './app.routing';
     GenerateEmailComponent,
     InspectionDataComponent,
     AddressBookComponent,
+    ChangePasswordComponent,
     RecentCalibrationsComponent,
     QCCheckComponent,
     CentreCheckComponent,

@@ -7,6 +7,7 @@ import { CalibrationsDueComponent } from './calibrations-due/calibrations-due.co
 import { GenerateEmailComponent } from './generate-email/generate-email.component';
 import { InspectionDataComponent } from './inspection-data/inspection-data.component';
 import { AddressBookComponent } from './address-book/address-book.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RecentCalibrationsComponent } from './recent-calibrations/recent-calibrations.component';
 import { QCCheckComponent } from './qc-check/qc-check.component';
 import { CentreCheckComponent } from './centre-check/centre-check.component';
@@ -35,7 +36,8 @@ export const ROUTES = [
     { path: 'software-licenses', role: 'Administrator', component: SoftwareLicensesComponent, canActivate: [LoggedInGuard] },
     { path: 'detailed-exceptions', role: 'Administrator', component: DetailedExceptionsComponent, canActivate: [LoggedInGuard] },
     { path: 'direct-upload', role: 'DirectUpload', component: DirectUploadComponent, canActivate: [LoggedInGuard] },
-    { path: 'address-book', role: 'TachographCentre', component: AddressBookComponent, canActivate: [LoggedInGuard] }
+    { path: 'address-book', role: 'TachographCentre', component: AddressBookComponent, canActivate: [LoggedInGuard] },
+    { path: 'change-password', role: 'TachographCentre', component: ChangePasswordComponent, canActivate: [LoggedInGuard] }
 ];
 
 
