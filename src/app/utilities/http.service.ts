@@ -20,25 +20,25 @@ export class HttpService {
     }
 
     get(url: string): Observable<Response> {
-        return this._request({ url: url, method: RequestMethod.Get, headers: this.getRequestHeaders(false) });
+        return this.http.get(url, { headers: this.getRequestHeaders(false) });
     }
 
     post(url: string, body: string): Observable<Response> {
-        return this._request({ url: url, body: body, method: RequestMethod.Post, headers: this.getRequestHeaders(false) });
+        return this.http.post(url, body, { headers: this.getRequestHeaders(false) });
     }
 
     put(url: string, body: string): Observable<Response> {
-        return this._request({ url: url, body: body, method: RequestMethod.Put, headers: this.getRequestHeaders(false) });
+        return this.http.put(url, body, { headers: this.getRequestHeaders(false) });
     }
 
     delete(url: string, body: string): Observable<Response> {
-        return this._request({ url: url, body: body, method: RequestMethod.Delete, headers: this.getRequestHeaders(false) });
+        return this.http.delete(url, { body, headers: this.getRequestHeaders(false) });
     }
 
     authenticate(username: string, password: string, rememberMe: boolean): Observable<boolean> {
         let creds: string = 'username=' + username + '&password=' + password + '&grant_type=password&client_id=099153c2625149bc8ecb3e85e03f0022';
 
-        return this._request({ url: `${AppSettings.SERVER_ADDRESS}/oauth2/token`, body: creds, method: RequestMethod.Post, headers: this.getRequestHeaders(true) })
+        return this.http.post(`${AppSettings.SERVER_ADDRESS}/oauth2/token`, creds, { headers: this.getRequestHeaders(true) })
             .do((response: Response) => {
                 this.jwtHelper.setToken(response.json(), rememberMe);
             })
@@ -71,9 +71,5 @@ export class HttpService {
     handleError<T>(error: Response): Observable<T> {
         console.error(error);
         return Observable.throw(error || 'Server Error');
-    }
-
-    private _request(options: RequestOptionsArgs): Observable<Response> {
-        return this.http.request(options.url, options);
     }
 }
