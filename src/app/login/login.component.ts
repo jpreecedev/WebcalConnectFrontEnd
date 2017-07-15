@@ -5,6 +5,8 @@ import { JwtHelper } from '../utilities/JwtHelper';
 import { ShowError } from '../utilities/messageBox';
 import { hasValidToken } from '../utilities/Jwt';
 
+import { AppSettings } from '../app.settings';
+
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./styles.scss'],
@@ -20,6 +22,7 @@ export class LoginComponent implements OnInit {
     authenticate(username: string, password: string, rememberMe: boolean): void {
 
         this.isRequesting = true;
+
         this.httpService.authenticate(username, password, rememberMe).subscribe((response: boolean) => {
             if (response) {
                 this.jwtHelper.isLoggedIn = true;

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 
-let moment = require('moment');
-let Pikaday = require('Pikaday');
+import * as moment from 'moment';
+import * as Pikaday from 'Pikaday';
 
 @Component({
     selector: 'wc-date-picker',

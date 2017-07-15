@@ -13,11 +13,11 @@
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav pull-right"> 
+            <ul class="nav navbar-nav pull-right">
                 <li><a [hidden]="!jwtHelper.isLoggedIn" routerLink="/dashboard">Dashboard</a></li>
                 <li class="dropdown" [hidden]="!jwtHelper.isLoggedIn" dropdown>
                     <a dropdownToggle class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools <span class="caret"></span></a>
-                    <ul class="dropdown-menu" dropdownMenu>
+                    <ul class="dropdown-menu" *dropdownMenu>
                         <li><a routerLink="/qc-check">QC Check</a></li>
                         <li><a routerLink="/centre-check">Centre Check</a></li>
                         <li><a routerLink="/generate-email">Generate Email</a></li>

@@ -1,3 +1,6 @@
+@import 'variables';
+@import '../../node_modules/font-awesome/scss/font-awesome';
+
 $color_storm_dust_approx: #666;
 $white_30: rgba(255,255,255,.3);
 $color_lochmara_approx: #0088cc;
@@ -400,7 +403,7 @@ pagination-controls li.current{
 
 .pie-legend {
 	list-style-type: none;
-		
+
 	li {
 		display: inline;
 		margin-left: 15px;
@@ -419,14 +422,14 @@ pagination-controls li.current{
         margin-bottom: 7px;
     }
     .card-container.card {
-        margin-top: 20px;   
+        margin-top: 20px;
     }
 }
 
 @media(max-width: 1024px) {
     .carousel-caption {
         bottom: 20px;
-        
+
         img {
             max-width: 80px;
             margin-top: 20px;
@@ -441,7 +444,7 @@ pagination-controls li.current{
 }
 
 @media(max-width: 768px){
-    .card-container.card {        
+    .card-container.card {
         padding: 20px 20px;
     }
 }

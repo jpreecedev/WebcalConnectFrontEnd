@@ -33,10 +33,10 @@ import { FileUploadService } from './utilities/file-upload.service';
 import { JwtHelper } from './utilities/JwtHelper';
 import { LoggedInGuard } from './utilities/loggedin.guard';
 
-import { CarouselModule } from 'ng2-bootstrap/carousel';
-import { DropdownModule } from 'ng2-bootstrap';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
-import { Ng2PaginationModule } from 'ng2-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { routing } from './app.routing';
 
 @NgModule({
@@ -71,9 +71,9 @@ import { routing } from './app.routing';
     FormsModule,
     HttpModule,
     CarouselModule.forRoot(),
-    DropdownModule.forRoot(),
+    BsDropdownModule.forRoot(),
     routing,
-    Ng2PaginationModule
+    NgxPaginationModule
   ],
   providers: [
     FileUploadService,
