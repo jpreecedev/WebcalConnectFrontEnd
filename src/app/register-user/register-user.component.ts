@@ -20,10 +20,10 @@ export interface UserRegistration {
 })
 export class RegisterUserComponent {
 
-    private userRegistration: UserRegistration;
-    private isRequesting = false;
-    private validationErrors: string;
-    private confirmPassword: string;
+    public userRegistration: UserRegistration;
+    public isRequesting = false;
+    public validationErrors: string;
+    public confirmPassword: string;
 
     constructor(private router: Router, private service: RegisterUserService) {
         this.resetForm();

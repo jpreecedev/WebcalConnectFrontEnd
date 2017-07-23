@@ -26,11 +26,11 @@ export class ManageAccessComponent implements OnInit {
         currentPage: 1
     };
 
-    private isRequesting: boolean;
+    public isRequesting: boolean;
     private isUpdating: boolean;
-    private users: ManageAccessUser[];
-    private connectedSites: ManageAccessSite[];
-    private selectedSiteId: number;
+    public users: ManageAccessUser[];
+    public connectedSites: ManageAccessSite[];
+    public selectedSiteId: number;
 
     constructor(private service: ManageAccessService) {
     }

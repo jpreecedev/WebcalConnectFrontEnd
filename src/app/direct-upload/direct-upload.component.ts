@@ -24,9 +24,9 @@ export class DirectUploadComponent implements OnInit {
         currentPage: 1
     };
 
-    private uploadedCertificates: DirectUploadDocument[];
-    private isRequesting: boolean;
-    private isUploading = false;
+    public uploadedCertificates: DirectUploadDocument[];
+    public isRequesting: boolean;
+    public isUploading = false;
     private uploadProgress = 0;
 
     constructor(private service: DirectUploadService, private uploadService: FileUploadService) {

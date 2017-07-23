@@ -26,9 +26,9 @@ export interface History {
 })
 export class InspectionDataComponent {
 
-    private isRequesting = false;
-    private vehicleRegistration: string;
-    private inspectionData: InspectionData;
+    public isRequesting = false;
+    public vehicleRegistration: string;
+    public inspectionData: InspectionData;
 
     constructor(private service: InspectionDataService) {
     }

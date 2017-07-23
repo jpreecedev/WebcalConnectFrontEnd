@@ -33,9 +33,9 @@ export class CalibrationsDueComponent implements OnInit {
         currentPage: 1
     };
 
-    private selectedDepotName: string;
-    private depotNames: string[];
-    private isRequesting: boolean;
+    public selectedDepotName: string;
+    public depotNames: string[];
+    public isRequesting: boolean;
 
     constructor(private service: CalibrationsDueService, private http: Http) {
     }

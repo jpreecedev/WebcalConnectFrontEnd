@@ -14,9 +14,9 @@ export class DatePickerComponent implements OnInit {
 
     private nativeElement: any;
     private picker: any;
-    private theDate: string;
-    private labelId: string;
-    private theLabel: string;
+    public theDate: string;
+    public labelId: string;
+    public theLabel: string;
 
     constructor(elementRef: ElementRef) {
         this.nativeElement = elementRef.nativeElement;

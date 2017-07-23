@@ -14,7 +14,7 @@ export interface MenuItem {
     styleUrls: ['./styles.scss']
 })
 export class AppComponent {
-    constructor(private router: Router, private jwtHelper: JwtHelper) {
+    constructor(private router: Router, public jwtHelper: JwtHelper) {
     }
 
     logout(): void {

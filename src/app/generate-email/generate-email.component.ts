@@ -33,8 +33,8 @@ export interface EmailReportData {
 })
 export class GenerateEmailComponent implements OnInit {
 
-    private isAdministrator = false;
-    private generateReport: GenerateReport;
+    public isAdministrator = false;
+    public generateReport: GenerateReport;
     private clientNames: ClientName[];
     private selectedClientId: number;
     private reportType = 'RecentCalibrations';
@@ -42,8 +42,8 @@ export class GenerateEmailComponent implements OnInit {
     private recentCalibrations: RecentCalibration[];
     private calibrationsDue: CalibrationDue[];
 
-    private isRequesting = false;
-    private isUpdating = false;
+    public isRequesting = false;
+    public isUpdating = false;
     private isSending = false;
 
     constructor(private service: GenerateEmailService) {

@@ -1,9 +1,9 @@
 export class AppSettings {
     public static get API_ENDPOINT(): string {
-        return 'http://localhost:50139/api';
+        return 'https://www.webcalconnect.com/api';
     }
 
     public static get SERVER_ADDRESS(): string {
-        return 'http://localhost:50139';
+        return 'https://www.webcalconnect.com';
     }
 }

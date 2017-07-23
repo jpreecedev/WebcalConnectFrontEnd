@@ -31,16 +31,18 @@ export class SoftwareLicensesComponent implements OnInit {
         currentPage: 1
     };
 
-    private clients: Client[];
-    private selectedClient: Client;
-    private isRequesting: boolean;
-    private isAdding: boolean;
-    private isAddingLicense: boolean;
+    public filterValue: string;
+
+    public clients: Client[];
+    public selectedClient: Client;
+    public isRequesting: boolean;
+    public isAdding: boolean;
+    public isAddingLicense: boolean;
     private isDeletingLicense: boolean;
     private isDeletingClient: boolean;
 
-    private newClientName: string;
-    private newLicenseExpiration: string;
+    public newClientName: string;
+    public newLicenseExpiration: string;
 
     constructor(private service: SoftwareLicensesService) {
         this.selectedClient = ({} as Client);

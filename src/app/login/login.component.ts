@@ -14,7 +14,10 @@ import { AppSettings } from '../app.settings';
 })
 export class LoginComponent implements OnInit {
 
-    private isRequesting = false;
+    public username: string;
+    public password: string;
+    public rememberMe: boolean;
+    public isRequesting = false;
 
     constructor(private httpService: HttpService, private router: Router, private jwtHelper: JwtHelper) {
     }

@@ -35,11 +35,11 @@ export interface StatusReportUser {
 })
 export class StatusReportComponent implements OnInit {
 
-    private isRequesting: boolean;
-    private users: StatusReportUser[];
+    public isRequesting: boolean;
+    public users: StatusReportUser[];
     private selectedSiteId: number;
-    private hasData: boolean;
-    private statusReportData: StatusReport;
+    public hasData: boolean;
+    public statusReportData: StatusReport;
     private isBuildingReport: boolean;
 
     constructor(private service: StatusReportService) {

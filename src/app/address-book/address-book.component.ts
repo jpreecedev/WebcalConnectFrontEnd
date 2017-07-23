@@ -27,9 +27,9 @@ export class AddressBookComponent implements OnInit {
         currentPage: 1
     };
 
-    private isRequesting: boolean;
+    public isRequesting: boolean;
     private isUpdating: boolean;
-    private addressBookEntries: AddressBookEntry[];
+    public addressBookEntries: AddressBookEntry[];
     private filteredAddressBookEntries: AddressBookEntry[];
     private selectedAddressBookEntry: AddressBookEntry;
     private originalCopy: AddressBookEntry;

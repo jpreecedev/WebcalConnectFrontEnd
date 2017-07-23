@@ -28,8 +28,8 @@ export class CentreCheckComponent implements OnInit {
         currentPage: 1
     };
 
-    private centreChecks: CentreCheck[];
-    private isRequesting: boolean;
+    public centreChecks: CentreCheck[];
+    public isRequesting: boolean;
 
     constructor(private service: CentreCheckService, private http: Http) {
     }

@@ -26,7 +26,7 @@ export class DetailedExceptionsComponent implements OnInit {
 
     public detailedExceptions: DetailedException[];
 
-    private isRequesting: boolean;
+    public isRequesting: boolean;
     private isDeleting: boolean;
 
     constructor(private service: DetailedExceptionsService) {

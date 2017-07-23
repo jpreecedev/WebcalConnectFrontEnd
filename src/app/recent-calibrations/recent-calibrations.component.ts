@@ -37,13 +37,13 @@ export class RecentCalibrationsComponent implements OnInit {
         currentPage: 1
     };
 
-    private recentCalibrations: RecentCalibration[];
+    public recentCalibrations: RecentCalibration[];
     private filteredCalibrations: RecentCalibration[];
 
-    private isRequesting: boolean;
+    public isRequesting: boolean;
     private isDownloading = false;
     private isEmailing = false;
-    private depotNames: string[];
+    public depotNames: string[];
 
     constructor(private service: RecentCalibrationsService, private router: Router) {
         let d = new Date();

@@ -31,8 +31,8 @@ export class QCCheckComponent implements OnInit {
         currentPage: 1
     };
 
-    private qcChecks: QCCheck[];
-    private isRequesting: boolean;
+    public qcChecks: QCCheck[];
+    public isRequesting: boolean;
 
     constructor(private service: QCCheckService, private http: Http) {
 

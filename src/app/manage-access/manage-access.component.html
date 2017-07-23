@@ -7,7 +7,7 @@
             <div class="col-xs-12 col-sm-6">
                 <div class="form-group">
                     <label for="selectUser">Select user</label>
-                    <select id="selectUser" name="selectUser" class="form-control" #site [(ngModel)]="selectedSiteId" (change)="getConnectedSites(site.value, site)">
+                    <select id="selectUser" name="selectUser" class="form-control" #site [(ngModel)]="selectedSiteId" (change)="getConnectedSites(site.value)">
                         <option [value]="item.id" *ngFor="let item of users" #index>{{item.name}}</option>
                     </select>
                 </div>
