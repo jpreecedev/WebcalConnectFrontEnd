@@ -13,6 +13,27 @@ export class RecentCalibrationsService {
 
     }
 
+    b64toBlob = (b64Data, contentType='', sliceSize=512) => {
+      const byteCharacters = atob(b64Data);
+      const byteArrays = [];
+
+      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+          byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        const byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+      }
+
+      const blob = new Blob(byteArrays, {type: contentType});
+      return blob;
+    }
+
     getRecent(from: string, to: string, filter: string): Observable<Response> {
         if (filter === '- All -') {
             filter = null;
@@ -25,17 +46,16 @@ export class RecentCalibrationsService {
 
         this.httpService.get(`${AppSettings.API_ENDPOINT}/resource/certificate/${id}/${documentType}`)
             .subscribe((response: Response) => {
-                if (window.navigator.msSaveOrOpenBlob) {
-                    let blobObject = new Blob([response.text()]);
-                    window.navigator.msSaveOrOpenBlob(blobObject, 'document.pdf');
-                } else {
-                    let popup = window.open('data:application/pdf;base64,' + encodeURIComponent(response.text()));
-                    setTimeout(function () {
-                        if (!popup || popup.outerHeight === 0) {
-                            ShowMessage('Your web browser might be blocking popups from opening on this page, please add this site to your exception list.');
-                        }
-                    }, 25);
-                }
+                let contentType = 'application/pdf';
+                let b64Data = response.text();
+                let blob = this.b64toBlob(b64Data, contentType);
+                let blobUrl = URL.createObjectURL(blob);
+
+                let link = document.createElement("a");
+                link.download = "certificate";
+                link.href = blobUrl;
+                document.body.appendChild(link);
+                link.click();
             },
             (error: any) => {
                 ShowError('Unable to download certificate, please try again later.', error);
